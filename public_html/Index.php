@@ -86,12 +86,15 @@
 	 * 				be handled by Shaun Bebbington
 	 * @changes as of 2017-01-11:
 	 * 				Minor refactoring to the methods in the library
+	 * @changes as of 2017-01-12:
+	 * 				Some more refactoring and an initial commit to GitHub, the main thing is to move the
+	 * 				global helpers to a file in the application/core directory, therefore making this
+	 * 				file quite light-weight in PHP terms. All of the page handling stuff is handled in
+	 * 				the Core directly now; Need to add in the HTML builder and other things, as well
+	 * 				as work on the modelling.
 	 */
 	class Index
 	{
-		private $allowedFileExts = array(
-        	'php', 'html', 'htm', 'xhtml', 'asp', 'aspx', 'jsp', 'js', 'so', 'jspa', 'cgi',
-        );
 		protected $core;
 		
 		/**
