@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title><?php echo isset($this->title) ? "{$this->title} :: " : ''; ?>Shaun Bebbington</title>
+		<meta name="description" content="<?php if(isset($this->description) && strlen($this->description)>2): ?><?php echo $this->description; ?><?php else: ?>Skeleton example<?php endif; ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="author" content="Shaun Bebbington">
+		<meta name="twitter" content="@YearOfCodes">
+		<?php echo $this->canonical; ?>
+		<script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+		<link href="<?php echo $this->host; ?>/css/styles.css" rel="stylesheet">

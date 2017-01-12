@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+    <head>
+    	<?php require_once("{$this->partial['header']}"); ?>
+    </head>
+    <body>
+    	<div id="content" class="container">
+    		<h1><?php echo $this->header; ?></h1>
+    		<h2><?php echo $this->subHeader; ?></h2>
+    		<?php echo $this->content . PHP_EOL; ?>
+    		<hr />
+		</div>
+		<?php require_once("{$this->partial['footer']}"); ?>
+	</body>
+</html>

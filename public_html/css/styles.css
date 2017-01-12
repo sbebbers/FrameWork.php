@@ -1,0 +1,195 @@
+@media only screen and (min-width:0px){
+	.col-xs-1{width:8.3333333334%}
+	.col-xs-2{width:16.6666666667%}
+	.col-xs-3{width:25%}
+	.col-xs-4{width:33.3333333334%}
+	.col-xs-5{width:41.6666666667%}
+	.col-xs-6{width:50%;}
+	.col-xs-7{width:58.3333333334%}
+	.col-xs-8{width:66.6666666667%}
+	.col-xs-9{width:75%}
+	.col-xs-10{width:83.3333333334%}
+	.col-xs-11{width:91.6666666667%}
+	.col-xs-12,.img-responsive{width:100%}
+	.col-xs-1-offset{margin-left:8.3333333334%}
+	.col-xs-2-offset{margin-left:16.6666666667%}
+	.col-xs-3-offset{margin-left:25%}
+	.col-xs-4-offset{margin-left:33.3333333334%}
+	.col-xs-5-offset{margin-left:41.6666666667%}
+	.col-xs-6-offset{margin-left:50%;}
+	.col-xs-7-offset{margin-left:58.3333333334%}
+	.col-xs-8-offset{margin-left:66.6666666667%}
+	.col-xs-9-offset{margin-left:75%}
+	.col-xs-10-offset{margin-left:83.3333333334%}
+	.col-xs-11-offset{margin-left:91.6666666667%}
+	.desktop,.tablet{display:none}
+	.pull-left{float:left}
+	.pull-right{float:right}
+	.centre{margin:0 auto}
+	.clearfix:before,.clearfix,.clearfix:after{display:block;content:"";clear:both}
+	.container{margin:0 12px;max-width:100%}
+	.btn{display:block;border-radius:4px;padding:8px;font-size:14px;line-height:16px;font-weight:600}
+	.btn-submit{border:2px solid #00a227;background:#11b713;color:#eee}
+	.btn-submit:hover{border:2px solid #11b713;background:#12c220;color:#fff}
+	.img-responsive{height:auto}
+}
+@media only screen and (min-width:480px){
+	.col-sm-1{width:8.3333333334%}
+	.col-sm-2{width:16.6666666667%}
+	.col-sm-3{width:25%}
+	.col-sm-4{width:33.3333333334%}
+	.col-sm-5{width:41.6666666667%}
+	.col-sm-6{width:50%;}
+	.col-sm-7{width:58.3333333334%}
+	.col-sm-8{width:66.6666666667%}
+	.col-sm-9{width:75%}
+	.col-sm-10{width:83.3333333334%}
+	.col-sm-11{width:91.6666666667%}
+	.col-sm-12{width:100%}
+	.col-sm-1-offset{margin-left:8.3333333334%}
+	.col-sm-2-offset{margin-left:16.6666666667%}
+	.col-sm-3-offset{margin-left:25%}
+	.col-sm-4-offset{margin-left:33.3333333334%}
+	.col-sm-5-offset{margin-left:41.6666666667%}
+	.col-sm-6-offset{margin-left:50%;}
+	.col-sm-7-offset{margin-left:58.3333333334%}
+	.col-sm-8-offset{margin-left:66.6666666667%}
+	.col-sm-9-offset{margin-left:75%}
+	.col-sm-10-offset{margin-left:83.3333333334%}
+	.col-sm-11-offset{margin-left:91.6666666667%}
+}
+@media only screen and (min-width:625px){
+	.col-smd-1{width:8.3333333334%}
+	.col-smd-2{width:16.6666666667%}
+	.col-smd-3{width:25%}
+	.col-smd-4{width:33.3333333334%}
+	.col-smd-5{width:41.6666666667%}
+	.col-smd-6{width:50%;}
+	.col-smd-7{width:58.3333333334%}
+	.col-smd-8{width:66.6666666667%}
+	.col-smd-9{width:75%}
+	.col-smd-10{width:83.3333333334%}
+	.col-smd-11{width:91.6666666667%}
+	.col-smd-12{width:100%}
+	.col-smd-1-offset{margin-left:8.3333333334%}
+	.col-smd-2-offset{margin-left:16.6666666667%}
+	.col-smd-3-offset{margin-left:25%}
+	.col-smd-4-offset{margin-left:33.3333333334%}
+	.col-smd-5-offset{margin-left:41.6666666667%}
+	.col-smd-6-offset{margin-left:50%;}
+	.col-smd-7-offset{margin-left:58.3333333334%}
+	.col-smd-8-offset{margin-left:66.6666666667%}
+	.col-smd-9-offset{margin-left:75%}
+	.col-smd-10-offset{margin-left:83.3333333334%}
+	.col-smd-11-offset{margin-left:91.6666666667%}
+}
+/* Assumes tablet view from 768px and above */
+@media only screen and (min-width:768px){
+	.col-md-1{width:8.3333333334%}
+	.col-md-2{width:16.6666666667%}
+	.col-md-3{width:25%}
+	.col-md-4{width:33.3333333334%}
+	.col-md-5{width:41.6666666667%}
+	.col-md-6{width:50%;}
+	.col-md-7{width:58.3333333334%}
+	.col-md-8{width:66.6666666667%}
+	.col-md-9{width:75%}
+	.col-md-10{width:83.3333333334%}
+	.col-md-11{width:91.6666666667%}
+	.col-md-12{width:100%}
+	.col-md-1-offset{margin-left:8.3333333334%}
+	.col-md-2-offset{margin-left:16.6666666667%}
+	.col-md-3-offset{margin-left:25%}
+	.col-md-4-offset{margin-left:33.3333333334%}
+	.col-md-5-offset{margin-left:41.6666666667%}
+	.col-md-6-offset{margin-left:50%;}
+	.col-md-7-offset{margin-left:58.3333333334%}
+	.col-md-8-offset{margin-left:66.6666666667%}
+	.col-md-9-offset{margin-left:75%}
+	.col-md-10-offset{margin-left:83.3333333334%}
+	.col-md-11-offset{margin-left:91.6666666667%}
+	.mobile{display:none}
+	.tablet{display:block}
+	.container{margin:0 auto;max-width:752px}
+}
+/* Assumes desktop view from 990px and above */
+@media only screen and (min-width:990px){
+	.col-mdl-1{width:8.3333333334%}
+	.col-mdl-2{width:16.6666666667%}
+	.col-mdl-3{width:25%}
+	.col-mdl-4{width:33.3333333334%}
+	.col-mdl-5{width:41.6666666667%}
+	.col-mdl-6{width:50%;}
+	.col-mdl-7{width:58.3333333334%}
+	.col-mdl-8{width:66.6666666667%}
+	.col-mdl-9{width:75%}
+	.col-mdl-10{width:83.3333333334%}
+	.col-mdl-11{width:91.6666666667%}
+	.col-mdl-12{width:100%}
+	.col-mdl-1-offset{margin-left:8.3333333334%}
+	.col-mdl-2-offset{margin-left:16.6666666667%}
+	.col-mdl-3-offset{margin-left:25%}
+	.col-mdl-4-offset{margin-left:33.3333333334%}
+	.col-mdl-5-offset{margin-left:41.6666666667%}
+	.col-mdl-6-offset{margin-left:50%;}
+	.col-mdl-7-offset{margin-left:58.3333333334%}
+	.col-mdl-8-offset{margin-left:66.6666666667%}
+	.col-mdl-9-offset{margin-left:75%}
+	.col-mdl-10-offset{margin-left:83.3333333334%}
+	.col-mdl-11-offset{margin-left:91.6666666667%}
+	.mobile,.tablet{display:none}
+	.desktop{display:block}
+	.container{max-width:960px}
+}
+@media only screen and (min-width:1200px){
+	.col-lg-1{width:8.3333333334%}
+	.col-lg-2{width:16.6666666667%}
+	.col-lg-3{width:25%}
+	.col-lg-4{width:33.3333333334%}
+	.col-lg-5{width:41.6666666667%}
+	.col-lg-6{width:50%;}
+	.col-lg-7{width:58.3333333334%}
+	.col-lg-8{width:66.6666666667%}
+	.col-lg-9{width:75%}
+	.col-lg-10{width:83.3333333334%}
+	.col-lg-11{width:91.6666666667%}
+	.col-lg-12{width:100%}
+	.col-lg-1-offset{margin-left:8.3333333334%}
+	.col-lg-2-offset{margin-left:16.6666666667%}
+	.col-lg-3-offset{margin-left:25%}
+	.col-lg-4-offset{margin-left:33.3333333334%}
+	.col-lg-5-offset{margin-left:41.6666666667%}
+	.col-lg-6-offset{margin-left:50%;}
+	.col-lg-7-offset{margin-left:58.3333333334%}
+	.col-lg-8-offset{margin-left:66.6666666667%}
+	.col-lg-9-offset{margin-left:75%}
+	.col-lg-10-offset{margin-left:83.3333333334%}
+	.col-lg-11-offset{margin-left:91.6666666667%}
+	.container{max-width:1024px}
+}
+@media only screen and (min-width:1600px){
+	.col-xl-1{width:8.3333333334%}
+	.col-xl-2{width:16.6666666667%}
+	.col-xl-3{width:25%}
+	.col-xl-4{width:33.3333333334%}
+	.col-xl-5{width:41.6666666667%}
+	.col-xl-6{width:50%;}
+	.col-xl-7{width:58.3333333334%}
+	.col-xl-8{width:66.6666666667%}
+	.col-xl-9{width:75%}
+	.col-xl-10{width:83.3333333334%}
+	.col-xl-11{width:91.6666666667%}
+	.col-xl-12{width:100%}
+	.col-xl-1-offset{margin-left:8.3333333334%}
+	.col-xl-2-offset{margin-left:16.6666666667%}
+	.col-xl-3-offset{margin-left:25%}
+	.col-xl-4-offset{margin-left:33.3333333334%}
+	.col-xl-5-offset{margin-left:41.6666666667%}
+	.col-xl-6-offset{margin-left:50%;}
+	.col-xl-7-offset{margin-left:58.3333333334%}
+	.col-xl-8-offset{margin-left:66.6666666667%}
+	.col-xl-9-offset{margin-left:75%}
+	.col-xl-10-offset{margin-left:83.3333333334%}
+	.col-xl-11-offset{margin-left:91.6666666667%}
+	.container{max-width:1480px}
+}
