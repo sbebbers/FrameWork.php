@@ -6,22 +6,22 @@
 #### File Structure:
 ```
 	../application
-		---> controller
+		--> controller
 			\ For all of the custom controller methods and logic
-		---> core
+		--> core
 			\ Contains the main engine room for looking up page requests,
 				and loading the right controller and view
-		---> model
+		--> model
 			\ main Db connection and model logic
-		---> library
+		--> library
 			\ Helper functions and other such things
-		---> view
+		--> view
 			\ HTML (with embedded PHP) views
-		---> partial
+		--> partial
 			\ For partial HTML views such as headers, footers and menus
 ```
 	@version 0.0.8
-	@date	February - January 2017
+	@date	February 2016 - January 2017
 	@author	Shaun Bebbington (version 0.0.1 to current)
 			&& Linden Bryon (version 0.0.1 to 0.0.7)
 	@changes	as of 2016-02-19:
