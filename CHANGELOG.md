@@ -1,4 +1,4 @@
-# Project FrameWork.php MCV v0.0.8
+# Project FrameWork.php MVC v0.0.8
 
 ### This is a fairly simple and fairly stupid MCV framework for PHP 5.4 or later Simply set up your path in the allowed segments, it will now allow all file extensions by default (.aspx, .jsp, .html etc...) - this creates a canonical tag thing to include in the head.
 
