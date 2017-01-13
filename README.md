@@ -5,11 +5,11 @@ FrameWork.php started out life as a simple and quite messy OO MVC framework in o
 
 I also thought it necessary to allow numerous file extensions on the page uri alias, so for instance, in the skeleton provided, one might use any of the following:
 
-http://framework.local/home
-http://framework.local/home.php
-http://framework.local/home.aspx
-http://framework.local/home.htm
-http://framework.local/home.html
+* http://framework.local/home
+* http://framework.local/home.php
+* http://framework.local/home.aspx
+* http://framework.local/home.htm
+* http://framework.local/home.html
 
 The idea was to obscure that it was a PHP framework, and to send the page URLs with the .aspx file extension to our pen testers. I don't know if this was a good idea, however there were no issues that came back requiring attention.
 
@@ -20,5 +20,5 @@ I'd like to thank Linden for his help and support whilst at Rushcliff Ltd, I lea
 If you have any comments then please feel free to contact me.
 
 Shaun Bebbington.
-@yearofcodes
+Twitter: @yearofcodes
 --

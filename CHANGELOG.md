@@ -1,7 +1,7 @@
 # Project FrameWork.php MCV v0.0.8
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
-### This is a fairly simple and fairly stupid MCV framework for PHP 5.4 or later Simply set up your path in the allowed segments, it will now allow all file extensions by default (.aspx, .jsp, .html etc...) - this is handled by creating a canonical tag thing to include in the head.
+### This is a fairly simple and fairly stupid MCV framework for PHP 5.4 or later Simply set up your path in the allowed segments, it will now allow all file extensions by default (.aspx, .jsp, .html etc...) - this creates a canonical tag thing to include in the head.
 
 #### File Structure:
 ```
@@ -20,10 +20,10 @@
 		--> partial
 			\ For partial HTML views such as headers, footers and menus
 ```
-	@version 0.0.8
-	@date	February 2016 - January 2017
-	@author	Shaun Bebbington (version 0.0.1 to current)
-			&& Linden Bryon (version 0.0.1 to 0.0.7)
+	@version	0.0.8
+	@date		February 2016 - January 2017
+	@author		Shaun Bebbington (version 0.0.1 to current)
+				&& Linden Bryon (version 0.0.1 to 0.0.7)
 	@changes	as of 2016-02-19:
  				Added partial views in seperate directory
  				Added model and controller core so all other model and controller classes
