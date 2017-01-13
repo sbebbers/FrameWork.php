@@ -281,9 +281,9 @@ class Library
     }
     
     /**
-     * Turns a PHP array into a JSON-alike thing
+     * Turns a PHP scalar into JSON
      *
-     * @param	array
+     * @param	scalar
      * @author	sbebbington
      * @date	10 Jan 2017 - 15:56:39
      * @version	0.0.1

@@ -2,6 +2,7 @@
 require_once (serverPath('/model/ModelCore.php'));
 
 class HomeModel extends \Application\Model\ModelCore{
+	protected $table;
 	public function __construct(){
 		parent::__construct();
 		$this->table = "view";
@@ -19,9 +20,9 @@ class HomeModel extends \Application\Model\ModelCore{
 	 */
 	public function getView($colName = 'home'){
 		$query	= "SELECT `header`, `sub_header`, `content` FROM `{$this->db}`.`{$this->table}` "
-				."WHERE `name`='{$colName}';";
+				."WHERE `name`=?;";
 		$result	= $this->connection->prepare($query);
-		$result->execute();
+		$result->execute(array($colName));
 		return $result->fetch(PDO::FETCH_ASSOC);
 	}
 }
