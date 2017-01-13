@@ -220,6 +220,29 @@ class Library
     }
     
     /**
+     * This will convert the snake_case stuff typically used in databases
+     * to normal camelCase typically used in PHP
+     * 
+     * @param	string
+     * @author	sbebbington
+     * @date	13 Jan 2017 - 10:35:31
+     * @version	0.0.1
+     * @return	string
+     * @todo
+     */
+    public function convertSnakeCase($snake){
+    	if(strpos('_', $snake) === true){
+    		return $snake;
+    	}
+    	$_snake			= explode('_', $snake);
+    	$camelBuilder	= '';
+    	foreach($_snake as $key => $data){
+    		$camelBuilder .= ($key === 0) ? $data : ucfirst($data);
+    	}
+    	return $camelBuilder;
+    }
+    
+    /**
      * Cleanses and trims the data, used for posted data etc...
      * The recursion bit has been removed from the original
      * version as it seemed a little over-kill, although quite

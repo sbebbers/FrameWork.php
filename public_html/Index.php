@@ -28,7 +28,7 @@
 		 * @todo
 		 */
 		public function __construct(){
-			$this->core			= new \Application\Core\Framework\Core();
+			$this->core	= new \Application\Core\Framework\Core();
 			$this->core->loadPage();
 		}
 	}

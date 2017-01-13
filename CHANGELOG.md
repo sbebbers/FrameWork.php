@@ -67,3 +67,7 @@
  				file quite light-weight in PHP terms. All of the page handling stuff is handled in
  				the Core directly now; Need to add in the HTML builder and other things, as well
  				as work on the modelling.
+	@changes as of 2017-01-13:
+				I've added a convertSnakeCase function to the library so that database keys may be
+				used in a PHP-friendly way such as camelCase. In my test, sub_header in the database
+				becomes subHeader in my PHP view - much easier to remember.
