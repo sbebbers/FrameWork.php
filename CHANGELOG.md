@@ -16,9 +16,10 @@
 			\ Helper functions and other such things
 		--> view
 			\ HTML (with embedded PHP) views
-		--> partial
-			\ For partial HTML views such as headers, footers and menus
+			--> partial
+				\ For partial HTML views such as headers, footers and menus
 ```
+--
 	@version	0.0.8
 	@date		February 2016 - January 2017
 	@author		Shaun Bebbington (version 0.0.1 to current)
