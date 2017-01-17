@@ -1,8 +1,9 @@
 <?php
 
 namespace Application\Core\Framework;
+require_once(serverPath('/core/HtmlBuilder.php'));
 
-class Core
+class Core extends \Application\Core\Framework\HtmlBuilder
 {
 	public $segment;
 	public $host;
@@ -28,6 +29,7 @@ class Core
 	public $canonical = '';
 	
 	public function __construct(){
+		parent::__construct();
 		$this->host	        = isHttps() ? "https://" : "http://";
 		$this->host			.= host();
 		if(in_array($this->host, $this->errorReporting)){
