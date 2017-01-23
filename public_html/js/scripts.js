@@ -25,7 +25,7 @@ function checkDate(_d, _m, _y){
 	if(_y > 0 && _y < 100){
 		_y += 2000;
 	}else if(_y >= 100 && _y < 1900){
-		return {"error": "Year range must be between 1900 and the current year in the Gregorian calendar"};
+		return {"error": "Year range must be between 1900 and 2100 in the Gregorian calendar"};
 	}else if(_y < 0 || _y > 2100){
 		return {"error": "Year out of range - " + _y};
 	}

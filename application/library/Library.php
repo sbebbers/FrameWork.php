@@ -70,7 +70,7 @@ class Library
 	 * 			changes are made
 	 */
 	public function version(){
-		return '0.0.8';
+		return '0.0.9';
 	}
 	
 	/**

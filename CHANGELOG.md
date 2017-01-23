@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.0.8
+# Project FrameWork.php MVC v0.0.9
 
 ### This is a fairly simple and fairly stupid MCV framework for PHP 5.4 or later Simply set up your path in the allowed segments, it will now allow all file extensions by default (.aspx, .jsp, .html etc...) - this creates a canonical tag thing to include in the head.
 
@@ -21,7 +21,7 @@
 ```
 --
 	@version	0.0.8
-	@date		February 2016 - January 2017
+	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
 	@changes	as of 2016-02-19:
@@ -72,3 +72,15 @@
 				I've added a convertSnakeCase function to the library so that database keys may be
 				used in a PHP-friendly way such as camelCase. In my test, sub_header in the database
 				becomes subHeader in my PHP view - much easier to remember.
+	@changes as of 2017-01-23:
+				I've added in the HTML builder with an example of how to use on the home page view
+				in application/view/home.phtml. This will allow you to generate much of your HTML
+				using PHP but will also produce the HTML in minimised form; as PHP doesn't care so
+				much about white spaces, you can align your PHP in nice way without affecting the
+				outcome of the HTML (still generated as minimised regardless of how you format your
+				PHP).
+				Some of the SEO companies that I have worked with like minimised HTML as it might
+				affect the page load time by a few milliseconds if you're lucky.
+				I've also started to use the strict PHP 7 types in parts of the project, it should
+				be easy enough to fix this for PHP 5.x version, but from now on I'll be using the
+				latest PHP standards, so consider it now a PHP 7 framework.
