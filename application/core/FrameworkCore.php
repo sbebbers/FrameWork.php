@@ -23,8 +23,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	public $filePath;
 	public $http;
 	private $errorReporting = array(
-		"http://sandbox.local",
-		"https://sandbox.local"
+		"http://framework.php.local",
+		"https://framework.php.local"
 	);
 	public $canonical = '';
 	

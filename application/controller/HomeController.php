@@ -2,7 +2,8 @@
 require_once (serverPath('/controller/ControllerCore.php'));
 require_once (serverPath('/model/HomeModel.php'));
 
-class HomeController extends \Application\Controller\ControllerCore{
+class HomeController extends \Application\Controller\ControllerCore
+{
 	public function __construct(){
 		parent::__construct();
 		

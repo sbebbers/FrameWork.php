@@ -1,7 +1,8 @@
 <?php
 require_once (serverPath('/model/ModelCore.php'));
 
-class HomeModel extends \Application\Model\ModelCore{
+class HomeModel extends \Application\Model\ModelCore
+{
 	protected $table;
 	public function __construct(){
 		parent::__construct();

@@ -2,7 +2,8 @@
 namespace Application\Core\Framework;
 require_once(serverPath("/library/Library.php"));
 
-class HtmlBuilder{
+class HtmlBuilder
+{
 	public $lib;
 	
 	public function __construct(){
