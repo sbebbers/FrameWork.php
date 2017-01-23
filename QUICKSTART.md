@@ -70,9 +70,9 @@ Your controller class might look like this:
 
 	<?php
 	require_once(serverPath('/model/MyPageModel.php'));
-	require_once(serverPath('/controller/ControllerCore.php'));
+	require_once (serverPath('/controller/ControllerCore.php'));
 
-	class MyPageController extends \Application\Controller\CoreController
+	class MyPageController extends \Application\Controller\ControllerCore
 	{
 		public function __construct(){
 			parent::__construct();
