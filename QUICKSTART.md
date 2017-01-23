@@ -2,7 +2,7 @@
 
 ### Quick start guide - updated 2017-01-23###
 
-You will already have a home page and 404 page to play with; these files are located in the /application/view folder. There are two partial views included as well, a file called header.phtml for the <head> section of your website, and one named footer.phtml for your page <footer>. These are in a sub-folder in your view folder.
+You will already have a home page and 404 page to play with; these files are located in the /application/view folder. There are two partial views included as well, a file called header.phtml for the ```<head>``` section of your website, and one named footer.phtml for your page ```<footer>```. These are in a sub-folder in your view folder.
 
 You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP will generate:
 
