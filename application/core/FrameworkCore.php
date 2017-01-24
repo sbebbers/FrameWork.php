@@ -63,7 +63,6 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	    	'header'	=> serverPath("/view/partial/header.phtml"),
 	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
 		);
-		
 	}
 
 	/**

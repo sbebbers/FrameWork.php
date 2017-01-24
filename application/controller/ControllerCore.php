@@ -25,8 +25,6 @@ class ControllerCore
         }
         $this->view             = new \stdClass();        
         $this->host				= host();
-        
-		date_default_timezone_set("Europe/London");
     }
     
 	/**

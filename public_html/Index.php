@@ -15,20 +15,26 @@
 	class Index
 	{
 		protected $core;
+		public $timeZone = "Europe/London";
 		
 		/**
-		 * Constructor routes all of the allowed URL paths above and sets up some variables
-		 * which will hopefully be usable in the views etc...
-		 *
-		 * @author	Shaun B && Linden
-		 * @version	0.0.1
-		 * @date	2015-15-02
+		 * This will initiate the core to load the view
+		 * according to the uri path, one may also
+		 * change the default timezone for the project
+		 * by altering the public $timeZone string above
+		 * for a list of valid timezones, see:
+		 * http://php.net/manual/en/timezones.php
+		 * 
 		 * @param	na
-		 * @return 	na
+		 * @author	sbebbington
+		 * @date	24 Jan 2017 - 09:49:15
+		 * @version	0.0.1
+		 * @return	
 		 * @todo
 		 */
 		public function __construct(){
 			$this->core	= new \Application\Core\Framework\Core();
+			setTimeZone($this->timeZone);
 			$this->core->loadPage();
 		}
 	}

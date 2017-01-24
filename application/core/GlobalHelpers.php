@@ -67,3 +67,18 @@ function documentRoot($routeTo = null){
 function host(){
 	return $_SERVER['HTTP_HOST'];
 }
+
+/**
+ * Sets time zone, for a full list, see
+ * http://php.net/manual/en/timezones.php
+ * 
+ * @param	string
+ * @author	sbebbington
+ * @date	24 Jan 2017 - 09:48:21
+ * @version	0.0.1
+ * @return	void
+ * @todo
+ */
+function setTimeZone(string $timeZone){
+	date_default_timezone_set($timeZone);
+}
