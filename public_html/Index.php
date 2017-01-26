@@ -28,7 +28,7 @@
 		 * @param	na
 		 * @author	sbebbington
 		 * @date	24 Jan 2017 - 09:49:15
-		 * @version	0.0.1
+		 * @version	0.0.2
 		 * @return	
 		 * @todo
 		 */
