@@ -26,6 +26,9 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		"http://framework.php.local",
 		"https://framework.php.local"
 	);
+	private $allowedFileExts	= array(
+		'htm', 'html', 'asp', 'aspx', 'js', 'php', 'phtml',
+	);
 	public $canonical = '';
 	
 	public function __construct(){
@@ -46,12 +49,11 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 			$this->segment				= $segment[0];
 		}
 		
-		if(strpos($this->segment, ".") == true){
-			$segments 			= explode(".", $this->segment);
-			$count				= count($segments) - 1;
-			if(in_array($segments[$count], $this->allowedFileExts)){
-				$this->segment			= $segments[$count-1];
-				$this->core->canonical	= "<link rel=\"canonical\" href=\"{$this->host}/{$this->segment}\">" . PHP_EOL;
+		if(strpos($this->segment, ".") > 0){
+			$segments 			= explode(".", $this->segment);				
+			if(in_array($segments[count($segments)-1], $this->allowedFileExts)){
+				$this->segment		= $segments[count($segments)-2];
+				$this->canonical	= "<link rel=\"canonical\" href=\"{$this->host}/{$this->segment}\">" . PHP_EOL;
 			}
 		}
 		$this->serverPath   = serverPath();
