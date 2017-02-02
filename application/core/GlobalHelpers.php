@@ -82,3 +82,27 @@ function host(){
 function setTimeZone(string $timeZone){
 	date_default_timezone_set($timeZone);
 }
+
+
+/**
+ * Gets user IP address
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	2 Feb 2017 - 09:58:21
+ * @version	0.0.1
+ * @return	string
+ * @todo
+ */
+function getUserIPAddress(){
+	$client		= $_SERVER['HTTP_CLIENT_IP'] ?? '';
+	$forward	= $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+	$remote		= $_SERVER['REMOTE_ADDR'] ?? '';
+	$ip			= $remote;
+	if(filter_var($client, FILTER_VALIDATE_IP)){
+		$ip		= $client;
+	}else if(filter_var($forward, FILTER_VALIDATE_IP)){
+		$ip		= $forward;
+	}
+	return $ip;
+}
