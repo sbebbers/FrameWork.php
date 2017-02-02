@@ -40,20 +40,22 @@ class Index
 }
 
 /**
- * Determines server path and will include additional route with optional parameter
+ * This will correctly route to the application
+ * directory on your server
  *
  * @param	string
  * @author	Shaun
- * @date	9 Jun 2016 10:04:26
- * @version	0.0.1
+ * @date	2 Feb 2017 - 13:01:13
+ * @version	0.0.2
  * @return	string
  * @todo
  */
-function serverPath($routeTo = null){
+function serverPath(string $routeTo = ''){
 	$_x = str_replace("\\", "/", dirname(__FILE__)) . '/application';
 	$_x = str_replace("public_html/", "", $_x);
-	$_x .= ($routeTo === null) ? '' : $routeTo;
+	$_x .= $routeTo;
 	return str_replace("//", "/", $_x);
 }
+
 // Creates new instance and therefore initiates the controllers, models and views etc...
 $page = new Index();

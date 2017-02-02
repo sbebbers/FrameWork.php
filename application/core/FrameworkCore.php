@@ -66,18 +66,18 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
 		);
 	}
-
+	
 	/**
 	 * Sets the meta page titles in the views
 	 * 
-	 * @author	Shaun B
-	 * @version	0.0.1
-	 * @date	2016-09-02
-	 * @param 	string $page
+	 * @param	string
+	 * @author	sbebbington
+	 * @date	2 Feb 2017 - 13:04:10
+	 * @version	0.0.2
 	 * @return	string
 	 * @todo
 	 */
-	public function setTitle($page = ''){
+	public function setTitle(string $page = ''){
 	    $titles = array(
 			'home'				=> "Example FrameWork.php skeleton site",
 	    );
@@ -87,14 +87,14 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	/**
 	 * Sets the meta page descriptions in the views
 	 * 
-	 * @author	Shaun
+	 * @param	string
+	 * @author	sbebbington
+	 * @date	2 Feb 2017 - 13:04:47
 	 * @version	0.0.1
-	 * @date	2016-09-02 
-	 * @param	string $page
 	 * @return	string
 	 * @todo
 	 */
-	public function setDescription($page = ''){
+	public function setDescription(string $page = ''){
 	    $descriptions = array(
             'home'				=> "The Skeleton",
 	    );
@@ -102,18 +102,18 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	}
 	
 	/**
-	 * Bug fixed edition of the using ZF type view variables
-	 *
-	 * @param	array|object
-	 * @author	Shaun
-	 * @date	14 Sep 2016 09:34:33
-	 * @version	0.0.3
-	 * @return	na
+	 * Bug fixed edition of the using ZF type view variables 
+	 * 
+	 * @param	
+	 * @author	sbebbington
+	 * @date	2 Feb 2017 - 13:05:41
+	 * @version	0.0.3a
+	 * @return	
 	 * @todo
 	 */
-	public function setView($instance, $masterKey = null){
+	public function setView($instance, string $masterKey = ''){
 		foreach($instance as $key => $data){
-			if($masterKey == null){
+			if($masterKey == ''){
 				$this->$key = $data;
 			}else{
 				$this->$masterKey->$key = $data;

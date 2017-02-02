@@ -9,12 +9,12 @@ if(!defined(PHP_EOL)){
  *
  * @param	string, boolean
  * @author 	Shaun
- * @date 	12 May 2016 10:58:44
- * @version	0.0.3
+ * @date	2 Feb 2017 - 13:06:45
+ * @version	0.0.3a
  * @return	string
  * @todo
  */
-function getDomain($domain, $https){
+function getDomain(string $domain = '', bool $https = false){
 	$domain				= explode('.', $domain);
 	$domain[0]			= ($https == true) ? str_replace('https://', '', $domain[0]) : str_replace('http://', '', $domain[0]);
 	$countedElements	= sizeof($domain)-1;
@@ -42,14 +42,14 @@ function isHttps(){
  *
  * @param	na
  * @author	Shaun
- * @date	6 Sep 2016 14:20:11
- * @version	0.0.1
+  * @date	2 Feb 2017 - 13:07:39
+ * @version	0.0.2
  * @return	string
  * @todo
  */
-function documentRoot($routeTo = null){
+function documentRoot(string $routeTo = ''){
 	$_x = str_replace("\\", "/", dirname(__FILE__));
-	$_x .= ($routeTo === null) ? '' : $routeTo;
+	$_x .= $routeTo;
 	return str_replace("//", "/", $_x);
 }
 
