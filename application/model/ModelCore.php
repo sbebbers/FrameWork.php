@@ -12,7 +12,7 @@ class ModelCore
 		$user			= (getServerIPAddress() == '127.0.0.1') ? "root" : "database_username";
 		$host			= getServerIPAddress();
 		$port			= 3306;
-		$this->db		= (getServerIPAddress() == '127.0.0.1') ? "hfpe_manager" : "database_name";
+		$this->db		= (getServerIPAddress() == '127.0.0.1') ? "skeleton" : "database_name";
 		
 		try{
 			$this->connection = new \PDO("mysql:host={$host};port:{$host};dbname={$this->db}", $user, $password);

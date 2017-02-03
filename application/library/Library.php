@@ -253,7 +253,39 @@ class Library
 	    	}
 	    	return $camelBuilder;
     	}
-    	return $snake;
+    	return "{$snake}";
+    }
+    
+    /**
+     * This will convert a camelCase string to
+     * snake_case as database enthusiasts like
+     * snake_case. A lot
+     *
+     * @param	string, int
+     * @author	sbebbington
+     * @date	3 Feb 2017 - 13:46:37
+     * @version	0.0.1
+     * @return	string
+     * @todo
+     */
+    public function convertToSnakeCase(string $unSnaked = '', int $offset = 0){
+    	if($unSnaked === ''){
+    		return '';
+    	}
+    	$index			= $charBuffer = 0;
+    	$stringBuffer	= '';
+    	while($index < strlen($unSnaked)){
+    		$charBuffer = ord($unSnaked[$index]);
+    		if($index > $offset){
+    			if($charBuffer < 91 && $charBuffer > 64){
+    				$charBuffer		+= 32;
+    				$stringBuffer	.= '_';
+    			}
+    		}
+    		$stringBuffer .= chr($charBuffer);
+    		$index++;
+    	}
+    	return "{$stringBuffer}";
     }
     
     /**
