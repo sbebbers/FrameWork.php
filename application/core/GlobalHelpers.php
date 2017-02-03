@@ -104,3 +104,18 @@ function getUserIPAddress(){
 	}
 	return $ip;
 }
+
+/**
+ * Returns the IP address that the framework
+ * is running on
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	3 Feb 2017 - 09:04:29
+ * @version	0.0.1
+ * @return	string
+ * @todo
+ */
+function getServerIPAddress(){
+	return "{$_SERVER['SERVER_ADDR']}";
+}
