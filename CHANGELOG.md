@@ -84,3 +84,11 @@
 				I've also started to use the strict PHP 7 types in parts of the project, it should
 				be easy enough to fix this for PHP 5.x version, but from now on I'll be using the
 				latest PHP standards, so consider it now a PHP 7 framework.
+	@changes as of 2017-02-06:
+				Added in a path router to the core - for instance, if you have in your view folder
+				/admin/login.phtml and /admin/dashboard.phtml, you will now be able to use this
+				path as a URI request. Setting up the $allowedSegments and $pageControllers has not
+				changed in the Framework Core, as it will build the URI string and route to it.
+				I've also improved the logic for working out which view to load in the loadPage()
+				method of the core; now it will check if the file exists as well as a check to see
+				if the URI request is allowed.

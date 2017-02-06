@@ -145,10 +145,10 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * $this->objName in the PHP/HTML view or something.
 	 *
 	 * @param	na
-	 * @author	Shaun
-	 * @date	12 Sep 2016 10:10:02
-	 * @version	0.0.2
-	 * @return	na
+	 * @author	sbebbington
+	 * @date	6 Feb 2017 - 11:15:14
+	 * @version	0.0.3
+	 * @return	void
 	 * @todo
 	 */
 	public function loadPage(){
@@ -159,7 +159,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		if(in_array($this->segment, $this->allowedSegments) == false || !file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"))){
 			$this->setView(array("_404Error" => 1));
 			$this->title		= '404 error - page not found, please try again';
-			$this->description	= 'There\'s a Skeleton in Sandbox';
+			$this->description	= 'There\'s a Skeleton in the Sandbox';
 			require_once(serverPath("/view/404.phtml"));
 			exit;
 		}
