@@ -119,3 +119,19 @@ function getUserIPAddress(){
 function getServerIPAddress(){
 	return "{$_SERVER['SERVER_ADDR']}";
 }
+
+
+/**
+ * Returns the current or default URI segment
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	6 Feb 2017 - 11:40:40
+ * @version	0.0.1
+ * @return	string
+ * @todo
+ */
+function getSegment(){
+	$page	= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
+	return !empty($page) ? strtolower($page[count($page)]) : 'home';
+}
