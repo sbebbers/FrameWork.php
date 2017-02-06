@@ -21,6 +21,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	public $root;
 	public $flash;
 	public $filePath;
+	public $uriPath;
 	public $http;
 	private $errorReporting = array(
 		"http://framework.php.local",
@@ -39,14 +40,28 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 			error_reporting(-1);
 			ini_set('display_errors', '1');
 		}
+		$this->uriPath	= '';
+		$page			= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
+		if(count($page)>1){
+			foreach($page as $key => $data){
+				if($key != count($page)){
+					$this->uriPath	.= "{$data}/";
+				}
+			}
+		}
+		$this->segment	= !empty($page) ? strtolower($page[count($page)]) : "";
 		
-		$page			= explode('/', $_SERVER['REQUEST_URI']);
-		$pageCount		= count($page) - 1;
-		
-		$this->segment	= (isset($page[$pageCount]) && strlen($page[$pageCount]) > 1) ? strtolower($page[$pageCount]) : "";
-		if(isset($_GET)){
-			$segment 					= explode("?", $this->segment);
+		if(!empty($_GET)){
+			$segment 					= explode('?', $this->segment);
 			$this->segment				= $segment[0];
+			if(isset($segment[1]) && strlen($segment[1])>0){
+				$_GET	= array();
+				$get	= explode("&", $segment[1]);
+				foreach($get as $data){
+					$_data = explode("=", $data);
+					$_GET[$_data[0]] = urldecode($_data[1]);
+				}
+			}
 		}
 		
 		if(strpos($this->segment, ".") > 0){
@@ -137,16 +152,16 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * @todo
 	 */
 	public function loadPage(){
-		if((in_array($this->segment, $this->allowedSegments) == false) && $this->segment != ""){
+		if($this->segment == ""){
+			$this->segment		= 'home';
+		}
+		
+		if(in_array($this->segment, $this->allowedSegments) == false || !file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"))){
 			$this->setView(array("_404Error" => 1));
 			$this->title		= '404 error - page not found, please try again';
 			$this->description	= 'There\'s a Skeleton in Sandbox';
 			require_once(serverPath("/view/404.phtml"));
 			exit;
-		}
-		
-		if($this->segment == ""){
-			$this->segment		= 'home';
 		}
 		
 		if(in_array($this->segment, $this->allowedSegments) == true){
@@ -162,11 +177,11 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 					}
 				}
 			}
-			
+				
 			if(isset($_SESSION['flashMessage']) && !empty($_SESSION['flashMessage'])){
 				$this->setView($_SESSION['flashMessage'], "flash");
 			}
-			require_once(serverPath("/view/{$this->segment}.phtml"));
+			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
 		}
 	}
 }

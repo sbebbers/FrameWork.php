@@ -7,7 +7,7 @@ class Library
 	public $date;
 	private $key;
 	
-	public function __construct($aAccess = false){
+	public function __construct(){
 		$this->key			= 'Skelet0n';
 	}
 	
@@ -327,7 +327,7 @@ class Library
     }
     
     /**
-     * Turns a PHP scalar into JSON
+     * Turns a PHP array into JSON
      *
      * @param	array|resource
      * @author	sbebbington
@@ -338,5 +338,20 @@ class Library
      */
     public function convertToJSON($data){
     	return json_encode($data);
+    }
+    
+    /**
+     * Converts a JSON object to a
+     * PHP resource
+     * 
+     * @param	JSON
+     * @author	sbebbington
+     * @date	3 Feb 2017 - 14:47:48
+     * @version	0.0.1
+     * @return	resource
+     * @todo
+     */
+    public function convertFromJSON($data){
+    	return json_decode($data);
     }
 }
