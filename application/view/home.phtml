@@ -4,8 +4,18 @@
     	$this->open("head");
 			require_once("{$this->partial['header']}");
 		$this->close("head");
-    	$this->open("body")
-    		->open("div", "content", "container")
+    	$this->open("body");
+    	
+    		if(isset($this->flash->message)){
+    			$this->open("div", "flash", array("container", "flash"))
+    				->p()->id("flash-message")->class(array("flash-bg", "green"))->closeElement()
+    					->text($this->flash->message)
+    				->close("p")
+    				
+    			->close("div");
+    		}
+    		
+    		$this->open("div", "content", "container")
     			->h(1, $this->header, "header")
     			->h(3, $this->subHeader, "sub_header")
     			->text($this->content, true)

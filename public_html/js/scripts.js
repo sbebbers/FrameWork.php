@@ -50,4 +50,5 @@ function checkDate(_d, _m, _y){
 
 $(function(){
 	console.log("Page ready.");
+	$(".flash").fadeOut(2e3);
 });

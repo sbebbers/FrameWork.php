@@ -1,6 +1,6 @@
 AddDefaultCharset UTF-8
 DefaultLanguage en-GB
-DirectoryIndex Index.php
+DirectoryIndex index.php
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f

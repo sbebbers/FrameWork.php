@@ -51,10 +51,10 @@ class Index
  * @todo
  */
 function serverPath(string $routeTo = ''){
-	$_x = str_replace("\\", "/", dirname(__FILE__)) . '/application';
-	$_x = str_replace("public_html/", "", $_x);
+	$_x = str_replace("\\", '/', dirname(__FILE__)) . '/application';
+	$_x = str_replace("public_html/", '', $_x);
 	$_x .= $routeTo;
-	return str_replace("//", "/", $_x);
+	return str_replace("//", '/', $_x);
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...

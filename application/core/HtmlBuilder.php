@@ -81,6 +81,7 @@ class HtmlBuilder
 			$_class .= "{$class}";
 		}
 		print("{$_class}\"");
+		return $this;
 	}
 	
 	/**
@@ -274,7 +275,7 @@ class HtmlBuilder
 	 * will generate the following HTML:
 	 * 		<div id="content" class="col-xs-12">
 	 * 
-	 * @param	string, string, string | array, boolean
+	 * @param	string, string, string | array, [boolean]
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 10:05:40
 	 * @version	0.0.1

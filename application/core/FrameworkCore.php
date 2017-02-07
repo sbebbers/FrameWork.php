@@ -137,6 +137,21 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	}
 	
 	/**
+	 * Clears the page flash messages as these
+	 * are stored in the PHP $_SESSION global
+	 * 
+	 * @param	boolean
+	 * @author	sbebbington
+	 * @date	7 Feb 2017 - 15:19:57
+	 * @version	0.0.1
+	 * @return	resource
+	 * @todo
+	 */
+	public function emptyFlashMessages(bool $emptyFlash){
+		return ($emptyFlash === true) ? $_SESSION['flashMessage'] = array() : array();
+	}
+	
+	/**
 	 * This will load the view and related controllers
 	 * It has an added exception for Jamie's admin html
 	 * template. This version should now allow Zend-alike
@@ -146,8 +161,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	6 Feb 2017 - 11:15:14
-	 * @version	0.0.3
+	 * @date	7 Feb 2017 - 15:21:00
+	 * @version	0.0.3a
 	 * @return	void
 	 * @todo
 	 */
@@ -177,11 +192,14 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 					}
 				}
 			}
-				
+
+			$emptyFlash = false;
 			if(isset($_SESSION['flashMessage']) && !empty($_SESSION['flashMessage'])){
 				$this->setView($_SESSION['flashMessage'], "flash");
+				$emptyFlash = true;
 			}
 			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
+			$this->emptyFlashMessages($emptyFlash);
 		}
 	}
 }
