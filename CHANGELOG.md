@@ -92,3 +92,7 @@
 				I've also improved the logic for working out which view to load in the loadPage()
 				method of the core; now it will check if the file exists as well as a check to see
 				if the URI request is allowed.
+	@changes as of 2017-02-08:
+				I've been in contact with my former colleague Linden Bryon (@Lindenbryon) who has
+				agreed to collaborate on this project which will help in its development in the
+				PHP side as well as the JavaScript and jQuery stuff. Happy Days.
