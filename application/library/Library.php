@@ -7,7 +7,7 @@ class Library
 	public $date;
 	private $key;
 	
-	public function __construct($aAccess = false){
+	public function __construct(){
 		$this->key			= 'Skelet0n';
 	}
 	
@@ -22,7 +22,7 @@ class Library
 	 * @return 	null
 	 * @todo
 	 */
-	public function debug($variable = null, $die = false, $message = '', $file = null, $line = null, $header = ''){
+	public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''){
 		if(is_null($variable)){
 			echo '<p>You need to send the scalar or resource that you are trying to debug as your first parameter, else this don\'t work</p>';
 			exit;
@@ -42,14 +42,14 @@ class Library
 	 * For seeing contents of variables or objects, optional die
 	 * and die message included
 	 *
-	 * @param	Library
+	 * @param	object, boolean, string, string, string
 	 * @author 	Shaun && Linden
-	 * @date	9 Jan 2017 - 15:47:16
-	 * @version 0.0.3
+	 * @date	2 Feb 2017 - 13:12:04
+	 * @version	0.0.3a
 	 * @return	null
 	 * @todo
 	 */
-	public function dump($variable, $die = false, $message = '', $file = null, $line = null){
+	public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''){
 		echo var_dump($variable);
 		echo $file != null ? '<pre>File: ' . print_r($file,1) . '</pre>' : "";
 		echo $line != null ? '<pre>Line: ' . print_r($line,1) . '</pre>' : "";
@@ -70,7 +70,7 @@ class Library
 	 * 			changes are made
 	 */
 	public function version(){
-		return '0.0.8';
+		return '0.0.9';
 	}
 	
 	/**
@@ -99,14 +99,14 @@ class Library
 	 *
 	 * @param	string
 	 * @author 	Shaun && Stack Overflow
-	 * @date 	22 Mar 2016 16:25:47
-	 * @version 0.0.2
+	 * @date	2 Feb 2017 - 13:13:02
+	 * @version 0.0.2a
 	 * @return	String
 	 * @todo
-	 */	
-	public function encryptIt($string, $_55Number = null){
-		$md5a = ($_55Number == null) ? md5($this->key) : md5($_55Number);
-		$md5b = ($_55Number == null) ? md5(md5($this->key)) : md5(md5($_55Number));
+	 */
+	public function encryptIt(string $string, string $_55Number = ''){
+		$md5a = ($_55Number == '') ? md5($this->key) : md5($_55Number);
+		$md5b = ($_55Number == '') ? md5(md5($this->key)) : md5(md5($_55Number));
 		return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $md5a, $string, MCRYPT_MODE_CBC, $md5b));
 	}
 	
@@ -115,12 +115,12 @@ class Library
 	 *
 	 * @param	string
 	 * @author 	Shaun && Stack Overflow
-	 * @date 	22 Mar 2016 16:15:34
-	 * @version 0.0.2
+	 * @date	2 Feb 2017 - 13:14:24
+	 * @version 0.0.2a
 	 * @return	string
 	 * @todo
 	 */
-	public function decryptIt($string, $_55Number = null){
+	public function decryptIt(string $string, string $_55Number = ''){
 		$md5a = ($_55Number == null) ? md5($this->key) : md5($_55Number);
 		$md5b = ($_55Number == null) ? md5(md5($this->key)) : md5(md5($_55Number));
 		return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $md5a, base64_decode($string), MCRYPT_MODE_CBC, $md5b), "\0");
@@ -131,12 +131,15 @@ class Library
 	 *
 	 * @param	string, string
 	 * @author 	Shaun || Steve
-	 * @date 	29 Sep 2016 11:16:08
-	 * @version 0.0.4a
+	 * @date	2 Feb 2017 - 13:15:26
+	 * @version 0.0.5
 	 * @return	na
 	 * @todo
 	 */
-	public function redirect($destination, $host){
+	public function redirect(string $destination = '', string $host = ''){
+		if($destination == '' || $host == ''){
+			$this->debug("You need to set a destination and host parameters as a string to call the Library redirect() method", true);
+		}
 		$host	= preg_replace('/^https?\:\/\//','',$host);
 		$http	= isHttps() ? "https://" : "http://";
 		header("Location:{$http}{$host}/{$destination}");
@@ -148,13 +151,16 @@ class Library
      * 
      * @param	string, string
      * @author	Shaun
-     * @date	10 Oct 2016 21:09:00
-     * @version	0.0.1
+     * @date	2 Feb 2017 - 13:18:50
+     * @version	0.0.2
      * @return	na
      * @todo
      */
-    public function redirectExternal($destination, $website){
-        die("
+    public function redirectExternal(string $destination = '', string $website= ''){
+    	if($destination == '' || $host == ''){
+    		$this->debug("You need to set a destination and host parameters as a string to call the Library redirectExternal() method", true);
+    	}
+        die(trim("
         	<!DOCTYPE html>
         	<html lang=\"en-gb\">
         		<head>
@@ -164,7 +170,7 @@ class Library
         		</head>
         		<body></body>
         	</html>
-        ");
+        "));
     }
     
     /**
@@ -173,42 +179,47 @@ class Library
      * parameters as a flat array and the expected result
      * to use this
      *
-     * @param	object, string, array | scalar, scalar
+     * @param	object, string, array, any, [boolean]
      * @author	sbebbington
-     * @date	6 Jan 2017 - 15:31:16
-     * @version	0.0.1
+     * @date	2 Feb 2017 - 13:35:14
+     * @version	0.0.2
      * @return	boolean | string
      * @todo
      */
-    public function testUnit($object, $method, $params = array(), $expectedResult){
+    public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
     	if($object == null){
     		return print("<p>Pass an object to this method in order to test it</p>");
     	}
+    	if($method == ''){
+    		return print("<p>You need to specify the name of the method that you want to test</p>");
+    	}
+    	if($expectedResult == null){
+    		return print("<p>You need to specify your expected return value from the method that you are testing</p>");
+    	}
     	$passCol	= "color: green;";
     	$failCol	= "color: red;";
-    	$tested		= false;
     
     	if(!is_array($params) && (is_string($params) || is_numeric($params))){
     		$pass	= $object->$method($params);
     		$tested = true;
     	}else if(is_array($params)){
     		$pass = $object->$method(
-    				$params[0],
-    				isset($params[1]) ? $params[1] : null,
-    				isset($params[2]) ? $params[2] : null,
-    				isset($params[3]) ? $params[3] : null,
-    				isset($params[4]) ? $params[4] : null,
-    				isset($params[5]) ? $params[5] : null,
-    				isset($params[6]) ? $params[6] : null,
-    				isset($params[7]) ? $params[7] : null,
-    				isset($params[8]) ? $params[8] : null,
-    				isset($params[9]) ? $params[9] : null
-    				);
+    			$params[0],
+    			isset($params[1]) ? $params[1] : null,
+    			isset($params[2]) ? $params[2] : null,
+    			isset($params[3]) ? $params[3] : null,
+    			isset($params[4]) ? $params[4] : null,
+    			isset($params[5]) ? $params[5] : null,
+    			isset($params[6]) ? $params[6] : null,
+    			isset($params[7]) ? $params[7] : null,
+    			isset($params[8]) ? $params[8] : null,
+    			isset($params[9]) ? $params[9] : null
+    		);
     			
     		$tested = true;
     	}
     	
-    	if($tested){
+    	if($tested === true){
     		echo "<p style=\"";
     		echo ($pass == $expectedResult) ? "{$passCol}\">Test matched expected result" : "{$failCol}\">Test failed";
     		echo "</p>" . PHP_EOL;
@@ -217,6 +228,64 @@ class Library
     		return ($pass == $expectedResult);
     	}
     	return print("<p>Please send the parameters as an array, a string or a numeric value</p>");
+    }
+    
+    /**
+     * This will convert the snake_case stuff typically used in databases
+     * to normal camelCase typically used in PHP
+     * 
+     * @param	string
+     * @author	sbebbington
+     * @date	2 Feb 2017 - 13:39:01
+     * @version	0.0.2
+     * @return	string
+     * @todo
+     */
+    public function convertSnakeCase(string $snake = ''){
+    	if($snake != ''){
+	    	$_snake			= explode('_', $snake);
+	    	if(count($_snake) === 1){
+	    		return $snake;
+	    	}
+	    	$camelBuilder	= '';
+	    	foreach($_snake as $key => $data){
+	    		$camelBuilder .= ($key === 0) ? $data : ucfirst($data);
+	    	}
+	    	return $camelBuilder;
+    	}
+    	return "{$snake}";
+    }
+    
+    /**
+     * This will convert a camelCase string to
+     * snake_case as database enthusiasts like
+     * snake_case. A lot
+     *
+     * @param	string, int
+     * @author	sbebbington
+     * @date	3 Feb 2017 - 13:46:37
+     * @version	0.0.1
+     * @return	string
+     * @todo
+     */
+    public function convertToSnakeCase(string $unSnaked = '', int $offset = 0){
+    	if($unSnaked === ''){
+    		return '';
+    	}
+    	$index			= $charBuffer = 0;
+    	$stringBuffer	= '';
+    	while($index < strlen($unSnaked)){
+    		$charBuffer = ord($unSnaked[$index]);
+    		if($index > $offset){
+    			if($charBuffer < 91 && $charBuffer > 64){
+    				$charBuffer		+= 32;
+    				$stringBuffer	.= '_';
+    			}
+    		}
+    		$stringBuffer .= chr($charBuffer);
+    		$index++;
+    	}
+    	return "{$stringBuffer}";
     }
     
     /**
@@ -232,7 +301,7 @@ class Library
      * @return	array
      * @todo
      */
-    public function cleanseInputs($data, $htmlSpecialChars = false, $cleanInput = array()){
+    public function cleanseInputs($data, bool $htmlSpecialChars = false, $cleanInput = array()){
     	foreach($data as $key => $value){
     		$cleanInput[$key] = ($htmlSpecialChars === false) ? trim(strip_tags($value)) : htmlspecialchars(trim($value));
     	}
@@ -252,15 +321,15 @@ class Library
      * @return	string
      * @todo
      */
-    public function domainType($subDomain = false){
+    public function domainType(bool $subDomain = false){
     	$host	= explode(".", $this->host());
     	return ($subDomain === false) ? $host[count($host)-1] : $host[0];
     }
     
     /**
-     * Turns a PHP array into a JSON-alike thing
+     * Turns a PHP array into JSON
      *
-     * @param	array
+     * @param	array|resource
      * @author	sbebbington
      * @date	10 Jan 2017 - 15:56:39
      * @version	0.0.1
@@ -269,5 +338,20 @@ class Library
      */
     public function convertToJSON($data){
     	return json_encode($data);
+    }
+    
+    /**
+     * Converts a JSON object to a
+     * PHP resource
+     * 
+     * @param	JSON
+     * @author	sbebbington
+     * @date	3 Feb 2017 - 14:47:48
+     * @version	0.0.1
+     * @return	resource
+     * @todo
+     */
+    public function convertFromJSON($data){
+    	return json_decode($data);
     }
 }

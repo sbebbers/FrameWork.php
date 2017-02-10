@@ -25,8 +25,6 @@ class ControllerCore
         }
         $this->view             = new \stdClass();        
         $this->host				= host();
-        
-		date_default_timezone_set("Europe/London");
     }
     
 	/**
@@ -89,39 +87,5 @@ class ControllerCore
      */
     public function setFlashMessage($key, $value){
     	$_SESSION['flashMessage'][$key] = $value;
-    }
-    
-    /**
-     * Checks if flash message exists
-     *
-     * @param	string
-     * @author	Shaun
-     * @date	14 Sep 2016 10:18:04
-     * @version	0.0.1
-     * @return	boolean
-     * @todo
-     */
-    public function getFlashMessage($key){
-    	return isset($_SESSION['flashMessage'][$key]) ? true : false;
-    }
-    
-    /**
-     * Clears flash messages
-     *
-     * @param	string|array
-     * @author	Shaun
-     * @date	15 Sep 2016 10:40:49
-     * @version	0.0.1
-     * @return	na
-     * @todo
-     */
-    public function clearFlashMessage($key){
-    	if(is_array($key)){
-    		foreach($key as $_key => $_data){
-    			$_SESSION['flashMessage'][$_data]	= null;
-    		}
-    	}else{
-    		$_SESSION['flashMessage'][$key]			= null;
-    	}
     }
 }

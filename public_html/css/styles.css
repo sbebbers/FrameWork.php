@@ -193,3 +193,6 @@
 	.col-xl-11-offset{margin-left:91.6666666667%}
 	.container{max-width:1480px}
 }
+.flash{color:#eee;font-weight:700;font-size:18px;line-height:20px}
+.flash-bg{padding:8px;border-radius:4px}
+.green{background:#1a4}

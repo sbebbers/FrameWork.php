@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="php_new_file_context" deleted="false" description="FrameWork.php view" enabled="true" id="org.eclipse.php.ui.editor.templates.php.html.frameset" name="New PHP file - FrameWork.php view">&lt;!DOCTYPE html&gt;
+&lt;html lang="en-gb"&gt;
+	&lt;head&gt;
+		&lt;?php require_once("{$$this-&gt;partial['header']}"); ?&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div class="container"&gt;
+			&lt;?php ${cursor} ?&gt;
+		&lt;/div&gt;
+		&lt;?php require_once("{$$this-&gt;partial['footer']}"); ?&gt;
+	&lt;/body&gt;
+&lt;/html&gt;</template></templates>
