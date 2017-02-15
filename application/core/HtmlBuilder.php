@@ -340,4 +340,21 @@ class HtmlBuilder
 		$this->close("h{$size}");
 		return $this;
 	}
+	
+	/**
+	 * Opens a <script type="text/javascript" src="...">
+	 * tag
+	 *
+	 * @param	string
+	 * @author	sbebbington
+	 * @date	15 Feb 2017 - 13:45:35
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function javaScript(string $src=''){
+		print("<script type=\"text/javascript\"");
+		print(strlen($src) ? " src=\"{$src}\">" : ">");
+		return $this;
+	}
 }
