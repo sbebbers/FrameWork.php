@@ -354,4 +354,38 @@ class Library
     public function convertFromJSON($data){
     	return json_decode($data);
     }
+    
+    /**
+     * This will perform a soft minimisation of
+     * your javascript [jQuery] files; As it is
+     * a dumb minimisation there are some a few
+     * limitations, for instance:
+     * 	[1] All comments must be /* style
+     * 	[2] Variable names are not obfustated
+     * 	[3] Not all white spaces are removed
+     * 	[4] It will not remove the final ;
+     * 		where it is not necessary
+     * 
+     * @param	string
+     * @author	sbebbington
+     * @date	20 Feb 2017 - 17:29:19
+     * @version	0.0.1
+     * @return	string
+     * @todo	Finish this
+     */
+    public function softMinimiseJS($filePath){
+    	$remove = array(
+    		'remove' => array(
+    			"\t",
+    			"\r\n",
+    		),
+    		'replace' => array(
+    			'+'		=> " + ",
+    			'=='	=> " == ",
+    			'!='	=> " != ",
+    			'if('	=> "if (",
+    			
+    		),
+    	);
+    }
 }
