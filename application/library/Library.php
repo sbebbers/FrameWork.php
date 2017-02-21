@@ -365,15 +365,15 @@ class Library
      * 	[3] Not all white spaces are removed
      * 	[4] It will not remove the final ;
      * 		where it is not necessary
-     * 
-     * @param	string
+     *
+     * @param	string, [boolean], [boolean]
      * @author	sbebbington
-     * @date	20 Feb 2017 - 17:29:19
-     * @version	0.0.1
+     * @date	21 Feb 2017 - 15:20:10
+     * @version	0.0.2
      * @return	string
      * @todo	Test this
      */
-    public function softMinimiseJS(string $filePathName = ''){
+    public function softMinimiseJS(string $filePathName = '', bool $doubleSpaces = true, bool $spacedTab = true){
     	if(empty($filePathName)){
     		return '';
     	}
@@ -401,6 +401,12 @@ class Library
     	}
     	foreach($remove['replace'] as $key => $data){
     		if($key =='space' || $key == 'tab'){
+    			if($key == 'space' && $doubleSpaces === false){
+    				continue;
+    			}
+    			if($key == 'tab' && $spacedTab === false){
+    				continue;
+    			}
     			$key = '';
     		}
     		$file	= str_replace($data, $key, $file);
