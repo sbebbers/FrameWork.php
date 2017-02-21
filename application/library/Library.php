@@ -371,9 +371,12 @@ class Library
      * @date	20 Feb 2017 - 17:29:19
      * @version	0.0.1
      * @return	string
-     * @todo	Finish this
+     * @todo	Test this
      */
-    public function softMinimiseJS($filePath){
+    public function softMinimiseJS(string $filePathName = ''){
+    	if(empty($filePathName)){
+    		return '';
+    	}
     	$remove = array(
     		'remove' => array(
     			"\t",
@@ -384,8 +387,24 @@ class Library
     			'=='	=> " == ",
     			'!='	=> " != ",
     			'if('	=> "if (",
-    			
+    			'++'	=> "++ ",
+    			'==='	=> " === ",
+    			'!=='	=> " !== ",
+    			'{'		=> " { ",
+    			'space'	=> "  ",
+    			'tab'	=> "    ",
     		),
     	);
+    	$file	= file_get_contents($filePathName);
+    	foreach($remove['remove'] as $data){
+    		$file	= str_replace($data, '', $file);
+    	}
+    	foreach($remove['replace'] as $key => $data){
+    		if($key =='space' || $key == 'tab'){
+    			$key = '';
+    		}
+    		$file	= str_replace($data, $key, $file);
+    	}
+    	return $file;
     }
 }
