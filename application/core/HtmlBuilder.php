@@ -255,16 +255,55 @@ class HtmlBuilder
 	}
 	
 	/**
-	 * Intended for <select name="name"><option>...</option></select>
+	 * For <select id="id" name="name" class="class"><option></option></select>
+	 * Option values will be the $key and the display will be $data in the
+	 * array; if you want a selected item from the drop down, send the key
+	 * name of the item to be marked as selected after the options array
 	 * 
-	 * @param	string, string, array
+	 * @param	string, string, string, array, string, boolean
 	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 10:27:56
-	 * @version	0.0.1
-	 * @return	Finish this
+	 * @date	27 Feb 2017 - 10:42:12
+	 * @version	0.0.2
+	 * @return	this
 	 * @todo
 	 */
-	public function select(string $id = '', string $name = '', array $options){
+	public function select(string $id = '', string $name = '', string $class = '', array $options, string $selected = '', bool $close = true){
+		print("<select");
+		if(!empty($id)){
+			print(" id=\"{$id}\"");
+		}
+		if(!empty($name)){
+			print(" name=\"{$name}\"");
+		}
+		if(!empty($class)){
+			print(" class=\"{$class}\"");
+		}
+		print(">");
+		if(!empty($options)){
+			$this->option($options, $selected);
+		}
+		print($close === true ? "</select>" : "");
+		return $this;
+	}
+	
+	/**
+	 * Builds the options for your select
+	 * 
+	 * @param	array, string
+	 * @author	sbebbington
+	 * @date	27 Feb 2017 - 10:43:37
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function option(array $options, string $selected = ''){
+		foreach($options as $key => $data){
+			print("<option value=\"{$key}\"");
+			if($key === $selected){
+				print(" selected=\"selected\"");
+			}
+			print(">{$data}</option>");
+		}
 		return $this;
 	}
 	
