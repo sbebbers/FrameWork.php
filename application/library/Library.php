@@ -97,33 +97,33 @@ class Library
 	/**
 	 * Password encryption generator
 	 *
-	 * @param	string
+	 * @param	string, int, padding
 	 * @author 	Shaun && Stack Overflow
-	 * @date	2 Feb 2017 - 13:13:02
-	 * @version 0.0.2a
-	 * @return	String
+	 * @date	28 Feb 2017 - 15:39:00
+	 * @version 0.0.3
+	 * @return	string
 	 * @todo
 	 */
-	public function encryptIt(string $string, string $_55Number = ''){
-		$md5a = ($_55Number == '') ? md5($this->key) : md5($_55Number);
-		$md5b = ($_55Number == '') ? md5(md5($this->key)) : md5(md5($_55Number));
-		return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $md5a, $string, MCRYPT_MODE_CBC, $md5b));
+	public function encryptIt(string $string, string $secret = '', int $padding = 8){
+		$md5		= ($secret == '') ? md5(md5($this->key)) : md5(md5($secret));
+		$encrypt	= urlencode(openssl_encrypt($string, "AES-128-ECB", $md5));
+		return $this->getEncryptionPadding($padding) . $encrypt . $this->getEncryptionPadding($padding);
 	}
 	
 	/**
 	 * Password decryption generator
 	 *
-	 * @param	string
+	 * @param	string, string, int
 	 * @author 	Shaun && Stack Overflow
-	 * @date	2 Feb 2017 - 13:14:24
-	 * @version 0.0.2a
+	 * @date	28 Feb 2017 - 15:38:28
+	 * @version 0.0.3
 	 * @return	string
 	 * @todo
 	 */
-	public function decryptIt(string $string, string $_55Number = ''){
-		$md5a = ($_55Number == null) ? md5($this->key) : md5($_55Number);
-		$md5b = ($_55Number == null) ? md5(md5($this->key)) : md5(md5($_55Number));
-		return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $md5a, base64_decode($string), MCRYPT_MODE_CBC, $md5b), "\0");
+	public function decryptIt(string $string, string $secret = '', int $padding = 8){
+		$md5	= ($secret == null) ? md5(md5($this->key)) : md5(md5($secret));
+		$string	= urldecode(substr($string, $padding, -$padding));
+		return openssl_decrypt($string, "AES-128-ECB", $md5);
 	}
 	
 	/**
@@ -144,6 +144,28 @@ class Library
 		$http	= isHttps() ? "https://" : "http://";
 		header("Location:{$http}{$host}/{$destination}");
 		exit;
+	}
+	
+	/**
+	 * Will add a random and predictable padding
+	 * to the encrypted and decrypted string
+	 * 
+	 * @param	int
+	 * @author	sbebbington
+	 * @date	28 Feb 2017 - 15:30:03
+	 * @version	0.0.1
+	 * @return	strings
+	 * @todo
+	 */
+	public function getEncryptionPadding(int $numberToPad = 8){
+		$end	= "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G&H*J(K)L-z=x[c]v{b}n;m:QW@E#R~T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
+		$end	= str_shuffle("{$end}");
+		$return	= '';
+		
+		for($i = 0; $i < $numberToPad; $i++){
+			$return	.= $end[$i];
+		}
+		return $return;		
 	}
     
     /**
