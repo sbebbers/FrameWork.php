@@ -6,9 +6,11 @@ class Library
 {
 	public $date;
 	private $key;
+	private $encryption;
 	
 	public function __construct(){
 		$this->key			= 'Skelet0n';
+		$this->encryption	= "AES-128-ECB";
 	}
 	
 	/**
@@ -106,7 +108,7 @@ class Library
 	 */
 	public function encryptIt(string $string, string $secret = '', int $padding = 8){
 		$md5		= ($secret == '') ? md5(md5($this->key)) : md5(md5($secret));
-		$encrypt	= urlencode(openssl_encrypt($string, "AES-128-ECB", $md5));
+		$encrypt	= urlencode(openssl_encrypt($string, $this->encryption, $md5));
 		return $this->getEncryptionPadding($padding) . $encrypt . $this->getEncryptionPadding($padding);
 	}
 	
@@ -123,7 +125,7 @@ class Library
 	public function decryptIt(string $string, string $secret = '', int $padding = 8){
 		$md5	= ($secret == null) ? md5(md5($this->key)) : md5(md5($secret));
 		$string	= urldecode(substr($string, $padding, -$padding));
-		return openssl_decrypt($string, "AES-128-ECB", $md5);
+		return openssl_decrypt($string, $this->encryption, $md5);
 	}
 	
 	/**
