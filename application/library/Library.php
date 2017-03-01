@@ -72,7 +72,7 @@ class Library
 	 * 			changes are made
 	 */
 	public function version(){
-		return '0.0.9';
+		return '0.1.0';
 	}
 	
 	/**
@@ -437,5 +437,34 @@ class Library
     		$file	= str_replace($data, $key, $file);
     	}
     	return $file;
+    }
+    
+    /**
+     * Should handle the posting of data
+     * 
+     * @param	string, object, string, string
+     * @author	sbebbington && Stack Overflow
+     * @date	1 Mar 2017 - 11:51:54
+     * @version	0.0.1
+     * @return	object
+     * @todo
+     */
+    function filePostContents(string $url, $data, string $username = '', string $password = ''){
+    	$postdata	= http_build_query($data);
+    
+    	$options = array('http' =>
+    		array(
+    			'method'  => 'POST',
+    			'header'  => 'Content-type: application/x-www-form-urlencoded',
+    			'content' => $postdata
+    		)
+    	);
+    
+    	if(strlen($username) > 0 && strlen($password) > 0){
+    		$opts['http']['header'] = ("Authorization: Basic " . base64_encode("{$username}:{$password}"));
+    	}
+    	
+    	$context = stream_context_create($options);
+    	return file_get_contents($url, false, $context);
     }
 }
