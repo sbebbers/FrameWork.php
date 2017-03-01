@@ -110,7 +110,7 @@ class Library
 		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
 		$encrypt	= $this->getEncryptionPadding($padding)
 					. openssl_encrypt($string, $this->encryption, $md5)
-					. $th1is->getEncryptionPadding($padding);
+					. $this->getEncryptionPadding($padding);
 		return ($urlEncode === true) ? urlencode($encrypt) : "{$encrypt}";
 	}
 	
