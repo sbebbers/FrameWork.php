@@ -99,33 +99,35 @@ class Library
 	/**
 	 * Password encryption generator
 	 *
-	 * @param	string, int, padding
+	 * @param	string, sting, int, boolean
 	 * @author 	Shaun && Stack Overflow
-	 * @date	28 Feb 2017 - 15:39:00
-	 * @version 0.0.3
+	 * @date	1 Mar 2017 - 08:54:14
+	 * @version	0.0.4
 	 * @return	string
 	 * @todo
 	 */
-	public function encryptIt(string $string, string $secret = '', int $padding = 8){
-		$md5		= ($secret == '') ? md5(md5($this->key)) : md5(md5($secret));
-		$encrypt	= urlencode(openssl_encrypt($string, $this->encryption, $md5));
-		return $this->getEncryptionPadding($padding) . $encrypt . $this->getEncryptionPadding($padding);
+	public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false){
+		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
+		$encrypt	= $this->getEncryptionPadding($padding)
+					. openssl_encrypt($string, $this->encryption, $md5)
+					. $th1is->getEncryptionPadding($padding);
+		return ($urlEncode === true) ? urlencode($encrypt) : "{$encrypt}";
 	}
 	
 	/**
 	 * Password decryption generator
 	 *
-	 * @param	string, string, int
+	 * @param	string, string, int, boolean
 	 * @author 	Shaun && Stack Overflow
-	 * @date	28 Feb 2017 - 15:38:28
-	 * @version 0.0.3
+	 * @date	1 Mar 2017 - 08:57:23
+	 * @version 0.0.4
 	 * @return	string
 	 * @todo
 	 */
-	public function decryptIt(string $string, string $secret = '', int $padding = 8){
-		$md5	= ($secret == null) ? md5(md5($this->key)) : md5(md5($secret));
-		$string	= urldecode(substr($string, $padding, -$padding));
-		return openssl_decrypt($string, $this->encryption, $md5);
+	public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false){
+		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
+		$decrypt	= openssl_decrypt(substr($string, $padding, -$padding), $this->encryption, $md5);
+		return ($urlDecode === true) ? urldecode($decrypt) : "{$decrypt}";
 	}
 	
 	/**
@@ -150,24 +152,23 @@ class Library
 	
 	/**
 	 * Will add a random and predictable padding
-	 * to the encrypted and decrypted string
+	 * to the encrypted and decrypted string. Made
+	 * this method less like a ZX80 sub routine
+	 * (I had been experimenting with ZX80 BASIC
+	 * on that day so appologies)
 	 * 
 	 * @param	int
 	 * @author	sbebbington
-	 * @date	28 Feb 2017 - 15:30:03
-	 * @version	0.0.1
-	 * @return	strings
+	 * @date	1 Mar 2017 - 09:01:05
+	 * @version	0.0.2
+	 * @return	string
 	 * @todo
 	 */
 	public function getEncryptionPadding(int $numberToPad = 8){
-		$end	= "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G&H*J(K)L-z=x[c]v{b}n;m:QW@E#R~T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
-		$end	= str_shuffle("{$end}");
-		$return	= '';
+		$shuffle	= "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
+		$shuffle	= str_shuffle("{$shuffle}");
 		
-		for($i = 0; $i < $numberToPad; $i++){
-			$return	.= $end[$i];
-		}
-		return $return;		
+		return substr($shuffle, 0, $numberToPad);		
 	}
     
     /**
