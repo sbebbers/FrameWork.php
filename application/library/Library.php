@@ -440,30 +440,39 @@ class Library
     }
     
     /**
-     * Should handle the posting of data
-     * 
-     * @param	string, object, string, string
+     * Handles the posting of data
+     *
+     * @param	string, object, string, string, string
      * @author	sbebbington && Stack Overflow
-     * @date	1 Mar 2017 - 11:51:54
-     * @version	0.0.1
+     * @date	3 Mar 2017 - 09:51:09
+     * @version	0.0.3
      * @return	object
      * @todo
      */
-    function filePostContents(string $url, $data, string $username = '', string $password = ''){
-    	$postdata	= http_build_query($data);
-    
-    	$options = array('http' =>
-    		array(
-    			'method'  => 'POST',
-    			'header'  => 'Content-type: application/x-www-form-urlencoded',
-    			'content' => $postdata
-    		)
-    	);
-    
-    	if(strlen($username) > 0 && strlen($password) > 0){
-    		$opts['http']['header'] = ("Authorization: Basic " . base64_encode("{$username}:{$password}"));
+    function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
+    	if($applicationType === 'x-www-form-urlencoded'){
+    		if(!is_object($data) || !is_array($data)){
+    			$data	= [$data];
+    		}
+    		$data	= http_build_query($data);
     	}
-    	
+    	$options	= array();
+    
+    	$options['http'] = array(
+    		'method'  => 'POST',
+    		'content' => $data
+    	);
+    	$header	= array(
+    		'header'	=>	"Content-type: application/{$applicationType};charset={$characterEncoding}",
+    	);
+    	if(is_string($data)){
+    		$header['header']	.= PHP_EOL . 'Content-Length: ' . strlen($data) . PHP_EOL;
+    	}
+    	if(!empty($username) && !empty($password)){
+    		$header['header'] .= PHP_EOL . "Authorization: Basic " . base64_encode("{$username}:{$password}");
+    	}
+    	$options['http'] = array_merge($options['http'], $header);
+    	 
     	$context = stream_context_create($options);
     	return file_get_contents($url, false, $context);
     }

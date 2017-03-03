@@ -135,3 +135,17 @@ function getSegment(){
 	$page	= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
 	return !empty($page) ? strtolower($page[count($page)]) : 'home';
 }
+
+/**
+ * Returns PHP_SELF
+ * 
+ * @param	na
+ * @author	sbebbington
+ * @date	2 Mar 2017 - 11:49:38
+ * @version	0.0.1
+ * @return	string
+ * @todo
+ */
+function getSelf(){
+	return $_SERVER['PHP_SELF'];
+}
