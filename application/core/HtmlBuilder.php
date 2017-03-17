@@ -13,11 +13,11 @@ class HtmlBuilder
 	/**
 	 * Tests the extension
 	 * 
-	 * @param	
+	 * @param	na
 	 * @author	sbebbington
 	 * @date	16 Jan 2017 - 17:19:50
 	 * @version	0.0.1
-	 * @return	
+	 * @return	this
 	 * @todo
 	 */
 	public function test(){
@@ -138,13 +138,19 @@ class HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 09:47:46
-	 * @version	0.0.1
+	 * @date	17 Mar 2017 - 16:40:33
+	 * @version	0.0.2
 	 * @return	this
 	 * @todo
 	 */
-	public function form(){
+	public function form(string $id = '', bool $closeElement = false){
 		print("<form");
+		if(!empty($id)){
+			print(" id=\"{$id}\"");
+		}
+		if($closeElement === true){
+			$this->closeElement(false);
+		}
 		return $this;
 	}
 	
@@ -190,6 +196,33 @@ class HtmlBuilder
 	 */
 	public function input(){
 		print("<input");
+		return $this;
+	}
+	
+	/**
+	 * Label generator
+	 * 
+	 * @param	string, string, string, string
+	 * @author	sbebbington
+	 * @date	17 Mar 2017 - 16:55:55
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function label(string $text, string $id = '', string $for = '', string $class = ''){
+		print("<label");
+		if(!empty($id)){
+			print(" id=\"{$id}\"");
+		}
+		if(!empty($for)){
+			print(" for=\"{$for}\"");
+		}
+		if(!empty($class)){
+			print(" class=\"{$class}\"");
+		}
+		if(!empty($text)){
+			print(">{$text}</label>");
+		}
 		return $this;
 	}
 	
