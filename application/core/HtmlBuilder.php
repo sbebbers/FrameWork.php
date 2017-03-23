@@ -41,6 +41,39 @@ class HtmlBuilder
 	}
 	
 	/**
+	 * Opens an a tag
+	 *
+	 * @param	string, string, string, string, string, boolean
+	 * @author	sbebbington
+	 * @date	23 Mar 2017 - 16:01:52
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', bool $close = true){
+		print("<a");
+		if(strlen($id)){
+			print(" id=\"{$id}\"");
+		}
+		if(strlen($href)){
+			print(" href=\"{$href}\"");
+		}
+		if(strlen($target)){
+			print(" target=\"{$target}\"");
+		}
+		if(strlen($onClick)){
+			print(" onclick=\"{$onClick}\"");
+		}
+		if(strlen($class)){
+			print(" class=\"{$class}\"");
+		}
+		if($close === true){
+			print(">");
+		}
+		return $this;
+	}
+	
+	/**
 	 * Adds an ID attribute to an HTML element
 	 * 
 	 * @param	string
