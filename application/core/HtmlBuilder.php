@@ -89,6 +89,38 @@ class HtmlBuilder
 	}
 	
 	/**
+	 * Generates the HTML image tag
+	 *
+	 * @param	string, string, int, int, string, string
+	 * @author	sbebbington
+	 * @date	29 Mar 2017 - 11:37:44
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function img(string $id = '', string $path, int $width = 0, int $height = 0, string $alt = '', string $class = ''){
+		print("<img");
+		if(!empty($id)){
+			print(" id=\"{$id}\"");
+		}
+		print(" src=\"{$path}\"");
+		if($width > 0){
+			print(" width=\"{$width}\"");
+		}
+		if($height > 0){
+			print(" height=\"{$height}\"");
+		}
+		if(!empty($alt)){
+			print(" alt=\"{$alt}\"");
+		}
+		if(!empty($class)){
+			print(" class=\"{$class}\"");
+		}
+		print(" />");
+		return $this;
+	}
+	
+	/**
 	 * Adds a class attribute to an HTML element
 	 * 
 	 * @param	string | array
