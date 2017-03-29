@@ -158,7 +158,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:31:27
 	 * @version	0.0.1
-	 * @return	string
+	 * @return	this
 	 * @todo
 	 */
 	public function text(string $text, bool $decode = false){
@@ -167,23 +167,30 @@ class HtmlBuilder
 	}
 	
 	/**
-	 * Opens a form
+	 * Opens a form tag
 	 * 
-	 * @param	na
+	 * @param	string, string, string, string, [boolean]
 	 * @author	sbebbington
-	 * @date	17 Mar 2017 - 16:40:33
-	 * @version	0.0.2
+	 * @date	28 Mar 2017 - 14:58:33
+	 * @version	0.0.2a
 	 * @return	this
 	 * @todo
 	 */
-	public function form(string $id = '', bool $closeElement = false){
+	public function form(string $id = '', string $action = '', string $method = 'post', string $class = ''){
 		print("<form");
 		if(!empty($id)){
 			print(" id=\"{$id}\"");
 		}
-		if($closeElement === true){
-			$this->closeElement(false);
+		if(!empty($action)){
+			print(" action=\"{$action}\"");
 		}
+		if(!empty($method)){
+			print(" method=\"{$method}\"");
+		}
+		if(!empty($class)){
+			print(" class=\"{$class}\"");
+		}
+		$this->closeElement(false);
 		return $this;
 	}
 	
@@ -460,6 +467,21 @@ class HtmlBuilder
 	public function javaScript(string $src=''){
 		print("<script type=\"text/javascript\"");
 		print(strlen($src) ? " src=\"{$src}\">" : ">");
+		return $this;
+	}
+	
+	/**
+	 * Sets title attribute within an HTML element
+	 * 
+	 * @param	string
+	 * @author	sbebbington
+	 * @date	28 Mar 2017 - 15:29:22
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function title(string $title=''){
+		print(" title=\"{$title}\"");
 		return $this;
 	}
 }
