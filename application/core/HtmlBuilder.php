@@ -43,15 +43,16 @@ class HtmlBuilder
 	/**
 	 * Opens an a tag
 	 *
-	 * @param	string, string, string, string, string, boolean
+	 * @param	string, string, string, string, string, string | array, [boolean]
 	 * @author	sbebbington
-	 * @date	23 Mar 2017 - 16:01:52
+	 * @date	30 Mar 2017 - 11:30:31
 	 * @version	0.0.1
 	 * @return	this
 	 * @todo
 	 */
-	public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', bool $close = true){
+	public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', $style = null, bool $close = true){
 		print("<a");
+		
 		if(strlen($id)){
 			print(" id=\"{$id}\"");
 		}
@@ -67,9 +68,13 @@ class HtmlBuilder
 		if(strlen($class)){
 			print(" class=\"{$class}\"");
 		}
+		if(!empty($style) && (is_string($style) || is_array($file))){
+			$this->style($style);
+		}
 		if($close === true){
 			print(">");
 		}
+		
 		return $this;
 	}
 	
@@ -90,7 +95,7 @@ class HtmlBuilder
 	
 	/**
 	 * Generates the HTML image tag
-	 *
+	 * 
 	 * @param	string, string, int, int, string, string
 	 * @author	sbebbington
 	 * @date	29 Mar 2017 - 11:37:44
@@ -201,15 +206,16 @@ class HtmlBuilder
 	/**
 	 * Opens a form tag
 	 * 
-	 * @param	string, string, string, string, [boolean]
+	 * @param	string, string, string, string, string | array
 	 * @author	sbebbington
-	 * @date	28 Mar 2017 - 14:58:33
-	 * @version	0.0.2a
+	 * @date	30 Mar 2017 - 11:27:48
+	 * @version	0.0.3
 	 * @return	this
 	 * @todo
 	 */
-	public function form(string $id = '', string $action = '', string $method = 'post', string $class = ''){
+	public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null){
 		print("<form");
+		
 		if(!empty($id)){
 			print(" id=\"{$id}\"");
 		}
@@ -222,37 +228,11 @@ class HtmlBuilder
 		if(!empty($class)){
 			print(" class=\"{$class}\"");
 		}
+		if(!empty($style) && (is_string($style) || is_array($file))){
+			$this->style($style);
+		}
 		$this->closeElement(false);
-		return $this;
-	}
-	
-	/**
-	 * Sets form action (page to post etc...)
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 09:47:59
-	 * @version	0.0.1
-	 * @return	$this
-	 * @todo
-	 */
-	public function action(string $file){
-		print(" action=\"{$file}\"");
-		return $this;
-	}
-	
-	/**
-	 * Sets a post method
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 09:48:30
-	 * @version	0.0.1
-	 * @return	this
-	 * @todo
-	 */
-	public function method(string $method){
-		print(" method=\"{$method}\"");
+		
 		return $this;
 	}
 	
@@ -274,15 +254,16 @@ class HtmlBuilder
 	/**
 	 * Label generator
 	 * 
-	 * @param	string, string, string, string
+	 * @param	string, string, string, string, string | array
 	 * @author	sbebbington
-	 * @date	17 Mar 2017 - 16:55:55
-	 * @version	0.0.1
+	 * @date	30 Mar 2017 - 11:26:28
+	 * @version	0.0.2
 	 * @return	this
 	 * @todo
 	 */
-	public function label(string $text, string $id = '', string $for = '', string $class = ''){
+	public function label(string $text, string $id = '', string $for = '', string $class = '', $style = null){
 		print("<label");
+		
 		if(!empty($id)){
 			print(" id=\"{$id}\"");
 		}
@@ -292,9 +273,13 @@ class HtmlBuilder
 		if(!empty($class)){
 			print(" class=\"{$class}\"");
 		}
+		if(!empty($style) && (is_string($style) || is_array($file))){
+			$this->style($style);
+		}
 		if(!empty($text)){
 			print(">{$text}</label>");
 		}
+		
 		return $this;
 	}
 	
@@ -415,18 +400,21 @@ class HtmlBuilder
 	/**
 	 * Used for opening any element not covered here
 	 * i.e. in your view:
-	 * 		$this->open("div", "content", "col-xs-12");
+	 * 		$this->open("div", "content", "col-xs-12", array('display' => "none"));
 	 * will generate the following HTML:
-	 * 		<div id="content" class="col-xs-12">
+	 * 		<div id="content" class="col-xs-12" style="display: none;">
+	 * The style attribute has been added for those
+	 * who use [primarily] jQuery to make web pages
+	 * dynamic
 	 * 
-	 * @param	string, string, string | array, [boolean]
+	 * @param	string, string, string | array, string | array, [boolean]
 	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 10:05:40
+	 * @date	30 Mar 2017 - 11:22:00
 	 * @version	0.0.1
 	 * @return	this
 	 * @todo
 	 */
-	public function open(string $element, string $id = '', $class = null, bool $selfClose = false){
+	public function open(string $element, string $id = '', $class = null, $style = null, bool $selfClose = false){
 		print("<{$element}");
 		if(strlen($id)>0){
 			$this->id($id);
@@ -434,7 +422,11 @@ class HtmlBuilder
 		if(is_string($class) || is_array($class)){
 			$this->class($class);
 		}
+		if(!empty($style) && (is_string($style) || is_array($file))){
+			$this->style($style);
+		}
 		$this->closeElement($selfClose);
+		
 		return $this;
 	}
 	
@@ -460,18 +452,21 @@ class HtmlBuilder
 	
 	/**
 	 * For HTML elements H1 to H6 inclusive
+	 * the style attribute is added for use
+	 * with jQuery and such
 	 * 
-	 * @param	int, string, string, string | array 
+	 * @param	int, string, string, string | array, string | array
 	 * @author	sbebbington
-	 * @date	23 Jan 2017 - 10:22:45
-	 * @version	0.0.1
+	 * @date	30 Mar 2017 - 10:51:02
+	 * @version	0.0.2
 	 * @return	this
 	 * @todo
 	 */
-	public function h(int $size, string $text, string $id = '', $class = null){
+	public function h(int $size, string $text, string $id = '', $class = null, $style = null){
 		if($size < 1 || $size > 6){
 			$this->lib->debug("Please set your header size between 1 and 6, value {$size} is not allowed", true);
 		}
+		
 		print("<h{$size}");
 		if(strlen($id)>0){
 			$this->id($id);
@@ -479,9 +474,13 @@ class HtmlBuilder
 		if(is_string($class) || is_array($class)){
 			$this->class($class);
 		}
+		if(!empty($style) && (is_string($style) || is_array($style))){
+			$this->style($style);
+		}
 		$this->closeElement(false);
 		print("{$text}");
 		$this->close("h{$size}");
+		
 		return $this;
 	}
 	
@@ -496,7 +495,7 @@ class HtmlBuilder
 	 * @return	this
 	 * @todo
 	 */
-	public function javaScript(string $src=''){
+	public function javaScript(string $src = ''){
 		print("<script type=\"text/javascript\"");
 		print(strlen($src) ? " src=\"{$src}\">" : ">");
 		return $this;
@@ -512,8 +511,37 @@ class HtmlBuilder
 	 * @return	this
 	 * @todo
 	 */
-	public function title(string $title=''){
+	public function title(string $title = ''){
 		print(" title=\"{$title}\"");
+		return $this;
+	}
+	
+	/**
+	 * This will allow style="display: none;"
+	 * and other such malevolence to be added
+	 * to your HTML
+	 * 
+	 * @param	string | array
+	 * @author	sbebbington
+	 * @date	30 Mar 2017 - 10:52:43
+	 * @version	0.0.1a
+	 * @return	this
+	 * @todo
+	 */
+	public function style($style = null){
+		if(empty($style)){
+			$style = '';
+		}
+		if(is_array($style)){
+			$_style	= '';
+			foreach($style as $key => $value){
+				$_style	.= "{$key}: {$value};";
+			}
+			$style	= $_style;
+			unset($_style);
+		}
+		print(" style=\"{$style}\"");
+		
 		return $this;
 	}
 }
