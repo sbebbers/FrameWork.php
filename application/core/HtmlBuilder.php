@@ -79,6 +79,29 @@ class HtmlBuilder
 	}
 	
 	/**
+	 * Makes a HR element
+	 * 
+	 * @param	string, string
+	 * @author	sbebbington
+	 * @date	5 Apr 2017 - 16:14:08
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function hr(string $id = '', string $class=''){
+		print("<hr");
+		if(strlen($id)){
+			print(" id=\"{$id}\"");
+		}
+		if(strlen($class)){
+			print(" class=\"{$class}\"");
+		}
+		print(" />");
+		return $this;
+	}
+	
+	
+	/**
 	 * Adds an ID attribute to an HTML element
 	 * 
 	 * @param	string
@@ -200,6 +223,46 @@ class HtmlBuilder
 	 */
 	public function text(string $text, bool $decode = false){
 		print($decode === false ? $text : htmlspecialchars_decode($text));
+		return $this;
+	}
+	
+	/**
+	 * Generates a <textarea></textarea>
+	 * for your view
+	 * 
+	 * @param	string, string, int, int, string, string, boolean
+	 * @author	sbebbington
+	 * @date	30 Mar 2017 - 14:25:06
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function textArea(string $id = '', string $name = '', int $rows = 0, int $cols = 0, string $placeHolder = '', string  $class = '', bool $required = false){
+		print("<textarea");
+		
+		if(!empty($id)){
+			print(" id=\"{$id}\"");
+		}
+		if(!empty($name)){
+			print(" name=\"{$name}\"");
+		}
+		if($rows > 0){
+			print(" rows=\"{$rows}\"");
+		}
+		if($cols> 0){
+			print(" cols=\"{$cols}\"");
+		}
+		if(!empty($placeHolder)){
+			print(" placeholder=\"{$placeholder}\"");			
+		}
+		if(!empty($class)){
+			print(" class=\"{$class}\"");
+		}
+		if($required === true){
+			print(" required=\"required\"");
+		}
+		print("><textarea>");
+		
 		return $this;
 	}
 	
