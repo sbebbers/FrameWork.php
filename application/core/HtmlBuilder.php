@@ -117,6 +117,30 @@ class HtmlBuilder
 	}
 	
 	/**
+	 * Added in HTML span
+	 * 
+	 * @param	string, string
+	 * @author	sbebbington
+	 * @date	10 Apr 2017 - 09:36:45
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function span(string $id = '', $class = null){
+		print("<span");
+		
+		if(strlen($id) > 0){
+			$this->id($id);
+		}
+		if(!is_null($class)){
+			$this->class($class);
+		}
+		print(">");
+		
+		return $this;
+	}
+	
+	/**
 	 * Generates the HTML image tag
 	 * 
 	 * @param	string, string, int, int, string, string
@@ -261,7 +285,7 @@ class HtmlBuilder
 		if($required === true){
 			print(" required=\"required\"");
 		}
-		print("><textarea>");
+		print(">");
 		
 		return $this;
 	}
