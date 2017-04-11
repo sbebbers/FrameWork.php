@@ -218,6 +218,25 @@ class HtmlBuilder
 	}
 	
 	/**
+	 * Adds in the placeholder for elements
+	 * that use it
+	 * 
+	 * @param	string
+	 * @author	sbebbington
+	 * @date	11 Apr 2017 - 10:03:08
+	 * @version	0.0.1
+	 * @return	this
+	 * @todo
+	 */
+	public function placeHolder(string $placeHolder = ''){
+		print(" placeholder");
+		if(strlen($placeHolder)){
+			print("=\"{$placeHolder}\"");
+		}
+		return $this;
+	}
+	
+	/**
 	 * Closes an element either with a > or a />
 	 * with false or true respecitively
 	 * 
