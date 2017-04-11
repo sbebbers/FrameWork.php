@@ -277,7 +277,7 @@ class HtmlBuilder
 			print(" cols=\"{$cols}\"");
 		}
 		if(!empty($placeHolder)){
-			print(" placeholder=\"{$placeholder}\"");			
+			print(" placeholder=\"{$placeHolder}\"");			
 		}
 		if(!empty($class)){
 			print(" class=\"{$class}\"");
