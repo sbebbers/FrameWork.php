@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.0.9
+# Project FrameWork.php MVC v0.1.1
 
 ### This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up your path in the allowed segments, the name of your path will point to the /application/view folder - you must place a view file with the same name as the allowed path with a .phtml extension, so in the example home in the $allowedSegments resource in the FrameworkCore.php will load the home.phtml view in /application/view
 
@@ -20,7 +20,7 @@
 				\ For partial HTML views such as headers, footers and menus
 ```
 --
-	@version	0.0.9
+	@version	0.1.1
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -92,3 +92,15 @@
 				I've also improved the logic for working out which view to load in the loadPage()
 				method of the core; now it will check if the file exists as well as a check to see
 				if the URI request is allowed.
+	@changes as of 2017-02-08:
+				I've been in contact with my former colleague Linden Bryon (@Lindenbryon) who has
+				agreed to collaborate on this project which will help in its development in the
+				PHP side as well as the JavaScript and jQuery stuff. Happy Days.
+	@changes as of 2017-03-01:
+				I've changed the way that the library encryption and decryption works to remove
+				some PHP functions that have been deprecated in PHP 7.1.x. In addition, there is
+				a file handling function in the library which will post your data to a restful
+				service without the cURL dependencies.
+	@changes as of 2017-03-30
+				I've beefed up and refactored some of the HTML builder methods to make it easier
+				to work with jQuery and other such things.

@@ -5,24 +5,15 @@ require_once(serverPath('/core/HtmlBuilder.php'));
 
 class Core extends \Application\Core\Framework\HtmlBuilder
 {
-	public $segment;
-	public $host;
-	public $allowedSegments	= array(
+	public $segment, $host, $partial, $controller, $title, $description,
+	$serverPath, $root, $flash, $filePath, $uriPath, $http;
+	
+	protected $allowedSegments	= array(
 		'home',
 	);
-	public $pageController	= array(
+	protected $pageController	= array(
 		'home'			=> "HomeController",
 	);
-	public $partial;
-	public $controller;
-	public $title;
-	public $description;
-	public $serverPath;
-	public $root;
-	public $flash;
-	public $filePath;
-	public $uriPath;
-	public $http;
 	private $errorReporting = array(
 		"http://framework.php.local",
 		"https://framework.php.local"

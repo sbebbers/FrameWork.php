@@ -6,9 +6,11 @@ class Library
 {
 	public $date;
 	private $key;
+	private $encryption;
 	
 	public function __construct(){
 		$this->key			= 'Skelet0n';
+		$this->encryption	= "AES-128-ECB";
 	}
 	
 	/**
@@ -70,7 +72,7 @@ class Library
 	 * 			changes are made
 	 */
 	public function version(){
-		return '0.0.9';
+		return '0.1.1';
 	}
 	
 	/**
@@ -97,33 +99,35 @@ class Library
 	/**
 	 * Password encryption generator
 	 *
-	 * @param	string
+	 * @param	string, sting, int, boolean
 	 * @author 	Shaun && Stack Overflow
-	 * @date	2 Feb 2017 - 13:13:02
-	 * @version 0.0.2a
-	 * @return	String
+	 * @date	1 Mar 2017 - 08:54:14
+	 * @version	0.0.4
+	 * @return	string
 	 * @todo
 	 */
-	public function encryptIt(string $string, string $_55Number = ''){
-		$md5a = ($_55Number == '') ? md5($this->key) : md5($_55Number);
-		$md5b = ($_55Number == '') ? md5(md5($this->key)) : md5(md5($_55Number));
-		return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $md5a, $string, MCRYPT_MODE_CBC, $md5b));
+	public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false){
+		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
+		$encrypt	= $this->getEncryptionPadding($padding)
+					. openssl_encrypt($string, $this->encryption, $md5)
+					. $this->getEncryptionPadding($padding);
+		return ($urlEncode === true) ? urlencode($encrypt) : "{$encrypt}";
 	}
 	
 	/**
 	 * Password decryption generator
 	 *
-	 * @param	string
+	 * @param	string, string, int, boolean
 	 * @author 	Shaun && Stack Overflow
-	 * @date	2 Feb 2017 - 13:14:24
-	 * @version 0.0.2a
+	 * @date	1 Mar 2017 - 08:57:23
+	 * @version 0.0.4
 	 * @return	string
 	 * @todo
 	 */
-	public function decryptIt(string $string, string $_55Number = ''){
-		$md5a = ($_55Number == null) ? md5($this->key) : md5($_55Number);
-		$md5b = ($_55Number == null) ? md5(md5($this->key)) : md5(md5($_55Number));
-		return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $md5a, base64_decode($string), MCRYPT_MODE_CBC, $md5b), "\0");
+	public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false){
+		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
+		$decrypt	= openssl_decrypt(substr($string, $padding, -$padding), $this->encryption, $md5);
+		return ($urlDecode === true) ? urldecode($decrypt) : "{$decrypt}";
 	}
 	
 	/**
@@ -144,6 +148,27 @@ class Library
 		$http	= isHttps() ? "https://" : "http://";
 		header("Location:{$http}{$host}/{$destination}");
 		exit;
+	}
+	
+	/**
+	 * Will add a random and predictable padding
+	 * to the encrypted and decrypted string. Made
+	 * this method less like a ZX80 sub routine
+	 * (I had been experimenting with ZX80 BASIC
+	 * on that day so appologies)
+	 * 
+	 * @param	int
+	 * @author	sbebbington
+	 * @date	1 Mar 2017 - 09:01:05
+	 * @version	0.0.2
+	 * @return	string
+	 * @todo
+	 */
+	public function getEncryptionPadding(int $numberToPad = 8){
+		$shuffle	= "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
+		$shuffle	= str_shuffle("{$shuffle}");
+		
+		return substr($shuffle, 0, $numberToPad);		
 	}
     
     /**
@@ -353,5 +378,102 @@ class Library
      */
     public function convertFromJSON($data){
     	return json_decode($data);
+    }
+    
+    /**
+     * This will perform a soft minimisation of
+     * your javascript [jQuery] files; As it is
+     * a dumb minimisation there are some a few
+     * limitations, for instance:
+     * 	[1] All comments must be /* style
+     * 	[2] Variable names are not obfustated
+     * 	[3] Not all white spaces are removed
+     * 	[4] It will not remove the final ;
+     * 		where it is not necessary
+     *
+     * @param	string, [boolean], [boolean]
+     * @author	sbebbington
+     * @date	21 Feb 2017 - 15:20:10
+     * @version	0.0.2
+     * @return	string
+     * @todo	Test this
+     */
+    public function softMinimiseJS(string $filePathName = '', bool $doubleSpaces = true, bool $spacedTab = true){
+    	if(empty($filePathName)){
+    		return '';
+    	}
+    	$remove = array(
+    		'remove' => array(
+    			"\t",
+    			"\r\n",
+    		),
+    		'replace' => array(
+    			'+'		=> " + ",
+    			'=='	=> " == ",
+    			'!='	=> " != ",
+    			'if('	=> "if (",
+    			'++'	=> "++ ",
+    			'==='	=> " === ",
+    			'!=='	=> " !== ",
+    			'{'		=> " { ",
+    			'space'	=> "  ",
+    			'tab'	=> "    ",
+    		),
+    	);
+    	$file	= file_get_contents($filePathName);
+    	foreach($remove['remove'] as $data){
+    		$file	= str_replace($data, '', $file);
+    	}
+    	foreach($remove['replace'] as $key => $data){
+    		if($key =='space' || $key == 'tab'){
+    			if($key == 'space' && $doubleSpaces === false){
+    				continue;
+    			}
+    			if($key == 'tab' && $spacedTab === false){
+    				continue;
+    			}
+    			$key = '';
+    		}
+    		$file	= str_replace($data, $key, $file);
+    	}
+    	return $file;
+    }
+    
+    /**
+     * Handles the posting of data
+     *
+     * @param	string, object, string, string, string
+     * @author	sbebbington && Stack Overflow
+     * @date	3 Mar 2017 - 09:51:09
+     * @version	0.0.3
+     * @return	object
+     * @todo
+     */
+    function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
+    	if($applicationType === 'x-www-form-urlencoded'){
+    		if(!is_object($data) || !is_array($data)){
+    			$data	= [$data];
+    		}
+    		$data	= http_build_query($data);
+    	}
+    	$options	= array();
+    
+    	$options['http'] = array(
+    		'method'  => 'POST',
+    		'content' => $data
+    	);
+    	$header	= array(
+    		'header'	=>	"Content-type: application/{$applicationType};charset={$characterEncoding}",
+    	);
+    	if(is_string($data)){
+    		$header['header']	.= PHP_EOL . 'Content-Length: ' . strlen($data) . PHP_EOL;
+    	}
+    	if(!empty($username) && !empty($password)){
+    		$header['header'] .= PHP_EOL . "Authorization: Basic " . base64_encode("{$username}:{$password}");
+    	}
+    	$options['http'] = array_merge($options['http'], $header);
+    	 
+    	$context = stream_context_create($options);
+    	return file_get_contents($url, false, $context);
     }
 }

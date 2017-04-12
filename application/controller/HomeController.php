@@ -19,4 +19,22 @@ class HomeController extends \Application\Controller\ControllerCore
 // 			$this->lib->debug($this->post, true);
 // 		}
 	}
+	
+	/**
+	 * Tester for the encryption and decryption
+	 * library methods (and for my own sanity)
+	 * Seems worky.
+	 * 
+	 * @param	string, string
+	 * @author	sbebbington
+	 * @date	1 Mar 2017 - 09:20:43
+	 * @version	0.0.1
+	 * @return	boolean
+	 * @todo
+	 */
+	public function passwordTester(string $password = "Password", string $secret = 'password'){
+		$_password				= $this->lib->encryptIt($password, $secret);
+		$_decryption 			= $this->lib->decryptIt("{$_password}", $secret);
+		return (bool)($_decryption === $password);
+	}
 }

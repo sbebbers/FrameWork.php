@@ -6,11 +6,7 @@ require_once(serverPath('/library/Library.php'));
 
 class ControllerCore
 {
-    public $post;
-    public $view;
-    public $lib;
-    public $sql;
-    public $host;
+    public $post, $view, $lib, $sql, $host;
     
     public function __construct(){
     	$this->lib		= new \Application\Library\Library();

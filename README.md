@@ -15,7 +15,7 @@ The idea was to obscure that it was a PHP framework, and to send the page URLs w
 
 I never had the chance to finish the framework to a satisfactory degree at Rushcliff Ltd, so although it has been deployed on a live product, it remains imperfect. I was allowed to continue developing it on leaving so here it is. Still imperfect but slightly improved. This is not something for those hipster and artisan developer-types, it is fairly simple and fairly stupid.
 
-I'd like to thank Linden for his help and support whilst at Rushcliff Ltd, I learnt a lot from him and became a better developer as a result.
+Linden has set up on GitHub so I have invited him as a collaborator on this project. Linden has expertise in PHP, HTML 5/CSS 3, and JavaScript (jQuery), so this should mean that we can develop the framework and also improve some of the front-end stuff as well.
 
 If you have any comments then please feel free to contact me.
 
