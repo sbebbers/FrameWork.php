@@ -528,7 +528,7 @@ class HtmlBuilder
 		if(is_string($class) || is_array($class)){
 			$this->class($class);
 		}
-		if(!empty($style) && (is_string($style) || is_array($file))){
+		if(!empty($style) && (is_string($style) || is_array($style))){
 			$this->style($style);
 		}
 		$this->closeElement($selfClose);
