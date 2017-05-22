@@ -310,16 +310,17 @@ class HtmlBuilder
 	}
 	
 	/**
-	 * Opens a form tag
+	 * Opens a form tag - added in encoding type
+	 * to handle input type file stuff
 	 * 
 	 * @param	string, string, string, string, string | array
 	 * @author	sbebbington
-	 * @date	30 Mar 2017 - 11:27:48
-	 * @version	0.0.3
+	 * @date	22 May 2017 - 11:48:40
+	 * @version	0.0.4
 	 * @return	this
 	 * @todo
 	 */
-	public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null){
+	public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null, string $encType = ''){
 		print("<form");
 		
 		if(!empty($id)){
@@ -336,6 +337,9 @@ class HtmlBuilder
 		}
 		if(!empty($style) && (is_string($style) || is_array($file))){
 			$this->style($style);
+		}
+		if(!empty($encType)){
+			print(" enctype=\"{$encType}\"");
 		}
 		$this->closeElement(false);
 		
