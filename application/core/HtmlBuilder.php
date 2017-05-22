@@ -358,12 +358,17 @@ class HtmlBuilder
 	}
 	
 	/**
-	 * Label generator
+	 * Label generator - bug/typo fixed edition
+	 * Without sending the $text parameter, the
+	 * label element will be left open and one
+	 * must therefore use $this->close('label')
+	 * or end up with dodgy mark-up and HTML
+	 * validation errors
 	 * 
 	 * @param	string, string, string, string, string | array
 	 * @author	sbebbington
-	 * @date	30 Mar 2017 - 11:26:28
-	 * @version	0.0.2
+	 * @date	22 May 2017 - 11:15:23
+	 * @version	0.0.3
 	 * @return	this
 	 * @todo
 	 */
@@ -379,11 +384,13 @@ class HtmlBuilder
 		if(!empty($class)){
 			print(" class=\"{$class}\"");
 		}
-		if(!empty($style) && (is_string($style) || is_array($file))){
+		if(!empty($style) && (is_string($style) || is_array($style))){
 			$this->style($style);
 		}
 		if(!empty($text)){
 			print(">{$text}</label>");
+		}else{
+			print(">");
 		}
 		
 		return $this;
