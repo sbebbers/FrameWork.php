@@ -49,8 +49,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 				$_GET	= array();
 				$get	= explode("&", $segment[1]);
 				foreach($get as $data){
-					$_data = explode("=", $data);
-					$_GET[$_data[0]] = urldecode($_data[1]);
+					$_data				= explode("=", $data);
+					$_GET[$_data[0]]	= urldecode($_data[1]);
 				}
 			}
 		}
@@ -108,21 +108,23 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	}
 	
 	/**
-	 * Bug fixed edition of the using ZF type view variables 
+	 * Bug fixed edition of the using ZF type view variables
+	 * added in error surpression to prevent warnings being
+	 * logged 
 	 * 
-	 * @param	
+	 * @param	resource | \stdClass, string
 	 * @author	sbebbington
-	 * @date	2 Feb 2017 - 13:05:41
-	 * @version	0.0.3a
-	 * @return	
+	 * @date	30 May 2017 - 09:49:39
+	 * @version	0.0.4
+	 * @return	na
 	 * @todo
 	 */
 	public function setView($instance, string $masterKey = ''){
 		foreach($instance as $key => $data){
 			if($masterKey == ''){
-				$this->$key = $data;
+				@$this->$key				= $data;
 			}else{
-				$this->$masterKey->$key = $data;
+				@$this->$masterKey->$key	= $data;
 			}
 		}
 	}
