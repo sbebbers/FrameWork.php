@@ -43,7 +43,7 @@ class DateController extends \Application\Controller\ControllerCore
 	 */
 	protected function setDays(){
 		$days	= array();
-		for($i=1; $i<31; $i++){
+		for($i = 1; $i <= 31; $i++){
 			$day	= "{$i}";
 			if($i<10){
 				$day	= "0{$i}";
