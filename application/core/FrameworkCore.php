@@ -10,9 +10,11 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	
 	protected $allowedSegments	= array(
 		'home',
+		'date-example'
 	);
 	protected $pageController	= array(
 		'home'			=> "HomeController",
+		'date-example'	=> "DateController"
 	);
 	private $errorReporting = array(
 		"http://framework.php.local",
@@ -86,6 +88,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	public function setTitle(string $page = ''){
 	    $titles = array(
 			'home'				=> "Example FrameWork.php skeleton site",
+	    	'date-example'		=> "Shows a date picker using HTML 5 and bespoke jQuery/JavaScript"
 	    );
 	    return $titles["{$page}"];
 	}
@@ -103,6 +106,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	public function setDescription(string $page = ''){
 	    $descriptions = array(
             'home'				=> "The Skeleton",
+	    	'date-example'		=> null
 	    );
 	    return $descriptions["{$page}"];
 	}
