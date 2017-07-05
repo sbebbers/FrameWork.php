@@ -8,7 +8,7 @@
     	
     		$this->open("div", "content", "container")
     			->h(1, "Date Picker example", "header")
-    			->h(4, "&laquo; This page demonstrates a simple mobile-friendly date-picker with date validation", "sub_header")
+    			->h(4, "&laquo; This page demonstrates a simple mobile-friendly date-picker with date validation", "sub-header")
     			->text("Here we are using HTML 5 elements and bespoke jQuery/JavaScript", true)
     			->open("hr", '', null, true)
     		->close("div");
@@ -24,7 +24,7 @@
     					->select("year", "year", "col-xs-12", $this->years, '', true)
     				->close("p")
     				->p()->class("col-xs-12 col-md-4 pull-right")->closeElement()
-    					->input()->id("submit")->name("sumbit")->type("sumbit")->value("Sumbit &raquo;")->class("col-xs-12 btn btn-success")->closeElement(true)
+    					->input()->id("submit")->name("sumbit")->type("sumbit")->value("Sumbit &raquo;")->class("col-xs-12 col-md-2 pull-right btn btn-submit")->closeElement(true)
     				->close("p")
     			->close("form")
     		->close("div");

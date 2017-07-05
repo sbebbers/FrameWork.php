@@ -30,7 +30,7 @@
 	.container{margin:0 12px;max-width:100%}
 	.btn{display:block;border-radius:4px;padding:8px;font-size:14px;line-height:16px;font-weight:600}
 	.btn-submit{border:2px solid #00a227;background:#11b713;color:#eee}
-	.btn-submit:hover{border:2px solid #11b713;background:#12c220;color:#fff}
+	.btn-submit:hover{border:2px solid #11b713;background:#12c220;color:#fff;cursor:pointer}
 	.img-responsive{height:auto}
 }
 @media only screen and (min-width:480px){
