@@ -173,12 +173,11 @@ class DateController extends \Application\Controller\ControllerCore
 	 * @return	boolean
 	 * @todo
 	 */
-	protected function checkDateValidity($daySubmitted = null, $monthSubmitted = null, $yearSubmitted = null){
-		if($daySubmitted == null || $monthSubmitted == null || $yearSubmitted == null){
+	protected function checkDateValidity($day = null, $month = null, $year = null){
+		if($day == null || $month == null || $year == null){
 			return false;
 		}
-		
-		return true;
+		return checkdate($month, $day, $year);
 	}
 	
 	/**
