@@ -5,8 +5,16 @@
 			require_once("{$this->partial['header']}");
 		$this->close("head");
     	$this->open("body", "body");
-    	
-    		$this->open("div", "content", "container")
+	    	
+	    	$defaultDay		= "{$this->controller->dateExample->getDefault($this->days)}";
+	    	$defaultMonth	= "{$this->controller->dateExample->getDefault($this->months)}";
+	    	$defaultYear	= "{$this->controller->dateExample->getDefault($this->years)}";
+	    	
+	    	$this->days		= $this->controller->dateExample->clearDefault($this->days);
+	    	$this->months	= $this->controller->dateExample->clearDefault($this->months);
+	    	$this->years	= $this->controller->dateExample->clearDefault($this->years);
+	    	
+	    	$this->open("div", "content", "container")
     			->h(1, "Date Picker example", "header")
     			->h(4, "&raquo; This page demonstrates a simple mobile-friendly date-picker with date validation", "sub-header")
     			->text("Here we are using HTML 5 elements and bespoke jQuery/JavaScript", true)
@@ -15,13 +23,13 @@
     		$this->open("div", "date", "container")
     			->form("date", "", "post", "col-xs-12")
     				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
-    					->select("day", "day", "col-xs-12", $this->days, '', true)
+    					->select("day", "day", "col-xs-12", $this->days, $defaultDay, true)
     				->close("p")
     				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
-    					->select("month", "month", "col-xs-12", $this->months, '', true)
+    					->select("month", "month", "col-xs-12", $this->months, $defaultMonth, true)
     				->close("p")
     				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
-    					->select("year", "year", "col-xs-12", $this->years, '', true)
+    					->select("year", "year", "col-xs-12", $this->years, $defaultYear, true)
     				->close("p")
     				->p()->class("col-xs-4 col-md-6 col-mdl-4 pull-right")->closeElement()
     					->input()->id("submit")->name("sumbit")->type("sumbit")->value("Sumbit &raquo;")->class("col-xs-12 col-md-3 pull-right btn btn-submit")->closeElement(true)

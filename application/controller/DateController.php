@@ -15,9 +15,9 @@ class DateController extends \Application\Controller\ControllerCore
 			''	=> "-- Select Year --",
 		);
 		
-		$day	+= $this->setDays();
-		$month	+= $this->setMonths();
-		$year	+= $this->setYears(1901, (int)date('Y'), 'asc');
+		$day	+= $this->setDays((int)date('d'));
+		$month	+= $this->setMonths('full', 'numeric', date('m'));
+		$year	+= $this->setYears(1901, (int)date('Y'), 'asc', (int)date('Y'));
 		
 		$this->view->days	= $day;
 		$this->view->months	= $month;
@@ -29,19 +29,19 @@ class DateController extends \Application\Controller\ControllerCore
 			// $this->lib->debug($this->post, true);
 		}
 	}
-	
+		
 	/**
 	 * Sets the number of days for an array assuming
 	 * 1 - 31 inclusive as date validation is handled
 	 * dynamically in the jQuery
 	 * 
-	 * @param	na
+	 * @param	int
 	 * @author	sbebbington
 	 * @date	4 Jul 2017 - 17:15:59
 	 * @version	0.0.1
 	 * @return	array
 	 */
-	protected function setDays(){
+	protected function setDays(int $default = 0){
 		$days	= array();
 		for($i = 1; $i <= 31; $i++){
 			$day	= "{$i}";
@@ -50,6 +50,12 @@ class DateController extends \Application\Controller\ControllerCore
 			}
 			$days[$day]	= $day;
 		}
+		if($default == 0){
+			goto end;
+		}
+		$days['default']	= ($default < 10) ? "0{$default}" : "{$default}";
+		
+		end:
 		return $days;
 	}
 	
@@ -66,7 +72,7 @@ class DateController extends \Application\Controller\ControllerCore
 	 * @version	0.0.1
 	 * @return	array
 	 */
-	protected function setMonths(string $type = "full", string $keyType = "numeric"){
+	protected function setMonths(string $type = "full", string $keyType = "numeric", string $default = ''){
 		$types = array(
 			'full', 'short', 'numeric'
 		);
@@ -92,6 +98,12 @@ class DateController extends \Application\Controller\ControllerCore
 			$months[$primaryKey]	= $keys[$type][$index];
 			$index++;
 		}
+		if($default == ''){
+			goto end;
+		}
+		$months['default'] = $default;
+		
+		end:
 		return $months;
 	}
 	
@@ -104,13 +116,13 @@ class DateController extends \Application\Controller\ControllerCore
 	 * a practical use for the deaded goto
 	 * command, replacing if/else logic
 	 * 
-	 * @param	int, int, string
+	 * @param	int, int, string, int
 	 * @author	sbebbington
 	 * @date	5 Jul 2017 - 10:10:45
 	 * @version	0.0.1
 	 * @return	array
 	 */
-	protected function setYears(int $start = 1977, int $end = 2017, $order = "asc"){
+	protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0){
 		$ordering	= array(
 			'asc', 'desc'
 		);
@@ -126,13 +138,56 @@ class DateController extends \Application\Controller\ControllerCore
 			for($i = $start; $i <= $end; $i++){
 				$years["{$i}"]	= $i;
 			}
-			goto end;
+			goto checkDefault;
 		}
 		for($i = $end; $i >= $start; $i--){
 			$years["{$i}"]	= $i;
 		}
 		
+		checkDefault:
+		if(!in_array($default, $years)){
+			die();
+			goto end;
+		}
+		$years['default']	= $default;
+		
 		end:
 		return $years;
+	}
+	
+	/**
+	 * Returns the default values to the view
+	 * to auto-select day, month, and year
+	 *
+	 * @param	stdClass
+	 * @author	sbebbington
+	 * @date	6 Jul 2017 - 11:37:21
+	 * @version	0.0.1
+	 * @return	string | null
+	 * @todo
+	 */
+	public function getDefault($viewObject = null){
+		if($viewObject == null){
+			return '';
+		}
+		return $viewObject['default'] ?? null;
+	}
+	
+	/**
+	 *
+	 *
+	 * @param
+	 * @author	sbebbington
+	 * @date	6 Jul 2017 - 11:49:16
+	 * @version	0.0.1
+	 * @return
+	 * @todo
+	 */
+	public function clearDefault($viewObject = null){
+		if($viewObject == null){
+			return '';
+		}
+		$viewObject['default']	= null;
+		return array_filter($viewObject, 'strlen');
 	}
 }

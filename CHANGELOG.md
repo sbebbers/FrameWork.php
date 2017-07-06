@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.1
+# Project FrameWork.php MVC v0.1.2
 
 ### This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up your path in the allowed segments, the name of your path will point to the /application/view folder - you must place a view file with the same name as the allowed path with a .phtml extension, so in the example home in the $allowedSegments resource in the FrameworkCore.php will load the home.phtml view in /application/view
 
@@ -20,7 +20,7 @@
 				\ For partial HTML views such as headers, footers and menus
 ```
 --
-	@version	0.1.1
+	@version	0.1.2
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -104,3 +104,5 @@
 	@changes as of 2017-03-30
 				I've beefed up and refactored some of the HTML builder methods to make it easier
 				to work with jQuery and other such things.
+	@changes as of 2017-07-06
+				There have been some minor fixes to the HTML Builder, and some changes to the Framework Core and Library; The changes to the latter and core are to cover where there are URI segments with dashes. For instance, in the example view and controller I have introduced, the allowed segment is date-example. As this is used to generate an object for a new instance of the controller related to the view (in this case DateController), it was not possible to use $this->controller->date-example as an instance name. Using a new method in the Library allows the date-example string to become something that PHP is able to use. In this case, I have chosen camelCase, so I can use $this->controller->dateExample in the date-example.phtml view where necessary.

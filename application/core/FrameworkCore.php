@@ -158,8 +158,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	7 Feb 2017 - 15:21:00
-	 * @version	0.0.3a
+	 * @date	6 Jul 2017 - 12:12:34
+	 * @version	0.0.4
 	 * @return	void
 	 * @todo
 	 */
@@ -182,10 +182,12 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));
-					$this->controller->$instance = new $controller();
-					if(isset($this->controller->$instance->view)){
-						$this->setView($this->controller->$instance->view);
-						$this->controller->$instance->view = null;
+					$_instance	= $this->lib->camelCaseFromDashes($instance);
+					$this->controller->$_instance = new $controller();
+					
+					if(isset($this->controller->$_instance->view)){
+						$this->setView($this->controller->$_instance->view);
+						$this->controller->$_instance->view = null;
 					}
 				}
 			}

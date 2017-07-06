@@ -498,15 +498,15 @@ class HtmlBuilder
 	 * 
 	 * @param	array, string
 	 * @author	sbebbington
-	 * @date	27 Feb 2017 - 10:43:37
-	 * @version	0.0.1
+	 * @date	6 Jul 2017 - 12:12:56
+	 * @version	0.0.1a
 	 * @return	this
 	 * @todo
 	 */
 	public function option(array $options, string $selected = ''){
 		foreach($options as $key => $data){
 			print("<option value=\"{$key}\"");
-			if($key === $selected){
+			if($key == $selected){
 				print(" selected=\"selected\"");
 			}
 			print(">{$data}</option>");
