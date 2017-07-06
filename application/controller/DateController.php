@@ -26,6 +26,7 @@ class DateController extends \Application\Controller\ControllerCore
 				$dateSubmitted	.= " - this is not a valid date";
 			}
 			$this->view->dateSubmitted	= $dateSubmitted;
+			goto end;
 		}
 		
 		$day	+= $this->setDays((int)date('d'));
@@ -34,9 +35,11 @@ class DateController extends \Application\Controller\ControllerCore
 		
 		$this->view->days	= $day;
 		$this->view->months	= $month;
-		$this->view->years	= $year;		
+		$this->view->years	= $year;	
+		end:
+		return;
 	}
-		
+	
 	/**
 	 * Sets the number of days for an array assuming
 	 * 1 - 31 inclusive as date validation is handled
