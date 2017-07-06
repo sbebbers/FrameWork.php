@@ -14,6 +14,19 @@ class DateController extends \Application\Controller\ControllerCore
 		$year	= array(
 			''	=> "-- Select Year --",
 		);
+				
+		if(!empty($this->post)){
+			$daySubmitted	= $this->post['day'];
+			$monthSubmitted	= $this->post['month'];
+			$yearSubmitted	= $this->post['year'];
+			$dateSubmitted	= "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
+			if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted) == true){
+				$dateSubmitted	.= " - this is a valid date";
+			}else{
+				$dateSubmitted	.= " - this is not a valid date";
+			}
+			$this->view->dateSubmitted	= $dateSubmitted;
+		}
 		
 		$day	+= $this->setDays((int)date('d'));
 		$month	+= $this->setMonths('full', 'numeric', date('m'));
@@ -21,13 +34,7 @@ class DateController extends \Application\Controller\ControllerCore
 		
 		$this->view->days	= $day;
 		$this->view->months	= $month;
-		$this->view->years	= $year;
-		
-		if(isset($this->post['submit'])){
-			// Do something with the posted data here, but for now
-			// we'll simply see the contents of the posted data
-			// $this->lib->debug($this->post, true);
-		}
+		$this->view->years	= $year;		
 	}
 		
 	/**
@@ -146,13 +153,32 @@ class DateController extends \Application\Controller\ControllerCore
 		
 		checkDefault:
 		if(!in_array($default, $years)){
-			die();
 			goto end;
 		}
 		$years['default']	= $default;
 		
 		end:
 		return $years;
+	}
+	
+	/**
+	 * Checks the full date submitted to see if it is
+	 * valid according to the parameters of the
+	 * Gregorian calander
+	 * 
+	 * @param	int, int, int
+	 * @author	sbebbington
+	 * @date	6 Jul 2017 - 13:50:32
+	 * @version	0.0.1
+	 * @return	boolean
+	 * @todo
+	 */
+	protected function checkDateValidity($daySubmitted = null, $monthSubmitted = null, $yearSubmitted = null){
+		if($daySubmitted == null || $monthSubmitted == null || $yearSubmitted == null){
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -164,7 +190,6 @@ class DateController extends \Application\Controller\ControllerCore
 	 * @date	6 Jul 2017 - 11:37:21
 	 * @version	0.0.1
 	 * @return	string | null
-	 * @todo
 	 */
 	public function getDefault($viewObject = null){
 		if($viewObject == null){
@@ -174,14 +199,14 @@ class DateController extends \Application\Controller\ControllerCore
 	}
 	
 	/**
+	 * Clears the default parameter from the view object
+	 * should one exist
 	 *
-	 *
-	 * @param
+	 * @param	stdClass | array
 	 * @author	sbebbington
 	 * @date	6 Jul 2017 - 11:49:16
 	 * @version	0.0.1
-	 * @return
-	 * @todo
+	 * @return	array
 	 */
 	public function clearDefault($viewObject = null){
 		if($viewObject == null){
