@@ -1,1 +1,6 @@
-<footer id="footer"><script type="text/javascript" src="<?php echo $this->host; ?>/js/scripts.js"></script></footer>
+<footer id="footer">
+	<script type="text/javascript" src="<?php echo $this->host; ?>/js/scripts.js"></script>
+	<?php if($this->segment == 'date-example'): ?>
+		<script type="text/javascript" src="<?php echo $this->host; ?>/js/date-check.js"></script>
+	<?php endif; ?>
+</footer>

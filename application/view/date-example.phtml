@@ -23,7 +23,7 @@
     		->close("div");
     		$this->open("div", "date", "container");
     			if(empty($this->dateSubmitted)){
-		    		$this->form("date", "{$this->host}/{$this->segment}", "post", "col-xs-12")
+		    		$this->form("date-form", "{$this->host}/{$this->segment}", "post", "col-xs-12")
 	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
 	    					->select("day", "day", "col-xs-12", $this->days, $defaultDay, true)
 	    				->close("p")

@@ -5,6 +5,23 @@ class DateController extends \Application\Controller\ControllerCore
 {
 	public function __construct(){
 		parent::__construct();
+		
+		if(!empty($this->post)){
+			$daySubmitted	= $this->post['day'];
+			$monthSubmitted	= $this->post['month'];
+			$yearSubmitted	= $this->post['year'];
+			$dateSubmitted	= "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
+	
+			if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted) == true){
+				$dateSubmitted	.= " - This is a valid date";
+			}else{
+				$dateSubmitted	.= " - This is not a valid date";
+			}
+			
+			$this->view->dateSubmitted	= $dateSubmitted;
+			goto end;
+		}
+		
 		$day	= array(
 			''	=> "-- Select Day --",
 		);
@@ -14,20 +31,6 @@ class DateController extends \Application\Controller\ControllerCore
 		$year	= array(
 			''	=> "-- Select Year --",
 		);
-				
-		if(!empty($this->post)){
-			$daySubmitted	= $this->post['day'];
-			$monthSubmitted	= $this->post['month'];
-			$yearSubmitted	= $this->post['year'];
-			$dateSubmitted	= "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
-			if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted) == true){
-				$dateSubmitted	.= " - this is a valid date";
-			}else{
-				$dateSubmitted	.= " - this is not a valid date";
-			}
-			$this->view->dateSubmitted	= $dateSubmitted;
-			goto end;
-		}
 		
 		$day	+= $this->setDays((int)date('d'));
 		$month	+= $this->setMonths('full', 'numeric', date('m'));
@@ -37,7 +40,6 @@ class DateController extends \Application\Controller\ControllerCore
 		$this->view->months	= $month;
 		$this->view->years	= $year;	
 		end:
-		return;
 	}
 	
 	/**
