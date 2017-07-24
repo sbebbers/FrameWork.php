@@ -7,26 +7,20 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 {
 	public $segment, $host, $partial, $controller, $title, $description,
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
-	
-	protected $allowedSegments	= array(
-		'home',
-		'date-example'
-	);
-	protected $pageController	= array(
-		'home'			=> "HomeController",
-		'date-example'	=> "DateController"
-	);
-	private $errorReporting = array(
-		"http://framework.php.local",
-		"https://framework.php.local"
-	);
-	private $allowedFileExts	= array(
-		'htm', 'html', 'asp', 'aspx', 'js', 'php', 'phtml',
-	);
 	public $canonical = '';
+	
+	protected $allowedSegments, $pageController;
+	
+	private $errorReporting, $allowedFileExts;
 	
 	public function __construct(){
 		parent::__construct();
+		$siteConfiguration		= json_decode(file_get_contents(serverPath('/config/pages.json')), true);
+		$this->allowedSegments	= $siteConfiguration['allowedSegments'];
+		$this->pageController	= $siteConfiguration['pageControllers'];
+		$this->errorReporting	= $siteConfiguration['errorReporting'];
+		$this->allowedFileExts	= $siteConfiguration['allowedFileExts'];
+				
 		$this->host	        = isHttps() ? "https://" : "http://";
 		$this->host			.= host();
 		if(in_array($this->host, $this->errorReporting)){

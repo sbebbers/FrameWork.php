@@ -1,0 +1,23 @@
+{
+	"allowedSegments":{
+		"Home": 		"home",
+		"Date-Example":	"date-example"
+	},
+	"pageController":{
+		"home":			"HomeController",
+		"date-example":	"DateController"
+	},
+	"errorReporting":{
+		"0":				"",
+		"1":				""
+	},
+	"allowedFileExts":{
+		"0":				"htm",
+		"1":				"html",
+		"2":				"asp",
+		"3":				"aspx",
+		"4":				"js",
+		"5":				"php",
+		"6":				"phtml"
+	}
+}

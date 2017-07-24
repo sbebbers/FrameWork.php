@@ -19,55 +19,55 @@ We are not connecting to the database in this example, so a `DateModel.php` clas
 
 Firstly, we will need to consider the following reserved object names used in FrameWork.php and the usage. These are as follows:
 
-<table >
+<table style="border:1px solid #000;border-radius:4px;padding:2px">
 	<tbody>
 		<tr>
-			<td><em>Reserved object</em></td>
-			<td><em>Usage</em></td>
+			<td style="border:1px solid #444"><em>Reserved object</em></td>
+			<td style="border:1px solid #444"><em>Usage</em></td>
 		</tr>
 		<tr>
-			<td><code>$this->post</code> &nbsp;&nbsp;</td>
-			<td>This is a PHP array object that contains any posted data. This object is used in your page controller and retrieves information from your HTML form</td>
+			<td style="border:1px solid #444"><code>$this->post</code> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444">This is a PHP array object that contains any posted data. This object is used in your page controller and retrieves information from your HTML form</td>
 		</tr>
 		<tr>
-			<td><code>$this->view->xxxx</code> &nbsp;&nbsp;</td>
-			<td><code>$this->view</code> is a standard class object used in your page controller to create view objects to be used on your HTML page where xxxx is the name of your view object. For instance, if you set <code>$this->view->helloSailor = "Hello Sailor";</code> in your page controller, you are able to echo out this object on your <code>page-view.phtml</code> file using PHP, like: <code>&lt;?php echo $this->helloSailor; ?&gt;</code></td>
+			<td style="border:1px solid #444"><code>$this->view->xxxx</code> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"><code>$this->view</code> is a standard class object used in your page controller to create view objects to be used on your HTML page where xxxx is the name of your view object. For instance, if you set <code>$this->view->helloSailor = "Hello Sailor";</code> in your page controller, you are able to echo out this object on your <code>page-view.phtml</code> file using PHP, like: <code>&lt;?php echo $this->helloSailor; ?&gt;</code></td>
 		</tr>
 		<tr>
-			<td><code>$this->host</code> &nbsp;&nbsp;</td>
-			<td>This is used in your page views and is the URL for your project and will re-assign itself when going from local development environments to staging sites to live sites. This means that you can load images on your page with <code>&lt;img id="my-banner" src="&lt;?php echo $this->host; ?&gt;/img/my-banner.jpg" alt="My page banner" class="img-responsive" /&gt;</code></td>
+			<td style="border:1px solid #444"><code>$this->host</code> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444">This is used in your page views and is the URL for your project and will re-assign itself when going from local development environments to staging sites to live sites. This means that you can load images on your page with <code>&lt;img id="my-banner" src="&lt;?php echo $this->host; ?&gt;/img/my-banner.jpg" alt="My page banner" class="img-responsive" /&gt;</code></td>
 		</tr>
 		<tr>
-			<td><code>$this->segment</code> &nbsp;&nbsp;</td>
-			<td>This is used in your page views and contains the last URI segment of the page of your project. This can be used in forms (if the form is posting to the same page and therefore page controller, you may use this in your form action), or in a condition to decide if there are elements that you want to display, or CSS/JavaScript files that you want to load on particular pages but not others.</td>
+			<td style="border:1px solid #444"><code>$this->segment</code> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444">This is used in your page views and contains the last URI segment of the page of your project. This can be used in forms (if the form is posting to the same page and therefore page controller, you may use this in your form action), or in a condition to decide if there are elements that you want to display, or CSS/JavaScript files that you want to load on particular pages but not others.</td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td>&nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444">&nbsp;&nbsp;</td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 		<tr>
-			<td> &nbsp;&nbsp;</td>
-			<td></td>
+			<td style="border:1px solid #444"> &nbsp;&nbsp;</td>
+			<td style="border:1px solid #444"></td>
 		</tr>
 	</tbody>
 </table>
