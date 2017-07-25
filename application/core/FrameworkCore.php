@@ -7,7 +7,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 {
 	public $segment, $host, $partial, $controller, $title, $description,
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
-	public $canonical = '';
+	public $canonical	= '';
+	public $pageData	= [];
 	
 	protected $allowedSegments, $pageController;
 	
@@ -18,14 +19,14 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		if($this->setSiteConfiguration() == false){
 			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
 		}
+		$this->pageData		= $this->getPageData();
 		
 		$this->setErrorReporting();
 		$this->setUri();		
 		$this->setGetGlobal();
 		$this->checkExtension();
 		
-		$this->serverPath   = serverPath();
-		
+		$this->serverPath   = serverPath();		
 		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
 		$this->controller	= new \stdClass();
 		$this->flash		= new \stdClass();
@@ -129,6 +130,22 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	}
 	
 	/**
+	 * Sets the page title and meta descriptions
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 10:50:31
+	 * @version	0.0.1
+	 * @return	array
+	 */
+	public function getPageData(){
+		if(!file_exists(serverPath('/config/pagedata.json'))){
+			return [];
+		}
+		return json_decode(file_get_contents(serverPath('/config/pagedata.json')), true);
+	}
+	
+	/**
 	 * Checks for valid extension; if one is present then
 	 * a canonical string is set as each page will assume
 	 * that the page without the file extension is the
@@ -149,43 +166,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 			}
 		}
 	}
-	
-	/**
-	 * Sets the meta page titles in the views
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	2 Feb 2017 - 13:04:10
-	 * @version	0.0.2
-	 * @return	string
-	 * @todo
-	 */
-	public function setTitle(string $page = ''){
-	    $titles = array(
-			'home'				=> "Example FrameWork.php skeleton site",
-	    	'date-example'		=> "Shows a date picker using HTML 5 and bespoke jQuery/JavaScript"
-	    );
-	    return $titles["{$page}"];
-	}
-	
-	/**
-	 * Sets the meta page descriptions in the views
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	2 Feb 2017 - 13:04:47
-	 * @version	0.0.1
-	 * @return	string
-	 * @todo
-	 */
-	public function setDescription(string $page = ''){
-	    $descriptions = array(
-            'home'				=> "The Skeleton",
-	    	'date-example'		=> null
-	    );
-	    return $descriptions["{$page}"];
-	}
-	
+		
 	/**
 	 * Bug fixed edition of the using ZF type view variables
 	 * added in error surpression to prevent warnings being
@@ -230,13 +211,14 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * view variables - so if you set an object in a page
 	 * controller as $this->view->objName, you can use
 	 * $this->objName in the PHP/HTML view or something.
+	 * Update includes a simplified way to get the page
+	 * meta data
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	6 Jul 2017 - 12:12:34
-	 * @version	0.0.4
+	 * @date	25 Jul 2017 - 10:59:38
+	 * @version	0.0.5
 	 * @return	void
-	 * @todo
 	 */
 	public function loadPage(){
 		if($this->segment == ""){
@@ -252,8 +234,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		}
 		
 		if(in_array($this->segment, $this->allowedSegments) == true){
-			$this->title		= $this->setTitle($this->segment);
-			$this->description	= $this->setDescription($this->segment);
+			$this->title		= $this->pageData['titles']["{$this->segment}"] ?? '';
+			$this->description	= $this->pageData['descriptions']["{$this->segment}"] ?? '';
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));

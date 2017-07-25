@@ -1,0 +1,10 @@
+{
+	"titles":{
+		"home":			"Example FrameWork.php skeleton site",
+		"date-example": "Shows a date picker using HTML 5 and bespoke jQuery/JavaScript"
+	},
+	"descriptions":{
+		"home":			"The Skeleton",
+		"date-example":	"Example of how to develop a simple form in Framework.php"
+	}
+}
