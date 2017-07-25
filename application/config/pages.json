@@ -8,8 +8,8 @@
 		"date-example":	"DateController"
 	},
 	"errorReporting":{
-		"0":				"",
-		"1":				""
+		"0":				"http://framework.php.local",
+		"1":				"https://framework.php.local"
 	},
 	"allowedFileExts":{
 		"0":				"htm",

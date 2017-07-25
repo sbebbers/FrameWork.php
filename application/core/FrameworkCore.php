@@ -15,18 +15,83 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	
 	public function __construct(){
 		parent::__construct();
+		if($this->setSiteConfiguration() == false){
+			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
+		}
+		
+		$this->setErrorReporting();
+		$this->setUri();		
+		$this->setGetGlobal();
+		$this->checkExtension();
+		
+		$this->serverPath   = serverPath();
+		
+		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
+		$this->controller	= new \stdClass();
+		$this->flash		= new \stdClass();
+		$this->partial 		= array(
+	    	'header'	=> serverPath("/view/partial/header.phtml"),
+	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
+		);
+	}
+	
+	/**
+	 * Sets up the site configuration according
+	 * to the JSON objects in 
+	 * ../application/config/pages.json
+	 * Note that allowedSegments and pageControllers
+	 * are required settings
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:28:42
+	 * @version	0.0.1
+	 * @return	boolean
+	 */
+	protected function setSiteConfiguration(){
+		if(!file_exists(serverPath('/config/pages.json'))){
+			return false;
+		}
 		$siteConfiguration		= json_decode(file_get_contents(serverPath('/config/pages.json')), true);
 		$this->allowedSegments	= $siteConfiguration['allowedSegments'];
-		$this->pageController	= $siteConfiguration['pageControllers'];
-		$this->errorReporting	= $siteConfiguration['errorReporting'];
-		$this->allowedFileExts	= $siteConfiguration['allowedFileExts'];
-				
+		$this->pageController	= $siteConfiguration['pageController'];
+		$this->errorReporting	= $siteConfiguration['errorReporting'] ?? [];
+		$this->allowedFileExts	= $siteConfiguration['allowedFileExts'] ?? [];
+		if(!empty($this->allowedSegments) && !empty($this->pageController)){
+			return true;
+		}
+		die("<pre>Fatal error: No pages or page controllers set in the pages.json file</pre>");
+	}
+	
+	/**
+	 * Sets up the host object and checks against
+	 * the error reporting config values
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:40:06
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function setErrorReporting(){
 		$this->host	        = isHttps() ? "https://" : "http://";
 		$this->host			.= host();
 		if(in_array($this->host, $this->errorReporting)){
 			error_reporting(-1);
 			ini_set('display_errors', '1');
 		}
+	}
+	
+	/**
+	 * Sets up the request URI for the framework
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:46:26
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function setUri(){
 		$this->uriPath	= '';
 		$page			= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
 		if(count($page)>1){
@@ -37,11 +102,22 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 			}
 		}
 		$this->segment	= !empty($page) ? strtolower($page[count($page)]) : "";
-		
+	}
+	
+	/**
+	 * Sets up the $_GET super global
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:48:12
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function setGetGlobal(){
 		if(!empty($_GET)){
 			$segment 					= explode('?', $this->segment);
 			$this->segment				= $segment[0];
-			if(isset($segment[1]) && strlen($segment[1])>0){
+			if(isset($segment[1]) && !empty($segment[1])){
 				$_GET	= array();
 				$get	= explode("&", $segment[1]);
 				foreach($get as $data){
@@ -50,23 +126,28 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 				}
 			}
 		}
-		
+	}
+	
+	/**
+	 * Checks for valid extension; if one is present then
+	 * a canonical string is set as each page will assume
+	 * that the page without the file extension is the
+	 * main page
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:50:40
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function checkExtension(){
 		if(strpos($this->segment, ".") > 0){
-			$segments 			= explode(".", $this->segment);				
+			$segments 			= explode(".", $this->segment);
 			if(in_array($segments[count($segments)-1], $this->allowedFileExts)){
 				$this->segment		= $segments[count($segments)-2];
 				$this->canonical	= "<link rel=\"canonical\" href=\"{$this->host}/{$this->segment}\">" . PHP_EOL;
 			}
 		}
-		$this->serverPath   = serverPath();
-		
-		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
-		$this->controller	= new \stdClass();
-		$this->flash		= new \stdClass();
-		$this->partial 		= array(
-	    	'header'	=> serverPath("/view/partial/header.phtml"),
-	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
-		);
 	}
 	
 	/**
