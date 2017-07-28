@@ -1,38 +1,44 @@
 <?php 
 if(!defined(PHP_EOL)){
-	define(PHP_EOL, "\r\n", true);
+	define("PHP_EOL", "\r\n", true);
 }
 
 /**
- * Works out whether or not it's .local or .com domain (for instance)
- * This is for the purposes of allowing session cookies and stuff.]
- *
- * @param	string, boolean
- * @author 	Shaun
- * @date	2 Feb 2017 - 13:06:45
- * @version	0.0.3a
- * @return	string
- * @todo
- */
-function getDomain(string $domain = '', bool $https = false){
-	$domain				= explode('.', $domain);
-	$domain[0]			= ($https == true) ? str_replace('https://', '', $domain[0]) : str_replace('http://', '', $domain[0]);
-	$countedElements	= sizeof($domain)-1;
-	return ".{$domain[$countedElements-1]}.{$domain[$countedElements]}";
-}
-
-/**
- * This will check to see if the server is running over http or https
- *
- * @author	Shaun B
+ * Will return the specific site parameter from
+ * the site.json config - will default to the
+ * baseURL setting if an empty string
+ * is sent, or cookieDomain if no parameter
+ * is sent
+ * 
+ * @param	string
+ * @author	sbebbington
+ * @date	27 Jul 2017 - 15:19:51
  * @version	0.0.1
- * @date	2016-19-02
+ * @return	string
+ */
+function getConfig(string $parameter= 'cookieDomain'){
+	if(!file_exists(serverPath("/config/site.json"))){
+		die("Fatal error: A site.json file is required in the configuration at the application level for the framework to run");
+	}
+	if(empty($parameter)){
+		$parameter = 'baseURL';
+	}
+	return json_decode(file_get_contents(serverPath("/config/site.json")), true)[$parameter] ?? null;
+}
+
+/**
+ * This will check to see if the server is running
+ * http or https. This parameter is now set in the
+ * site.json file in the application config
+ * 
  * @param	na
+ * @author	sbebbington
+ * @date	27 Jul 2017 - 15:35:10
+ * @version	0.0.2
  * @return	boolean
- * @todo
  */
 function isHttps(){
-	return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off');
+	return getConfig('protocol') == 'https';
 }
 
 /**
@@ -148,4 +154,60 @@ function getSegment(){
  */
 function getSelf(){
 	return $_SERVER['PHP_SELF'];
+}
+
+/**
+ * Returns the server query string
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	2 Mar 2017 - 13:23:08
+ * @version	0.0.1
+ * @return	string
+ * @todo
+ */
+function getQueryString(){
+	return str_replace("/", '', $_SERVER['QUERY_STRING']);
+}
+
+/**
+ * Returns the version number of the application
+ * as set in the site.json config
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	27 Jul 2017 - 16:02:26
+ * @version	0.0.1
+ * @return	string
+ */
+function getVersion(){
+	return getConfig('version');
+}
+
+/**
+ * If rc is set as true in the site.json config
+ * then this is a release candidate, else it isn't
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	27 Jul 2017 - 16:03:33
+ * @version	0.0.1
+ * @return	bool
+ */
+function isReleaseCandidate(){
+	return getConfig('rc');
+}
+
+/**
+ * States whether or not is a development
+ * version set in the site.json config
+ *
+ * @param	na
+ * @author	sbebbington
+ * @date	27 Jul 2017 - 16:05:23
+ * @version	0.0.1
+ * @return	bool
+ */
+function isDevelopmentVersion(){
+	return getConfig('dev');
 }

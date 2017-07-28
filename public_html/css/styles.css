@@ -26,6 +26,7 @@
 	.pull-left{float:left}
 	.pull-right{float:right}
 	.centre{margin:0 auto}
+	.text-centre{text-align:center}
 	.clearfix:before,.clearfix,.clearfix:after{display:block;content:"";clear:both}
 	.container{margin:0 12px;width:auto;max-width:100%}
 	.btn{display:block;border-radius:4px;padding:8px;font-size:14px;line-height:16px;font-weight:600}

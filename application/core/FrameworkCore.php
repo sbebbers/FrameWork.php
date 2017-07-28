@@ -31,8 +31,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		$this->controller	= new \stdClass();
 		$this->flash		= new \stdClass();
 		$this->partial 		= array(
-	    	'header'	=> serverPath("/view/partial/header.phtml"),
-	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
+			'header'	=> (file_exists(serverPath("/view/partial/header.phtml"))) ? serverPath("/view/partial/header.phtml") : '',
+			'footer'	=> (file_exists(serverPath("/view/partial/footer.phtml"))) ? serverPath("/view/partial/footer.phtml") : '',
 		);
 	}
 	
@@ -75,8 +75,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * @return	void
 	 */
 	protected function setErrorReporting(){
-		$this->host	        = isHttps() ? "https://" : "http://";
-		$this->host			.= host();
+		$this->host	        = getConfig('baseURL') . getConfig("uriSegments");
 		if(in_array($this->host, $this->errorReporting)){
 			error_reporting(-1);
 			ini_set('display_errors', '1');
@@ -84,25 +83,27 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	}
 	
 	/**
-	 * Sets up the request URI for the framework
+	 * Sets up the request URI path for the framework
+	 * and will also set the page segment (in the
+	 * allowedSegments JSON object)
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:46:26
-	 * @version	0.0.1
+	 * @date	28 Jul 2017 - 11:50:03
+	 * @version	0.0.3
 	 * @return	void
 	 */
 	protected function setUri(){
-		$this->uriPath	= '';
-		$page			= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
-		if(count($page)>1){
+		$this->uriPath	= getConfig('uriPath');
+		$page			= [];
+		if(($page = array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen')) && strlen($this->uriPath) <= 1 && !empty($page)){			
 			foreach($page as $key => $data){
 				if($key != count($page)){
 					$this->uriPath	.= "{$data}/";
 				}
 			}
 		}
-		$this->segment	= !empty($page) ? strtolower($page[count($page)]) : "";
+		$this->segment	= (count($page) > 0) ? strtolower($page[count($page)]) : '';
 	}
 	
 	/**
@@ -192,15 +193,16 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	/**
 	 * Clears the page flash messages as these
 	 * are stored in the PHP $_SESSION global
+	 * or will empty the whole $_SESSION var
 	 * 
 	 * @param	boolean
 	 * @author	sbebbington
-	 * @date	7 Feb 2017 - 15:19:57
-	 * @version	0.0.1
+	 * @date	28 Jul 2017 - 12:04:03
+	 * @version	0.0.1a
 	 * @return	resource
 	 * @todo
 	 */
-	public function emptyFlashMessages(bool $emptyFlash){
+	public function emptySession(bool $emptyFlash = false){
 		return ($emptyFlash === true) ? $_SESSION['flashMessage'] = array() : array();
 	}
 	
@@ -255,7 +257,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 				$emptyFlash = true;
 			}
 			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
-			$this->emptyFlashMessages($emptyFlash);
+			$this->emptySession($emptyFlash);
 		}
 	}
 }

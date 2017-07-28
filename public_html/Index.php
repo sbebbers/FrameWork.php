@@ -7,7 +7,7 @@ require_once(serverPath('/core/GlobalHelpers.php'));
 header('X-Content-Type-Options: nosniff');
 header('X-XSS-Protection: 1');
 header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
-session_set_cookie_params(0, '/', getDomain(host(), ($https = isHttps()) ), $https, true);
+session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
 if(session_id() == ""){
 	session_start();
 }
