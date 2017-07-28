@@ -7,18 +7,21 @@ class ModelCore
 	protected $charSet	= "utf8";
 	
 	public function __construct(){
-		$password		= (getServerIPAddress() == '127.0.0.1') ? "" : "database_password";
-		$user			= (getServerIPAddress() == '127.0.0.1') ? "root" : "database_username";
-		$host			= getServerIPAddress();
-		$port			= 3306;
-		$this->db		= (getServerIPAddress() == '127.0.0.1') ? "skeleton" : "database_name";
+		if(file_exists(serverPath('/config/database.json'))){
+			$dbConfig	= json_decode(file_get_contents(serverPath('/config/database.json')), true);
+		}else{
+			die("The framework requires a database configuration file at the application layer");
+		}
+		$this->db		= $dbConfig['db'];
+		$password		= $dbConfig['password'] ?? '';
+		$this->tables	= new \stdClass();
+		$this->lib		= new \Application\Library\Library();
 		
 		try{
-			$this->connection = new \PDO("mysql:host={$host};port:{$host};dbname={$this->db};charset={$this->charSet}", $user, $password);
+			$this->connection = new \PDO("mysql:host={$dbConfig['host']};port:{$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
 		}catch(PDOException $e){
-			echo '<pre>There was an issue connecting to the database: ' . PHP_EOL .
-			print_r($e, 1) . '</pre>';
-			die('<hr />');
+			echo '<pre>There was an issue connecting to the database</pre>';
+			$this->lib->debug($e,true);
 		}
 	}
 }
