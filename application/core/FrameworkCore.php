@@ -2,6 +2,7 @@
 
 namespace Application\Core\Framework;
 require_once(serverPath('/core/HtmlBuilder.php'));
+require_once(serverPath('/core/FrameworkException.php'));
 
 class Core extends \Application\Core\Framework\HtmlBuilder
 {
@@ -9,6 +10,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
 	public $canonical	= '';
 	public $pageData	= [];
+	public $ignoredExts	= [];
 	
 	protected $allowedSegments, $pageController;
 	
@@ -45,8 +47,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:28:42
-	 * @version	0.0.1
+	 * @date	28 Jul 2017 - 14:29:45
+	 * @version	0.0.2
 	 * @return	boolean
 	 */
 	protected function setSiteConfiguration(){
@@ -58,6 +60,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		$this->pageController	= $siteConfiguration['pageController'];
 		$this->errorReporting	= $siteConfiguration['errorReporting'] ?? [];
 		$this->allowedFileExts	= $siteConfiguration['allowedFileExts'] ?? [];
+		$this->ignoredExts		= $siteConfiguration['ignotedFileExts'] ?? ['js', 'css'];
+		
 		if(!empty($this->allowedSegments) && !empty($this->pageController)){
 			return true;
 		}
