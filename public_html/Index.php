@@ -35,7 +35,14 @@ class Index
 	public function __construct(){
 		$this->core	= new \Application\Core\Framework\Core();
 		setTimeZone($this->timeZone);
-		$this->core->loadPage();
+		try{
+			$this->core->loadPage();
+		}catch(\Application\Core\FrameworkException\FrameworkException $e){
+			writeToLogFile($e);
+		}catch(\Exception $e){
+			$this->core->lib->debug($e);
+			exit;
+		}
 	}
 }
 
@@ -44,17 +51,15 @@ class Index
  * directory on your server
  *
  * @param	string
- * @author	Shaun
- * @date	2 Feb 2017 - 13:01:13
- * @version	0.0.2
+ * @author	Rob Gill && Shaun
+ * @date	2 Aug 2017 - 13:47:12
+ * @version	0.0.3
  * @return	string
  * @todo
  */
 function serverPath(string $routeTo = ''){
-	$_x = str_replace("\\", '/', dirname(__FILE__)) . '/application';
-	$_x = str_replace("public_html/", '', $_x);
-	$_x .= $routeTo;
-	return str_replace("//", '/', $_x);
+	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME']))."/application";
+	return $base_dir.$routeTo;
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...

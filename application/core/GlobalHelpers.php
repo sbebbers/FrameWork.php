@@ -211,3 +211,71 @@ function isReleaseCandidate(){
 function isDevelopmentVersion(){
 	return getConfig('dev');
 }
+
+/**
+ * Gets the configuration path
+ *
+ * @param	string
+ * @author	Rob Gill && Shaun
+ * @date	16 Aug 2017 - 17:09:28
+ * @version	0.0.1a
+ * @return	string
+ */
+function logErrorPath(string $routeTo = ''){
+	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/logs";
+	return "{$base_dir}{$routeTo}";
+}
+
+/**
+ * Writes a log file based on date
+ * and day; if log file already exists
+ * then it will append the data to the
+ * file;
+ *
+ * @param	array | resource
+ * @author	sbebbington
+ * @date	3 Aug 2017 - 10:24:09
+ * @version	0.0.1
+ * @return	resource | false
+ * @todo
+ */
+function writeToLogFile(array $error = []){
+	if(empty($error)){
+		return false;
+	}
+	$months	= [1 => 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+	
+	if(empty($error['ip_address'])){
+		$error['ip_address']	= getUserIPAddress();
+	}
+	
+	if(empty($error['date'])){
+		$error['date']			= date("Y-m-d");
+		$error['time']			= date("H:i:s");
+	}
+	$fileNames	= explode("-", $error['date']);
+	$dirName	= $months[(int)$fileNames[1]];
+	$logPath	= logErrorPath("/{$dirName}");
+	$fileName	= "{$logPath}/{$fileNames[2]}.log";
+	
+	if(!is_dir(logErrorPath())){
+		if(!mkdir(logErrorPath(), 0755)){
+			throw new Exception("Filepath " . logErrorPath() . " could not be created", "0xf17e");
+		}
+	}
+	
+	if(!is_dir($logPath)){
+		if(!mkdir($logPath, 0755)){
+			throw new Exception("Filepath {$logPath} could not be created", "0xf17e");
+		}
+	}
+	$error	= json_encode($error);
+	
+	if(!file_exists($fileName)){
+		if(file_put_contents($fileName, "")){
+		}else{
+			throw new Exception("File {$fileName} could not be created", "0xf17e");
+		}
+	}
+	return file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? null;
+}

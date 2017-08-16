@@ -132,6 +132,8 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				in the constructor is now moved to its own method.
 	@changes as of 2017-08-16
 				I have made an exception class in the core directory as this is good
-				practise
+				practise - With thanks to Rob Gill for help and guidance; software error logging
+				is added to the GlobalHelpers.php if new exceptions or framework exceptions are
+				thrown anywhere. 
 
 --
