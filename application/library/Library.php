@@ -73,7 +73,7 @@ class Library
 	 * 			version
 	 */
 	public function version(){
-		return '0.1.2';
+		return '0.1.3';
 	}
 	
 	/**
