@@ -19,10 +19,10 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 			--> partial
 				\ For partial HTML views such as headers, footers and menus
 
-<hr />
+--
 
 
-	@version	0.1.2
+	@version	0.1.3
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -134,4 +134,4 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				I have made an exception class in the core directory as this is good
 				practise
 
-<hr />
+--
