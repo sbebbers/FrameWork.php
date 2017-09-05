@@ -279,3 +279,20 @@ function writeToLogFile(array $error = []){
 	}
 	return file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? null;
 }
+
+/**
+ * Negates a PHP feature on the empty() command
+ * whereby a string value of "0" will be empty;
+ * note that numeric values of 0 or 0.0 will
+ * return as empty so this tries to negate
+ * this feature as well
+ * 
+ * @param	scalar | object
+ * @author	sbebbington
+ * @date	5 Sep 2017 - 12:51:55
+ * @version	0.0.1
+ * @return	bool
+ */
+function isEmpty($value){
+	return (is_string($value) || is_numeric($value)) ? empty($value) && strlen("{$value}") : empty($value);
+}
