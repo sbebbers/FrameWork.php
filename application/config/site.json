@@ -1,7 +1,7 @@
 {
 	"baseURL":		"http://framework.php.local",
 	"protocol":		"http",
-	"cookieDomain": ".framework.php.local",
+	"cookieDomain": "framework.php.local",
 	"uriPath":		"/",
 	"version":		"0",
 	"rc":			false,
