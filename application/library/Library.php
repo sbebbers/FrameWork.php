@@ -69,10 +69,11 @@ class Library
 	 * @date 	2016-02-19
 	 * @return  string
 	 * @todo	Remember to update this number when
-	 * 			changes are made
+	 * 			enough changes constitute a new
+	 * 			version
 	 */
 	public function version(){
-		return '0.1.1';
+		return '0.1.3';
 	}
 	
 	/**
@@ -261,15 +262,15 @@ class Library
      * 
      * @param	string
      * @author	sbebbington
-     * @date	2 Feb 2017 - 13:39:01
-     * @version	0.0.2
+     * @date	6 Jul 2017 - 12:14:42
+     * @version	0.0.2a
      * @return	string
      * @todo
      */
-    public function convertSnakeCase(string $snake = ''){
+    public function convertSnakeCase(string $snake = '', string $delimiter = '_'){
     	if($snake != ''){
-	    	$_snake			= explode('_', $snake);
-	    	if(count($_snake) === 1){
+	    	$_snake			= explode($delimiter, $snake);
+	    	if(count($_snake) == 1){
 	    		return $snake;
 	    	}
 	    	$camelBuilder	= '';
@@ -279,6 +280,21 @@ class Library
 	    	return $camelBuilder;
     	}
     	return "{$snake}";
+    }
+    
+    /**
+     * Converts to camelCase where one or more dashes
+     * appear in the string
+     * 
+     * @param	string
+     * @author	sbebbington
+     * @date	6 Jul 2017 - 12:17:34
+     * @version	0.0.1
+     * @return	string
+     * @todo
+     */
+    public function camelCaseFromDashes($string){
+    	return $this->convertSnakeCase($string, '-');
     }
     
     /**

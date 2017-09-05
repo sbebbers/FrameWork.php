@@ -26,12 +26,14 @@
 	.pull-left{float:left}
 	.pull-right{float:right}
 	.centre{margin:0 auto}
+	.text-centre{text-align:center}
 	.clearfix:before,.clearfix,.clearfix:after{display:block;content:"";clear:both}
-	.container{margin:0 12px;max-width:100%}
+	.container{margin:0 12px;width:auto;max-width:100%}
 	.btn{display:block;border-radius:4px;padding:8px;font-size:14px;line-height:16px;font-weight:600}
-	.btn-submit{border:2px solid #00a227;background:#11b713;color:#eee}
-	.btn-submit:hover{border:2px solid #11b713;background:#12c220;color:#fff}
+	.btn-submit{display:inline-block;text-align:center;border:2px solid #00a227;background:#11b713;color:#eee}
+	.btn-submit:hover{border:2px solid #11b713;background:#12c220;color:#fff;cursor:pointer}
 	.img-responsive{height:auto}
+	h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5,h6,.h6{line-height:1em}
 }
 @media only screen and (min-width:480px){
 	.col-sm-1{width:8.3333333334%}
@@ -196,3 +198,5 @@
 .flash{color:#eee;font-weight:700;font-size:18px;line-height:20px}
 .flash-bg{padding:8px;border-radius:4px}
 .green{background:#1a4}
+.pad12{padding:12px}
+.margin12{margin:12px}

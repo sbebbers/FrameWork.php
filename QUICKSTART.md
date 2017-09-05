@@ -1,8 +1,8 @@
-# Project FrameWork.php MVC v0.1.1 #
+# Project FrameWork.php MVC v0.1.2 #
 
-### Quick start guide - updated 2017-01-23###
+### Quick start guide - updated 2017-01-23 ###
 
-You will already have a home page and 404 page to play with; these files are located in the /application/view folder. There are two partial views included as well, a file called header.phtml for the ```<head>``` section of your website, and one named footer.phtml for your page ```<footer>```. These are in a sub-folder in your view folder.
+You will already have a home page and 404 page to play with; these files are located in the `/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder.
 
 You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP will generate:
 
@@ -13,7 +13,7 @@ You can use plain HTML in any view, or use the HTML builder, which is still in p
 		->close("p")
 	->close("div");
 
-will generate the following HTML (when inspecting elements with your browser):
+will generate the following HTML (when inspecting elements in your browser):
 
 	<div id="content" class="container">
 		<h1>Main header</h1>
@@ -24,39 +24,67 @@ but will actually generate minimised HTML, as follows:
 
 	<div id="content" class="container"><h1>Main header</h1><p id="opening-text" class="col-xs-12">This is the opening paragraph</p></div>
 
-To add in a new view, you will need to locate the $allowedSegments array in the FrameworkCore.php file in /application/core; you will see that the home segment is already allowed, simple add to this array, for example:
+To add in a new view, you will need to edit the file in `/path/to/application/config/pages.json`. This file by default may look like this:
 
-	public $allowedSegments	= array(
-		'home',
-		'my-page',
-	);
-
-To relate this view to a controller, locate the $pageController array below it, for instance:
-
-	public $pageController	= array(
-		'home'			=> "HomeController",
-		'my-page'		=> "MyPageController",
-	);
-
-Now locate the setTitle() and setDescription() methods in the FrameworkCore class, this allows you to set the title and description meta tags for your page, for instance:
-
-	public function setTitle($page = ''){
-	    $titles = array(
-			'home'				=> "Example FrameWork.php skeleton site",
-			'my-page'			=> "This is my new web page",
-	    );
-	    return $titles["{$page}"];
+	{
+		"allowedSegments": {
+			"Home":	"home"
+		},
+		"pageController": {
+			"home":	"HomeController"
+		},
+		"errorReporting":{
+			"0":		"http://my-project.dev"
+		},
+		"allowedFileExts": {
+			"0":		"phtml"
+		}
 	}
 
-and:
+Therefore, to add in a new page, you need to name it appropraitely; if you want a section called my-blog on your website (and therefore, you'll have `http://my-project.dev/my-blog` in this example, then add the following:
 
-	public function setDescription($page = ''){
-	    $descriptions = array(
-            'home'				=> "The Skeleton",
-			'my-page'			=> "I tend not to use Lorem Ipsum in my examples as I don't speak Latin",
-	    );
-	    return $descriptions["{$page}"];
+	{
+		"allowedSegments": {
+			"home":		"home",
+			"my-blog":	"my-blog",
+		},
+		"pageController": {
+			"home":		"HomeController",
+			"my-blog":	"MyBlogController"
+		},
+		"errorReporting":{
+			"0":		"http://my-project.dev",
+		},
+		"allowedFileExts": {
+			"0":		"phtml"
+		}
 	}
+
+You may wish to set up some meta data for your new page; this is done in the `pagedata.json` file in `/path/to/application/config/pagedata.json`, which may look like this:
+
+	{
+		"titles":{
+			"home":	"My home page meta title"
+		},
+		"descriptions":{
+			"home":	"My home page meta description"
+		}
+	}
+
+Therefore, to add a title and description, you will need to use the name of your page (in this example `my-blog`) so that the framework may identify it, as follows:
+
+	{
+		"titles":{
+			"home":		"My home page meta title",
+			"my-blog": "The meta title for my-blog page"
+		},
+		"descriptions":{
+			"home":		"My home page meta description",
+			"my-blog":	"This is where I add a meta description for my page"
+		}
+	}
+
+Now you will need to add a controller class in the `/path/to/application/controller` directory. Continuing with the `my-blog` example, you will need to add in a `MyBlogController.php` file; 
 
 Once you have your controller, you will need to create a controller class in the /application/controller directory. The class name must match the controller name that you have given above including the .php file extension. If your page is interacting with a MySQL database then you will want to set up a model class in the /application/model directory. If you have called your model class MyPageModel.php, use the following at the top of your PHP controller class:
 

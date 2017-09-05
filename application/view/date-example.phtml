@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+	<?php 
+    	$this->open("head");
+			require_once("{$this->partial['header']}");
+		$this->close("head");
+    	$this->open("body", "body");
+    		if(empty($this->dateSubmitted)){
+		    	$defaultDay		= "{$this->controller->dateExample->getDefault($this->days)}";
+		    	$defaultMonth	= "{$this->controller->dateExample->getDefault($this->months)}";
+		    	$defaultYear	= "{$this->controller->dateExample->getDefault($this->years)}";
+		    	
+		    	$this->days		= $this->controller->dateExample->clearDefault($this->days);
+		    	$this->months	= $this->controller->dateExample->clearDefault($this->months);
+		    	$this->years	= $this->controller->dateExample->clearDefault($this->years);
+	    	}
+	    	
+	    	$this->open("div", "content", "container")
+    			->h(1, "Date Picker example", "header")
+    			->h(4, "&raquo; This page demonstrates a simple mobile-friendly date-picker with date validation", "sub-header")
+    			->text("Here we are using HTML 5 elements and bespoke jQuery/JavaScript", true)
+    			->open("hr", '', null, true)
+    		->close("div");
+    		$this->open("div", "date", "container");
+    			if(empty($this->dateSubmitted)){
+		    		$this->form("date-form", "{$this->host}/{$this->segment}", "post", "col-xs-12")
+	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    					->select("day", "day", "col-xs-12", $this->days, $defaultDay, true)
+	    				->close("p")
+	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    					->select("month", "month", "col-xs-12", $this->months, $defaultMonth, true)
+	    				->close("p")
+	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    					->select("year", "year", "col-xs-12", $this->years, $defaultYear, true)
+	    				->close("p")
+	    				->p()->class("col-xs-4 col-md-6 col-mdl-4 pull-right")->closeElement()
+	    					->input()->id("submit")->name("submit")->type("submit")->value("Submit &raquo;")->class("col-xs-12 col-md-3 pull-right btn btn-submit")->closeElement(true)
+	    				->close("p")
+	    			->close("form");
+    			}else{
+    				$this->h(5, "{$this->dateSubmitted}", "date-submitted");
+    			}
+    		$this->close("div");
+    		require_once("{$this->partial['footer']}");    	
+    	$this->close("body");
+    ?>
+</html>

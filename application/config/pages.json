@@ -1,0 +1,31 @@
+{
+	"allowedSegments":{
+		"Home": 		"home",
+		"Date-Example":	"date-example"
+	},
+	"pageController":{
+		"home":			"HomeController",
+		"date-example":	"DateController"
+	},
+	"errorReporting":{
+		"0":			"http://framework.php.local",
+		"1":			"https://framework.php.local"
+	},
+	"allowedFileExts":{
+		"0":			"htm",
+		"1":			"html",
+		"2":			"asp",
+		"3":			"aspx",
+		"4":			"php",
+		"5":			"phtml"
+	},
+	"ignoredFileExts":{
+		"0":			"jpeg",
+		"1":			"jpg",
+		"2":			"png",
+		"3":			"js",
+		"4":			"gif",
+		"5":			"ico",
+		"6":			"pdf"
+	}
+}

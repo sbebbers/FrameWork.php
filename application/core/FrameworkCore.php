@@ -2,50 +2,128 @@
 
 namespace Application\Core\Framework;
 require_once(serverPath('/core/HtmlBuilder.php'));
+require_once(serverPath('/core/FrameworkException.php'));
 
 class Core extends \Application\Core\Framework\HtmlBuilder
 {
 	public $segment, $host, $partial, $controller, $title, $description,
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
+	public $canonical	= '';
+	public $pageData	= [];
+	public $ignoredExts	= [];
 	
-	protected $allowedSegments	= array(
-		'home',
-	);
-	protected $pageController	= array(
-		'home'			=> "HomeController",
-	);
-	private $errorReporting = array(
-		"http://framework.php.local",
-		"https://framework.php.local"
-	);
-	private $allowedFileExts	= array(
-		'htm', 'html', 'asp', 'aspx', 'js', 'php', 'phtml',
-	);
-	public $canonical = '';
+	protected $allowedSegments, $pageController;
+	
+	private $errorReporting, $allowedFileExts;
 	
 	public function __construct(){
 		parent::__construct();
-		$this->host	        = isHttps() ? "https://" : "http://";
-		$this->host			.= host();
+		if($this->setSiteConfiguration() == false){
+			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
+		}
+		$this->pageData		= $this->getPageData();
+		
+		$this->setErrorReporting();
+		$this->setUri();		
+		$this->setGetGlobal();
+		$this->checkExtension();
+		
+		$this->serverPath   = serverPath();		
+		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
+		$this->controller	= new \stdClass();
+		$this->flash		= new \stdClass();
+		$this->partial 		= array(
+			'header'	=> (file_exists(serverPath("/view/partial/header.phtml"))) ? serverPath("/view/partial/header.phtml") : '',
+			'footer'	=> (file_exists(serverPath("/view/partial/footer.phtml"))) ? serverPath("/view/partial/footer.phtml") : '',
+		);
+	}
+	
+	/**
+	 * Sets up the site configuration according
+	 * to the JSON objects in 
+	 * ../application/config/pages.json
+	 * Note that allowedSegments and pageControllers
+	 * are required settings
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	28 Jul 2017 - 14:29:45
+	 * @version	0.0.2
+	 * @return	boolean
+	 */
+	protected function setSiteConfiguration(){
+		if(!file_exists(serverPath('/config/pages.json'))){
+			return false;
+		}
+		$siteConfiguration		= json_decode(file_get_contents(serverPath('/config/pages.json')), true);
+		$this->allowedSegments	= $siteConfiguration['allowedSegments'];
+		$this->pageController	= $siteConfiguration['pageController'];
+		$this->errorReporting	= $siteConfiguration['errorReporting'] ?? [];
+		$this->allowedFileExts	= $siteConfiguration['allowedFileExts'] ?? [];
+		$this->ignoredExts		= $siteConfiguration['ignotedFileExts'] ?? ['js', 'css'];
+		
+		if(!empty($this->allowedSegments) && !empty($this->pageController)){
+			return true;
+		}
+		die("<pre>Fatal error: No pages or page controllers set in the pages.json file</pre>");
+	}
+	
+	/**
+	 * Sets up the host object and checks against
+	 * the error reporting config values
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:40:06
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function setErrorReporting(){
+		$this->host	        = getConfig('baseURL') . getConfig("uriSegments");
 		if(in_array($this->host, $this->errorReporting)){
 			error_reporting(-1);
 			ini_set('display_errors', '1');
 		}
-		$this->uriPath	= '';
-		$page			= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
-		if(count($page)>1){
+	}
+	
+	/**
+	 * Sets up the request URI path for the framework
+	 * and will also set the page segment (in the
+	 * allowedSegments JSON object)
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	28 Jul 2017 - 11:50:03
+	 * @version	0.0.3
+	 * @return	void
+	 */
+	protected function setUri(){
+		$this->uriPath	= getConfig('uriPath');
+		$page			= [];
+		if(($page = array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen')) && strlen($this->uriPath) <= 1 && !empty($page)){			
 			foreach($page as $key => $data){
 				if($key != count($page)){
 					$this->uriPath	.= "{$data}/";
 				}
 			}
 		}
-		$this->segment	= !empty($page) ? strtolower($page[count($page)]) : "";
-		
+		$this->segment	= (count($page) > 0) ? strtolower($page[count($page)]) : '';
+	}
+	
+	/**
+	 * Sets up the $_GET super global
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:48:12
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function setGetGlobal(){
 		if(!empty($_GET)){
 			$segment 					= explode('?', $this->segment);
 			$this->segment				= $segment[0];
-			if(isset($segment[1]) && strlen($segment[1])>0){
+			if(isset($segment[1]) && !empty($segment[1])){
 				$_GET	= array();
 				$get	= explode("&", $segment[1]);
 				foreach($get as $data){
@@ -54,59 +132,46 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 				}
 			}
 		}
-		
+	}
+	
+	/**
+	 * Sets the page title and meta descriptions
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 10:50:31
+	 * @version	0.0.1
+	 * @return	array
+	 */
+	public function getPageData(){
+		if(!file_exists(serverPath('/config/pagedata.json'))){
+			return [];
+		}
+		return json_decode(file_get_contents(serverPath('/config/pagedata.json')), true);
+	}
+	
+	/**
+	 * Checks for valid extension; if one is present then
+	 * a canonical string is set as each page will assume
+	 * that the page without the file extension is the
+	 * main page
+	 * 
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	25 Jul 2017 - 09:50:40
+	 * @version	0.0.1
+	 * @return	void
+	 */
+	protected function checkExtension(){
 		if(strpos($this->segment, ".") > 0){
-			$segments 			= explode(".", $this->segment);				
+			$segments 			= explode(".", $this->segment);
 			if(in_array($segments[count($segments)-1], $this->allowedFileExts)){
 				$this->segment		= $segments[count($segments)-2];
 				$this->canonical	= "<link rel=\"canonical\" href=\"{$this->host}/{$this->segment}\">" . PHP_EOL;
 			}
 		}
-		$this->serverPath   = serverPath();
+	}
 		
-		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
-		$this->controller	= new \stdClass();
-		$this->flash		= new \stdClass();
-		$this->partial 		= array(
-	    	'header'	=> serverPath("/view/partial/header.phtml"),
-	    	'footer'	=> serverPath("/view/partial/footer.phtml"),
-		);
-	}
-	
-	/**
-	 * Sets the meta page titles in the views
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	2 Feb 2017 - 13:04:10
-	 * @version	0.0.2
-	 * @return	string
-	 * @todo
-	 */
-	public function setTitle(string $page = ''){
-	    $titles = array(
-			'home'				=> "Example FrameWork.php skeleton site",
-	    );
-	    return $titles["{$page}"];
-	}
-	
-	/**
-	 * Sets the meta page descriptions in the views
-	 * 
-	 * @param	string
-	 * @author	sbebbington
-	 * @date	2 Feb 2017 - 13:04:47
-	 * @version	0.0.1
-	 * @return	string
-	 * @todo
-	 */
-	public function setDescription(string $page = ''){
-	    $descriptions = array(
-            'home'				=> "The Skeleton",
-	    );
-	    return $descriptions["{$page}"];
-	}
-	
 	/**
 	 * Bug fixed edition of the using ZF type view variables
 	 * added in error surpression to prevent warnings being
@@ -132,15 +197,16 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	/**
 	 * Clears the page flash messages as these
 	 * are stored in the PHP $_SESSION global
+	 * or will empty the whole $_SESSION var
 	 * 
 	 * @param	boolean
 	 * @author	sbebbington
-	 * @date	7 Feb 2017 - 15:19:57
-	 * @version	0.0.1
+	 * @date	28 Jul 2017 - 12:04:03
+	 * @version	0.0.1a
 	 * @return	resource
 	 * @todo
 	 */
-	public function emptyFlashMessages(bool $emptyFlash){
+	public function emptySession(bool $emptyFlash = false){
 		return ($emptyFlash === true) ? $_SESSION['flashMessage'] = array() : array();
 	}
 	
@@ -151,13 +217,14 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * view variables - so if you set an object in a page
 	 * controller as $this->view->objName, you can use
 	 * $this->objName in the PHP/HTML view or something.
+	 * Update includes a simplified way to get the page
+	 * meta data
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	7 Feb 2017 - 15:21:00
-	 * @version	0.0.3a
+	 * @date	25 Jul 2017 - 10:59:38
+	 * @version	0.0.5
 	 * @return	void
-	 * @todo
 	 */
 	public function loadPage(){
 		if($this->segment == ""){
@@ -173,15 +240,17 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		}
 		
 		if(in_array($this->segment, $this->allowedSegments) == true){
-			$this->title		= $this->setTitle($this->segment);
-			$this->description	= $this->setDescription($this->segment);
+			$this->title		= $this->pageData['titles']["{$this->segment}"] ?? '';
+			$this->description	= $this->pageData['descriptions']["{$this->segment}"] ?? '';
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));
-					$this->controller->$instance = new $controller();
-					if(isset($this->controller->$instance->view)){
-						$this->setView($this->controller->$instance->view);
-						$this->controller->$instance->view = null;
+					$_instance	= $this->lib->camelCaseFromDashes($instance);
+					$this->controller->$_instance = new $controller();
+					
+					if(isset($this->controller->$_instance->view)){
+						$this->setView($this->controller->$_instance->view);
+						$this->controller->$_instance->view = null;
 					}
 				}
 			}
@@ -192,7 +261,7 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 				$emptyFlash = true;
 			}
 			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
-			$this->emptyFlashMessages($emptyFlash);
+			$this->emptySession($emptyFlash);
 		}
 	}
 }
