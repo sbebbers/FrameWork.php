@@ -1,9 +1,8 @@
-# Project FrameWork.php MVC v0.1.2 #
+# Project FrameWork.php MVC v0.1.3 #
 
 ### Setting up a new page ###
 
-#### This document is still work in progress as of 2017-07-25 #####
-
+#### This document is still work in progress as of 2017-09-06 ####
 In this document, we will look in more detail at how FrameWork.php works; it looks at setting page view objects, accessing methods from your page view within the controller, loading in custom JavaScript files in your footer if you are on certain page within your project, and validating form data on your page view with JavaScript and posted to your page controller. The page is available to view at `http://your-domain.com/date-example`.
 
 I assume here that you have some knowledge of PHP, HTML 5 and JavaScript or jQuery. If you are using this document to learn something about PHP and you have experience with a different tech stack or language then I assume that I provide enough here for you to transpose your knowledge of web development to the PHP world. If you are new to development generally and PHP 7 specifically then please consider a PHP primer first, including an introduction to object orientated programming. `http://php.net` is an excellent resource for understanding the core PHP concepts, commands and APIs.

@@ -134,6 +134,11 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				I have made an exception class in the core directory as this is good
 				practise - With thanks to Rob Gill for help and guidance; software error logging
 				is added to the GlobalHelpers.php if new exceptions or framework exceptions are
-				thrown anywhere. 
+				thrown anywhere.
+	@changes as of 2017-09-06
+				There is a method added in the GlobalHelpers which nagates the empty() issue with
+				PHP whereby string literal "0" and numberic zeros will return as empty; isEmpty()
+				will check if the parameter is a string or is numeric and therefore work out
+				if it's empty and the string length is zero
 
 --
