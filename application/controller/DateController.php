@@ -1,10 +1,10 @@
 <?php
-require_once (serverPath('/controller/ControllerCore.php'));
+use Application\Controller\ControllerCore;
 
 class DateController extends \Application\Controller\ControllerCore
 {
 	public function __construct(){
-		parent::__construct();
+		ControllerCore::__construct();
 		
 		if(!empty($this->post)){
 			$daySubmitted	= $this->post['day'];

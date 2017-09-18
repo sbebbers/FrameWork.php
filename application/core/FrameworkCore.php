@@ -1,10 +1,7 @@
 <?php
-
 namespace Application\Core\Framework;
-require_once(serverPath('/core/HtmlBuilder.php'));
-require_once(serverPath('/core/FrameworkException.php'));
 
-class Core extends \Application\Core\Framework\HtmlBuilder
+class Core extends HtmlBuilder
 {
 	public $segment, $host, $partial, $controller, $title, $description,
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
@@ -181,15 +178,15 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 May 2017 - 09:49:39
 	 * @version	0.0.4
-	 * @return	na
+	 * @return	void
 	 * @todo
 	 */
 	public function setView($instance, string $masterKey = ''){
 		foreach($instance as $key => $data){
 			if($masterKey == ''){
-				@$this->$key				= $data;
+				$this->{$key}               = $data;
 			}else{
-				@$this->$masterKey->$key	= $data;
+				$this->{$masterKey}->{$key} = $data;
 			}
 		}
 	}

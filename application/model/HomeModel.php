@@ -1,11 +1,12 @@
 <?php
-require_once (serverPath('/model/ModelCore.php'));
+namespace Application\Model;
+use PDO;
 
 class HomeModel extends \Application\Model\ModelCore
 {
 	protected $table;
 	public function __construct(){
-		parent::__construct();
+		ModelCore::__construct();
 		$this->table = "view";
 	}
 	

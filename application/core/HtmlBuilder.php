@@ -1,13 +1,13 @@
 <?php 
 namespace Application\Core\Framework;
-require_once(serverPath("/library/Library.php"));
+use Application\Library\Library;
 
 class HtmlBuilder
 {
 	public $lib;
 	
 	public function __construct(){
-		$this->lib	= new \Application\Library\Library();
+		$this->lib	= new Library();
 	}
 	
 	/**
@@ -17,7 +17,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	16 Jan 2017 - 17:19:50
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function test(){
@@ -32,7 +32,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:15:10
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function p(){
@@ -47,7 +47,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 Mar 2017 - 11:30:31
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', $style = null, bool $close = true){
@@ -85,7 +85,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	5 Apr 2017 - 16:14:08
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function hr(string $id = '', string $class=''){
@@ -108,7 +108,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:15:29
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function id(string $id){
@@ -123,7 +123,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	10 Apr 2017 - 09:36:45
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function span(string $id = '', $class = null){
@@ -147,7 +147,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	29 Mar 2017 - 11:37:44
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function img(string $id = '', string $path, int $width = 0, int $height = 0, string $alt = '', string $class = ''){
@@ -179,7 +179,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:16:35
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function class($class){
@@ -209,7 +209,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:26:47
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function dataAttr(string $attrName, string $data){
@@ -225,7 +225,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	11 Apr 2017 - 10:03:08
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function placeHolder(string $placeHolder = ''){
@@ -244,7 +244,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:30:19
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function closeElement(bool $selfClose = false){
@@ -261,7 +261,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:31:27
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function text(string $text, bool $decode = false){
@@ -277,7 +277,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 Mar 2017 - 14:25:06
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function textArea(string $id = '', string $name = '', int $rows = 0, int $cols = 0, string $placeHolder = '', string  $class = '', bool $required = false){
@@ -317,7 +317,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	22 May 2017 - 11:48:40
 	 * @version	0.0.4
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null, string $encType = ''){
@@ -353,7 +353,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:44:29
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function input(){
@@ -373,7 +373,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	22 May 2017 - 11:15:23
 	 * @version	0.0.3
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function label(string $text, string $id = '', string $for = '', string $class = '', $style = null){
@@ -407,7 +407,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:49:19
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function name(string $name){
@@ -422,7 +422,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:50:04
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function type(string $type){
@@ -437,7 +437,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:51:04
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function value(string $value){
@@ -453,7 +453,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 09:52:23
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function disabled(bool $disabled = true){
@@ -471,7 +471,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	27 Feb 2017 - 10:42:12
 	 * @version	0.0.2
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function select(string $id = '', string $name = '', string $class = '', array $options, string $selected = '', bool $close = true){
@@ -500,7 +500,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	6 Jul 2017 - 12:12:56
 	 * @version	0.0.1a
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function option(array $options, string $selected = ''){
@@ -528,7 +528,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 Mar 2017 - 11:22:00
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function open(string $element, string $id = '', $class = null, $style = null, bool $selfClose = false){
@@ -559,7 +559,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	23 Jan 2017 - 10:07:49
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function close(string $element){
@@ -576,7 +576,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 Mar 2017 - 10:51:02
 	 * @version	0.0.2
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function h(int $size, string $text, string $id = '', $class = null, $style = null){
@@ -609,7 +609,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	15 Feb 2017 - 13:45:35
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function javaScript(string $src = ''){
@@ -625,7 +625,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	28 Mar 2017 - 15:29:22
 	 * @version	0.0.1
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function title(string $title = ''){
@@ -642,7 +642,7 @@ class HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 Mar 2017 - 10:52:43
 	 * @version	0.0.1a
-	 * @return	this
+	 * @return	$this
 	 * @todo
 	 */
 	public function style($style = null){

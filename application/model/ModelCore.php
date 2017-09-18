@@ -19,7 +19,7 @@ class ModelCore
 		
 		try{
 			$this->connection = new \PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
-		}catch(PDOException $e){
+		}catch(\PDOException $e){
 			echo '<pre>There was an issue connecting to the database</pre>';
 			$this->lib->debug($e,true);
 		}

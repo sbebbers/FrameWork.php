@@ -1,6 +1,6 @@
 <?php
 namespace Application\Controller;
-use Application\Library;
+use Application\Library\Library;
 
 require_once(serverPath('/library/Library.php'));
 
@@ -9,7 +9,7 @@ class ControllerCore
     public $post, $view, $lib, $sql, $host;
     
     public function __construct(){
-    	$this->lib		= new \Application\Library\Library();
+    	$this->lib		= new Library();
         if(!isset($_SESSION['flashMessage'])){
         	$_SESSION['flashMessage']	= array();
         }
@@ -30,7 +30,7 @@ class ControllerCore
 	 * @author 	Linden && Shaun
 	 * @date	7 Oct 2016 14:54:10
 	 * @version 0.0.3
-	 * @return	na
+	 * @return	void
 	 * @todo
 	 */
     public function setPost(){
@@ -78,7 +78,7 @@ class ControllerCore
      * @author	Shaun
      * @date	14 Sep 2016 09:48:53
      * @version	0.0.1
-     * @return	na
+     * @return	void
      * @todo
      */
     public function setFlashMessage($key, $value){
