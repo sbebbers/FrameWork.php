@@ -140,5 +140,9 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				PHP whereby string literal "0" and numberic zeros will return as empty; isEmpty()
 				will check if the parameter is a string or is numeric and therefore work out
 				if it's empty and the string length is zero
+	@changes as of 2017-09-18
+				I tidied up the codebase a little to organise the use statements effectively and
+				therefore cut down on the number of require_once(...) commands. All working pretty
+				well I think.
 
 --
