@@ -136,7 +136,7 @@ class HtmlBuilder
 			$this->id($id);
 		}
 		if(!is_null($class)){
-			$this->class($class);
+			$this->addClass($class);
 		}
 		print(">");
 		
@@ -186,7 +186,7 @@ class HtmlBuilder
 	 * @return	$this
 	 * @todo
 	 */
-	public function class($class){
+	public function addClass($class){
 		if(!is_string($class) && !is_array($class)){
 			print(">" . PHP_EOL);
 			$this->lib->debug("Please send your classes for your HTML element as a string or an array", true);
@@ -553,7 +553,7 @@ class HtmlBuilder
 			$this->id($id);
 		}
 		if(is_string($class) || is_array($class)){
-			$this->class($class);
+			$this->addClass($class);
 		}
 		if(!empty($style) && (is_string($style) || is_array($style))){
 			$this->style($style);
@@ -606,7 +606,7 @@ class HtmlBuilder
 			$this->id($id);
 		}
 		if(is_string($class) || is_array($class)){
-			$this->class($class);
+			$this->addClass($class);
 		}
 		if(!empty($style) && (is_string($style) || is_array($style))){
 			$this->style($style);
