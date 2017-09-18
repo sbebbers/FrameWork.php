@@ -1,7 +1,9 @@
 <?php
 use Application\Controller\ControllerCore;
 
-class DateController extends \Application\Controller\ControllerCore
+require_once(serverPath("/controller/ControllerCore.php"));
+
+class DateController extends ControllerCore
 {
 	public function __construct(){
 		ControllerCore::__construct();

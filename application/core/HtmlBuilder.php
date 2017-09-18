@@ -2,6 +2,8 @@
 namespace Application\Core\Framework;
 use Application\Library\Library;
 
+require_once(serverPath("/library/Library.php"));
+
 class HtmlBuilder
 {
 	public $lib;
@@ -97,6 +99,7 @@ class HtmlBuilder
 			print(" class=\"{$class}\"");
 		}
 		print(" />");
+		
 		return $this;
 	}
 	
@@ -169,6 +172,7 @@ class HtmlBuilder
 			print(" class=\"{$class}\"");
 		}
 		print(" />");
+		
 		return $this;
 	}
 	
@@ -198,6 +202,7 @@ class HtmlBuilder
 			$_class .= "{$class}";
 		}
 		print("{$_class}\"");
+		
 		return $this;
 	}
 	
@@ -214,6 +219,7 @@ class HtmlBuilder
 	 */
 	public function dataAttr(string $attrName, string $data){
 		print(" data-{$attrName}=\"{$data}\"");
+		
 		return $this;
 	}
 	
@@ -233,6 +239,7 @@ class HtmlBuilder
 		if(strlen($placeHolder)){
 			print("=\"{$placeHolder}\"");
 		}
+		
 		return $this;
 	}
 	
@@ -249,6 +256,7 @@ class HtmlBuilder
 	 */
 	public function closeElement(bool $selfClose = false){
 		print($selfClose === false ? ">" : " />");
+		
 		return $this;
 	}
 	
@@ -266,6 +274,7 @@ class HtmlBuilder
 	 */
 	public function text(string $text, bool $decode = false){
 		print($decode === false ? $text : htmlspecialchars_decode($text));
+		
 		return $this;
 	}
 	
@@ -358,6 +367,7 @@ class HtmlBuilder
 	 */
 	public function input(){
 		print("<input");
+		
 		return $this;
 	}
 	
@@ -412,6 +422,7 @@ class HtmlBuilder
 	 */
 	public function name(string $name){
 		print(" name=\"{$name}\"");
+		
 		return $this;
 	}
 	
@@ -427,6 +438,7 @@ class HtmlBuilder
 	 */
 	public function type(string $type){
 		print(" type=\"{$type}\"");
+		
 		return $this;
 	}
 	
@@ -442,6 +454,7 @@ class HtmlBuilder
 	 */
 	public function value(string $value){
 		print(" value=\"{$value}\"");
+		
 		return $this;
 	}
 	
@@ -458,6 +471,7 @@ class HtmlBuilder
 	 */
 	public function disabled(bool $disabled = true){
 		print($disabled === true ? " disabled=\"disabled\"" : "");
+		
 		return $this;
 	}
 	
@@ -490,6 +504,7 @@ class HtmlBuilder
 			$this->option($options, $selected);
 		}
 		print($close === true ? "</select>" : "");
+		
 		return $this;
 	}
 	
@@ -511,6 +526,7 @@ class HtmlBuilder
 			}
 			print(">{$data}</option>");
 		}
+		
 		return $this;
 	}
 	
@@ -564,6 +580,7 @@ class HtmlBuilder
 	 */
 	public function close(string $element){
 		print("</{$element}>");
+		
 		return $this;
 	}
 	
@@ -615,6 +632,7 @@ class HtmlBuilder
 	public function javaScript(string $src = ''){
 		print("<script type=\"text/javascript\"");
 		print(strlen($src) ? " src=\"{$src}\">" : ">");
+		
 		return $this;
 	}
 	
@@ -630,6 +648,7 @@ class HtmlBuilder
 	 */
 	public function title(string $title = ''){
 		print(" title=\"{$title}\"");
+		
 		return $this;
 	}
 	

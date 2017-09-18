@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 use Application\Library\Library;
+use stdClass;
 
 require_once(serverPath('/library/Library.php'));
 
@@ -19,7 +20,7 @@ class ControllerCore
         if(!empty($_POST)){
             $this->setPost();
         }
-        $this->view             = new \stdClass();        
+        $this->view             = new stdClass();        
         $this->host				= host();
     }
     

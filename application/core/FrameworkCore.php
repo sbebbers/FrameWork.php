@@ -1,5 +1,9 @@
 <?php
 namespace Application\Core\Framework;
+use \Application\Core\Framework\HtmlBuilder;
+use stdClass;
+
+require_once(serverPath('/core/HtmlBuilder.php'));
 
 class Core extends HtmlBuilder
 {
@@ -27,8 +31,8 @@ class Core extends HtmlBuilder
 		
 		$this->serverPath   = serverPath();		
 		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
-		$this->controller	= new \stdClass();
-		$this->flash		= new \stdClass();
+		$this->controller	= new stdClass();
+		$this->flash		= new stdClass();
 		$this->partial 		= array(
 			'header'	=> (file_exists(serverPath("/view/partial/header.phtml"))) ? serverPath("/view/partial/header.phtml") : '',
 			'footer'	=> (file_exists(serverPath("/view/partial/footer.phtml"))) ? serverPath("/view/partial/footer.phtml") : '',

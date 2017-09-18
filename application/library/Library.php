@@ -1,5 +1,4 @@
 <?php
-
 namespace Application\Library;
 
 class Library

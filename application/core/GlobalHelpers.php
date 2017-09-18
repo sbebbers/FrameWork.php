@@ -1,7 +1,4 @@
 <?php 
-if(!defined(PHP_EOL)){
-	define("PHP_EOL", "\r\n", true);
-}
 
 /**
  * Will return the specific site parameter from
@@ -125,7 +122,6 @@ function getUserIPAddress(){
 function getServerIPAddress(){
 	return "{$_SERVER['SERVER_ADDR']}";
 }
-
 
 /**
  * Returns the current or default URI segment

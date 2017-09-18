@@ -1,5 +1,9 @@
 <?php 
 namespace Application\Model;
+use Application\Library\Library;
+use stdClass;
+use PDOException;
+use PDO;
 
 class ModelCore
 {
@@ -14,12 +18,12 @@ class ModelCore
 		}
 		$this->db		= $dbConfig['db'];
 		$password		= $dbConfig['password'] ?? '';
-		$this->tables	= new \stdClass();
-		$this->lib		= new \Application\Library\Library();
+		$this->tables	= new stdClass();
+		$this->lib		= new Library();
 		
 		try{
-			$this->connection = new \PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
-		}catch(\PDOException $e){
+			$this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
+		}catch(PDOException $e){
 			echo '<pre>There was an issue connecting to the database</pre>';
 			$this->lib->debug($e,true);
 		}
