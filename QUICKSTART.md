@@ -1,6 +1,6 @@
-# Project FrameWork.php MVC v0.1.2 #
+# Project FrameWork.php MVC v0.1.3 #
 
-### Quick start guide - updated 2017-01-23 ###
+### Quick start guide - updated 2017-09-06 ###
 
 You will already have a home page and 404 page to play with; these files are located in the `/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder.
 

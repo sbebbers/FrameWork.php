@@ -1,10 +1,11 @@
 <?php
-
 namespace Application\Core\Framework;
-require_once(serverPath('/core/HtmlBuilder.php'));
-require_once(serverPath('/core/FrameworkException.php'));
+use \Application\Core\Framework\HtmlBuilder;
+use stdClass;
 
-class Core extends \Application\Core\Framework\HtmlBuilder
+require_once(serverPath('/core/HtmlBuilder.php'));
+
+class Core extends HtmlBuilder
 {
 	public $segment, $host, $partial, $controller, $title, $description,
 	$serverPath, $root, $flash, $filePath, $uriPath, $http;
@@ -30,8 +31,8 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 		
 		$this->serverPath   = serverPath();		
 		$this->root			= str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
-		$this->controller	= new \stdClass();
-		$this->flash		= new \stdClass();
+		$this->controller	= new stdClass();
+		$this->flash		= new stdClass();
 		$this->partial 		= array(
 			'header'	=> (file_exists(serverPath("/view/partial/header.phtml"))) ? serverPath("/view/partial/header.phtml") : '',
 			'footer'	=> (file_exists(serverPath("/view/partial/footer.phtml"))) ? serverPath("/view/partial/footer.phtml") : '',
@@ -181,15 +182,15 @@ class Core extends \Application\Core\Framework\HtmlBuilder
 	 * @author	sbebbington
 	 * @date	30 May 2017 - 09:49:39
 	 * @version	0.0.4
-	 * @return	na
+	 * @return	void
 	 * @todo
 	 */
 	public function setView($instance, string $masterKey = ''){
 		foreach($instance as $key => $data){
 			if($masterKey == ''){
-				@$this->$key				= $data;
+				$this->{$key}               = $data;
 			}else{
-				@$this->$masterKey->$key	= $data;
+				$this->{$masterKey}->{$key} = $data;
 			}
 		}
 	}

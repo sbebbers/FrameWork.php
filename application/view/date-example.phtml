@@ -24,17 +24,17 @@
     		$this->open("div", "date", "container");
     			if(empty($this->dateSubmitted)){
 		    		$this->form("date-form", "{$this->host}/{$this->segment}", "post", "col-xs-12")
-	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    				->p()->addClass("col-xs-12 col-md-4 pull-left")->closeElement()
 	    					->select("day", "day", "col-xs-12", $this->days, $defaultDay, true)
 	    				->close("p")
-	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    				->p()->addClass("col-xs-12 col-md-4 pull-left")->closeElement()
 	    					->select("month", "month", "col-xs-12", $this->months, $defaultMonth, true)
 	    				->close("p")
-	    				->p()->class("col-xs-12 col-md-4 pull-left")->closeElement()
+	    				->p()->addClass("col-xs-12 col-md-4 pull-left")->closeElement()
 	    					->select("year", "year", "col-xs-12", $this->years, $defaultYear, true)
 	    				->close("p")
-	    				->p()->class("col-xs-4 col-md-6 col-mdl-4 pull-right")->closeElement()
-	    					->input()->id("submit")->name("submit")->type("submit")->value("Submit &raquo;")->class("col-xs-12 col-md-3 pull-right btn btn-submit")->closeElement(true)
+	    				->p()->addClass("col-xs-4 col-md-6 col-mdl-4 pull-right")->closeElement()
+	    					->input()->id("submit")->name("submit")->type("submit")->value("Submit &raquo;")->addClass("col-xs-12 col-md-3 pull-right btn btn-submit")->closeElement(true)
 	    				->close("p")
 	    			->close("form");
     			}else{

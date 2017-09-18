@@ -8,7 +8,7 @@
     	
     		if(!empty($this->flash->message)){
     			$this->open("div", "flash", array("container", "flash"))
-    				->p()->id("flash-message")->class(array("flash-bg", "green"))->closeElement()
+    				->p()->id("flash-message")->addClass(array("flash-bg", "green"))->closeElement()
     					->text($this->flash->message)
     				->close("p")
     			->close("div");

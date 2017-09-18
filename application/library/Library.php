@@ -1,5 +1,4 @@
 <?php
-
 namespace Application\Library;
 
 class Library
@@ -138,7 +137,7 @@ class Library
 	 * @author 	Shaun || Steve
 	 * @date	2 Feb 2017 - 13:15:26
 	 * @version 0.0.5
-	 * @return	na
+	 * @return	void
 	 * @todo
 	 */
 	public function redirect(string $destination = '', string $host = ''){
@@ -179,7 +178,7 @@ class Library
      * @author	Shaun
      * @date	2 Feb 2017 - 13:18:50
      * @version	0.0.2
-     * @return	na
+     * @return	void
      * @todo
      */
     public function redirectExternal(string $destination = '', string $website= ''){

@@ -1,5 +1,6 @@
 <?php
 use Application\Core\Framework\Core;
+use Application\Core\FrameworkException\FrameworkException;
 
 require_once(serverPath('/core/FrameworkCore.php'));
 require_once(serverPath('/core/GlobalHelpers.php'));
@@ -33,13 +34,13 @@ class Index
 	 * @todo
 	 */
 	public function __construct(){
-		$this->core	= new \Application\Core\Framework\Core();
+		$this->core	= new Core();
 		setTimeZone($this->timeZone);
 		try{
 			$this->core->loadPage();
-		}catch(\Application\Core\FrameworkException\FrameworkException $e){
+		}catch(FrameworkException $e){
 			writeToLogFile($e);
-		}catch(\Exception $e){
+		}catch(Exception $e){
 			$this->core->lib->debug($e);
 			exit;
 		}
@@ -59,7 +60,7 @@ class Index
  */
 function serverPath(string $routeTo = ''){
 	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME']))."/application";
-	return $base_dir.$routeTo;
+	return "{$base_dir}{$routeTo}";
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...

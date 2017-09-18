@@ -1,12 +1,13 @@
 <?php
 namespace Application\Core\FrameworkException;
+use Exception;
 
-class FrameworkException extends \Exception
+class FrameworkException extends Exception
 {
 	public $error;
 	
 	public function __construct($message, $code = null, $errors = []){
-		parent::__construct($message, (int)$code);
+		Exception::__construct($message, (int)$code);
 		$error	= [
 			'message'	=> $message,
 			'code'		=> $code,
