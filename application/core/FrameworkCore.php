@@ -18,7 +18,7 @@ class Core extends HtmlBuilder
 	private $errorReporting, $allowedFileExts;
 	
 	public function __construct(){
-		parent::__construct();
+		HtmlBuilder::__construct();
 		if($this->setSiteConfiguration() == false){
 			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
 		}
