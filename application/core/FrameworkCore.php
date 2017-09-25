@@ -242,13 +242,14 @@ class Core extends HtmlBuilder
 		if(in_array($this->segment, $this->allowedSegments) == true){
 			$this->title		= $this->pageData['titles']["{$this->segment}"] ?? '';
 			$this->description	= $this->pageData['descriptions']["{$this->segment}"] ?? '';
+			
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));
-					$_instance	= $this->lib->camelCaseFromDashes($instance);
-					$this->controller->$_instance = new $controller();
+					$_instance                     = $this->lib->camelCaseFromDashes($instance);
+					$this->controller->$_instance  = new $controller();
 					
-					if(isset($this->controller->$_instance->view)){
+					if($this->controller->$_instance->view instanceof stdClass){
 						$this->setView($this->controller->$_instance->view);
 						$this->controller->$_instance->view = null;
 					}
@@ -260,6 +261,7 @@ class Core extends HtmlBuilder
 				$this->setView($_SESSION['flashMessage'], "flash");
 				$emptyFlash = true;
 			}
+			
 			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
 			$this->emptySession($emptyFlash);
 		}
