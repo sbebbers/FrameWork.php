@@ -28,11 +28,10 @@ class ControllerCore
 	 * Sanatizes posted data
 	 *
 	 * @param	Array
-	 * @author 	Linden && Shaun
+	 * @author 	Linden && sbebbington
 	 * @date	7 Oct 2016 14:54:10
 	 * @version 0.0.3
 	 * @return	void
-	 * @todo
 	 */
     public function setPost(){
         foreach($_POST as $key => $data){
@@ -44,11 +43,10 @@ class ControllerCore
 	 * This should empty the super global $_POST and the controller $this->post
 	 *
 	 * @param	na
-	 * @author	Shaun
+	 * @author	sbebbington
 	 * @date	16 Jun 2016 11:25:04
 	 * @version	0.0.1
 	 * @return	array
-	 * @todo
 	 */
 	public function emptyPost(){
 		$_POST      = array();
@@ -59,11 +57,10 @@ class ControllerCore
 	 * Clears PHP session cookies
 	 *
 	 * @param	na
-	 * @author	Shaun
+	 * @author	sbebbington
 	 * @date 	14 Sep 2016 14:29:23
 	 * @version	0.0.2
 	 * @return
-	 * @todo
 	 */
 	public function emptySession(){
 		if(session_id() != ""){
@@ -76,11 +73,10 @@ class ControllerCore
      * Sets flash messages (recommend using string for value param)
      *
      * @param	string, string | int | boolean
-     * @author	Shaun
+     * @author	sbebbington
      * @date	14 Sep 2016 09:48:53
      * @version	0.0.1
      * @return	void
-     * @todo
      */
     public function setFlashMessage($key, $value){
     	$_SESSION['flashMessage'][$key] = $value;

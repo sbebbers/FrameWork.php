@@ -20,7 +20,6 @@ class HtmlBuilder
 	 * @date	16 Jan 2017 - 17:19:50
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function test(){
 		print("<p>HtmlBuilder test</p>");
@@ -35,7 +34,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:15:10
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function p(){
 		print("<p");
@@ -50,7 +48,6 @@ class HtmlBuilder
 	 * @date	30 Mar 2017 - 11:30:31
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', $style = null, bool $close = true){
 		print("<a");
@@ -88,7 +85,6 @@ class HtmlBuilder
 	 * @date	5 Apr 2017 - 16:14:08
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function hr(string $id = '', string $class=''){
 		print("<hr");
@@ -112,7 +108,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:15:29
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function id(string $id){
 		print(" id=\"{$id}\"");
@@ -127,7 +122,6 @@ class HtmlBuilder
 	 * @date	10 Apr 2017 - 09:36:45
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function span(string $id = '', $class = null){
 		print("<span");
@@ -151,7 +145,6 @@ class HtmlBuilder
 	 * @date	29 Mar 2017 - 11:37:44
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function img(string $id = '', string $path, int $width = 0, int $height = 0, string $alt = '', string $class = ''){
 		print("<img");
@@ -184,7 +177,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:16:35
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function addClass($class){
 		if(!is_string($class) && !is_array($class)){
@@ -215,7 +207,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:26:47
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function dataAttr(string $attrName, string $data){
 		print(" data-{$attrName}=\"{$data}\"");
@@ -232,7 +223,6 @@ class HtmlBuilder
 	 * @date	11 Apr 2017 - 10:03:08
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function placeHolder(string $placeHolder = ''){
 		print(" placeholder");
@@ -252,7 +242,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:30:19
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function closeElement(bool $selfClose = false){
 		print($selfClose === false ? ">" : " />");
@@ -270,7 +259,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:31:27
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function text(string $text, bool $decode = false){
 		print($decode === false ? $text : htmlspecialchars_decode($text));
@@ -287,7 +275,6 @@ class HtmlBuilder
 	 * @date	30 Mar 2017 - 14:25:06
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function textArea(string $id = '', string $name = '', int $rows = 0, int $cols = 0, string $placeHolder = '', string  $class = '', bool $required = false){
 		print("<textarea");
@@ -327,7 +314,6 @@ class HtmlBuilder
 	 * @date	22 May 2017 - 11:48:40
 	 * @version	0.0.4
 	 * @return	$this
-	 * @todo
 	 */
 	public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null, string $encType = ''){
 		print("<form");
@@ -363,7 +349,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:44:29
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function input(){
 		print("<input");
@@ -384,7 +369,6 @@ class HtmlBuilder
 	 * @date	22 May 2017 - 11:15:23
 	 * @version	0.0.3
 	 * @return	$this
-	 * @todo
 	 */
 	public function label(string $text, string $id = '', string $for = '', string $class = '', $style = null){
 		print("<label");
@@ -418,7 +402,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:49:19
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function name(string $name){
 		print(" name=\"{$name}\"");
@@ -434,7 +417,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:50:04
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function type(string $type){
 		print(" type=\"{$type}\"");
@@ -450,7 +432,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:51:04
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function value(string $value){
 		print(" value=\"{$value}\"");
@@ -467,7 +448,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 09:52:23
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function disabled(bool $disabled = true){
 		print($disabled === true ? " disabled=\"disabled\"" : "");
@@ -486,7 +466,6 @@ class HtmlBuilder
 	 * @date	27 Feb 2017 - 10:42:12
 	 * @version	0.0.2
 	 * @return	$this
-	 * @todo
 	 */
 	public function select(string $id = '', string $name = '', string $class = '', array $options, string $selected = '', bool $close = true){
 		print("<select");
@@ -516,7 +495,6 @@ class HtmlBuilder
 	 * @date	6 Jul 2017 - 12:12:56
 	 * @version	0.0.1a
 	 * @return	$this
-	 * @todo
 	 */
 	public function option(array $options, string $selected = ''){
 		foreach($options as $key => $data){
@@ -545,7 +523,6 @@ class HtmlBuilder
 	 * @date	30 Mar 2017 - 11:22:00
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function open(string $element, string $id = '', $class = null, $style = null, bool $selfClose = false){
 		print("<{$element}");
@@ -576,7 +553,6 @@ class HtmlBuilder
 	 * @date	23 Jan 2017 - 10:07:49
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function close(string $element){
 		print("</{$element}>");
@@ -594,7 +570,6 @@ class HtmlBuilder
 	 * @date	30 Mar 2017 - 10:51:02
 	 * @version	0.0.2
 	 * @return	$this
-	 * @todo
 	 */
 	public function h(int $size, string $text, string $id = '', $class = null, $style = null){
 		if($size < 1 || $size > 6){
@@ -627,7 +602,6 @@ class HtmlBuilder
 	 * @date	15 Feb 2017 - 13:45:35
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function javaScript(string $src = ''){
 		print("<script type=\"text/javascript\"");
@@ -644,7 +618,6 @@ class HtmlBuilder
 	 * @date	28 Mar 2017 - 15:29:22
 	 * @version	0.0.1
 	 * @return	$this
-	 * @todo
 	 */
 	public function title(string $title = ''){
 		print(" title=\"{$title}\"");
@@ -662,7 +635,6 @@ class HtmlBuilder
 	 * @date	30 Mar 2017 - 10:52:43
 	 * @version	0.0.1a
 	 * @return	$this
-	 * @todo
 	 */
 	public function style($style = null){
 		if(empty($style)){

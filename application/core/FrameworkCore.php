@@ -3,6 +3,7 @@ namespace Application\Core\Framework;
 use \Application\Core\Framework\HtmlBuilder;
 use stdClass;
 
+require_once(serverPath('/core/GlobalHelpers.php'));
 require_once(serverPath('/core/HtmlBuilder.php'));
 
 class Core extends HtmlBuilder
@@ -18,7 +19,7 @@ class Core extends HtmlBuilder
 	private $errorReporting, $allowedFileExts;
 	
 	public function __construct(){
-		parent::__construct();
+		HtmlBuilder::__construct();
 		if($this->setSiteConfiguration() == false){
 			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
 		}
@@ -183,7 +184,6 @@ class Core extends HtmlBuilder
 	 * @date	30 May 2017 - 09:49:39
 	 * @version	0.0.4
 	 * @return	void
-	 * @todo
 	 */
 	public function setView($instance, string $masterKey = ''){
 		foreach($instance as $key => $data){
@@ -205,7 +205,6 @@ class Core extends HtmlBuilder
 	 * @date	28 Jul 2017 - 12:04:03
 	 * @version	0.0.1a
 	 * @return	resource
-	 * @todo
 	 */
 	public function emptySession(bool $emptyFlash = false){
 		return ($emptyFlash === true) ? $_SESSION['flashMessage'] = array() : array();
