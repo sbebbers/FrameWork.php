@@ -44,11 +44,10 @@ function isHttps(){
  * / at the end
  *
  * @param	na
- * @author	Shaun
-  * @date	2 Feb 2017 - 13:07:39
+ * @author	sbebbington
+ * @date	2 Feb 2017 - 13:07:39
  * @version	0.0.2
  * @return	string
- * @todo
  */
 function documentRoot(string $routeTo = ''){
 	$_x = str_replace("\\", "/", dirname(__FILE__));
@@ -61,11 +60,10 @@ function documentRoot(string $routeTo = ''){
  * the PHP $_SERVER global thing #n00b
  *
  * @param	na
- * @author	Shaun
+ * @author	sbebbington
  * @date	5 Oct 2016 10:55:01
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function host(){
 	return $_SERVER['HTTP_HOST'];
@@ -80,7 +78,6 @@ function host(){
  * @date	24 Jan 2017 - 09:48:21
  * @version	0.0.1
  * @return	void
- * @todo
  */
 function setTimeZone(string $timeZone){
 	date_default_timezone_set($timeZone);
@@ -94,7 +91,6 @@ function setTimeZone(string $timeZone){
  * @date	2 Feb 2017 - 09:58:21
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function getUserIPAddress(){
 	$client		= $_SERVER['HTTP_CLIENT_IP'] ?? '';
@@ -117,7 +113,6 @@ function getUserIPAddress(){
  * @date	3 Feb 2017 - 09:04:29
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function getServerIPAddress(){
 	return "{$_SERVER['SERVER_ADDR']}";
@@ -131,7 +126,6 @@ function getServerIPAddress(){
  * @date	6 Feb 2017 - 11:40:40
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function getSegment(){
 	$page	= array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
@@ -146,7 +140,6 @@ function getSegment(){
  * @date	2 Mar 2017 - 11:49:38
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function getSelf(){
 	return $_SERVER['PHP_SELF'];
@@ -160,7 +153,6 @@ function getSelf(){
  * @date	2 Mar 2017 - 13:23:08
  * @version	0.0.1
  * @return	string
- * @todo
  */
 function getQueryString(){
 	return str_replace("/", '', $_SERVER['QUERY_STRING']);
@@ -212,7 +204,7 @@ function isDevelopmentVersion(){
  * Gets the configuration path
  *
  * @param	string
- * @author	Rob Gill && Shaun
+ * @author	Rob Gill && sbebbington
  * @date	16 Aug 2017 - 17:09:28
  * @version	0.0.1a
  * @return	string
@@ -233,7 +225,6 @@ function logErrorPath(string $routeTo = ''){
  * @date	3 Aug 2017 - 10:24:09
  * @version	0.0.1
  * @return	resource | false
- * @todo
  */
 function writeToLogFile(array $error = []){
 	if(empty($error)){

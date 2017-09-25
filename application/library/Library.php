@@ -17,11 +17,10 @@ class Library
 	 * Parameters now allow for a header for each object
 	 *
 	 * @param	object, boolean, string, string, string, string
-	 * @author 	Shaun && Linden
+	 * @author 	sbebbington && Linden
 	 * @date	11 Jan 2017 - 13:39:08
 	 * @version 0.0.4
 	 * @return 	null
-	 * @todo
 	 */
 	public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''){
 		if(is_null($variable)){
@@ -44,11 +43,10 @@ class Library
 	 * and die message included
 	 *
 	 * @param	object, boolean, string, string, string
-	 * @author 	Shaun && Linden
+	 * @author 	sbebbington && Linden
 	 * @date	2 Feb 2017 - 13:12:04
 	 * @version	0.0.3a
 	 * @return	null
-	 * @todo
 	 */
 	public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''){
 		echo var_dump($variable);
@@ -64,7 +62,7 @@ class Library
 	 * Returns current version of the framework
 	 *
 	 * @param	na
-	 * @author  Shaun B
+	 * @author  sbebbington B
 	 * @date 	2016-02-19
 	 * @return  string
 	 * @todo	Remember to update this number when
@@ -80,7 +78,7 @@ class Library
 	 * Try <?php echo $this->controllerInstance->libraryInstance->easterEgg(); ?> in your view
 	 * 
 	 * @param	na
-	 * @author	Shaun B
+	 * @author	sbebbington B
 	 * @date	2016-02-19
 	 * @return	Something good
 	 * @todo	Nothing as this function is perfect
@@ -100,11 +98,10 @@ class Library
 	 * Password encryption generator
 	 *
 	 * @param	string, sting, int, boolean
-	 * @author 	Shaun && Stack Overflow
+	 * @author 	sbebbington && Stack Overflow
 	 * @date	1 Mar 2017 - 08:54:14
 	 * @version	0.0.4
 	 * @return	string
-	 * @todo
 	 */
 	public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false){
 		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
@@ -118,11 +115,10 @@ class Library
 	 * Password decryption generator
 	 *
 	 * @param	string, string, int, boolean
-	 * @author 	Shaun && Stack Overflow
+	 * @author 	sbebbington && Stack Overflow
 	 * @date	1 Mar 2017 - 08:57:23
 	 * @version 0.0.4
 	 * @return	string
-	 * @todo
 	 */
 	public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false){
 		$md5		= ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
@@ -134,11 +130,10 @@ class Library
 	 * Redirects using the PHP header command 
 	 *
 	 * @param	string, string
-	 * @author 	Shaun || Steve
+	 * @author 	sbebbington || Steve
 	 * @date	2 Feb 2017 - 13:15:26
 	 * @version 0.0.5
 	 * @return	void
-	 * @todo
 	 */
 	public function redirect(string $destination = '', string $host = ''){
 		if($destination == '' || $host == ''){
@@ -162,7 +157,6 @@ class Library
 	 * @date	1 Mar 2017 - 09:01:05
 	 * @version	0.0.2
 	 * @return	string
-	 * @todo
 	 */
 	public function getEncryptionPadding(int $numberToPad = 8){
 		$shuffle	= "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
@@ -175,11 +169,10 @@ class Library
      * Redirects by using HTML/JavaScript
      * 
      * @param	string, string
-     * @author	Shaun
+     * @author	sbebbington
      * @date	2 Feb 2017 - 13:18:50
      * @version	0.0.2
      * @return	void
-     * @todo
      */
     public function redirectExternal(string $destination = '', string $website= ''){
     	if($destination == '' || $host == ''){
@@ -209,7 +202,6 @@ class Library
      * @date	2 Feb 2017 - 13:35:14
      * @version	0.0.2
      * @return	boolean | string
-     * @todo
      */
     public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
     	if($object == null){
@@ -264,7 +256,6 @@ class Library
      * @date	6 Jul 2017 - 12:14:42
      * @version	0.0.2a
      * @return	string
-     * @todo
      */
     public function convertSnakeCase(string $snake = '', string $delimiter = '_'){
     	if($snake != ''){
@@ -290,7 +281,6 @@ class Library
      * @date	6 Jul 2017 - 12:17:34
      * @version	0.0.1
      * @return	string
-     * @todo
      */
     public function camelCaseFromDashes($string){
     	return $this->convertSnakeCase($string, '-');
@@ -306,7 +296,6 @@ class Library
      * @date	3 Feb 2017 - 13:46:37
      * @version	0.0.1
      * @return	string
-     * @todo
      */
     public function convertToSnakeCase(string $unSnaked = '', int $offset = 0){
     	if($unSnaked === ''){
@@ -339,7 +328,6 @@ class Library
      * @date	6 Jan 2017 - 15:36:29
      * @version	0.0.2
      * @return	array
-     * @todo
      */
     public function cleanseInputs($data, bool $htmlSpecialChars = false, $cleanInput = array()){
     	foreach($data as $key => $value){
@@ -359,7 +347,6 @@ class Library
      * @date	10 Jan 2017 - 09:25:07
      * @version	0.0.2
      * @return	string
-     * @todo
      */
     public function domainType(bool $subDomain = false){
     	$host	= explode(".", $this->host());
@@ -373,8 +360,7 @@ class Library
      * @author	sbebbington
      * @date	10 Jan 2017 - 15:56:39
      * @version	0.0.1
-     * @return	JSON
-     * @todo
+     * @return	\JsonSerializable
      */
     public function convertToJSON($data){
     	return json_encode($data);
@@ -389,7 +375,6 @@ class Library
      * @date	3 Feb 2017 - 14:47:48
      * @version	0.0.1
      * @return	resource
-     * @todo
      */
     public function convertFromJSON($data){
     	return json_decode($data);
@@ -411,7 +396,6 @@ class Library
      * @date	21 Feb 2017 - 15:20:10
      * @version	0.0.2
      * @return	string
-     * @todo	Test this
      */
     public function softMinimiseJS(string $filePathName = '', bool $doubleSpaces = true, bool $spacedTab = true){
     	if(empty($filePathName)){
@@ -462,7 +446,6 @@ class Library
      * @date	3 Mar 2017 - 09:51:09
      * @version	0.0.3
      * @return	object
-     * @todo
      */
     function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
     	if($applicationType === 'x-www-form-urlencoded'){

@@ -3,12 +3,13 @@ use Application\Core\Framework\Core;
 use Application\Core\FrameworkException\FrameworkException;
 
 require_once(serverPath('/core/FrameworkCore.php'));
-require_once(serverPath('/core/GlobalHelpers.php'));
 
 header('X-Content-Type-Options: nosniff');
 header('X-XSS-Protection: 1');
 header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+
 session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
+
 if(session_id() == ""){
 	session_start();
 }
@@ -30,8 +31,9 @@ class Index
 	 * @author	sbebbington
 	 * @date	24 Jan 2017 - 09:49:15
 	 * @version	0.0.2
-	 * @return	
-	 * @todo
+	 * @return	void
+	 * @throws  \Application\Core\FrameworkException\FrameworkException
+	 * @throws  \Exception
 	 */
 	public function __construct(){
 		$this->core	= new Core();
@@ -52,11 +54,10 @@ class Index
  * directory on your server
  *
  * @param	string
- * @author	Rob Gill && Shaun
+ * @author	Rob Gill && sbebbington
  * @date	2 Aug 2017 - 13:47:12
  * @version	0.0.3
  * @return	string
- * @todo
  */
 function serverPath(string $routeTo = ''){
 	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME']))."/application";

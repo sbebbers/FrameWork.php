@@ -20,7 +20,6 @@ class HomeModel extends ModelCore
 	 * @date	13 Jan 2017 - 10:13:07
 	 * @version	0.0.1
 	 * @return	array
-	 * @todo
 	 */
 	public function getView($colName = 'home'){
 		$query	= "SELECT `header`, `sub_header`, `content` FROM `{$this->db}`.`{$this->table}` "

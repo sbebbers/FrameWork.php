@@ -178,7 +178,6 @@ class DateController extends ControllerCore
 	 * @date	6 Jul 2017 - 13:50:32
 	 * @version	0.0.1
 	 * @return	boolean
-	 * @todo
 	 */
 	protected function checkDateValidity($day = null, $month = null, $year = null){
 		if($day == null || $month == null || $year == null){
