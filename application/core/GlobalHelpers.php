@@ -48,14 +48,13 @@ function isHttps(){
  *
  * @param	na
  * @author	sbebbington
- * @date	2 Feb 2017 13:07:39
- * @version	0.0.2
+ * @date	26 Sep 2017 15:01:09
+ * @version	0.0.2a
  * @return	string
  */
 function documentRoot(string $routeTo = ''){
-	$_x = str_replace("\\", "/", dirname(__FILE__));
-	$_x .= $routeTo;
-	return str_replace("//", "/", $_x);
+	$baseDir = str_replace("\\", "/", (dirname(__FILE__) . $routeTo));
+	return str_replace("//", "/", $baseDir);
 }
 
 /**
@@ -171,7 +170,7 @@ function getQueryString(){
  * @version	0.0.1
  * @return	string
  */
-function getVersion(){
+function getSiteVersion(){
 	return getConfig('version');
 }
 
@@ -213,8 +212,8 @@ function isDevelopmentVersion(){
  * @return	string
  */
 function logErrorPath(string $routeTo = ''){
-	$baseDir = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/logs";
-	return "{$baseDir}{$routeTo}";
+    $baseDir = dirname(__DIR__) . "/logs";
+    return str_replace("\\","/", "{$baseDir}{$routeTo}");
 }
 
 /**
