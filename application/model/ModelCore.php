@@ -14,7 +14,7 @@ class ModelCore
 		if(file_exists(serverPath('/config/database.json'))){
 			$dbConfig	= json_decode(file_get_contents(serverPath('/config/database.json')), true);
 		}else{
-			die("The framework requires a database configuration file at the application layer");
+			die("<pre>The framework requires a database configuration file at the application layer</pre>");
 		}
 		$this->db		= $dbConfig['db'];
 		$password		= $dbConfig['password'] ?? '';

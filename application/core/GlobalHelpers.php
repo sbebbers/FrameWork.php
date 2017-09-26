@@ -15,7 +15,7 @@
  */
 function getConfig(string $parameter= 'cookieDomain'){
 	if(!file_exists(serverPath("/config/site.json"))){
-		die("Fatal error: A site.json file is required in the configuration at the application level for the framework to run");
+		die("<pre>Fatal error: A site.json file is required in the configuration at the application level for the framework to run</pre>");
 	}
 	if(empty($parameter)){
 		$parameter = 'baseURL';
