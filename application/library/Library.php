@@ -18,11 +18,14 @@ class Library
 	 *
 	 * @param	object, boolean, string, string, string, string
 	 * @author 	sbebbington && Linden
-	 * @date	11 Jan 2017 - 13:39:08
-	 * @version 0.0.4
+	 * @date	26 Sep 2017 09:47:37
+	 * @version 0.0.4a
 	 * @return 	null
 	 */
 	public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''){
+	    if(getConfig('mode') != 'test'){
+	        return null;
+	    }
 		if(is_null($variable)){
 			echo '<p>You need to send the scalar or resource that you are trying to debug as your first parameter, else this don\'t work</p>';
 			exit;
@@ -44,11 +47,14 @@ class Library
 	 *
 	 * @param	object, boolean, string, string, string
 	 * @author 	sbebbington && Linden
-	 * @date	2 Feb 2017 - 13:12:04
-	 * @version	0.0.3a
+	 * @date	26 Sep 2017 09:47:15
+	 * @version	0.0.4
 	 * @return	null
 	 */
 	public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''){
+	    if(getConfig('mode') != 'test'){
+	        return null;
+	    }
 		echo var_dump($variable);
 		echo $file != null ? '<pre>File: ' . print_r($file,1) . '</pre>' : "";
 		echo $line != null ? '<pre>Line: ' . print_r($line,1) . '</pre>' : "";
@@ -63,14 +69,14 @@ class Library
 	 *
 	 * @param	na
 	 * @author  sbebbington B
-	 * @date 	2016-02-19
+	 * @date	26 Sep 2017 10:05:31
 	 * @return  string
 	 * @todo	Remember to update this number when
 	 * 			enough changes constitute a new
 	 * 			version
 	 */
 	public function version(){
-		return '0.1.3';
+		return '0.1.3a';
 	}
 	
 	/**
@@ -99,7 +105,7 @@ class Library
 	 *
 	 * @param	string, sting, int, boolean
 	 * @author 	sbebbington && Stack Overflow
-	 * @date	1 Mar 2017 - 08:54:14
+	 * @date	1 Mar 2017 08:54:14
 	 * @version	0.0.4
 	 * @return	string
 	 */
@@ -116,7 +122,7 @@ class Library
 	 *
 	 * @param	string, string, int, boolean
 	 * @author 	sbebbington && Stack Overflow
-	 * @date	1 Mar 2017 - 08:57:23
+	 * @date	1 Mar 2017 08:57:23
 	 * @version 0.0.4
 	 * @return	string
 	 */
@@ -131,7 +137,7 @@ class Library
 	 *
 	 * @param	string, string
 	 * @author 	sbebbington || Steve
-	 * @date	2 Feb 2017 - 13:15:26
+	 * @date	2 Feb 2017 13:15:26
 	 * @version 0.0.5
 	 * @return	void
 	 */
@@ -154,7 +160,7 @@ class Library
 	 * 
 	 * @param	int
 	 * @author	sbebbington
-	 * @date	1 Mar 2017 - 09:01:05
+	 * @date	1 Mar 2017 09:01:05
 	 * @version	0.0.2
 	 * @return	string
 	 */
@@ -170,7 +176,7 @@ class Library
      * 
      * @param	string, string
      * @author	sbebbington
-     * @date	2 Feb 2017 - 13:18:50
+     * @date	2 Feb 2017 13:18:50
      * @version	0.0.2
      * @return	void
      */
@@ -199,11 +205,14 @@ class Library
      *
      * @param	object, string, array, any, [boolean]
      * @author	sbebbington
-     * @date	2 Feb 2017 - 13:35:14
-     * @version	0.0.2
+     * @date	26 Sep 2017 09:46:32
+     * @version	0.0.2a
      * @return	boolean | string
      */
     public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
+        if(getConfig('mode') != 'test'){
+            return null;
+        }
     	if($object == null){
     		return print("<p>Pass an object to this method in order to test it</p>");
     	}
@@ -253,7 +262,7 @@ class Library
      * 
      * @param	string
      * @author	sbebbington
-     * @date	6 Jul 2017 - 12:14:42
+     * @date	6 Jul 2017 12:14:42
      * @version	0.0.2a
      * @return	string
      */
@@ -278,7 +287,7 @@ class Library
      * 
      * @param	string
      * @author	sbebbington
-     * @date	6 Jul 2017 - 12:17:34
+     * @date	6 Jul 2017 12:17:34
      * @version	0.0.1
      * @return	string
      */
@@ -293,7 +302,7 @@ class Library
      *
      * @param	string, int
      * @author	sbebbington
-     * @date	3 Feb 2017 - 13:46:37
+     * @date	3 Feb 2017 13:46:37
      * @version	0.0.1
      * @return	string
      */
@@ -325,7 +334,7 @@ class Library
      *
      * @param	array, boolean, [array]
      * @author	sbebbington && Vietnam
-     * @date	6 Jan 2017 - 15:36:29
+     * @date	6 Jan 2017 15:36:29
      * @version	0.0.2
      * @return	array
      */
@@ -344,7 +353,7 @@ class Library
      *
      * @param	boolean
      * @author	sbebbington
-     * @date	10 Jan 2017 - 09:25:07
+     * @date	10 Jan 2017 09:25:07
      * @version	0.0.2
      * @return	string
      */
@@ -358,7 +367,7 @@ class Library
      *
      * @param	array|resource
      * @author	sbebbington
-     * @date	10 Jan 2017 - 15:56:39
+     * @date	10 Jan 2017 15:56:39
      * @version	0.0.1
      * @return	\JsonSerializable
      */
@@ -372,7 +381,7 @@ class Library
      * 
      * @param	JSON
      * @author	sbebbington
-     * @date	3 Feb 2017 - 14:47:48
+     * @date	3 Feb 2017 14:47:48
      * @version	0.0.1
      * @return	resource
      */
@@ -393,7 +402,7 @@ class Library
      *
      * @param	string, [boolean], [boolean]
      * @author	sbebbington
-     * @date	21 Feb 2017 - 15:20:10
+     * @date	21 Feb 2017 15:20:10
      * @version	0.0.2
      * @return	string
      */
@@ -443,7 +452,7 @@ class Library
      *
      * @param	string, object, string, string, string
      * @author	sbebbington && Stack Overflow
-     * @date	3 Mar 2017 - 09:51:09
+     * @date	3 Mar 2017 09:51:09
      * @version	0.0.3
      * @return	object
      */

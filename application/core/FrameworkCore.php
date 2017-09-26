@@ -2,6 +2,7 @@
 namespace Application\Core\Framework;
 use \Application\Core\Framework\HtmlBuilder;
 use stdClass;
+use Application\Core\FrameworkException\FrameworkException;
 
 require_once(serverPath('/core/GlobalHelpers.php'));
 require_once(serverPath('/core/HtmlBuilder.php'));
@@ -18,10 +19,20 @@ class Core extends HtmlBuilder
 	
 	private $errorReporting, $allowedFileExts;
 	
+	/**
+	 * Core constructor
+	 * 
+	 * @param	field_type
+	 * @author	sbebbington
+	 * @date	26 Sep 2017 14:42:15
+	 * @version 0.1.3a
+	 * @return	void
+	 * @throws  \Application\Core\FrameworkException\FrameworkException
+	 */
 	public function __construct(){
 		HtmlBuilder::__construct();
 		if($this->setSiteConfiguration() == false){
-			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
+			throw new FrameworkException("Please set up a pages.json file in the config folder", "0x00");
 		}
 		$this->pageData		= $this->getPageData();
 		
@@ -49,9 +60,10 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 14:29:45
+	 * @date	28 Jul 2017 14:29:45
 	 * @version	0.0.2
 	 * @return	boolean
+	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
 	protected function setSiteConfiguration(){
 		if(!file_exists(serverPath('/config/pages.json'))){
@@ -67,7 +79,7 @@ class Core extends HtmlBuilder
 		if(!empty($this->allowedSegments) && !empty($this->pageController)){
 			return true;
 		}
-		die("<pre>Fatal error: No pages or page controllers set in the pages.json file</pre>");
+		throw new FrameworkException("No pages or page controllers set in the pages.json file", "0x01");
 	}
 	
 	/**
@@ -76,7 +88,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:40:06
+	 * @date	25 Jul 2017 09:40:06
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -95,7 +107,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 11:50:03
+	 * @date	28 Jul 2017 11:50:03
 	 * @version	0.0.3
 	 * @return	void
 	 */
@@ -117,7 +129,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:48:12
+	 * @date	25 Jul 2017 09:48:12
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -141,7 +153,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 10:50:31
+	 * @date	25 Jul 2017 10:50:31
 	 * @version	0.0.1
 	 * @return	array
 	 */
@@ -160,7 +172,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:50:40
+	 * @date	25 Jul 2017 09:50:40
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -181,7 +193,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	resource | \stdClass, string
 	 * @author	sbebbington
-	 * @date	30 May 2017 - 09:49:39
+	 * @date	30 May 2017 09:49:39
 	 * @version	0.0.4
 	 * @return	void
 	 */
@@ -202,7 +214,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	boolean
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 12:04:03
+	 * @date	28 Jul 2017 12:04:03
 	 * @version	0.0.1a
 	 * @return	resource
 	 */
@@ -222,7 +234,7 @@ class Core extends HtmlBuilder
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 10:59:38
+	 * @date	25 Jul 2017 10:59:38
 	 * @version	0.0.5
 	 * @return	void
 	 */
@@ -242,13 +254,14 @@ class Core extends HtmlBuilder
 		if(in_array($this->segment, $this->allowedSegments) == true){
 			$this->title		= $this->pageData['titles']["{$this->segment}"] ?? '';
 			$this->description	= $this->pageData['descriptions']["{$this->segment}"] ?? '';
+			
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));
-					$_instance	= $this->lib->camelCaseFromDashes($instance);
-					$this->controller->$_instance = new $controller();
+					$_instance                     = $this->lib->camelCaseFromDashes($instance);
+					$this->controller->$_instance  = new $controller();
 					
-					if(isset($this->controller->$_instance->view)){
+					if($this->controller->$_instance->view instanceof stdClass){
 						$this->setView($this->controller->$_instance->view);
 						$this->controller->$_instance->view = null;
 					}
@@ -260,6 +273,7 @@ class Core extends HtmlBuilder
 				$this->setView($_SESSION['flashMessage'], "flash");
 				$emptyFlash = true;
 			}
+			
 			require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
 			$this->emptySession($emptyFlash);
 		}

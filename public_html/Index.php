@@ -29,11 +29,9 @@ class Index
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	24 Jan 2017 - 09:49:15
+	 * @date	24 Jan 2017 09:49:15
 	 * @version	0.0.2
 	 * @return	void
-	 * @throws  \Application\Core\FrameworkException\FrameworkException
-	 * @throws  \Exception
 	 */
 	public function __construct(){
 		$this->core	= new Core();
@@ -55,13 +53,13 @@ class Index
  *
  * @param	string
  * @author	Rob Gill && sbebbington
- * @date	2 Aug 2017 - 13:47:12
- * @version	0.0.3
+ * @date	26 Sep 2017 09:50:01
+ * @version	0.0.4
  * @return	string
  */
 function serverPath(string $routeTo = ''){
-	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME']))."/application";
-	return "{$base_dir}{$routeTo}";
+	$baseDir = dirname(__DIR__) . "/application";
+	return str_replace("\\","/", "{$baseDir}{$routeTo}");
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...
