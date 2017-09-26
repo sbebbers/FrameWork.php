@@ -1,5 +1,7 @@
 <?php 
 
+use Application\Core\FrameworkException\FrameworkException;
+
 /**
  * Will return the specific site parameter from
  * the site.json config - will default to the
@@ -12,10 +14,11 @@
  * @date	27 Jul 2017 15:19:51
  * @version	0.0.1
  * @return	string
+ * @throws  \Application\Core\FrameworkException\FrameworkException
  */
 function getConfig(string $parameter= 'cookieDomain'){
 	if(!file_exists(serverPath("/config/site.json"))){
-		die("<pre>Fatal error: A site.json file is required in the configuration at the application level for the framework to run</pre>");
+		throw new FrameworkException("A site.json file is required in the configuration at the application level for the framework to run", "0x02");
 	}
 	if(empty($parameter)){
 		$parameter = 'baseURL';

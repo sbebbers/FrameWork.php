@@ -2,6 +2,7 @@
 namespace Application\Core\Framework;
 use \Application\Core\Framework\HtmlBuilder;
 use stdClass;
+use Application\Core\FrameworkException\FrameworkException;
 
 require_once(serverPath('/core/GlobalHelpers.php'));
 require_once(serverPath('/core/HtmlBuilder.php'));
@@ -18,10 +19,20 @@ class Core extends HtmlBuilder
 	
 	private $errorReporting, $allowedFileExts;
 	
+	/**
+	 * Core constructor
+	 * 
+	 * @param	field_type
+	 * @author	sbebbington
+	 * @date	26 Sep 2017 14:42:15
+	 * @version 0.1.3a
+	 * @return	void
+	 * @throws  \Application\Core\FrameworkException\FrameworkException
+	 */
 	public function __construct(){
 		HtmlBuilder::__construct();
 		if($this->setSiteConfiguration() == false){
-			die("<pre>Fatal error: Please set up a pages.json file in the config folder</pre>");
+			throw new FrameworkException("Please set up a pages.json file in the config folder", "0x00");
 		}
 		$this->pageData		= $this->getPageData();
 		
@@ -52,6 +63,7 @@ class Core extends HtmlBuilder
 	 * @date	28 Jul 2017 14:29:45
 	 * @version	0.0.2
 	 * @return	boolean
+	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
 	protected function setSiteConfiguration(){
 		if(!file_exists(serverPath('/config/pages.json'))){
@@ -67,7 +79,7 @@ class Core extends HtmlBuilder
 		if(!empty($this->allowedSegments) && !empty($this->pageController)){
 			return true;
 		}
-		die("<pre>Fatal error: No pages or page controllers set in the pages.json file</pre>");
+		throw new FrameworkException("No pages or page controllers set in the pages.json file", "0x01");
 	}
 	
 	/**
