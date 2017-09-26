@@ -9,7 +9,7 @@
  * 
  * @param	string
  * @author	sbebbington
- * @date	27 Jul 2017 - 15:19:51
+ * @date	27 Jul 2017 15:19:51
  * @version	0.0.1
  * @return	string
  */
@@ -30,7 +30,7 @@ function getConfig(string $parameter= 'cookieDomain'){
  * 
  * @param	na
  * @author	sbebbington
- * @date	27 Jul 2017 - 15:35:10
+ * @date	27 Jul 2017 15:35:10
  * @version	0.0.2
  * @return	boolean
  */
@@ -45,7 +45,7 @@ function isHttps(){
  *
  * @param	na
  * @author	sbebbington
- * @date	2 Feb 2017 - 13:07:39
+ * @date	2 Feb 2017 13:07:39
  * @version	0.0.2
  * @return	string
  */
@@ -75,7 +75,7 @@ function host(){
  * 
  * @param	string
  * @author	sbebbington
- * @date	24 Jan 2017 - 09:48:21
+ * @date	24 Jan 2017 09:48:21
  * @version	0.0.1
  * @return	void
  */
@@ -110,7 +110,7 @@ function getUserIPAddress(){
  *
  * @param	na
  * @author	sbebbington
- * @date	3 Feb 2017 - 09:04:29
+ * @date	3 Feb 2017 09:04:29
  * @version	0.0.1
  * @return	string
  */
@@ -210,8 +210,8 @@ function isDevelopmentVersion(){
  * @return	string
  */
 function logErrorPath(string $routeTo = ''){
-	$base_dir = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/logs";
-	return "{$base_dir}{$routeTo}";
+	$baseDir = dirname(dirname($_SERVER['SCRIPT_FILENAME'])) . "/logs";
+	return "{$baseDir}{$routeTo}";
 }
 
 /**

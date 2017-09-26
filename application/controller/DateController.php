@@ -51,7 +51,7 @@ class DateController extends ControllerCore
 	 * 
 	 * @param	int
 	 * @author	sbebbington
-	 * @date	4 Jul 2017 - 17:15:59
+	 * @date	4 Jul 2017 17:15:59
 	 * @version	0.0.1
 	 * @return	array
 	 */
@@ -82,7 +82,7 @@ class DateController extends ControllerCore
 	 * 
 	 * @param	string, string
 	 * @author	sbebbington
-	 * @date	5 Jul 2017 - 10:13:08
+	 * @date	5 Jul 2017 10:13:08
 	 * @version	0.0.1
 	 * @return	array
 	 */
@@ -132,7 +132,7 @@ class DateController extends ControllerCore
 	 * 
 	 * @param	int, int, string, int
 	 * @author	sbebbington
-	 * @date	5 Jul 2017 - 10:10:45
+	 * @date	5 Jul 2017 10:10:45
 	 * @version	0.0.1
 	 * @return	array
 	 */
@@ -175,7 +175,7 @@ class DateController extends ControllerCore
 	 * 
 	 * @param	int, int, int
 	 * @author	sbebbington
-	 * @date	6 Jul 2017 - 13:50:32
+	 * @date	6 Jul 2017 13:50:32
 	 * @version	0.0.1
 	 * @return	boolean
 	 */
@@ -192,7 +192,7 @@ class DateController extends ControllerCore
 	 *
 	 * @param	stdClass
 	 * @author	sbebbington
-	 * @date	6 Jul 2017 - 11:37:21
+	 * @date	6 Jul 2017 11:37:21
 	 * @version	0.0.1
 	 * @return	string | null
 	 */
@@ -209,7 +209,7 @@ class DateController extends ControllerCore
 	 *
 	 * @param	stdClass | array
 	 * @author	sbebbington
-	 * @date	6 Jul 2017 - 11:49:16
+	 * @date	6 Jul 2017 11:49:16
 	 * @version	0.0.1
 	 * @return	array
 	 */

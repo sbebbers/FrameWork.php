@@ -30,7 +30,7 @@ class HomeController extends ControllerCore
 	 * 
 	 * @param	string, string
 	 * @author	sbebbington
-	 * @date	1 Mar 2017 - 09:20:43
+	 * @date	1 Mar 2017 09:20:43
 	 * @version	0.0.1
 	 * @return	boolean
 	 */

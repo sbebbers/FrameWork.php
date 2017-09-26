@@ -49,7 +49,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 14:29:45
+	 * @date	28 Jul 2017 14:29:45
 	 * @version	0.0.2
 	 * @return	boolean
 	 */
@@ -76,7 +76,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:40:06
+	 * @date	25 Jul 2017 09:40:06
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -95,7 +95,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 11:50:03
+	 * @date	28 Jul 2017 11:50:03
 	 * @version	0.0.3
 	 * @return	void
 	 */
@@ -117,7 +117,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:48:12
+	 * @date	25 Jul 2017 09:48:12
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -141,7 +141,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 10:50:31
+	 * @date	25 Jul 2017 10:50:31
 	 * @version	0.0.1
 	 * @return	array
 	 */
@@ -160,7 +160,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 09:50:40
+	 * @date	25 Jul 2017 09:50:40
 	 * @version	0.0.1
 	 * @return	void
 	 */
@@ -181,7 +181,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	resource | \stdClass, string
 	 * @author	sbebbington
-	 * @date	30 May 2017 - 09:49:39
+	 * @date	30 May 2017 09:49:39
 	 * @version	0.0.4
 	 * @return	void
 	 */
@@ -202,7 +202,7 @@ class Core extends HtmlBuilder
 	 * 
 	 * @param	boolean
 	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 12:04:03
+	 * @date	28 Jul 2017 12:04:03
 	 * @version	0.0.1a
 	 * @return	resource
 	 */
@@ -222,7 +222,7 @@ class Core extends HtmlBuilder
 	 *
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	25 Jul 2017 - 10:59:38
+	 * @date	25 Jul 2017 10:59:38
 	 * @version	0.0.5
 	 * @return	void
 	 */

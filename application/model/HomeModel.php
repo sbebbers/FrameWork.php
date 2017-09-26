@@ -17,7 +17,7 @@ class HomeModel extends ModelCore
 	 * 
 	 * @param	[string]
 	 * @author	sbebbington
-	 * @date	13 Jan 2017 - 10:13:07
+	 * @date	13 Jan 2017 10:13:07
 	 * @version	0.0.1
 	 * @return	array
 	 */
