@@ -1,10 +1,10 @@
 <?php 
 namespace Application\Model;
-use Application\Library\Library;
-use stdClass;
-use PDOException;
-use PDO;
 use Application\Core\FrameworkException\FrameworkException;
+use Application\Library\Library;
+use PDO;
+use PDOException;
+use stdClass;
 
 class ModelCore
 {
@@ -32,11 +32,8 @@ class ModelCore
 		$this->tables	= new stdClass();
 		$this->lib		= new Library();
 		
-		try{
-			$this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
-		}catch(PDOException $e){
-			echo '<pre>There was an issue connecting to the database</pre>';
-			$this->lib->debug($e, true);
+		if(!$this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password)){
+		    throw new PDOException("A database connection could not be established", 0xdb);
 		}
 	}
 }
