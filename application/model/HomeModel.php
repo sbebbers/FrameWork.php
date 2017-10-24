@@ -1,6 +1,7 @@
 <?php
 namespace Application\Model;
 use PDO;
+use Application\Core\FrameworkException\FrameworkException;
 
 require_once(serverPath("/model/ModelCore.php"));
 
@@ -23,9 +24,20 @@ class HomeModel extends ModelCore
 	 */
 	public function getView($colName = 'home'){
 		$query	= "SELECT `header`, `sub_header`, `content` FROM `{$this->db}`.`{$this->table}` "
-				."WHERE `name`=?;";
+		    ."WHERE `name`=?;";
 		$result	= $this->connection->prepare($query);
-		$result->execute(array($colName));
-		return $result->fetch(PDO::FETCH_ASSOC);
+		if($result->execute(array($colName)) === true){
+		    return $result->fetch(PDO::FETCH_ASSOC);
+		}else{
+		    throw new FrameworkException(
+		        "Unable to run query: {$query}",
+		        "0x00",
+		        array(
+		            "class" => __CLASS__,
+		            "method" => __METHOD__,
+		            "classObjects" => $this
+		        )
+		    );
+		}
 	}
 }

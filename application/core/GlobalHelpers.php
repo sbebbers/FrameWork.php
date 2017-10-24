@@ -222,16 +222,18 @@ function logErrorPath(string $routeTo = ''){
  * then it will append the data to the
  * file;
  *
- * @param	array | resource
+ * @param	array | stdClass
  * @author	sbebbington
  * @date	3 Aug 2017 - 10:24:09
  * @version	0.0.1
  * @return	resource | false
  */
-function writeToLogFile(array $error = []){
+function writeToLogFile($error = []){
 	if(empty($error)){
 		return false;
 	}
+	$error = is_array($error) ? $error : [$error];
+	
 	$months	= [1 => 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 	
 	if(empty($error['ip_address'])){
@@ -249,13 +251,13 @@ function writeToLogFile(array $error = []){
 	
 	if(!is_dir(logErrorPath())){
 		if(!mkdir(logErrorPath(), 0755)){
-			throw new Exception("Filepath " . logErrorPath() . " could not be created", "0xf17e");
+			throw new Exception("Filepath " . logErrorPath() . " could not be created", 0xf17e);
 		}
 	}
 	
 	if(!is_dir($logPath)){
 		if(!mkdir($logPath, 0755)){
-			throw new Exception("Filepath {$logPath} could not be created", "0xf17e");
+			throw new Exception("Filepath {$logPath} could not be created", 0xf17e);
 		}
 	}
 	$error	= json_encode($error);
@@ -263,10 +265,10 @@ function writeToLogFile(array $error = []){
 	if(!file_exists($fileName)){
 		if(file_put_contents($fileName, "")){
 		}else{
-			throw new Exception("File {$fileName} could not be created", "0xf17e");
+			throw new Exception("File {$fileName} could not be created", 0xf17e);
 		}
 	}
-	return file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? null;
+	return file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? false;
 }
 
 /**

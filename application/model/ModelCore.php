@@ -1,10 +1,13 @@
-<?php 
+<?php
 namespace Application\Model;
+
 use Application\Core\FrameworkException\FrameworkException;
 use Application\Library\Library;
 use PDO;
 use PDOException;
 use stdClass;
+
+require_once(serverPath("/core/FrameworkException.php"));
 
 class ModelCore
 {
@@ -18,7 +21,7 @@ class ModelCore
 	 * @author	sbebbington
 	 * @date	26 Sep 2017 14:43:38
 	 * @version 0.1.3a
-	 * @return	bare_field_name
+	 * @return	void
 	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
 	public function __construct(){
@@ -32,8 +35,18 @@ class ModelCore
 		$this->tables	= new stdClass();
 		$this->lib		= new Library();
 		
-		if(!$this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password)){
-		    throw new PDOException("A database connection could not be established", 0xdb);
+		try{
+		    $this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
+		}catch(PDOException $e){
+		    throw new FrameworkException(
+		        $e->getMessage(),
+		        $e->getCode(),
+		        array(
+		            "class" => __CLASS__,
+		            "method" => __METHOD__,
+		            "classObjects" => $this
+		        )
+		    );
 		}
 	}
 }
