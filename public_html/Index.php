@@ -34,11 +34,11 @@ class Index
 	 * @return	void
 	 */
 	public function __construct(){
+	    $this->core	= new Core();
+	    
 		if($this->checkPageLoad() == true){
 		    $error = null;
-		    
 		    try{
-		        $this->core	= new Core();
 		        setTimeZone($this->timeZone);
 		        $this->core->loadPage();
 		    }catch(FrameworkException $error){
