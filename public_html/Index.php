@@ -30,15 +30,15 @@ class Index
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	24 Oct 2017 10:08:48
-	 * @version	0.0.3
+	 * @version	0.1.4
 	 * @return	void
 	 */
 	public function __construct(){
+	    $this->core	= new Core();
+	    
 		if($this->checkPageLoad() == true){
 		    $error = null;
-		    
 		    try{
-		        $this->core	= new Core();
 		        setTimeZone($this->timeZone);
 		        $this->core->loadPage();
 		    }catch(FrameworkException $error){
@@ -58,7 +58,7 @@ class Index
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	28 Jul 2017 - 17:03:54
-	 * @version	0.0.1a
+	 * @version	0.0.2
 	 * @return	boolean
 	 */
 	public function checkPageLoad(){

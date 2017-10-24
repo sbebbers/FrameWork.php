@@ -7,4 +7,14 @@
 	<?php if($this->segment == 'date-example'): ?>
 		<script type="text/javascript" src="<?php echo $this->host; ?>/js/date-check.js"></script>
 	<?php endif; ?>
+	<?php if(getConfig('mode') == "test"): ?>
+		<?php
+            $this->lib->debug(
+                array(
+                    'version' => getConfig('version'),
+                    'releaseCandidate' => (getConfig('rc') === true) ? "true" : "false"
+                )
+            );
+		?>
+	<?php endif; ?>
 </footer>

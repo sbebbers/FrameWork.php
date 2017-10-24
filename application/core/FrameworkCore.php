@@ -25,7 +25,7 @@ class Core extends HtmlBuilder
 	 * @param	field_type
 	 * @author	sbebbington
 	 * @date	26 Sep 2017 14:42:15
-	 * @version 0.1.3a
+	 * @version 0.1.4
 	 * @return	void
 	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */

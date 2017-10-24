@@ -13,7 +13,7 @@ class HomeController extends ControllerCore
 		$this->sql				= new HomeModel();
 		foreach($this->sql->getView() as $key => $data){
 			$key				= $this->lib->convertSnakeCase($key);
-			$this->view->$key	= htmlspecialchars_decode($data);
+			$this->view->{$key} = htmlspecialchars_decode($data);
 		}
 		$this->setFlashMessage('message', "Made you look :-P");
 // 		if(isset($this->post['submit'])){
