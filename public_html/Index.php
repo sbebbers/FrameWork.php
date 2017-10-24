@@ -29,23 +29,54 @@ class Index
 	 * 
 	 * @param	na
 	 * @author	sbebbington
-	 * @date	24 Jan 2017 09:49:15
-	 * @version	0.0.2
+	 * @date	24 Oct 2017 10:08:48
+	 * @version	0.0.3
 	 * @return	void
 	 */
 	public function __construct(){
-		$this->core	= new Core();
-		setTimeZone($this->timeZone);
-		try{
-			$this->core->loadPage();
-		}catch(FrameworkException $e){
-			writeToLogFile($e);
-		}catch(Exception $e){
-			$this->core->lib->debug($e);
-			exit;
+		if($this->checkPageLoad() == true){
+		    $error = null;
+		    
+		    try{
+		        $this->core	= new Core();
+		        setTimeZone($this->timeZone);
+		        $this->core->loadPage();
+		    }catch(FrameworkException $error){
+		    }catch(Exception $error){
+		    }
+		    
+		    if(!is_null($error)){
+		        writeToLogFile($error);
+		    }
 		}
 	}
+	
+	/**
+	 * Check if request is for page view
+	 * or site asset
+	 *
+	 * @param	na
+	 * @author	sbebbington
+	 * @date	28 Jul 2017 - 17:03:54
+	 * @version	0.0.1a
+	 * @return	boolean
+	 */
+	public function checkPageLoad(){
+	    $exts = array_filter(
+	        explode('/', $_SERVER['REQUEST_URI']),
+	        'strlen'
+	    );
+	    $last	= [];
+	    if (count($exts)) {
+	        $last	= explode(".", $exts[count($exts)-1] ?? '');
+	        $last	= (count($last) > 0) ? $last[count($last)-1] : '';
+	        return in_array($last, $this->core->ignoredExts) ? false : true;
+	    }
+	    return true;
+	}
 }
+
+
 
 /**
  * This will correctly route to the application
