@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.3a #
+# Project FrameWork.php MVC v0.1.4 #
 
 ### Setting up a new page ###
 
@@ -105,7 +105,7 @@ Linking the date-example view to the page controller is handled in the pages.jso
 
 Hopefully these configuration options are fairly self-explanatory. Please note that only `pageController` objects in the JSON are key/data pairs for individual items; in other configuration options, the key does not matter as long as there are no repeating keys. None of the names for the parent objects should be changed or this will cause the site to crash or behave in an unexpected way. You may wish to change the values in the `errorReporting` object to represent your domain name. This will allow you to set all visible PHP error reporting for your development and staging sites.
 
-It is strongly not recommended to set error reporting on live sites unless you limit access on your server whilst debugging. Use the `GlobalHelpers::writeToLogFile()` method to create your own PHP Exceptions using the `FrameworkException` class and this will make switching on visible PHP error reporting unnecessary in the long run.
+It is strongly recommended to switch off error reporting on live sites unless you limit access on your server whilst debugging. Use the `GlobalHelpers::writeToLogFile()` method to create your own PHP Exceptions using the `FrameworkException` class and this will make switching on visible PHP error reporting unnecessary in the long run.
 
 
 ---

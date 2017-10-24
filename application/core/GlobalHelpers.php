@@ -224,8 +224,8 @@ function logErrorPath(string $routeTo = ''){
  *
  * @param	array | stdClass
  * @author	sbebbington
- * @date	3 Aug 2017 - 10:24:09
- * @version	0.0.1
+ * @date	24 Oct 2017 12:54:49
+ * @version	0.0.2
  * @return	resource | false
  */
 function writeToLogFile($error = []){

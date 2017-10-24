@@ -1,8 +1,8 @@
-# Project FrameWork.php MVC v0.1.3a #
+# Project FrameWork.php MVC v0.1.4 #
 
-### Quick start guide - updated 2017-09-06 ###
+### Quick start guide - updated 2017-10-24 ###
 
-You will already have a home page and 404 page to play with; these files are located in the `/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder.
+You will already have a home page and 404 page to play with; these files are located in the `/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder called `partial`.
 
 You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP will generate:
 
@@ -59,6 +59,8 @@ Therefore, to add in a new page, you need to name it appropraitely; if you want 
 			"0":		"phtml"
 		}
 	}
+
+Please note that it is a <strike>bug</strike> intended feature of this framework that each view has a related controller. The Application Core will look for a controller for each page views (`allowedSegments` object) in the JSON configuration above.
 
 You may wish to set up some meta data for your new page; this is done in the `pagedata.json` file in `/path/to/application/config/pagedata.json`, which may look like this:
 
@@ -133,6 +135,6 @@ To see these variables in your page view, you simply remove the view keyword fro
 		</body>
 	</html>
 
-This should be enough to go on for now. As this is a living project, expect more functionality to be added soon. I intend to finish the HTML builder first before moving onto a hopefully useful PDO query builder.
+This should be enough to go on for now. Any questions, please contact me through GitHub or Twitter.
 
 ---
