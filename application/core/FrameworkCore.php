@@ -25,7 +25,7 @@ class Core extends HtmlBuilder
 	 * @param	field_type
 	 * @author	sbebbington
 	 * @date	26 Sep 2017 14:42:15
-	 * @version 0.1.4
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
@@ -61,7 +61,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	28 Jul 2017 14:29:45
-	 * @version	0.0.2
+	 * @version 0.1.4-RC1
 	 * @return	boolean
 	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
@@ -89,7 +89,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	25 Jul 2017 09:40:06
-	 * @version	0.0.1
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	protected function setErrorReporting(){
@@ -108,7 +108,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	28 Jul 2017 11:50:03
-	 * @version	0.0.3
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	protected function setUri(){
@@ -130,7 +130,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	25 Jul 2017 09:48:12
-	 * @version	0.0.1
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	protected function setGetGlobal(){
@@ -154,7 +154,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	25 Jul 2017 10:50:31
-	 * @version	0.0.1
+	 * @version 0.1.4-RC1
 	 * @return	array
 	 */
 	public function getPageData(){
@@ -173,7 +173,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	25 Jul 2017 09:50:40
-	 * @version	0.0.1
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	protected function checkExtension(){
@@ -194,7 +194,7 @@ class Core extends HtmlBuilder
 	 * @param	resource | \stdClass, string
 	 * @author	sbebbington
 	 * @date	30 May 2017 09:49:39
-	 * @version	0.0.4
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	public function setView($instance, string $masterKey = ''){
@@ -215,7 +215,7 @@ class Core extends HtmlBuilder
 	 * @param	boolean
 	 * @author	sbebbington
 	 * @date	28 Jul 2017 12:04:03
-	 * @version	0.0.1a
+	 * @version 0.1.4-RC1
 	 * @return	resource
 	 */
 	public function emptySession(bool $emptyFlash = false){
@@ -235,7 +235,7 @@ class Core extends HtmlBuilder
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	25 Jul 2017 10:59:38
-	 * @version	0.0.5
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	public function loadPage(){
@@ -258,12 +258,12 @@ class Core extends HtmlBuilder
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));
-					$_instance                     = $this->lib->camelCaseFromDashes($instance);
-					$this->controller->$_instance  = new $controller();
+					$_instance                         = $this->lib->camelCaseFromDashes($instance);
+					$this->controller->{$_instance}    = new $controller();
 					
-					if($this->controller->$_instance->view instanceof stdClass){
-						$this->setView($this->controller->$_instance->view);
-						$this->controller->$_instance->view = null;
+					if($this->controller->{$_instance}->view instanceof stdClass){
+						$this->setView($this->controller->{$_instance}->view);
+						$this->controller->{$_instance}->view = null;
 					}
 				}
 			}

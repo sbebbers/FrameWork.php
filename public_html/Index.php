@@ -30,7 +30,7 @@ class Index
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	24 Oct 2017 10:08:48
-	 * @version	0.1.4
+	 * @version 0.1.4-RC1
 	 * @return	void
 	 */
 	public function __construct(){
@@ -58,7 +58,7 @@ class Index
 	 * @param	na
 	 * @author	sbebbington
 	 * @date	28 Jul 2017 - 17:03:54
-	 * @version	0.0.2
+	 * @version 0.1.4-RC1
 	 * @return	boolean
 	 */
 	public function checkPageLoad(){
@@ -76,8 +76,6 @@ class Index
 	}
 }
 
-
-
 /**
  * This will correctly route to the application
  * directory on your server
@@ -85,7 +83,7 @@ class Index
  * @param	string
  * @author	Rob Gill && sbebbington
  * @date	26 Sep 2017 09:50:01
- * @version	0.0.4
+ * @version 0.1.4-RC1
  * @return	string
  */
 function serverPath(string $routeTo = ''){
