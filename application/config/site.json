@@ -4,7 +4,7 @@
 	"cookieDomain": "framework.php.dev",
 	"uriPath":		"/",
 	"version":		"0.1.4-RC1",
-	"rc":			false,
+	"rc":			true,
 	"dev":			true,
 	"mode":			"test"
 }
