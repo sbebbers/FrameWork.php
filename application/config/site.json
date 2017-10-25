@@ -3,7 +3,7 @@
 	"protocol":		"http",
 	"cookieDomain": "framework.php.dev",
 	"uriPath":		"/",
-	"version":		"0.1.4",
+	"version":		"0.1.4-RC1",
 	"rc":			false,
 	"dev":			true,
 	"mode":			"test"
