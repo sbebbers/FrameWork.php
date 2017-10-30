@@ -465,24 +465,24 @@ class Library
         $timeZoneType = "+";
         
         if(is_null($date)){
-            print('Null value sent to ' . __METHOD__);
-            return;
+            throw new FrameworkException('Date string was sent as null');
         }
+
         $day    = $month = $year = 0;
         $time   = "00:00:00";
         $hours  = "0000";
         
-        if(strpos($date, "T")){
+        if(strpos($date, "T") == 10 && strlen($date) > 18){
             $_time  = explode("T", $date);
             $time   = $_time[1];
             $date   = $_time[0];
             $timeZone = false;
             
-            if(strpos($time, "-")){
+            if(substr($d, -5, -4) == "-"){
                 $_time  = explode("-", $time);
                 $timeZone = true;
                 $timeZoneType = "-";
-            }else if(strpos($time, "+")){
+            }else if(substr($d, -5, -4) == "+"){
                 $_time  = explode("+", $time);
                 $timeZone = true;
             }
