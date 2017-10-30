@@ -462,9 +462,11 @@ class Library
      */
     public function sanitizeDateString($date = null){
         $error = false;
+        $timeZoneType = "+";
         
         if(is_null($date)){
-            throw new FrameworkException('Null value sent to ' . __METHOD__);
+            print('Null value sent to ' . __METHOD__);
+            return;
         }
         $day    = $month = $year = 0;
         $time   = "00:00:00";
@@ -474,15 +476,24 @@ class Library
             $_time  = explode("T", $date);
             $time   = $_time[1];
             $date   = $_time[0];
+            $timeZone = false;
             
-            if(strpos($time, "+")){
+            if(strpos($time, "-")){
+                $_time  = explode("-", $time);
+                $timeZone = true;
+                $timeZoneType = "-";
+            }else if(strpos($time, "+")){
                 $_time  = explode("+", $time);
+                $timeZone = true;
+            }
+            
+            if($timeZone === true){
                 $hours  = $_time[1];
                 $time   = $_time[0];
             }
         }
         
-        $time = $this->sanitizeTimeString("{$time}+{$hours}");
+        $time = 'T' . $this->sanitizeTimeString("{$time}{$timeZoneType}{$hours}");
         
         $date = trim(str_replace("/", "-", str_replace(".", "-", $date)));
         $date = explode("-", $date);
@@ -501,6 +512,7 @@ class Library
         
         if(checkdate($month, $day, $year) == false || $error == true){
             throw new FrameworkException("Date is invalid; please use dd-mm-yyyy or yyyy-mm-dd with optional time (Thrs:min:sec+0000, i.e., T09:00:00+0100). Value sent (yyyy-mm-ddThrs:min:sec+0000) was {$year}-{$month}-{$day}{$time}");
+            return;
         }
         
         $valid = "{$year}-{$month}-{$day}{$time}";
@@ -521,7 +533,14 @@ class Library
      * @return	string
      */
     protected function sanitizeTimeString($time = ''){
-        $_time       = explode("+", $time);
+        $timeZoneType = "+";
+        if(strpos($time, "-")){
+            $_time = explode("-", $time);
+            $timeZoneType = "-";
+        }else{
+            $_time = explode("+", $time);
+        }
+        
         $time       = $_time[0];
         $plusHrs    = substr($_time[1], 0, 2);
         $plusMin    = substr($_time[1], 2);
@@ -540,7 +559,7 @@ class Library
             throw new FrameworkException("Time is invalid, expected HH:MM:SS, recieved {$time[0]}:{$time[1]}:{$time[2]}");
         }
         
-        return "T{$time[0]}:{$time[1]}:{$time[2]}+{$plusHrs}{$plusMin}";
+        return "{$time[0]}:{$time[1]}:{$time[2]}{$timeZoneType}{$plusHrs}{$plusMin}";
     }
     
     /**
