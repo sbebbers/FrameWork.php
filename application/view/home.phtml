@@ -5,8 +5,8 @@
 			require_once("{$this->partial['header']}");
 		$this->close("head");
     	$this->open("body");
-    	
-    		if(!empty($this->flash->message)){
+    	   
+    	   if(!empty($this->flash->message)){
     			$this->open("div", "flash", array("container", "flash"))
     				->p()->id("flash-message")->addClass(array("flash-bg", "green"))->closeElement()
     					->text($this->flash->message)
@@ -20,6 +20,9 @@
     			->text($this->content, true)
     			->open("hr", '', null, true)
     		->close("div");
+    		##if(!empty($this->easterEgg)):
+    		##    echo "<!-- <pre>{$this->easterEgg}</pre> -->";
+    		##endif;
     		require_once("{$this->partial['footer']}");
     	$this->close("body");
     ?>
