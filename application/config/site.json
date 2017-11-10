@@ -3,6 +3,7 @@
 	"protocol":		"http",
 	"cookieDomain": "framework.php.dev",
 	"uriPath":		"/",
+	"loadCoreController" : true,
 	"version":		"0.1.4-RC1",
 	"rc":			true,
 	"dev":			true,

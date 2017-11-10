@@ -255,6 +255,10 @@ class Core extends HtmlBuilder
 			$this->title		= $this->pageData['titles']["{$this->segment}"] ?? '';
 			$this->description	= $this->pageData['descriptions']["{$this->segment}"] ?? '';
 			
+			if(getConfig('loadCoreController') == true){
+			    require_once(serverPath("/controller/ControllerCore.php"));
+			}
+			
 			foreach($this->pageController as $instance => $controller){
 				if($this->segment == $instance){
 					require_once(serverPath("/controller/{$controller}.php"));

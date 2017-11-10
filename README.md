@@ -1,5 +1,5 @@
-# FrameWork.php
-### Developed by Shaun Bebbington and Linden Bryon
+# FrameWork.php #
+### Developed by Shaun Bebbington and Linden Bryon ###
 
 FrameWork.php started out life as a simple and quite messy OO MVC framework in order to mentor a junior PHP developer whilst I was working at Rushcliff Ltd in Burton-Upon-Trent, Staffordshire. The idea was to link a controller to each page, and have a model per controller, so that the controller class would act as a middle-man between the front-end view and the database as necessary.
 
@@ -13,12 +13,12 @@ I also thought it necessary to allow numerous file extensions on the page uri al
 
 The idea was to obscure that it was a PHP framework, and to send the page URLs with the .aspx file extension to our pen testers. I don't know if this was a good idea, however there were no issues that came back requiring attention.
 
-I never had the chance to finish the framework to a satisfactory degree at Rushcliff Ltd, so although it has been deployed on a live product, it remains imperfect. I was allowed to continue developing it on leaving so here it is. Still imperfect but slightly improved. This is not something for those hipster and artisan developer-types, it is fairly simple and fairly stupid.
+I never had the chance to finish the framework to a satisfactory degree at Rushcliff Ltd, so although it has been deployed on a live product, it remains imperfect. I was allowed to continue developing it on leaving [Rushcliff] so here it is. Still imperfect but always improving. This is not something for those hipster and artisan developer-types, it is fairly simple and fairly stupid.
 
-Linden has set up on GitHub so I have invited him as a collaborator on this project. Linden has expertise in PHP, HTML 5/CSS 3, and JavaScript (jQuery), so this should mean that we can develop the framework and also improve some of the front-end stuff as well.
+Linden has set up on GitHub so I have invited him as a collaborator on this project. Linden has expertise with MySQL, PHP 5/7, HTML 5/CSS 3, JavaScript (jQuery) and some JavaScript frameworks, and is a very keen and highly recommended developer.
 
 If you have any comments then please feel free to contact me.
 
 Shaun Bebbington.
-Twitter: @yearofcodes
+Twitter: @ShaunBebbers
 --
