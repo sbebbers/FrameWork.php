@@ -1,8 +1,8 @@
 # Project FrameWork.php MVC v0.1.4-RC1 #
 
-### Quick start guide - updated 2017-10-24 ###
+### Quick start guide - updated 2017-11-10 ###
 
-You will already have a home page and 404 page to play with; these files are located in the `/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder called `partial`.
+You will already have a home page and 404 page to play with; these files are located in the `./path/to/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder called `/partial`.
 
 You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP will generate:
 
@@ -24,7 +24,7 @@ but will actually generate minimised HTML, as follows:
 
 	<div id="content" class="container"><h1>Main header</h1><p id="opening-text" class="col-xs-12">This is the opening paragraph</p></div>
 
-To add in a new view, you will need to edit the file in `/path/to/application/config/pages.json`. This file by default may look like this:
+To add in a new view, you will need to edit the file in `./path/to/application/config/pages.json`. This file by default may look like this:
 
 	{
 		"allowedSegments": {
@@ -62,7 +62,7 @@ Therefore, to add in a new page, you need to name it appropraitely; if you want 
 
 Please note that it is a <strike>bug</strike> intended feature of this framework that each view has a related controller. The Application Core will look for a controller for each page views (`allowedSegments` object) in the JSON configuration above.
 
-You may wish to set up some meta data for your new page; this is done in the `pagedata.json` file in `/path/to/application/config/pagedata.json`, which may look like this:
+You may wish to set up some meta data for your new page; this is done in the `pagedata.json` file in `./path/to/application/config/pagedata.json`, which may look like this:
 
 	{
 		"titles":{
@@ -86,35 +86,63 @@ Therefore, to add a title and description, you will need to use the name of your
 		}
 	}
 
-Now you will need to add a controller class in the `/path/to/application/controller` directory. Continuing with the `my-blog` example, you will need to add in a `MyBlogController.php` file; 
-
-Once you have your controller, you will need to create a controller class in the /application/controller directory. The class name must match the controller name that you have given above including the .php file extension. If your page is interacting with a MySQL database then you will want to set up a model class in the /application/model directory. If you have called your model class MyPageModel.php, use the following at the top of your PHP controller class:
-
-	require_once(serverPath('/model/MyPageModel.php'));
-
-and if you want to use the ControllerCore class, use
-
-	require_once(serverPath('/controller/ControllerCore.php'));
-
-Your controller class might look like this:
+Now you will need to add a controller class in the `./path/to/application/controller` directory. Continuing with the `my-blog` example, you will need to add in a `MyBlogController.php` file. A minimum Controller class is as follows:
 
 	<?php
-	require_once(serverPath('/model/MyPageModel.php'));
-	require_once (serverPath('/controller/ControllerCore.php'));
+	
+	class MyBlogController
+	{
+	}
+
+If you wish to extend your Controller class from the `ControllerCore`, amend the above script as follows as a minimum:
+
+	<?php
+	
+	use Application\Controller\ControllerCore;
+	
+	class MyBlogController extends ControllerCore
+	{
+		public function __construct(){
+			ControllerCore::__construct();
+		}
+	}
+
+The `ControllerCore` class is loaded on all pages in the `site.json`:
+
+	"loadCoreController" : true
+
+If your page is interacting with a MySQL database then you will want to set up a model class in the `path/to/application/model` directory. If you have called your model class `MyBlogModel.php`, use the following at the top of your PHP controller class:
+
+	require_once(serverPath('/model/MyBlogModel.php'));
+
+Your controller class might look like this including the core and model:
+
+	<?php
+	
+	use Application\Controller\ControllerCore;
+	
+	require_once(serverPath('/model/MyBlogModel.php'));
 
 	class MyPageController extends \Application\Controller\ControllerCore
 	{
 		public function __construct(){
-			parent::__construct();
-			$this->sql = new MyPageModel();
+			ControllerCore::__construct();
+			$this->sql = new MyBlogModel();
 		}
 	}
 
 You can add Zend Framework-style view variables in your controller core by using $this->view which is part of the CoreController class. So in your MyPageController class, you can simply do something like this in your constructor:
 
+	<?php
+	
+	use Application\Controller\ControllerCore;
+	
+	require_once(serverPath('/model/MyBlogModel.php'));
+	
 	public function __construct(){
-		parent::__construct();
+		ControllerCore::__construct();
 		$this->sql = new MyPageModel();
+		
 		$this->view->myPageHeader		= "<h1>New Header</h1>";
 		$this->view->myPageSubHeader	= "<h3>Sub Header</h3>";
 		$this->view->myPageContent		= "<p>This is the opening paragraph for my content</p>";
