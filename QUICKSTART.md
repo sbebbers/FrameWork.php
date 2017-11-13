@@ -1,10 +1,10 @@
-# Project FrameWork.php MVC v0.1.4-RC1 #
+# Project FrameWork.php MVC v0.1.4-RC2 #
 
 ### Quick start guide - updated 2017-11-10 ###
 
 You will already have a home page and 404 page to play with; these files are located in the `./path/to/application/view` folder. There are two partial views included as well, a file called header.phtml for the `<head>` section of your website, and one named footer.phtml for your page `<footer>`. These are in a sub-folder in your view folder called `/partial`.
 
-You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP will generate:
+You can use plain HTML in any view, or use the HTML builder, which is still in progress but should allow you to open and close any HTML tag using open() and close() methods. For instance, the following PHP:
 
 	$this->open("div", "content", "container")
 		->h(1, "Main header")
@@ -41,7 +41,7 @@ To add in a new view, you will need to edit the file in `./path/to/application/c
 		}
 	}
 
-Therefore, to add in a new page, you need to name it appropraitely; if you want a section called my-blog on your website (and therefore, you'll have `http://my-project.dev/my-blog` in this example, then add the following:
+Therefore, to add in a new page, you need to name it appropraitely; if you want a section called my-blog on your website (and therefore, you'll have `http://my-project.dev/my-blog` in this example), then add the following:
 
 	{
 		"allowedSegments": {
@@ -107,11 +107,17 @@ If you wish to extend your Controller class from the `ControllerCore`, amend the
 		}
 	}
 
-The `ControllerCore` class is loaded on all pages in the `site.json`:
+The `ControllerCore` class is loaded on all pages in the `site.json` if this setting is true:
 
 	"loadCoreController" : true
 
-If your page is interacting with a MySQL database then you will want to set up a model class in the `path/to/application/model` directory. If you have called your model class `MyBlogModel.php`, use the following at the top of your PHP controller class:
+If you set this to false, then this will imply that you don't require the `ControllerCore` class on some or all pages, so for those page controllers that will extend it, you will need to `require` it on each page. To do so, put this at the top of your relevant page controller (after the `use` statement and before the opening `class` declaration:
+
+    require_once (serverPath('/controller/ControllerCore.php'));
+
+The `serverPath` function will auto-route to the `./path/to/application` directory.
+
+If your page is interacting with a MySQL database then you will want to set up a model class in the `./path/to/application/model` directory. If you have called your model class `MyBlogModel.php`, use the following at the top of your PHP controller class after the `use` statement specified above:
 
 	require_once(serverPath('/model/MyBlogModel.php'));
 
@@ -123,7 +129,7 @@ Your controller class might look like this including the core and model:
 	
 	require_once(serverPath('/model/MyBlogModel.php'));
 
-	class MyPageController extends \Application\Controller\ControllerCore
+	class MyBlogController extends ControllerCore
 	{
 		public function __construct(){
 			ControllerCore::__construct();
@@ -135,27 +141,32 @@ You can add Zend Framework-style view variables in your controller core by using
 
 	<?php
 	
-	use Application\Controller\ControllerCore;
+	use ControllerCore;
 	
 	require_once(serverPath('/model/MyBlogModel.php'));
 	
-	public function __construct(){
-		ControllerCore::__construct();
-		$this->sql = new MyPageModel();
+	class MyBlogController extends ControllerCore
+	{
+		public function __construct(){
+			ControllerCore::__construct();
+			$this->sql = new MyPageModel();
 		
-		$this->view->myPageHeader		= "<h1>New Header</h1>";
-		$this->view->myPageSubHeader	= "<h3>Sub Header</h3>";
-		$this->view->myPageContent		= "<p>This is the opening paragraph for my content</p>";
+			$this->view->myPageHeader		= "<h1>New Header</h1>";
+			$this->view->myPageSubHeader	= "<h3>Sub Header</h3>";
+			$this->view->myPageContent		= "<p>This is the opening paragraph for my content</p>";
+		}
 	}
 
-To see these variables in your page view, you simply remove the view keyword from the object, for instance:
+To see these variables in your page view, you simply remove the `view` keyword from the object name, for instance:
 
 	<!DOCTYPE html>
 	<html lang="en-gb">
     	<head><?php require_once("{$this->partial['header']}"); ?></head>
     	<body>
     		<div id="content" class="container">
+    			<!-- $this->view->myPageHeader in your controller -->
 				<?php echo $this->myPageHeader; ?>
+				<!-- etc... -->
 				<?php echo $this->myPageSubHeader; ?>
 				<?php echo $this->myPageContent; ?>
 			</div>
@@ -163,6 +174,6 @@ To see these variables in your page view, you simply remove the view keyword fro
 		</body>
 	</html>
 
-This should be enough to go on for now. Any questions, please contact me through GitHub or Twitter.
+Please note that the instructions for the date example are as yet unfinished, but this should be enough to go on for now. Any questions, please contact me through GitHub or Twitter.
 
 ---
