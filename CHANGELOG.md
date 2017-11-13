@@ -187,4 +187,12 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				to reduce repeating code. The ModelCore::tables object is
 				auto-populated by ModelCore::setTables() - some improvements
 				have been added to the way pages are loaded as well
+	@changes as of 2017-11-13
+				An option has been added to the config file to auto-load the
+				ControllerCore class which will make each controller a little
+				tidier so one doesn't need the require_once() statement at
+				the top of each new controller. Simply:
+				use Application\Controller\ControllerCore;
+				in each controller instead if the loadCoreController JSON
+				object is set in site.json. 
 --
