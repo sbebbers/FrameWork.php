@@ -21,7 +21,7 @@ class ModelCore
 	 * @param	field_type
 	 * @author	sbebbington
 	 * @date	26 Sep 2017 14:43:38
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	void
 	 * @throws  \Application\Core\FrameworkException\FrameworkException
 	 */
@@ -58,7 +58,7 @@ class ModelCore
 	 * @param	field_type
 	 * @author	sbebbington
 	 * @date	24 Oct 2017 13:26:43
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	void
 	 */
 	private function setTables(string $db = ''){
@@ -81,7 +81,7 @@ class ModelCore
 	 * @param	PDOStatement, array, bool, string, constant
 	 * @author	sbebbington
 	 * @date	24 Oct 2017 13:32:46
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	resource
 	 * @throws  FrameworkException
 	 */

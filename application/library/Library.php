@@ -22,7 +22,7 @@ class Library
 	 * @param	object, boolean, string, string, string, string
 	 * @author 	sbebbington && Linden
 	 * @date	26 Sep 2017 09:47:37
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return 	null
 	 */
 	public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''){
@@ -51,7 +51,7 @@ class Library
 	 * @param	object, boolean, string, string, string
 	 * @author 	sbebbington && Linden
 	 * @date	26 Sep 2017 09:47:15
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	null
 	 */
 	public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''){
@@ -79,7 +79,7 @@ class Library
 	 * 			version
 	 */
 	public function version(){
-		return '0.1.4-RC1';
+		return '0.1.4-RC2';
 	}
 	
 	/**
@@ -109,7 +109,7 @@ class Library
 	 * @param	string, sting, int, boolean
 	 * @author 	sbebbington && Stack Overflow
 	 * @date	1 Mar 2017 08:54:14
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	string
 	 */
 	public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false){
@@ -126,7 +126,7 @@ class Library
 	 * @param	string, string, int, boolean
 	 * @author 	sbebbington && Stack Overflow
 	 * @date	1 Mar 2017 08:57:23
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	string
 	 */
 	public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false){
@@ -141,7 +141,7 @@ class Library
 	 * @param	string, string
 	 * @author 	sbebbington || Steve
 	 * @date	2 Feb 2017 13:15:26
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	void
 	 */
 	public function redirect(string $destination = '', string $host = ''){
@@ -164,7 +164,7 @@ class Library
 	 * @param	int
 	 * @author	sbebbington
 	 * @date	1 Mar 2017 09:01:05
-	 * @version 0.1.4-RC1
+	 * @version 0.1.4-RC2
 	 * @return	string
 	 */
 	public function getEncryptionPadding(int $numberToPad = 8){
@@ -180,7 +180,7 @@ class Library
      * @param	string, string
      * @author	sbebbington
      * @date	2 Feb 2017 13:18:50
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	void
      */
     public function redirectExternal(string $destination = '', string $website= ''){
@@ -209,7 +209,7 @@ class Library
      * @param	object, string, array, any, [boolean]
      * @author	sbebbington
      * @date	26 Sep 2017 09:46:32
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	boolean | string
      */
     public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
@@ -266,7 +266,7 @@ class Library
      * @param	string
      * @author	sbebbington
      * @date	6 Jul 2017 12:14:42
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	string
      */
     public function convertSnakeCase(string $snake = '', string $delimiter = '_'){
@@ -291,7 +291,7 @@ class Library
      * @param	string
      * @author	sbebbington
      * @date	6 Jul 2017 12:17:34
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	string
      */
     public function camelCaseFromDashes($string){
@@ -306,7 +306,7 @@ class Library
      * @param	string, int
      * @author	sbebbington
      * @date	3 Feb 2017 13:46:37
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	string
      */
     public function convertToSnakeCase(string $unSnaked = '', int $offset = 0){
@@ -338,7 +338,7 @@ class Library
      * @param	array, boolean, [array]
      * @author	sbebbington && Vietnam
      * @date	6 Jan 2017 15:36:29
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	array
      */
     public function cleanseInputs($data, bool $htmlSpecialChars = false, $cleanInput = array()){
@@ -357,7 +357,7 @@ class Library
      * @param	boolean
      * @author	sbebbington
      * @date	10 Jan 2017 09:25:07
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	string
      */
     public function domainType(bool $subDomain = false){
@@ -371,7 +371,7 @@ class Library
      * @param	array|resource
      * @author	sbebbington
      * @date	10 Jan 2017 15:56:39
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	\JsonSerializable
      */
     public function convertToJSON($data){
@@ -385,7 +385,7 @@ class Library
      * @param	JSON
      * @author	sbebbington
      * @date	3 Feb 2017 14:47:48
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	resource
      */
     public function convertFromJSON($data){
@@ -406,7 +406,7 @@ class Library
      * @param	string, [boolean], [boolean]
      * @author	sbebbington
      * @date	21 Feb 2017 15:20:10
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	string
      */
     public function softMinimiseJS(string $filePathName = '', bool $doubleSpaces = true, bool $spacedTab = true){
@@ -568,7 +568,7 @@ class Library
      * @param	string, object, string, string, string
      * @author	sbebbington && Stack Overflow
      * @date	3 Mar 2017 09:51:09
-     * @version 0.1.4-RC1
+     * @version 0.1.4-RC2
      * @return	object
      */
     function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
