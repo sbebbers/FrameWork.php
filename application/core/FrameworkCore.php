@@ -247,6 +247,7 @@ class Core extends HtmlBuilder
 			$this->setView(array("_404Error" => 1));
 			$this->title		= '404 error - page not found, please try again';
 			$this->description	= 'There\'s a Skeleton in the Sandbox';
+			http_response_code(404);
 			require_once(serverPath("/view/404.phtml"));
 			exit;
 		}
