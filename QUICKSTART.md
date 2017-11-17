@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.4-RC2 #
+# Project FrameWork.php MVC v0.1.4-RC3 #
 
 ### Quick start guide - updated 2017-11-10 ###
 
