@@ -47,7 +47,7 @@ class Index
                 $_error = $error;
             }
             
-            if(!is_null($error)){
+            if(!is_null($_error)){
                 writeToLogFile($_error);
             }
         }
