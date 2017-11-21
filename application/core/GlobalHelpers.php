@@ -46,15 +46,16 @@ function isHttps(){
  * To include further file paths, include a following
  * / at the end
  *
- * @param   na
+ * @param   string, string
  * @author  sbebbington
- * @date    26 Sep 2017 15:01:09
+ * @date	21 Nov 2017 09:31:00
  * @version 0.1.4-RC3
  * @return  string
  */
-function documentRoot(string $routeTo = ''){
-    $baseDir = str_replace("\\", "/", (dirname(__FILE__) . $routeTo));
-    return str_replace("//", "/", $baseDir);
+function documentRoot(string $routeTo = '', string $replace = 'public_html'){
+    $baseDir = str_replace("\\", "/", dirname(__FILE__));
+    $baseDir = str_replace("application/core", $replace, $baseDir);
+    return str_replace("//", "/", $baseDir . $routeTo);
 }
 
 /**
@@ -68,7 +69,7 @@ function documentRoot(string $routeTo = ''){
  * @return  string
  */
 function host(){
-    return $_SERVER['HTTP_HOST'];
+    return "{$_SERVER['HTTP_HOST']}";
 }
 
 /**
@@ -144,7 +145,7 @@ function getSegment(){
  * @return  string
  */
 function getSelf(){
-    return $_SERVER['PHP_SELF'];
+    return "{$_SERVER['PHP_SELF']}";
 }
 
 /**
