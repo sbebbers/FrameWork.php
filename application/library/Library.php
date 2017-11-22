@@ -366,15 +366,23 @@ class Library
     }
     
     /**
-     * Turns a PHP array into JSON
+     * Turns a PHP array into JSON; use
+     * true for the second value to trim
+     * the data in array to convert to
+     * JSON
      *
-     * @param   array|resource
+     * @param   array|resource, [bool]
      * @author  sbebbington
      * @date    10 Jan 2017 15:56:39
      * @version 0.1.4-RC3
      * @return  \JsonSerializable
      */
-    public function convertToJSON($data){
+    public function convertToJSON(array $data = array(), bool $trimData = false){
+        if(!empty($data) && $trimData === true){
+            foreach($data as $k => $d){
+                $data[$k] = (is_string($k)) ? trim($k) : $k;
+            }
+        }
         return json_encode($data);
     }
     
@@ -458,7 +466,7 @@ class Library
      * @author  sbebbington
      * @date    30 Oct 2017 11:19:41
      * @version 0.1.4
-     * @return  string
+     * @return  DateTime
      */
     public function sanitizeDateString($date = null){
         $error = false;
