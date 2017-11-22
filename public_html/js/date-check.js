@@ -101,7 +101,7 @@ $(function(){
 	 */
 	$("#day, #month, #year").on("change", function(){
 		_d = $("#day").val(),_m = $("#month").val(),_y = $("#year").val(), _f = null;
-		if(""+parseInt(_m) == "NaN"){
+		if("NaN" === parseInt(_m)){
 			_f = Boolean(_m.length > 3);
 			_m = getNumericMonth(_m);
 		}
