@@ -1,5 +1,6 @@
 <?php
 namespace Application\Core\Framework;
+
 use \Application\Core\Framework\HtmlBuilder;
 use stdClass;
 use Application\Core\FrameworkException\FrameworkException;

@@ -84,7 +84,7 @@ class Library
     
     /**
      * Is it Easter yet?
-     * Try <?php echo $this->controllerInstance->libraryInstance->easterEgg(); ?> in your view
+     * Try <?phpecho $this->controllerInstance->libraryInstance->easterEgg(); ?> in your view
      * 
      * @param   na
      * @author  sbebbington B

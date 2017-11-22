@@ -1,5 +1,6 @@
 <?php
 namespace Application\Core\FrameworkException;
+
 use Exception;
 
 class FrameworkException extends Exception

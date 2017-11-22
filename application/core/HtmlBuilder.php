@@ -1,5 +1,6 @@
-<?php 
+<?php
 namespace Application\Core\Framework;
+
 use Application\Library\Library;
 
 require_once(serverPath("/library/Library.php"));

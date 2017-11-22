@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 use Application\Core\FrameworkException\FrameworkException;
 
 /**

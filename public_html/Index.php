@@ -13,7 +13,7 @@ session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
 if(session_id() == ""){
     session_start();
 }
-    
+
 class Index
 {
     protected $core;
