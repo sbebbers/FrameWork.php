@@ -59,7 +59,7 @@ class ControllerCore
      *
      * @param   na
      * @author  sbebbington
-     * @date     14 Sep 2016 14:29:23
+     * @date    14 Sep 2016 14:29:23
      * @version 0.1.4-RC3
      * @return
      */

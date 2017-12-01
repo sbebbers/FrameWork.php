@@ -6,7 +6,6 @@ use DateTime;
 
 class Library
 {
-    public $date;
     private $key;
     private $encryption;
     
