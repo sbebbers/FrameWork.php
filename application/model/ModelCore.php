@@ -12,7 +12,9 @@ require_once(serverPath("/core/FrameworkException.php"));
 
 class ModelCore
 {
-    protected $db, $connection, $tables;
+    protected $db,
+              $connection,
+              $tables;
     protected $charSet    = "utf8";
     
     /**

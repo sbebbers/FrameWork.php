@@ -17,7 +17,6 @@ if(session_id() == ""){
 class Index
 {
     protected $core;
-    public $timeZone = "Europe/London";
 
     /**
      * This will initiate the core to load the view
@@ -39,7 +38,7 @@ class Index
         if($this->checkPageLoad() == true){
             $_error = null;
             try{
-                setTimeZone($this->timeZone);
+                setTimeZone(getConfig('timeZone'));
                 $this->core->loadPage();
             }catch(FrameworkException $error){
                 $_error = $error;
