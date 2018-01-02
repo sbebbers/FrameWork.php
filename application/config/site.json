@@ -8,5 +8,7 @@
 	"rc":			true,
 	"dev":			true,
 	"mode":			"test",
-	"timeZone":		"Europe/London"
+	"timeZone":		"Europe/London",
+	"key":			"Skelet0n",
+    "encryptionType":	"AES-128-ECB"
 }

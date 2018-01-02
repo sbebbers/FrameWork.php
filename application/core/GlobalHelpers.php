@@ -10,12 +10,12 @@ use Application\Core\FrameworkException\FrameworkException;
  * 
  * @param   string
  * @author  sbebbington
- * @date    27 Jul 2017 15:19:51
+ * @date    2 Jan 2018 10:48:15
  * @version 0.1.4-RC3
  * @return  string
  * @throws  FrameworkException
  */
-function getConfig(string $parameter= 'cookieDomain'){
+function getConfig(string $parameter= ''){
     if(!file_exists(serverPath("/config/site.json"))){
         throw new FrameworkException("A site.json file is required in the configuration at the application level for the framework to run", "0x02");
     }
@@ -112,12 +112,12 @@ function getUserIPAddress(){
  *
  * @param   na
  * @author  sbebbington
- * @date    3 Feb 2017 09:04:29
+ * @date    2 Jan 2018 10:48:58
  * @version 0.1.4-RC3
  * @return  string
  */
 function getServerIPAddress(){
-    return "{$_SERVER['SERVER_ADDR']}";
+    return $_SERVER['SERVER_ADDR'];
 }
 
 /**
@@ -139,12 +139,12 @@ function getSegment(){
  * 
  * @param   na
  * @author  sbebbington
- * @date    2 Mar 2017 - 11:49:38
+ * @date    2 Jan 2018 10:49:31
  * @version 0.1.4-RC3
  * @return  string
  */
 function getSelf(){
-    return "{$_SERVER['PHP_SELF']}";
+    return $_SERVER['PHP_SELF'];
 }
 
 /**

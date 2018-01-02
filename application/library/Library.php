@@ -6,12 +6,12 @@ use DateTime;
 
 class Library
 {
-    private $key;
-    private $encryption;
+    private $key,
+            $encryption;
     
     public function __construct(){
-        $this->key          = 'Skelet0n';
-        $this->encryption   = "AES-128-ECB";
+        $this->key          = getConfig('key');
+        $this->encryption   = getConfig('encryptionType');
     }
     
     /**
