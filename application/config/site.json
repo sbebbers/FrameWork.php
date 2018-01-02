@@ -7,5 +7,6 @@
 	"version":		"0.1.4-RC3",
 	"rc":			true,
 	"dev":			true,
-	"mode":			"test"
+	"mode":			"test",
+	"timeZone":		"Europe/London"
 }
