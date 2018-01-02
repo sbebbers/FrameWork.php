@@ -96,16 +96,14 @@ function getMonthName(_m, _f){
  * Specific page-load events for date-picker
  */
 $(function(){
-	/**
-	 * @todo	Finish the change event handling off
-	 */
 	$("#day, #month, #year").on("change", function(){
 		_d = $("#day").val(),_m = $("#month").val(),_y = $("#year").val(), _f = null;
-		if(""+parseInt(_m) == "NaN"){
+		if("NaN" === parseInt(_m)){
 			_f = Boolean(_m.length > 3);
 			_m = getNumericMonth(_m);
 		}
 		_v = checkDate(_d, _m, _y);
-		
+		/* Changes day to valid day if not correct */
+		$("#day").val(_v.day);
 	})
 });

@@ -11,84 +11,85 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
 
 if(session_id() == ""){
-	session_start();
+    session_start();
 }
-	
+
 class Index
 {
-	protected $core;
-	public $timeZone = "Europe/London";
+    protected $core;
 
-	/**
-	 * This will initiate the core to load the view
-	 * according to the uri path, one may also
-	 * change the default timezone for the project
-	 * by altering the public $timeZone string above
-	 * for a list of valid timezones, see:
-	 * http://php.net/manual/en/timezones.php
-	 * 
-	 * @param	na
-	 * @author	sbebbington
-	 * @date	24 Oct 2017 10:08:48
-	 * @version 0.1.4-RC2
-	 * @return	void
-	 */
-	public function __construct(){
-	    $this->core	= new Core();
-	    
-		if($this->checkPageLoad() == true){
-		    $error = null;
-		    try{
-		        setTimeZone($this->timeZone);
-		        $this->core->loadPage();
-		    }catch(FrameworkException $error){
-		    }catch(Exception $error){
-		    }
-		    
-		    if(!is_null($error)){
-		        writeToLogFile($error);
-		    }
-		}
-	}
-	
-	/**
-	 * Check if request is for page view
-	 * or site asset
-	 *
-	 * @param	na
-	 * @author	sbebbington
-	 * @date	28 Jul 2017 - 17:03:54
-	 * @version 0.1.4-RC2
-	 * @return	boolean
-	 */
-	public function checkPageLoad(){
-	    $exts = array_filter(
-	        explode('/', $_SERVER['REQUEST_URI']),
-	        'strlen'
-	    );
-	    $last	= [];
-	    if (count($exts)) {
-	        $last	= explode(".", $exts[count($exts)-1] ?? '');
-	        $last	= (count($last) > 0) ? $last[count($last)-1] : '';
-	        return in_array($last, $this->core->ignoredExts) ? false : true;
-	    }
-	    return true;
-	}
+    /**
+     * This will initiate the core to load the view
+     * according to the uri path, one may also
+     * change the default timezone for the project
+     * by altering the public $timeZone string above
+     * for a list of valid timezones, see:
+     * http://php.net/manual/en/timezones.php
+     * 
+     * @param   na
+     * @author  sbebbington
+     * @date    2 Jan 2018 10:44:24
+     * @version 0.1.4-RC3
+     * @return  void
+     */
+    public function __construct(){
+        $this->core = new Core();
+        
+        if($this->checkPageLoad() == true){
+            $_error = null;
+            try{
+                setTimeZone(getConfig('timeZone'));
+                $this->core->loadPage();
+            }catch(FrameworkException $error){
+                $_error = $error;
+            }catch(Exception $error){
+                $_error = $error;
+            }
+            
+            if(!is_null($_error)){
+                writeToLogFile($_error);
+            }
+        }
+    }
+    
+    /**
+     * Check if request is for page view
+     * or site asset
+     *
+     * @param   na
+     * @author  sbebbington
+     * @date    28 Jul 2017 - 17:03:54
+     * @version 0.1.4-RC3
+     * @return  boolean
+     */
+    public function checkPageLoad(){
+        $exts = array_filter(
+            explode('/', $_SERVER['REQUEST_URI']),
+            'strlen'
+        );
+        $last    = [];
+        if (count($exts)) {
+            $last   = explode(".", $exts[count($exts)-1] ?? '');
+            $last   = (count($last) > 0) ? $last[count($last)-1] : '';
+            return in_array($last, $this->core->ignoredExts) ? false : true;
+        }
+        return true;
+    }
 }
 
 /**
  * This will correctly route to the application
  * directory on your server
  *
- * @param	string
- * @author	Rob Gill && sbebbington
- * @date	26 Sep 2017 09:50:01
- * @version 0.1.4-RC2
- * @return	string
+ * @param   string
+ * @author  Rob Gill && sbebbington
+ * @date    26 Sep 2017 09:50:01
+ * @version 0.1.4-RC3
+ * @return  string
  */
 function serverPath(string $routeTo = ''){
-	$baseDir = dirname(__DIR__) . "/application";
-	return str_replace("\\","/", "{$baseDir}{$routeTo}");
+    $baseDir = dirname(__DIR__) . "/application";
+    return str_replace("\\","/", "{$baseDir}{$routeTo}");
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...

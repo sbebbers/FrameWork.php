@@ -1,11 +1,14 @@
 {
 	"baseURL":		"http://framework.php.dev",
 	"protocol":		"http",
-	"cookieDomain": "framework.php.dev",
+	"cookieDomain": 	"framework.php.dev",
 	"uriPath":		"/",
-	"loadCoreController" : true,
-	"version":		"0.1.4-RC2",
+	"loadCoreController" : 	true,
+	"version":		"0.1.4-RC3",
 	"rc":			true,
 	"dev":			true,
-	"mode":			"test"
+	"mode":			"test",
+	"timeZone":		"Europe/London",
+	"key":			"Skelet0n",
+    "encryptionType":	"AES-128-ECB"
 }
