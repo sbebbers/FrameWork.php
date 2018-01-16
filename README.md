@@ -1,5 +1,6 @@
 # FrameWork.php #
 ### Developed by Shaun Bebbington and Linden Bryon ###
+#### Special thanks to Aaron Zvimba for his help, advice and support ####
 
 FrameWork.php started out life as a simple and quite messy OO MVC framework in order to mentor a junior PHP developer whilst I was working at Rushcliff Ltd in Burton-Upon-Trent, Staffordshire. The idea was to link a controller to each page, and have a model per controller, so that the controller class would act as a middle-man between the front-end view and the database as necessary.
 
@@ -20,5 +21,5 @@ Linden has set up on GitHub so I have invited him as a collaborator on this proj
 If you have any comments then please feel free to contact me.
 
 Shaun Bebbington.
-Twitter: @ShaunBebbers
+Twitter: @YearOfCodes
 --

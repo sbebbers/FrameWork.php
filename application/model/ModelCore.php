@@ -23,7 +23,7 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    26 Sep 2017 14:43:38
-     * @version 0.1.4-RC3
+     * @version 0.1.4-RC4
      * @return  void
      * @throws  FrameworkException
      */
@@ -31,7 +31,7 @@ class ModelCore
         if(file_exists(serverPath('/config/database.json'))){
             $dbConfig   = json_decode(file_get_contents(serverPath('/config/database.json')), true);
         }else{
-            throw new FrameworkException("The framework requires a database configuration file at the application layer", "0xdb");
+            throw new FrameworkException("The framework requires a database configuration file at the application layer", 0xdb);
         }
         $this->db       = $dbConfig['db'];
         $password       = $dbConfig['password'] ?? '';
@@ -60,7 +60,7 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    24 Oct 2017 13:26:43
-     * @version 0.1.4-RC3
+     * @version 0.1.4-RC4
      * @return  void
      */
     private function setTables(string $db = ''){
@@ -83,7 +83,7 @@ class ModelCore
      * @param   PDOStatement, array, bool, string, constant
      * @author  sbebbington
      * @date    24 Oct 2017 13:32:46
-     * @version 0.1.4-RC3
+     * @version 0.1.4-RC4
      * @return  resource
      * @throws  FrameworkException
      */
@@ -94,7 +94,7 @@ class ModelCore
         if(empty($query) || empty($parameters)){
             throw new FrameworkException(
                 "PDO execution called without valid query or parameters",
-                "0x07",
+                0x07,
                 array(
                     "class"     => $caller['class'] ?? __CLASS__,
                     "method"    => $caller['function'] ?? __METHOD__,
@@ -112,7 +112,7 @@ class ModelCore
         }else{
             throw new FrameworkException(
                 "Unable to run query: {$query}",
-                "0x08",
+                0x08,
                 array(
                     "class" => $caller['class'] ?? __CLASS__,
                     "method" => $caller['function'] ?? __METHOD__,
