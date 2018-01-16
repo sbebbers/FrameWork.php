@@ -111,9 +111,10 @@ class ModelCore
             return (strlen($key) > 0) ? $return[$key] : $return;
         }else{
             throw new FrameworkException(
-                "Unable to run query: {$query}",
+                "Unable to run query, see PDOStatement as detailed",
                 0x08,
                 array(
+                    "PDOStatement" => $query,
                     "class" => $caller['class'] ?? __CLASS__,
                     "method" => $caller['function'] ?? __METHOD__,
                     "parameters" => $parameters
