@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.4-RC3 #
+# Project FrameWork.php MVC v0.1.4-RC4 #
 
 This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up your path in the allowed segments, the name of your path will point to the /application/view folder - you must place a view file with the same name as the allowed path with a .phtml extension, so in the example home in the $allowedSegments resource in the FrameworkCore.php will load the home.phtml view in /application/view
 
@@ -194,5 +194,14 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				the top of each new controller. Simply:
 				use Application\Controller\ControllerCore;
 				in each controller instead if the loadCoreController JSON
-				object is set in site.json. 
+				object is set in site.json.
+	@changes as of 2018-01-16
+				Since the last release, I've made some cosmetic and necessary
+				changes to the code-base thanks to a code review from my
+				friend Aaron Zvimba. There is also an over-sight that I
+				missed on throwing a FrameworkExcpetion, in that each
+				FrameworkException code was causing a bug whereby the hex
+				string was not being correctly parsed to an integer type,
+				so I have corrected this in each case and therefore there
+				is a new release candidate.
 --
