@@ -1,7 +1,11 @@
 {
-	"password": "",
-	"user":		"root",
-	"host":		"127.0.0.1",
-	"port":		3306,
-	"db":		"skeleton"
+	"password":{
+		"readUser": "v5b$!7jykzHI3XOL1kl9+GeNzIJmHw==!xD7T-LO",
+		"writeUser": "(ZPO:eC#kzHI3XOL1kl9+GeNzIJmHw==N2jMzx8i"
+	},
+	"readUser": "readuser",
+	"writeUser": "root",
+	"host": "127.0.0.1",
+	"port": 3306,
+	"db": "skeleton"
 }

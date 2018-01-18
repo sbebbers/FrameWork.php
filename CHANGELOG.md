@@ -204,4 +204,14 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				string was not being correctly parsed to an integer type,
 				so I have corrected this in each case and therefore there
 				is a new release candidate.
+	@changes as of 2018-01-16
+				After a quick fix for a new RC, I have separated out the
+				modelling logic to allow for read and write users to allow
+				for two users per database, one with read/write permissions
+				and the other with read only permissioms. The idea is to
+				limit write access to only when needed; for instance, in a
+				CMS with admin area, the admin log in will use the database
+				read/write user, whilst most of the front-end stuff will
+				access the database via the read only user; this should
+				limit the opportunity for SQL injection and such.
 --

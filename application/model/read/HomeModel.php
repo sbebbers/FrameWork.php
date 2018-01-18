@@ -1,5 +1,7 @@
 <?php
-namespace Application\Model;
+namespace Application\Model\Read;
+
+use Application\Model\ModelCore;
 
 require_once(serverPath("/model/ModelCore.php"));
 
@@ -7,7 +9,7 @@ class HomeModel extends ModelCore
 {
     protected $table;
     public function __construct(){
-        ModelCore::__construct();
+        ModelCore::__construct("readUser");
         $this->table = $this->tables->view;
     }
     
