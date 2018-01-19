@@ -222,11 +222,12 @@ function logErrorPath(string $routeTo = ''){
  * then it will append the data to the
  * file;
  *
- * @param   array | stdClass
+ * @param   array | mixed
  * @author  sbebbington
- * @date    24 Oct 2017 12:54:49
+ * @date    19 Oct 2018 13:38:49
  * @version 0.1.5-RC1
  * @return  resource | false
+ * @throws  Exception
  */
 function writeToLogFile($error = []){
     if(empty($error)){
@@ -263,8 +264,7 @@ function writeToLogFile($error = []){
     $error  = json_encode($error);
     
     if(!file_exists($fileName)){
-        if(file_put_contents($fileName, "")){
-        }else{
+        if(!file_put_contents($fileName, "")){
             throw new Exception("File {$fileName} could not be created", 0xf17e);
         }
     }

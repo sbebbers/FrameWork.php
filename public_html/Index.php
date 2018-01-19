@@ -28,7 +28,7 @@ class Index
      * 
      * @param   na
      * @author  sbebbington
-     * @date    2 Jan 2018 10:44:24
+     * @date    19 Jan 2018 13:38:24
      * @version 0.1.5-RC1
      * @return  void
      */
@@ -47,7 +47,11 @@ class Index
             }
             
             if(!is_null($_error)){
-                writeToLogFile($_error);
+                try{
+                    writeToLogFile($_error);
+                }catch(Exception $e){
+                    echo '<!-- unable to write to error log: ' . print_r($e, true_) . ' -->';
+                }
             }
         }
     }
