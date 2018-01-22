@@ -214,4 +214,12 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				read/write user, whilst most of the front-end stuff will
 				access the database via the read only user; this should
 				limit the opportunity for SQL injection and such.
+	@changes as of 2018-01-22
+				I've made the miscellaneous meta titles in the header able
+				to be set in the pagesata.json configuration file. In the
+				metaData.default object is the information for the home
+				page, and each specific view has it's own dataset thereafter.
+				Note that the metaData.default object is assumed as required;
+				if this is empty then please put a literal default in your
+				header or header partial. 
 --

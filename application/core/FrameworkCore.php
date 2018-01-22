@@ -16,6 +16,7 @@ class Core extends HtmlBuilder
            $controller,
            $title,
            $description,
+           $metaData,
            $serverPath,
            $root,
            $flash,
@@ -49,6 +50,10 @@ class Core extends HtmlBuilder
             throw new FrameworkException("Please set up a pages.json file in the config folder", 0x00);
         }
         $this->pageData     = $this->getPageData();
+        $this->metaData     = '';
+        if(!empty($this->pageData['metaData'])){
+            $this->metaData = $this->setMetaData($this->pageData['metaData']);
+        }
         
         $this->setErrorReporting();
         $this->setUri();        
@@ -178,6 +183,36 @@ class Core extends HtmlBuilder
             return [];
         }
         return json_decode(file_get_contents(serverPath('/config/pagedata.json')), true);
+    }
+    
+    /**
+     * Sets the page matadata according to the
+     * pagedata.json configuration file
+     * 
+     * @author  sbebbington
+     * @date    22 Jan 2018 09:38:02
+     * @version 0.1.5-RC1
+     * @return  string
+     */
+    public function setMetaData(array $pageData = []){
+        if(empty($pageData) || empty($pageData['default'])){
+            return '';
+        }
+        $metaData = "";
+        
+        if((empty($this->segment) || $this->segment == 'home') || !empty($pageData["{$this->segment}"])){
+            if(!empty($pageData["{$this->segment}"])){
+                $pageData = $pageData["{$this->segment}"];
+            }else if(empty($this->segment) || $this->segment == 'home'){
+                $pageData = $pageData['default'];
+            }
+            
+            foreach($pageData as $key => $data){
+                $metaData .= "<meta name=\"{$key}\" content=\"{$data}\" />" . PHP_EOL;
+            }
+        }
+        
+        return $metaData;
     }
     
     /**

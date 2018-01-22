@@ -6,5 +6,15 @@
 	"descriptions":{
 		"home":			"The Skeleton",
 		"date-example":	"Example of how to develop a simple form in Framework.php"
+	},
+	"metaData":{
+		"default":{
+			"author":	"Shaun Bebbington",
+			"twitter":	"@YearOfCodes"
+		},
+		"date-example":{
+			"author":	"Shaun Bebbington",
+			"twitter":	"@YearOfCodes"
+		}
 	}
 }
