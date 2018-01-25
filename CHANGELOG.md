@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.4-RC4 #
+# Project FrameWork.php MVC v0.1.5-RC1 #
 
 This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up your path in the allowed segments, the name of your path will point to the /application/view folder - you must place a view file with the same name as the allowed path with a .phtml extension, so in the example home in the $allowedSegments resource in the FrameworkCore.php will load the home.phtml view in /application/view
 
@@ -24,7 +24,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 --
 
 
-	@version	0.1.4-RC3
+	@version	0.1.5-RC1
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -204,4 +204,22 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				string was not being correctly parsed to an integer type,
 				so I have corrected this in each case and therefore there
 				is a new release candidate.
+	@changes as of 2018-01-16
+				After a quick fix for a new RC, I have separated out the
+				modelling logic to allow for read and write users to allow
+				for two users per database, one with read/write permissions
+				and the other with read only permissioms. The idea is to
+				limit write access to only when needed; for instance, in a
+				CMS with admin area, the admin log in will use the database
+				read/write user, whilst most of the front-end stuff will
+				access the database via the read only user; this should
+				limit the opportunity for SQL injection and such.
+	@changes as of 2018-01-22
+				I've made the miscellaneous meta titles in the header able
+				to be set in the pagesata.json configuration file. In the
+				metaData.default object is the information for the home
+				page, and each specific view has it's own dataset thereafter.
+				Note that the metaData.default object is assumed as required;
+				if this is empty then please put a literal default in your
+				header or header partial. 
 --

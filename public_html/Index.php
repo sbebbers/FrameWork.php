@@ -28,8 +28,8 @@ class Index
      * 
      * @param   na
      * @author  sbebbington
-     * @date    2 Jan 2018 10:44:24
-     * @version 0.1.4-RC4
+     * @date    19 Jan 2018 13:38:24
+     * @version 0.1.5-RC1
      * @return  void
      */
     public function __construct(){
@@ -47,7 +47,11 @@ class Index
             }
             
             if(!is_null($_error)){
-                writeToLogFile($_error);
+                try{
+                    writeToLogFile($_error);
+                }catch(Exception $e){
+                    echo '<!-- unable to write to error log: ' . print_r($e, true_) . ' -->';
+                }
             }
         }
     }
@@ -59,7 +63,7 @@ class Index
      * @param   na
      * @author  sbebbington
      * @date    28 Jul 2017 - 17:03:54
-     * @version 0.1.4-RC4
+     * @version 0.1.5-RC1
      * @return  boolean
      */
     public function checkPageLoad(){
@@ -84,7 +88,7 @@ class Index
  * @param   string
  * @author  Rob Gill && sbebbington
  * @date    26 Sep 2017 09:50:01
- * @version 0.1.4-RC4
+ * @version 0.1.5-RC1
  * @return  string
  */
 function serverPath(string $routeTo = ''){

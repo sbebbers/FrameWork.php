@@ -1,8 +1,8 @@
 <?php
 use Application\Controller\ControllerCore;
-use Application\Model\HomeModel;
+use Application\Model\Read\HomeModel;
 
-require_once(serverPath("/model/HomeModel.php"));
+require_once(serverPath("/model/read/HomeModel.php"));
 
 class HomeController extends ControllerCore
 {
@@ -31,7 +31,7 @@ class HomeController extends ControllerCore
      * @param   string, string
      * @author  sbebbington
      * @date    1 Mar 2017 09:20:43
-     * @version 0.1.4-RC4
+     * @version 0.1.5-RC1
      * @return  boolean
      */
     public function passwordTester(string $password = "Password", string $secret = 'password'){

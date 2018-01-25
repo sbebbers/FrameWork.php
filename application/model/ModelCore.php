@@ -16,6 +16,11 @@ class ModelCore
               $connection,
               $tables;
     protected $charSet    = "utf8";
+    protected $userTypes = [
+        "readUser",
+        "writeUser"
+    ];
+    private $dbUser;
     
     /**
      * Constructor
@@ -23,23 +28,31 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    26 Sep 2017 14:43:38
-     * @version 0.1.4-RC4
+     * @version 0.1.5-RC1
      * @return  void
      * @throws  FrameworkException
      */
-    public function __construct(){
+    public function __construct(string $dbUser = ''){
+        if(!in_array($dbUser, $this->userTypes)){
+            throw new FrameworkException(
+                "Database user type was not set or is incorrect when constructing the ModelCore",
+                0x03
+            );
+        }
+        
         if(file_exists(serverPath('/config/database.json'))){
             $dbConfig   = json_decode(file_get_contents(serverPath('/config/database.json')), true);
         }else{
             throw new FrameworkException("The framework requires a database configuration file at the application layer", 0xdb);
         }
-        $this->db       = $dbConfig['db'];
-        $password       = $dbConfig['password'] ?? '';
-        $this->tables   = new stdClass();
+        
         $this->lib      = new Library();
+        $this->db       = $dbConfig['db'];
+        $password       = $this->lib->decryptIt($dbConfig['password'][$dbUser]);
+        $this->tables   = new stdClass();
         
         try{
-            $this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig['user'], $password);
+            $this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig[$dbUser], $password);
             $this->setTables($this->db);
         }catch(PDOException $e){
             throw new FrameworkException(
@@ -48,10 +61,38 @@ class ModelCore
                 array(
                     "class" => __CLASS__,
                     "method" => __METHOD__,
-                    "classObjects" => $this
+                    "config" => $dbConfig,
+                    "dbUser" => $dbUser
                 )
             );
         }
+        
+        $this->setDbUser($dbUser);
+    }
+    
+    /**
+     * Sets the $dbUser object
+     * 
+     * @param string $dbUser
+     * @author  sbebbington
+     * @date    16 Jan 2018 15:36:02
+     * @version 0.1.5-RC1
+     * @return  void
+     */
+    public function setDbUser(string $dbUser){
+        $this->dbUser = $dbUser;
+    }
+    
+    /**
+     * Gets the $dbUser object
+     * 
+     * @author  sbebbington
+     * @date    16 Jan 2018 15:38:42
+     * @version 0.1.5-RC1
+     * @return  string
+     */
+    public function getDbUser(){
+        return $this->dbUser;
     }
     
     /**
@@ -60,7 +101,7 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    24 Oct 2017 13:26:43
-     * @version 0.1.4-RC4
+     * @version 0.1.5-RC1
      * @return  void
      */
     private function setTables(string $db = ''){
@@ -83,7 +124,7 @@ class ModelCore
      * @param   PDOStatement, array, bool, string, constant
      * @author  sbebbington
      * @date    24 Oct 2017 13:32:46
-     * @version 0.1.4-RC4
+     * @version 0.1.5-RC1
      * @return  resource
      * @throws  FrameworkException
      */
@@ -111,9 +152,10 @@ class ModelCore
             return (strlen($key) > 0) ? $return[$key] : $return;
         }else{
             throw new FrameworkException(
-                "Unable to run query: {$query}",
+                "Unable to run query, see PDOStatement as detailed",
                 0x08,
                 array(
+                    "PDOStatement" => $query,
                     "class" => $caller['class'] ?? __CLASS__,
                     "method" => $caller['function'] ?? __METHOD__,
                     "parameters" => $parameters
