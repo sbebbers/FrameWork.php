@@ -3,6 +3,7 @@ namespace Application\Library;
 
 use Application\Core\FrameworkException\FrameworkException;
 use DateTime;
+use stdClass;
 
 class Library
 {
@@ -604,5 +605,17 @@ class Library
          
         $context    = stream_context_create($options);
         return file_get_contents($url, false, $context);
+    }
+    
+    /**
+     * Checks if count() can be used on an object or scalar
+     * 
+     * @param   mixed $object
+     * @author	sbebbeington
+     * @date	13 Feb 2018 13:26:37
+     * @return	boolean
+     */
+    public function isCountable($object = null){
+        return ((is_array($object) || $object instanceof stdClass) && !empty($object));
     }
 }

@@ -41,23 +41,6 @@ function isHttps(){
 }
 
 /**
- * Gets the path to the public facing directory
- * To include further file paths, include a following
- * / at the end
- *
- * @param   string, string
- * @author  sbebbington
- * @date	21 Nov 2017 09:31:00
- * @version 0.1.5-RC2
- * @return  string
- */
-function documentRoot(string $routeTo = '', string $replace = 'public_html'){
-    $baseDir = str_replace("\\", "/", dirname(__FILE__));
-    $baseDir = str_replace("application/core", $replace, $baseDir);
-    return str_replace("//", "/", $baseDir . $routeTo);
-}
-
-/**
  * Returns the name of the current host file from
  * the PHP $_SERVER global thing #n00b
  *
