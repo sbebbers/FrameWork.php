@@ -20,9 +20,9 @@
     			->text($this->content, true)
     			->open("hr", '', null, true)
     		->close("div");
-    		##if(!empty($this->easterEgg)):
-    		##    echo "<!-- <pre>{$this->easterEgg}</pre> -->";
-    		##endif;
+    		if(!empty($this->easterEgg)):
+    		    echo "<pre>{$this->easterEgg}</pre>";
+    		endif;
     		require_once("{$this->partial['footer']}");
     	$this->close("body");
     ?>
