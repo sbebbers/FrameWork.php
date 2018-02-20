@@ -1,6 +1,10 @@
 <?php
 namespace Application\Library;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 use Application\Core\FrameworkException\FrameworkException;
 use DateTime;
 

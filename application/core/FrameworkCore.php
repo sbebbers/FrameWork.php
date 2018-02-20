@@ -1,6 +1,10 @@
 <?php
 namespace Application\Core\Framework;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 use \Application\Core\Framework\HtmlBuilder;
 use stdClass;
 use Application\Core\FrameworkException\FrameworkException;

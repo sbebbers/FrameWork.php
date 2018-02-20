@@ -1,6 +1,10 @@
 <?php
 namespace Application\Model\Read;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../../view/403.phtml");
+}
+
 use Application\Model\ModelCore;
 
 require_once(serverPath("/model/ModelCore.php"));

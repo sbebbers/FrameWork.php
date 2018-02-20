@@ -1,6 +1,10 @@
 <?php
 use Application\Core\FrameworkException\FrameworkException;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 /**
  * Will return the specific site parameter from
  * the site.json config - will default to the

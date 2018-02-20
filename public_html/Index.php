@@ -2,6 +2,10 @@
 use Application\Core\Framework\Core;
 use Application\Core\FrameworkException\FrameworkException;
 
+if(defined('FRAMEWORKPHP') == false){
+    define('FRAMEWORKPHP', 0xffff);
+}
+
 require_once(serverPath('/core/FrameworkCore.php'));
 
 header('X-Content-Type-Options: nosniff');

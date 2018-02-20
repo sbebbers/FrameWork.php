@@ -2,6 +2,11 @@
 namespace Application\Controller;
 
 use Application\Library\Library;
+
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 use stdClass;
 
 require_once(serverPath('/library/Library.php'));

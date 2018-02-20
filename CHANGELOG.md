@@ -222,4 +222,9 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				Note that the metaData.default object is assumed as required;
 				if this is empty then please put a literal default in your
 				header or header partial. 
+	@changes as of 2018-02-20
+				I've added in some security checks and some other mildly good
+				practise to the application layer. The next release candidate
+				will allow (but not recommend) that the application directory
+				be *inside* the public facing folder.
 --
