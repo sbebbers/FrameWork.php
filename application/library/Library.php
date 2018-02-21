@@ -7,6 +7,7 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 
 use Application\Core\FrameworkException\FrameworkException;
 use DateTime;
+use stdClass;
 
 class Library
 {
@@ -211,16 +212,16 @@ class Library
      *
      * @param   object, string, array, any, [boolean]
      * @author  sbebbington
-     * @date    26 Sep 2017 09:46:32
+     * @date	21 Feb 2018 09:53:55
      * @version 0.1.5-RC3
      * @return  boolean | string
      */
-    public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
+    public function testUnit(stdClass $object, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
         if(getConfig('mode') != 'test'){
             return null;
         }
-        if($object == null){
-            return print("<p>Pass an object to this method in order to test it</p>");
+        if(!$object instanceof stdClass){
+            return print("<p>Pass an object of type stdCalss to this method in order to test it</p>");
         }
         if($method == ''){
             return print("<p>You need to specify the name of the method that you want to test</p>");
@@ -470,6 +471,7 @@ class Library
      * @date    30 Oct 2017 11:19:41
      * @version 0.1.4
      * @return  DateTime
+     * @deprecated
      */
     public function sanitizeDateString($date = null){
         $error = false;
@@ -542,6 +544,7 @@ class Library
      * @date    30 Oct 2017 11:37:27
      * @version 0.1.4
      * @return  string
+     * @deprecated
      */
     protected function sanitizeTimeString($time = ''){
         $timeZoneType = "+";
