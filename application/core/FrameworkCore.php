@@ -44,7 +44,7 @@ class Core extends HtmlBuilder
      * @param   field_type
      * @author  sbebbington
      * @date    26 Sep 2017 14:42:15
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      * @throws  FrameworkException
      */
@@ -84,7 +84,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    28 Jul 2017 14:29:45
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  boolean
      * @throws  FrameworkException
      */
@@ -112,7 +112,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    25 Jul 2017 09:40:06
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     protected function setErrorReporting(){
@@ -131,7 +131,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    28 Jul 2017 11:50:03
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     protected function setUri(){
@@ -154,7 +154,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    25 Jul 2017 09:48:12
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     protected function setGetGlobal(){
@@ -179,7 +179,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    25 Jul 2017 10:50:31
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  array
      */
     public function getPageData(){
@@ -195,7 +195,7 @@ class Core extends HtmlBuilder
      * 
      * @author  sbebbington
      * @date    22 Jan 2018 09:38:02
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  string
      */
     public function setMetaData(array $pageData = []){
@@ -228,7 +228,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    25 Jul 2017 09:50:40
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     protected function checkExtension(){
@@ -250,7 +250,7 @@ class Core extends HtmlBuilder
      * @param   resource | \stdClass, string
      * @author  sbebbington
      * @date    30 May 2017 09:49:39
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function setView($instance, string $masterKey = ''){
@@ -271,7 +271,7 @@ class Core extends HtmlBuilder
      * @param   boolean
      * @author  sbebbington
      * @date    28 Jul 2017 12:04:03
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  resource
      */
     public function emptySession(bool $emptyFlash = false){
@@ -291,7 +291,7 @@ class Core extends HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    25 Jul 2017 10:59:38
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function loadPage(){

@@ -35,7 +35,7 @@ class HomeController extends ControllerCore
      * @param   string, string
      * @author  sbebbington
      * @date    1 Mar 2017 09:20:43
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  boolean
      */
     public function passwordTester(string $password = "Password", string $secret = 'password'){

@@ -1,14 +1,15 @@
 {
-	"baseURL": "http://framework.php.dev",
+	"baseURL": "http://framework.php.local",
 	"protocol": "http",
-	"cookieDomain": "framework.php.dev",
+	"cookieDomain": "framework.php.local",
 	"uriPath": "/",
 	"loadCoreController": true,
-	"version": "0.1.4-RC4",
+	"version": "0.1.5-RC3",
 	"rc": true,
 	"dev": true,
 	"mode": "test",
 	"timeZone": "Europe/London",
 	"key": "Skelet0n",
-    "encryptionType": "AES-128-ECB"
+    "encryptionType": "AES-128-ECB",
+    "applicationLayer": "../"
 }

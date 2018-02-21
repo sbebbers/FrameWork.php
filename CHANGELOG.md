@@ -29,7 +29,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 --
 
 
-	@version	0.1.5-RC2
+	@version	0.1.5-RC3
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)

@@ -33,7 +33,7 @@ class Index
      * @param   na
      * @author  sbebbington
      * @date    19 Jan 2018 13:38:24
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function __construct(){
@@ -67,7 +67,7 @@ class Index
      * @param   na
      * @author  sbebbington
      * @date    28 Jul 2017 - 17:03:54
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  boolean
      */
     public function checkPageLoad(){
@@ -92,7 +92,7 @@ class Index
  * @param   string
  * @author  Rob Gill && sbebbington
  * @date    26 Sep 2017 09:50:01
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function serverPath(string $routeTo = ''){

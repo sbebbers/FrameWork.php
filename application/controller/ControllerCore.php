@@ -40,7 +40,7 @@ class ControllerCore
      * @param   Array
      * @author  Linden && sbebbington
      * @date    7 Oct 2016 14:54:10
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function setPost(){
@@ -55,7 +55,7 @@ class ControllerCore
      * @param   na
      * @author  sbebbington
      * @date    16 Jun 2016 11:25:04
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  array
      */
     public function emptyPost(){
@@ -69,7 +69,7 @@ class ControllerCore
      * @param   na
      * @author  sbebbington
      * @date    14 Sep 2016 14:29:23
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return
      */
     public function emptySession(){
@@ -85,7 +85,7 @@ class ControllerCore
      * @param   string, string | int | boolean
      * @author  sbebbington
      * @date    14 Sep 2016 09:48:53
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function setFlashMessage($key, $value){
