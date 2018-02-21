@@ -5,8 +5,8 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 #### File Structure: ####
 
 	../application
-	   --> config
-	      \ This is where to set the database and site credentials and such
+		--> config
+			\ This is where to set the database and site credentials and such
 		--> controller
 			\ For all of the custom controller methods and logic
 		--> core
@@ -23,8 +23,8 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 			\ Helper functions and other such things
 		--> view
 			\ HTML (with embedded PHP) views
-			--> partial
-				\ For partial HTML views such as headers, footers and menus
+		--> partial
+			\ For partial HTML views such as headers, footers and menus
 
 --
 

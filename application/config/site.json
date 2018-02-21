@@ -10,6 +10,6 @@
 	"mode": "test",
 	"timeZone": "Europe/London",
 	"key": "Skelet0n",
-    "encryptionType": "AES-128-ECB",
-    "applicationLayer": "../"
+  "encryptionType": "AES-128-ECB",
+  "applicationLayer": "../"
 }
