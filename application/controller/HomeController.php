@@ -24,7 +24,7 @@ class HomeController extends ControllerCore
             // we'll simply see the contents of the posted data
             $this->lib->debug($this->post, true);
         }
-        $this->view->easterEgg  = $this->lib->easterEgg();
+        // $this->view->easterEgg  = ''; ## $this->lib->easterEgg();
     }
     
     /**

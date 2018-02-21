@@ -216,12 +216,12 @@ class Library
      * @version 0.1.5-RC3
      * @return  boolean | string
      */
-    public function testUnit(stdClass $object, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
+    public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
         if(getConfig('mode') != 'test'){
             return null;
         }
-        if(!$object instanceof stdClass){
-            return print("<p>Pass an object of type stdCalss to this method in order to test it</p>");
+        if($object == null){
+            return print("<p>Pass an object to this method in order to test it</p>");
         }
         if($method == ''){
             return print("<p>You need to specify the name of the method that you want to test</p>");
@@ -233,10 +233,10 @@ class Library
         $failCol    = "color: red;";
     
         if(!is_array($params) && (is_string($params) || is_numeric($params))){
-            $pass    = $object->$method($params);
+            $pass    = $object->{$method}($params);
             $tested = true;
         }else if(is_array($params)){
-            $pass = $object->$method(
+            $pass = $object->{$method}(
                 $params[0],
                 isset($params[1]) ? $params[1] : null,
                 isset($params[2]) ? $params[2] : null,
