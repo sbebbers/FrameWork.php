@@ -13,6 +13,11 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 			\ Contains the main engine room for looking up page requests,
 				and loading the right controller and view
 		--> model
+			\
+			--> read
+			|	\ For read access users to database
+			--> write
+			|	\ For read/write access to database
 			\ main Db connection and model logic
 		--> library
 			\ Helper functions and other such things
