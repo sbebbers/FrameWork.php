@@ -2,6 +2,10 @@
 use Application\Controller\ControllerCore;
 use Application\Model\Read\HomeModel;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 require_once(serverPath("/model/read/HomeModel.php"));
 
 class HomeController extends ControllerCore
@@ -15,12 +19,12 @@ class HomeController extends ControllerCore
             $this->view->{$key} = htmlspecialchars_decode($data);
         }
         $this->setFlashMessage('message', "Made you look :-P");
-//         if(isset($this->post['submit'])){
-//             // Do something with the posted data here, but for now
-//             // we'll simply see the contents of the posted data
-//             $this->lib->debug($this->post, true);
-//         }
-//         $this->view->easterEgg  = $this->lib->easterEgg();
+        if(isset($this->post['submit'])){
+            // Do something with the posted data here, but for now
+            // we'll simply see the contents of the posted data
+            $this->lib->debug($this->post, true);
+        }
+        // $this->view->easterEgg  = ''; ## $this->lib->easterEgg();
     }
     
     /**
@@ -31,7 +35,7 @@ class HomeController extends ControllerCore
      * @param   string, string
      * @author  sbebbington
      * @date    1 Mar 2017 09:20:43
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  boolean
      */
     public function passwordTester(string $password = "Password", string $secret = 'password'){

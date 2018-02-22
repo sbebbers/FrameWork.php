@@ -13,6 +13,11 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 			\ Contains the main engine room for looking up page requests,
 				and loading the right controller and view
 		--> model
+			\
+			--> read
+			|	\ For read access users to database
+			--> write
+			|	\ For read/write access to database
 			\ main Db connection and model logic
 		--> library
 			\ Helper functions and other such things
@@ -24,7 +29,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 --
 
 
-	@version	0.1.5-RC2
+	@version	0.1.5-RC3
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -222,4 +227,9 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				Note that the metaData.default object is assumed as required;
 				if this is empty then please put a literal default in your
 				header or header partial. 
+	@changes as of 2018-02-20
+				I've added in some security checks and some other mildly good
+				practise to the application layer. The next release candidate
+				will allow (but not recommend) that the application directory
+				be *inside* the public facing folder.
 --

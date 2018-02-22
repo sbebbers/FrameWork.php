@@ -1,6 +1,10 @@
 <?php
 namespace Application\Model;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 use Application\Core\FrameworkException\FrameworkException;
 use Application\Library\Library;
 use PDO;
@@ -28,7 +32,7 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    26 Sep 2017 14:43:38
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      * @throws  FrameworkException
      */
@@ -76,7 +80,7 @@ class ModelCore
      * @param string $dbUser
      * @author  sbebbington
      * @date    16 Jan 2018 15:36:02
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     public function setDbUser(string $dbUser){
@@ -88,7 +92,7 @@ class ModelCore
      * 
      * @author  sbebbington
      * @date    16 Jan 2018 15:38:42
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  string
      */
     public function getDbUser(){
@@ -101,7 +105,7 @@ class ModelCore
      * @param   field_type
      * @author  sbebbington
      * @date    24 Oct 2017 13:26:43
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  void
      */
     private function setTables(string $db = ''){
@@ -124,7 +128,7 @@ class ModelCore
      * @param   PDOStatement, array, bool, string, constant
      * @author  sbebbington
      * @date    24 Oct 2017 13:32:46
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  resource
      * @throws  FrameworkException
      */
