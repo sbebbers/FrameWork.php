@@ -1,6 +1,10 @@
 <?php
 use Application\Core\FrameworkException\FrameworkException;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 /**
  * Will return the specific site parameter from
  * the site.json config - will default to the
@@ -11,7 +15,7 @@ use Application\Core\FrameworkException\FrameworkException;
  * @param   string
  * @author  sbebbington
  * @date    2 Jan 2018 10:48:15
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  * @throws  FrameworkException
  */
@@ -33,7 +37,7 @@ function getConfig(string $parameter= ''){
  * @param   na
  * @author  sbebbington
  * @date    27 Jul 2017 15:35:10
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  boolean
  */
 function isHttps(){
@@ -48,7 +52,7 @@ function isHttps(){
  * @param   string, string
  * @author  sbebbington
  * @date	21 Nov 2017 09:31:00
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function documentRoot(string $routeTo = '', string $replace = 'public_html'){
@@ -64,7 +68,7 @@ function documentRoot(string $routeTo = '', string $replace = 'public_html'){
  * @param   na
  * @author  sbebbington
  * @date    5 Oct 2016 10:55:01
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function host(){
@@ -78,7 +82,7 @@ function host(){
  * @param   string
  * @author  sbebbington
  * @date    24 Jan 2017 09:48:21
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  void
  */
 function setTimeZone(string $timeZone){
@@ -91,7 +95,7 @@ function setTimeZone(string $timeZone){
  * @param   na
  * @author  sbebbington
  * @date    2 Feb 2017 - 09:58:21
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getUserIPAddress(){
@@ -113,7 +117,7 @@ function getUserIPAddress(){
  * @param   na
  * @author  sbebbington
  * @date    2 Jan 2018 10:48:58
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getServerIPAddress(){
@@ -126,7 +130,7 @@ function getServerIPAddress(){
  * @param   na
  * @author  sbebbington
  * @date    6 Feb 2017 - 11:40:40
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getSegment(){
@@ -140,7 +144,7 @@ function getSegment(){
  * @param   na
  * @author  sbebbington
  * @date    2 Jan 2018 10:49:31
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getSelf(){
@@ -153,7 +157,7 @@ function getSelf(){
  * @param   na
  * @author  sbebbington
  * @date    2 Mar 2017 - 13:23:08
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getQueryString(){
@@ -167,7 +171,7 @@ function getQueryString(){
  * @param   na
  * @author  sbebbington
  * @date    27 Jul 2017 - 16:02:26
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function getSiteVersion(){
@@ -181,7 +185,7 @@ function getSiteVersion(){
  * @param   na
  * @author  sbebbington
  * @date    27 Jul 2017 - 16:03:33
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  bool
  */
 function isReleaseCandidate(){
@@ -195,7 +199,7 @@ function isReleaseCandidate(){
  * @param   na
  * @author  sbebbington
  * @date    27 Jul 2017 - 16:05:23
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  bool
  */
 function isDevelopmentVersion(){
@@ -208,7 +212,7 @@ function isDevelopmentVersion(){
  * @param   string
  * @author  Rob Gill && sbebbington
  * @date    16 Aug 2017 - 17:09:28
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  string
  */
 function logErrorPath(string $routeTo = ''){
@@ -225,7 +229,7 @@ function logErrorPath(string $routeTo = ''){
  * @param   array | mixed
  * @author  sbebbington
  * @date    19 Oct 2018 13:38:49
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  resource | false
  * @throws  Exception
  */
@@ -281,7 +285,7 @@ function writeToLogFile($error = []){
  * @param   scalar | object
  * @author  sbebbington
  * @date    5 Sep 2017 - 12:51:55
- * @version 0.1.5-RC2
+ * @version 0.1.5-RC3
  * @return  bool
  */
 function isEmpty($value){

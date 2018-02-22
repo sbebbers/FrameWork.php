@@ -1,0 +1,18 @@
+<?php 
+    $protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+    http_response_code(403);
+    header("{$protocol} 403 Forbidden");
+?>
+<!DOCTYPE html>
+<html lang="en-gb">
+    <head>
+    	<title>403 Forbidden</title>
+    </head>
+    <body>
+    	<div id="content" class="container">
+			<h1><?php echo print_r(http_response_code(), 1); ?> Error</h1>
+			<h3>Access denied</h3>
+		</div>
+	</body>
+</html>
+<?php exit; ?>

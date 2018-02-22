@@ -1,6 +1,10 @@
 <?php
 namespace Application\Core\Framework;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 use Application\Library\Library;
 
 require_once(serverPath("/library/Library.php"));
@@ -19,7 +23,7 @@ class HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    16 Jan 2017 - 17:19:50
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function test(){
@@ -33,7 +37,7 @@ class HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:15:10
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function p(){
@@ -47,7 +51,7 @@ class HtmlBuilder
      * @param   string, string, string, string, string, string | array, [boolean]
      * @author  sbebbington
      * @date    30 Mar 2017 - 11:30:31
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function a(string $id = '', string $href = '', string $target = '', string $onClick = '', string $class = '', $style = null, bool $close = true){
@@ -84,7 +88,7 @@ class HtmlBuilder
      * @param   string, string
      * @author  sbebbington
      * @date    5 Apr 2017 - 16:14:08
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function hr(string $id = '', string $class=''){
@@ -107,7 +111,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:15:29
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function id(string $id){
@@ -121,7 +125,7 @@ class HtmlBuilder
      * @param   string, string
      * @author  sbebbington
      * @date    10 Apr 2017 - 09:36:45
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function span(string $id = '', $class = null){
@@ -144,7 +148,7 @@ class HtmlBuilder
      * @param   string, string, int, int, string, string
      * @author  sbebbington
      * @date    29 Mar 2017 - 11:37:44
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function img(string $id = '', string $path, int $width = 0, int $height = 0, string $alt = '', string $class = ''){
@@ -176,7 +180,7 @@ class HtmlBuilder
      * @param   string | array
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:16:35
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function addClass($class){
@@ -206,7 +210,7 @@ class HtmlBuilder
      * @param   string, string
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:26:47
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function dataAttr(string $attrName, string $data){
@@ -222,7 +226,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    11 Apr 2017 - 10:03:08
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function placeHolder(string $placeHolder = ''){
@@ -241,7 +245,7 @@ class HtmlBuilder
      * @param   boolean
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:30:19
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function closeElement(bool $selfClose = false){
@@ -258,7 +262,7 @@ class HtmlBuilder
      * @param   string, boolean
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:31:27
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function text(string $text, bool $decode = false){
@@ -274,7 +278,7 @@ class HtmlBuilder
      * @param   string, string, int, int, string, string, boolean
      * @author  sbebbington
      * @date    30 Mar 2017 - 14:25:06
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function textArea(string $id = '', string $name = '', int $rows = 0, int $cols = 0, string $placeHolder = '', string  $class = '', bool $required = false){
@@ -313,7 +317,7 @@ class HtmlBuilder
      * @param   string, string, string, string, string | array
      * @author  sbebbington
      * @date    22 May 2017 - 11:48:40
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function form(string $id = '', string $action = '', string $method = 'post', string $class = '', $style = null, string $encType = ''){
@@ -348,7 +352,7 @@ class HtmlBuilder
      * @param   na
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:44:29
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function input(){
@@ -368,7 +372,7 @@ class HtmlBuilder
      * @param   string, string, string, string, string | array
      * @author  sbebbington
      * @date    22 May 2017 - 11:15:23
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function label(string $text, string $id = '', string $for = '', string $class = '', $style = null){
@@ -401,7 +405,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:49:19
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function name(string $name){
@@ -416,7 +420,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:50:04
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function type(string $type){
@@ -431,7 +435,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:51:04
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function value(string $value){
@@ -447,7 +451,7 @@ class HtmlBuilder
      * @param   boolean
      * @author  sbebbington
      * @date    23 Jan 2017 - 09:52:23
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function disabled(bool $disabled = true){
@@ -465,7 +469,7 @@ class HtmlBuilder
      * @param   string, string, string, array, string, boolean
      * @author  sbebbington
      * @date    27 Feb 2017 - 10:42:12
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function select(string $id = '', string $name = '', string $class = '', array $options, string $selected = '', bool $close = true){
@@ -494,7 +498,7 @@ class HtmlBuilder
      * @param   array, string
      * @author  sbebbington
      * @date    6 Jul 2017 - 12:12:56
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function option(array $options, string $selected = ''){
@@ -522,7 +526,7 @@ class HtmlBuilder
      * @param   string, string, string | array, string | array, [boolean]
      * @author  sbebbington
      * @date    30 Mar 2017 - 11:22:00
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function open(string $element, string $id = '', $class = null, $style = null, bool $selfClose = false){
@@ -552,7 +556,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    23 Jan 2017 - 10:07:49
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function close(string $element){
@@ -569,7 +573,7 @@ class HtmlBuilder
      * @param   int, string, string, string | array, string | array
      * @author  sbebbington
      * @date    30 Mar 2017 - 10:51:02
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function h(int $size, string $text, string $id = '', $class = null, $style = null){
@@ -601,7 +605,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    15 Feb 2017 - 13:45:35
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function javaScript(string $src = ''){
@@ -617,7 +621,7 @@ class HtmlBuilder
      * @param   string
      * @author  sbebbington
      * @date    28 Mar 2017 - 15:29:22
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function title(string $title = ''){
@@ -634,7 +638,7 @@ class HtmlBuilder
      * @param   string | array
      * @author  sbebbington
      * @date    30 Mar 2017 - 10:52:43
-     * @version 0.1.5-RC2
+     * @version 0.1.5-RC3
      * @return  $this
      */
     public function style($style = null){
