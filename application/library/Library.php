@@ -5,10 +5,6 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
 }
 
-use Application\Core\FrameworkException\FrameworkException;
-use DateTime;
-use stdClass;
-
 class Library
 {
     private $key,
@@ -220,7 +216,7 @@ class Library
         if(getConfig('mode') != 'test'){
             return null;
         }
-        if($object == null){
+        if($object == null || !is_object($object)){
             return print("<p>Pass an object to this method in order to test it</p>");
         }
         if($method == ''){
@@ -460,120 +456,6 @@ class Library
             $file = str_replace($data, $key, $file);
         }
         return $file;
-    }
-    
-    /**
-     * This will sanitize date strings in
-     * yyyy/mm/dd and dd/mm/yyyy format
-     * 
-     * @param   string
-     * @author  sbebbington
-     * @date    30 Oct 2017 11:19:41
-     * @version 0.1.4
-     * @return  DateTime
-     * @deprecated
-     */
-    public function sanitizeDateString($date = null){
-        $error = false;
-        $timeZoneType = "+";
-        
-        if(is_null($date)){
-            throw new FrameworkException('Date string was sent as null');
-        }
-
-        $day    = $month = $year = 0;
-        $time   = "00:00:00";
-        $hours  = "0000";
-        
-        if(strpos($date, "T") == 10 && strlen($date) > 18){
-            $_time  = explode("T", $date);
-            $time   = $_time[1];
-            $date   = $_time[0];
-            $timeZone = false;
-            
-            if(substr($d, -5, -4) == "-"){
-                $_time          = explode("-", $time);
-                $timeZone       = true;
-                $timeZoneType   = "-";
-            }else if(substr($d, -5, -4) == "+"){
-                $_time          = explode("+", $time);
-                $timeZone       = true;
-            }
-            
-            if($timeZone === true){
-                $hours  = $_time[1];
-                $time   = $_time[0];
-            }
-        }
-        
-        $time = 'T' . $this->sanitizeTimeString("{$time}{$timeZoneType}{$hours}");
-        
-        $date = trim(str_replace("/", "-", str_replace(".", "-", $date)));
-        $date = explode("-", $date);
-        
-        if(isset($date[0]) && strlen($date[0]) == 4 && intval($date[0]) >= 1970){
-            $year   = "{$date[0]}";
-            $month  = isset($date[1]) ? "{$date[1]}" : '';
-            $day    = isset($date[2]) ? "{$date[2]}" : '';
-        }else if(isset($date[2]) && strlen($date[2]) == 4 && intval($date[2]) >= 1970){
-            $day    = isset($date[0]) ? "{$date[0]}" : '';
-            $month  = isset($date[1]) ? "{$date[1]}" : '';
-            $year   = "{$date[2]}";
-        }else{
-            $error = true;
-        }
-        
-        if(checkdate($month, $day, $year) == false || $error == true){
-            throw new FrameworkException("Date is invalid; please use dd-mm-yyyy or yyyy-mm-dd with optional time (Thrs:min:sec+0000, i.e., T09:00:00+0100). Value sent (yyyy-mm-ddThrs:min:sec+0000) was {$year}-{$month}-{$day}{$time}");
-            return;
-        }
-        
-        $valid = "{$year}-{$month}-{$day}{$time}";
-        
-        return new DateTime($valid);
-    }
-    
-    /**
-     * Checks the time string to see if it
-     * is in the accepted parameters, uses
-     * 24hr clock format
-     * (00:00:00 - 23:59:59)
-     * 
-     * @param   string
-     * @author  sbebbington
-     * @date    30 Oct 2017 11:37:27
-     * @version 0.1.4
-     * @return  string
-     * @deprecated
-     */
-    protected function sanitizeTimeString($time = ''){
-        $timeZoneType = "+";
-        if(strpos($time, "-")){
-            $_time = explode("-", $time);
-            $timeZoneType = "-";
-        }else{
-            $_time = explode("+", $time);
-        }
-        
-        $time       = $_time[0];
-        $plusHrs    = substr($_time[1], 0, 2);
-        $plusMin    = substr($_time[1], 2);
-        
-        if(strlen($time) != 8 || intval($plusHrs) < 0 || intval($plusHrs) > 23 || (intval($plusMin) < 0 || intval($plusMin > 59))){
-            throw new FrameworkException("Time is invalid, expected THH:MM:SS+HHMM, recieved T{$time}+{$plusHrs}{$plusMin}");
-        }
-        
-        if(strpos($time, ".")){
-            $time = str_replace(".", ":", $time);
-        }
-        
-        $time = explode(":", $time);
-        
-        if(intval($time[0]) < 0 || intval($time[0]) > 23 || intval($time[1]) < 0 || intval($time[1]) > 59 || intval($time[2]) < 0 || intval($time[2]) > 59){
-            throw new FrameworkException("Time is invalid, expected HH:MM:SS, recieved {$time[0]}:{$time[1]}:{$time[2]}");
-        }
-        
-        return "{$time[0]}:{$time[1]}:{$time[2]}{$timeZoneType}{$plusHrs}{$plusMin}";
     }
     
     /**
