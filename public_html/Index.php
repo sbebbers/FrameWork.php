@@ -54,7 +54,7 @@ class Index
                 try{
                     writeToLogFile($_error);
                 }catch(Exception $e){
-                    echo '<!-- unable to write to error log: ' . print_r($e, true) . ' -->';
+                    echo '<!-- Unable to write to error log: ' . print_r($e, true) . ' -->';
                 }
             }
         }

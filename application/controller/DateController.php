@@ -1,9 +1,9 @@
 <?php
-use Application\Controller\ControllerCore;
-
 if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
 }
+
+use Application\Controller\ControllerCore;
 
 class DateController extends ControllerCore
 {
