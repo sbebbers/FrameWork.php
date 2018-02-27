@@ -376,6 +376,7 @@ class Library
      * @date    10 Jan 2017 15:56:39
      * @version 0.1.5-RC3
      * @return  \JsonSerializable
+     * @deprecated
      */
     public function convertToJSON(array $data = array(), bool $trimData = false){
         if(!empty($data) && $trimData === true){
@@ -395,6 +396,7 @@ class Library
      * @date    3 Feb 2017 14:47:48
      * @version 0.1.5-RC3
      * @return  resource
+     * @deprecated
      */
     public function convertFromJSON($data){
         return json_decode($data);
