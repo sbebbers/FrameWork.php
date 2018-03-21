@@ -53,8 +53,8 @@ class Index
             if(!is_null($_error)){
                 try{
                     writeToLogFile($_error);
-                }catch(Exception $e){
-                    echo '<!-- Unable to write to error log: ' . print_r($e, true) . ' -->';
+                }catch(Exception $error){
+                    echo '<!-- Unable to write to error log: ' . print_r($error->getMessage(), true) . ' -->';
                 }
             }
         }
