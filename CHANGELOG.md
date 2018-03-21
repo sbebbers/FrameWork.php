@@ -232,4 +232,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 				practise to the application layer. The next release candidate
 				will allow (but not recommend) that the application directory
 				be *inside* the public facing folder.
+	@changes as of 2018-03-21
+				I've refactored the FrameworkException class to provide some
+				more clarity as to what it actually does.
 --
