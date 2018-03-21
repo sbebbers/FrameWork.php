@@ -5,6 +5,10 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 
 use Application\Controller\ControllerCore;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 class DateController extends ControllerCore
 {
     public function __construct(){

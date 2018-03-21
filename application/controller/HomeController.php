@@ -6,6 +6,10 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 use Application\Controller\ControllerCore;
 use Application\Model\Read\HomeModel;
 
+if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
+    require_once("../view/403.phtml");
+}
+
 require_once(serverPath("/model/read/HomeModel.php"));
 
 class HomeController extends ControllerCore

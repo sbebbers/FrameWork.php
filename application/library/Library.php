@@ -168,7 +168,7 @@ class Library
      * @return  string
      */
     public function getEncryptionPadding(int $numberToPad = 8){
-        $shuffle    = "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
+        $shuffle    = "1q2w3e4r5t6y7u8i9o0p!ASÂ£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
         $shuffle    = str_shuffle("{$shuffle}");
         
         return substr($shuffle, 0, $numberToPad);        
@@ -495,5 +495,17 @@ class Library
          
         $context    = stream_context_create($options);
         return file_get_contents($url, false, $context);
+    }
+    
+    /**
+     * Checks if count() can be used on an object or scalar
+     * 
+     * @param   mixed $object
+     * @author	sbebbeington
+     * @date	13 Feb 2018 13:26:37
+     * @return	boolean
+     */
+    public function isCountable($object = null){
+        return ((is_array($object) || $object instanceof stdClass) && !empty($object));
     }
 }
