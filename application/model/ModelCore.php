@@ -12,9 +12,9 @@ use PDOException;
 use stdClass;
 use PDOStatement;
 
-require_once(serverPath("/core/FrameworkException.php"));
+require_once(serverPath("/model/QueryBuilder.php"));
 
-class ModelCore
+class ModelCore extends QueryBuilder
 {
     protected $db,
               $connection,
@@ -43,13 +43,9 @@ class ModelCore
                 0x03
             );
         }
+        QueryBuilder::__construct();
         
-        if(file_exists(serverPath('/config/database.json'))){
-            $dbConfig   = json_decode(file_get_contents(serverPath('/config/database.json')), true);
-        }else{
-            throw new FrameworkException("The framework requires a database configuration file at the application layer", 0xdb);
-        }
-        
+        $dbConfig       = $this->getConfig();
         $this->lib      = new Library();
         $this->db       = $dbConfig['db'];
         $password       = $this->lib->decryptIt($dbConfig['password'][$dbUser]);
