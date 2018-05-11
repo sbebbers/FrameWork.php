@@ -13,7 +13,8 @@ class QueryBuilder
 {
     protected $config,
               $select,
-              $from;
+              $from,
+              $where;
     
     public function __construct(){
         if(file_exists(serverPath('/config/database.json'))){
@@ -89,5 +90,17 @@ class QueryBuilder
     public function selectFrom(array $items = [], string $table = '', string $database = ''){
         $this->select($items)->from($table, $database);
         return $this;
+    }
+    
+    /**
+     * Builds the where clause
+     *
+     * @param   array $conditions
+     * @author  Shaun B
+     * @date	10 May 2018 16:24:09
+     * @return  $this
+     */
+    public function where(array $conditions = []){
+        
     }
 }
