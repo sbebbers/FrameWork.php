@@ -23,3 +23,4 @@ If you have any comments then please feel free to contact me.
 Shaun Bebbington.
 Twitter: @YearOfCodes
 --
+<img src="https://sonarcloud.io/api/project_badges/measure?project=coffee&metric=alert_status" alt="Scanned with SonarCloud" />
