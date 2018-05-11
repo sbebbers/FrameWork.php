@@ -25,8 +25,8 @@ class ControllerCore
     
     public function __construct(){
         $this->lib      = new Library();
-        if(!isset($_SESSION['flashMessage'])){
-            $_SESSION['flashMessage']    = array();
+        if(!isset($_SESSION[FLASHMESSAGE])){
+            $_SESSION[FLASHMESSAGE]    = array();
         }
         if(empty($this->post) || $this->post == null){
             $this->post = array();
@@ -93,6 +93,6 @@ class ControllerCore
      * @return  void
      */
     public function setFlashMessage($key, $value){
-        $_SESSION['flashMessage'][$key] = $value;
+        $_SESSION[FLASHMESSAGE][$key] = $value;
     }
 }

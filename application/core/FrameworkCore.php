@@ -5,9 +5,10 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
 }
 
-use \Application\Core\Framework\HtmlBuilder;
-use stdClass;
+define('FLASHMESSAGE', 'flashMessage');
+
 use Application\Core\FrameworkException\FrameworkException;
+use stdClass;
 
 require_once(serverPath('/core/GlobalHelpers.php'));
 require_once(serverPath('/core/HtmlBuilder.php'));
@@ -275,7 +276,7 @@ class Core extends HtmlBuilder
      * @return  resource
      */
     public function emptySession(bool $emptyFlash = false){
-        return ($emptyFlash === true) ? $_SESSION['flashMessage'] = array() : array();
+        return ($emptyFlash === true) ? $_SESSION[FLASHMESSAGE] = array() : array();
     }
     
     /**
@@ -332,8 +333,8 @@ class Core extends HtmlBuilder
             }
 
             $emptyFlash = false;
-            if(isset($_SESSION['flashMessage']) && !empty($_SESSION['flashMessage'])){
-                $this->setView($_SESSION['flashMessage'], "flash");
+            if(isset($_SESSION[FLASHMESSAGE]) && !empty($_SESSION[FLASHMESSAGE])){
+                $this->setView($_SESSION[FLASHMESSAGE], "flash");
                 $emptyFlash = true;
             }
             
