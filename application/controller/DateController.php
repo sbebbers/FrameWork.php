@@ -9,14 +9,6 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
 }
 
-define('DAY', 'day');
-define('MONTH', 'month');
-define('YEAR', 'year');
-define('FULLVALUE', 'full');
-define('SHORTVALUE', 'short');
-define('NUMERICVALUE', 'numeric');
-define('DEFAULTVALUE', 'default');
-
 class DateController extends ControllerCore
 {
     public function __construct(){
@@ -223,7 +215,7 @@ class DateController extends ControllerCore
         if($viewObject == null){
             return '';
         }
-        return $viewObject['default'] ?? null;
+        return $viewObject[DEFAULTVALUE] ?? null;
     }
     
     /**
@@ -240,7 +232,7 @@ class DateController extends ControllerCore
         if($viewObject == null){
             return '';
         }
-        $viewObject['default']    = null;
+        $viewObject[DEFAULTVALUE]    = null;
         return array_filter($viewObject, 'strlen');
     }
 }

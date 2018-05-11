@@ -6,6 +6,13 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 }
 
 define('FLASHMESSAGE', 'flashMessage');
+define('DAY', 'day');
+define('MONTH', 'month');
+define('YEAR', 'year');
+define('FULLVALUE', 'full');
+define('SHORTVALUE', 'short');
+define('NUMERICVALUE', 'numeric');
+define('DEFAULTVALUE', 'default');
 
 use Application\Core\FrameworkException\FrameworkException;
 use stdClass;
@@ -200,7 +207,7 @@ class Core extends HtmlBuilder
      * @return  string
      */
     public function setMetaData(array $pageData = []){
-        if(empty($pageData) || empty($pageData['default'])){
+        if(empty($pageData) || empty($pageData[DEFAULTVALUE])){
             return '';
         }
         $metaData = "";
@@ -209,7 +216,7 @@ class Core extends HtmlBuilder
             if(!empty($pageData["{$this->segment}"])){
                 $pageData = $pageData["{$this->segment}"];
             }else if(empty($this->segment) || $this->segment == 'home'){
-                $pageData = $pageData['default'];
+                $pageData = $pageData[DEFAULTVALUE];
             }
             
             foreach($pageData as $key => $data){
