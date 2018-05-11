@@ -9,18 +9,26 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
 }
 
+define('__DAY__', 'day');
+define('__MONTH__', 'month');
+define('__YEAR__', 'year');
+define('__FULL__', 'full');
+define('__SHORT__', 'short');
+define('__NUMERIC__', 'numeric');
+define('__DEFAULT__', 'default');
+
 class DateController extends ControllerCore
 {
     public function __construct(){
         ControllerCore::__construct();
         
         if(!empty($this->post)){
-            $daySubmitted   = $this->post['day'];
-            $monthSubmitted = $this->post['month'];
-            $yearSubmitted  = $this->post['year'];
+            $daySubmitted   = $this->post[__DAY__];
+            $monthSubmitted = $this->post[__MONTH__];
+            $yearSubmitted  = $this->post[__YEAR__];
             $dateSubmitted  = "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
     
-            if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted) == true){
+            if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted)){
                 $dateSubmitted  .= " - This is a valid date";
             }else{
                 $dateSubmitted  .= " - This is not a valid date";
@@ -41,7 +49,7 @@ class DateController extends ControllerCore
         );
         
         $day    += $this->setDays((int)date('d'));
-        $month  += $this->setMonths('full', 'numeric', date('m'));
+        $month  += $this->setMonths(__FULL__, __NUMERIC__, date('m'));
         $year   += $this->setYears(1901, (int)date('Y'), 'asc', (int)date('Y'));
         
         $this->view->days   = $day;
@@ -73,7 +81,7 @@ class DateController extends ControllerCore
         if($default == 0){
             goto end;
         }
-        $days['default']    = ($default < 10) ? "0{$default}" : "{$default}";
+        $days[__DEFAULT__]    = ($default < 10) ? "0{$default}" : "{$default}";
         
         end:
         return $days;
@@ -92,26 +100,26 @@ class DateController extends ControllerCore
      * @version 0.1.5-RC3
      * @return  array
      */
-    protected function setMonths(string $type = "full", string $keyType = "numeric", string $default = ''){
+    protected function setMonths(string $type = __FULL__, string $keyType = __NUMERIC__, string $default = ''){
         $types = array(
-            'full',
-            'short',
-            'numeric'
+            __FULL__,
+            __SHORT__,
+            __NUMERIC__
         );
         if(empty($type) || empty($keyType) || !in_array($type, $types) || !in_array($keyType, $types)){
             return ["Error setting month object, please set type and key type as full, short or numeric"];
         }
         $keys    = array(
-            'numeric'   => array(
+            __NUMERIC__     => array(
                 "01", "02", "03", "04",
                 "05", "06", "07", "08",
                 "09", "10", "11", "12"
             ),
-            'full'      => array(
+            __FULL__        => array(
                 "January", "February", "March", "April", "May", "June", "July",
                 "August", "September", "October", "November", "December"
             ),
-            'short'     => array(
+            __SHORT__       => array(
                 "Jan", "Feb", "Mar",
                 "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep",
@@ -127,7 +135,7 @@ class DateController extends ControllerCore
         if($default == ''){
             goto end;
         }
-        $months['default']  = $default;
+        $months[__DEFAULT__]  = $default;
         
         end:
         return $months;
@@ -177,7 +185,7 @@ class DateController extends ControllerCore
         if(!in_array($default, $years)){
             goto end;
         }
-        $years['default']    = $default;
+        $years[__DEFAULT__]    = $default;
         
         end:
         return $years;
