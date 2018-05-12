@@ -75,7 +75,7 @@ class HtmlBuilder
         if(!empty($style) && (is_string($style) || is_array($file))){
             $this->style($style);
         }
-        if($close === true){
+        if(isTrue($close)){
             print(">");
         }
         
@@ -249,7 +249,7 @@ class HtmlBuilder
      * @return  $this
      */
     public function closeElement(bool $selfClose = false){
-        print($selfClose === false ? ">" : " />");
+        print(isFalse($selfClose) ? ">" : " />");
         
         return $this;
     }
@@ -266,7 +266,7 @@ class HtmlBuilder
      * @return  $this
      */
     public function text(string $text, bool $decode = false){
-        print($decode === false ? $text : htmlspecialchars_decode($text));
+        print(isFalse($decode) ? $text : htmlspecialchars_decode($text));
         
         return $this;
     }
@@ -302,7 +302,7 @@ class HtmlBuilder
         if(!empty($class)){
             print(" class=\"{$class}\"");
         }
-        if($required === true){
+        if(isTrue($required)){
             print(" required=\"required\"");
         }
         print(">");
@@ -455,7 +455,7 @@ class HtmlBuilder
      * @return  $this
      */
     public function disabled(bool $disabled = true){
-        print($disabled === true ? " disabled=\"disabled\"" : "");
+        print(isTrue($disabled) ? " disabled=\"disabled\"" : "");
         
         return $this;
     }
@@ -487,7 +487,7 @@ class HtmlBuilder
         if(!empty($options)){
             $this->option($options, $selected);
         }
-        print($close === true ? "</select>" : "");
+        print(isTrue($close) ? "</select>" : "");
         
         return $this;
     }

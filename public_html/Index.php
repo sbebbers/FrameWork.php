@@ -2,7 +2,7 @@
 use Application\Core\Framework\Core;
 use Application\Core\FrameworkException\FrameworkException;
 
-if(defined('FRAMEWORKPHP') == false){
+if(isFalse(defined('FRAMEWORKPHP'))){
     define('FRAMEWORKPHP', 0xffff);
 }
 
@@ -39,7 +39,7 @@ class Index
     public function __construct(){
         $this->core = new Core();
         
-        if($this->checkPageLoad() == true){
+        if(isTrue($this->checkPageLoad())){
             $_error = null;
             try{
                 setTimeZone(getConfig('timeZone'));
@@ -84,6 +84,38 @@ class Index
         return true;
     }
 }
+
+
+/**
+ * Really a method to reduce the "Code smells"
+ * which is decided for other languages but
+ * is imposed on PHP
+ *
+ * @param   mixed $value
+ * @author  Shaun B
+ * @date	12 May 2018 13:46:43
+ * @version 0.1.5-RC3
+ * @return  boolean
+ */
+function isTrue($value = null){
+    return boolval($value);
+}
+
+/**
+ * As with isTrue, just a case of reducing
+ * "Code smells"
+ *
+ * @param   mixed $value
+ * @author  Shaun B
+ * @date	12 May 2018 13:47:58
+ * @version 0.1.5-RC3
+ * @return  boolean
+ * @throws
+ */
+function isFalse($value = null){
+    return boolval($value === false);
+}
+
 
 /**
  * This will correctly route to the application

@@ -195,7 +195,7 @@ class DateController extends ControllerCore
      * @return  boolean
      */
     protected function checkDateValidity($day = null, $month = null, $year = null){
-        if($day == null || $month == null || $year == null){
+        if(is_null($day) || is_null($month) || is_null($year)){
             return false;
         }
         return checkdate($month, $day, $year);
@@ -212,7 +212,7 @@ class DateController extends ControllerCore
      * @return  string | null
      */
     public function getDefault($viewObject = null){
-        if($viewObject == null){
+        if(is_null($viewObject)){
             return '';
         }
         return $viewObject[DEFAULTVALUE] ?? null;
@@ -222,17 +222,22 @@ class DateController extends ControllerCore
      * Clears the default parameter from the view object
      * should one exist
      *
-     * @param   stdClass | array
+     * @param   object | array
      * @author  sbebbington
-     * @date    6 Jul 2017 11:49:16
+     * @date	11 May 2018 14:13:24
      * @version 0.1.5-RC3
-     * @return  array
+     * @return  array | object
      */
     public function clearDefault($viewObject = null){
-        if($viewObject == null){
-            return '';
+        if(is_null($viewObject)){
+            return [];
         }
-        $viewObject[DEFAULTVALUE]    = null;
-        return array_filter($viewObject, 'strlen');
+        if(is_array($viewObject)){
+            $viewObject[DEFAULTVALUE]    = null;
+        }else if(is_object($viewObject)){
+            $viewObject->{DEFAULTVALUE} = null;
+        }
+        
+        return is_array($viewObject) ? array_filter($viewObject, 'strlen') : $viewObject;
     }
 }

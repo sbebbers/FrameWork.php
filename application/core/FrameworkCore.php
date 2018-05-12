@@ -58,7 +58,7 @@ class Core extends HtmlBuilder
      */
     public function __construct(){
         HtmlBuilder::__construct();
-        if($this->setSiteConfiguration() == false){
+        if(isFalse($this->setSiteConfiguration())){
             throw new FrameworkException("Please set up a pages.json file in the config folder", 0x00);
         }
         $this->pageData     = $this->getPageData();
@@ -283,7 +283,7 @@ class Core extends HtmlBuilder
      * @return  resource
      */
     public function emptySession(bool $emptyFlash = false){
-        return ($emptyFlash === true) ? $_SESSION[FLASHMESSAGE] = array() : array();
+        return (isTrue($emptyFlash)) ? $_SESSION[FLASHMESSAGE] = array() : array();
     }
     
     /**
@@ -307,7 +307,7 @@ class Core extends HtmlBuilder
             $this->segment  = 'home';
         }
         
-        if(in_array($this->segment, $this->allowedSegments) == false || !file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"))){
+        if(isFalse(in_array($this->segment, $this->allowedSegments)) || isFalse(file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml")))){
             $this->title        = '404 error - page not found, please try again';
             $this->description  = 'There\'s a Skeleton in the Sandbox';
             $this->setView(array(
@@ -318,11 +318,11 @@ class Core extends HtmlBuilder
             exit;
         }
         
-        if(in_array($this->segment, $this->allowedSegments) == true){
+        if(isTrue(in_array($this->segment, $this->allowedSegments))){
             $this->title        = $this->pageData['titles']["{$this->segment}"] ?? '';
             $this->description  = $this->pageData['descriptions']["{$this->segment}"] ?? '';
             
-            if(getConfig('loadCoreController') == true){
+            if(isTrue(getConfig('loadCoreController'))){
                 require_once(serverPath("/controller/ControllerCore.php"));
             }
             

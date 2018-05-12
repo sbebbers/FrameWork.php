@@ -143,8 +143,8 @@ class ModelCore extends QueryBuilder
             );
         }
         
-        if($query->execute($parameters) === true){
-            if($fetchAll === false){
+        if(isTrue($query->execute($parameters))){
+            if(isFalse($fetchAll)){
                 $return = $query->fetch($fetchType);
             }else{
                $return = $query->fetchAll($fetchType);

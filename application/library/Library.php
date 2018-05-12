@@ -40,7 +40,7 @@ class Library
         echo $file != null ? '<pre>File: ' . print_r($file, 1) . '</pre>' : "";
         echo $line != null ? '<pre>Line: ' . print_r($line, 1) . '</pre>' : "";
         echo (strlen($header) > 0) ? "</div>" : "";
-        if($die === true){
+        if(isTrue($die)){
             die("{$message}");
         }
         return null;
@@ -63,7 +63,7 @@ class Library
         echo var_dump($variable);
         echo $file != null ? '<pre>File: ' . print_r($file,1) . '</pre>' : "";
         echo $line != null ? '<pre>Line: ' . print_r($line,1) . '</pre>' : "";
-        if($die === true){
+        if(isTrue($die)){
             die($message);
         }
         return null;
@@ -91,7 +91,7 @@ class Library
      * @param   na
      * @author  sbebbington B
      * @date    2016-02-19
-     * @return  Something good
+     * @return  "Something good"
      * @todo    Nothing as this function is perfect
      */
     public function easterEgg(){
@@ -119,7 +119,7 @@ class Library
         $encrypt    = $this->getEncryptionPadding($padding)
             . openssl_encrypt($string, $this->encryption, $md5)
             . $this->getEncryptionPadding($padding);
-        return ($urlEncode === true) ? urlencode($encrypt) : "{$encrypt}";
+        return (isTrue($urlEncode)) ? urlencode($encrypt) : "{$encrypt}";
     }
     
     /**
@@ -134,7 +134,7 @@ class Library
     public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false){
         $md5        = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $decrypt    = openssl_decrypt(substr($string, $padding, -$padding), $this->encryption, $md5);
-        return ($urlDecode === true) ? urldecode($decrypt) : "{$decrypt}";
+        return (isTrue($urlDecode)) ? urldecode($decrypt) : "{$decrypt}";
     }
     
     /**
@@ -250,7 +250,7 @@ class Library
             $tested = true;
         }
         
-        if($tested === true){
+        if(isTrue($tested)){
             echo "<p style=\"";
             echo ($pass == $expectedResult) ? "{$passCol}\">Test matched expected result" : "{$failCol}\">Test failed";
             echo "</p>" . PHP_EOL;
@@ -345,7 +345,7 @@ class Library
      */
     public function cleanseInputs($data, bool $htmlSpecialChars = false, $cleanInput = array()){
         foreach($data as $key => $value){
-            $cleanInput[$key] = ($htmlSpecialChars === false) ? trim(strip_tags($value)) : htmlspecialchars(trim($value));
+            $cleanInput[$key] = (isFalse($htmlSpecialChars)) ? trim(strip_tags($value)) : htmlspecialchars(trim($value));
         }
         return $cleanInput;
     }
@@ -364,44 +364,7 @@ class Library
      */
     public function domainType(bool $subDomain = false){
         $host   = explode(".", $this->host());
-        return ($subDomain === false) ? $host[count($host)-1] : $host[0];
-    }
-    
-    /**
-     * Turns a PHP array into JSON; use
-     * true for the second value to trim
-     * the data in array to convert to
-     * JSON
-     *
-     * @param   array|resource, [bool]
-     * @author  sbebbington
-     * @date    10 Jan 2017 15:56:39
-     * @version 0.1.5-RC3
-     * @return  \JsonSerializable
-     * @deprecated
-     */
-    public function convertToJSON(array $data = array(), bool $trimData = false){
-        if(!empty($data) && $trimData === true){
-            foreach($data as $k => $d){
-                $data[$k] = (is_string($k)) ? trim($k) : $k;
-            }
-        }
-        return json_encode($data);
-    }
-    
-    /**
-     * Converts a JSON object to a
-     * PHP resource
-     * 
-     * @param   JSON
-     * @author  sbebbington
-     * @date    3 Feb 2017 14:47:48
-     * @version 0.1.5-RC3
-     * @return  resource
-     * @deprecated
-     */
-    public function convertFromJSON($data){
-        return json_decode($data);
+        return (isFalse($subDomain)) ? $host[count($host)-1] : $host[0];
     }
     
     /**
@@ -449,10 +412,10 @@ class Library
         }
         foreach($remove['replace'] as $key => $data){
             if($key =='space' || $key == 'tab'){
-                if($key == 'space' && $doubleSpaces === false){
+                if($key == 'space' && isFalse($doubleSpaces)){
                     continue;
                 }
-                if($key == 'tab' && $spacedTab === false){
+                if($key == 'tab' && isFalse($spacedTab)){
                     continue;
                 }
                 $key = '';
