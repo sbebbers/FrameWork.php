@@ -94,12 +94,12 @@ class Library
      * @return  "Something good"
      * @todo    Nothing as this function is perfect
      */
-    public function easterEgg(){
+    public function easterEgg(string $id = "something-good"){
         $easterEgg = chr(116) . chr(104) . chr(101) . chr(99) . chr(97) . chr(116) . chr(97) . chr(112) . chr(105);
         return trim("
-            <div class=\"container\">
+            <div id=\"{$id}\" class=\"container\">
                 <a href=\"http://{$easterEgg}.com\">
-                    <img src=\"http://{$easterEgg}.com/api/images/get?format=src&type=gif\" alt=\"Easter Egg\">
+                    <img src=\"http://{$easterEgg}.com/api/images/get?format=src&type=gif\" alt=\"Easter Egg\" />
                 </a>
             </div>
         ");

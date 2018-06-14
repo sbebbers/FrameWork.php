@@ -6,10 +6,6 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 use Application\Controller\ControllerCore;
 use Application\Model\Read\HomeModel;
 
-if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
-    require_once("../view/403.phtml");
-}
-
 require_once(serverPath("/model/read/HomeModel.php"));
 
 class HomeController extends ControllerCore
@@ -24,8 +20,6 @@ class HomeController extends ControllerCore
         }
         $this->setFlashMessage('message', "Made you look :-P");
         if(isset($this->post['submit'])){
-            // Do something with the posted data here, but for now
-            // we'll simply see the contents of the posted data
             $this->lib->debug($this->post, true);
         }
         // $this->view->easterEgg  = ''; ## $this->lib->easterEgg();

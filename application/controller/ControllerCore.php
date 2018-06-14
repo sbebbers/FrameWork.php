@@ -17,7 +17,7 @@ require_once(serverPath('/library/Library.php'));
 
 class ControllerCore
 {
-    public $post,
+    public $post = array(),
            $view,
            $lib,
            $sql,
@@ -27,9 +27,6 @@ class ControllerCore
         $this->lib      = new Library();
         if(!isset($_SESSION[FLASHMESSAGE])){
             $_SESSION[FLASHMESSAGE]    = array();
-        }
-        if(empty($this->post) || $this->post == null){
-            $this->post = array();
         }
         if(!empty($_POST)){
             $this->setPost();
