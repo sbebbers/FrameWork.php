@@ -6,6 +6,7 @@ if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
 }
 
 define('FLASHMESSAGE', 'flashMessage');
+define('FLASH', 'flash');
 define('DAY', 'day');
 define('MONTH', 'month');
 define('YEAR', 'year');
@@ -56,7 +57,8 @@ class Core extends HtmlBuilder
      * @return  void
      * @throws  FrameworkException
      */
-    public function __construct(){
+    public function __construct()
+    {
         HtmlBuilder::__construct();
         if(isFalse($this->setSiteConfiguration())){
             throw new FrameworkException("Please set up a pages.json file in the config folder", 0x00);
@@ -96,7 +98,8 @@ class Core extends HtmlBuilder
      * @return  boolean
      * @throws  FrameworkException
      */
-    protected function setSiteConfiguration(){
+    protected function setSiteConfiguration() : bool
+    {
         if(!file_exists(serverPath('/config/pages.json'))){
             return false;
         }
@@ -123,7 +126,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    protected function setErrorReporting(){
+    protected function setErrorReporting() : void
+    {
         $this->host = getConfig('baseURL') . getConfig("uriSegments");
         if(in_array($this->host, $this->errorReporting)){
             error_reporting(-1);
@@ -142,7 +146,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    protected function setUri(){
+    protected function setUri() : void
+    {
         $this->uriPath  = getConfig('uriPath');
         $page           = [];
         
@@ -165,7 +170,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    protected function setGetGlobal(){
+    protected function setGetGlobal() : void
+    {
         if(!empty($_GET)){
             $segment        = explode('?', $this->segment);
             $this->segment  = $segment[0];
@@ -190,7 +196,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  array
      */
-    public function getPageData(){
+    public function getPageData() : array
+    {
         if(!file_exists(serverPath('/config/pagedata.json'))){
             return [];
         }
@@ -206,7 +213,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  string
      */
-    public function setMetaData(array $pageData = []){
+    public function setMetaData(array $pageData = []) : string
+    {
         if(empty($pageData) || empty($pageData[DEFAULTVALUE])){
             return '';
         }
@@ -239,7 +247,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    protected function checkExtension(){
+    protected function checkExtension() : void
+    {
         if(strpos($this->segment, ".") > 0){
             $segments   = explode(".", $this->segment);
             
@@ -261,7 +270,8 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    public function setView($instance, string $masterKey = ''){
+    public function setView($instance, string $masterKey = '') : void
+    {
         foreach($instance as $key => $data){
             if($masterKey == ''){
                 $this->{$key}               = $data;
@@ -280,9 +290,10 @@ class Core extends HtmlBuilder
      * @author  sbebbington
      * @date    28 Jul 2017 12:04:03
      * @version 0.1.5-RC3
-     * @return  resource
+     * @return  array
      */
-    public function emptySession(bool $emptyFlash = false){
+    public function emptySession(bool $emptyFlash = false) : array
+    {
         return (isTrue($emptyFlash)) ? $_SESSION[FLASHMESSAGE] = array() : array();
     }
     
@@ -302,29 +313,17 @@ class Core extends HtmlBuilder
      * @version 0.1.5-RC3
      * @return  void
      */
-    public function loadPage(){
+    public function loadPage() : void
+    {
         if($this->segment == ""){
             $this->segment  = 'home';
         }
-        
-        if(isFalse(in_array($this->segment, $this->allowedSegments)) || isFalse(file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml")))){
-            $this->title        = '404 error - page not found, please try again';
-            $this->description  = 'There\'s a Skeleton in the Sandbox';
-            $this->setView(array(
-                "_404Error" => 1
-            ));
-            http_response_code(404);
-            require_once(serverPath("/view/404.phtml"));
-            exit;
-        }
+        $this->checkForPage();
         
         if(isTrue(in_array($this->segment, $this->allowedSegments))){
             $this->title        = $this->pageData['titles']["{$this->segment}"] ?? '';
             $this->description  = $this->pageData['descriptions']["{$this->segment}"] ?? '';
-            
-            if(isTrue(getConfig('loadCoreController'))){
-                require_once(serverPath("/controller/ControllerCore.php"));
-            }
+            $this->loadControllerCore();
             
             foreach($this->pageController as $instance => $controller){
                 if($this->segment == $instance){
@@ -341,12 +340,48 @@ class Core extends HtmlBuilder
 
             $emptyFlash = false;
             if(isset($_SESSION[FLASHMESSAGE]) && !empty($_SESSION[FLASHMESSAGE])){
-                $this->setView($_SESSION[FLASHMESSAGE], "flash");
+                $this->setView($_SESSION[FLASHMESSAGE], FLASH);
                 $emptyFlash = true;
             }
             
             require_once(serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
             $this->emptySession($emptyFlash);
+        }
+    }
+    
+    /**
+     * Checks if the route is valid or not
+     *
+     * @author  Shaun B
+     * @date    27 Jul 2018 16:28:18
+     * @return  bool
+     */
+    public function checkForPage() : bool
+    {
+        if(isFalse(in_array($this->segment, $this->allowedSegments)) || isFalse(file_exists(serverPath("/view/{$this->uriPath}{$this->segment}.phtml")))){
+            $this->title        = '404 error - page not found, please try again';
+            $this->description  = 'There\'s a Skeleton in the Sandbox';
+            $this->setView(array(
+                "_404Error" => 1
+            ));
+            http_response_code(404);
+            require_once(serverPath("/view/404.phtml"));
+            exit;
+        }
+        return true;
+    }
+    
+    /**
+     * Requires Controller Core if necessary
+     *
+     * @author  Shaun B
+     * @date    27 Jul 2018 16:30:33
+     * @return  void
+     */
+    public function loadControllerCore() : void
+    {
+        if(isTrue(getConfig('loadCoreController'))){
+            require_once(serverPath("/controller/ControllerCore.php"));
         }
     }
 }
