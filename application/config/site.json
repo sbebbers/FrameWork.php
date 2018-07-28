@@ -1,6 +1,6 @@
 {
-	"baseURL": "http://framework.php.local",
-	"protocol": "http",
+	"baseURL": "https://framework.php.local",
+	"protocol": "https",
 	"cookieDomain": "framework.php.local",
 	"uriPath": "/",
 	"loadCoreController": true,
