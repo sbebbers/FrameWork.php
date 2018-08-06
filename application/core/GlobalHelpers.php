@@ -268,3 +268,15 @@ function writeToLogFile($error = []){
 function isEmpty($value){
     return (is_string($value) || is_numeric($value)) ? empty($value) && strlen("{$value}") : empty($value);
 }
+
+/**
+ * Checks if count() can be used on an object or scalar
+ *
+ * @param   mixed $object
+ * @author	sbebbeington
+ * @date	13 Feb 2018 13:26:37
+ * @return	boolean
+ */
+function isCountable($object = null){
+    return ((is_array($object) || $object instanceof stdClass) && !empty($object));
+}
