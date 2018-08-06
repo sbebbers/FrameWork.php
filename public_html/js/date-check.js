@@ -1,7 +1,12 @@
 const maxDays = Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31),
-	_ms = {
+	_monthsNumeric = {
 		"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun" :6,
 		"Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "Dec": 12
+	},
+	_monthsLong = {
+		1: "January", 2: "February", 3: "March", 4: "April",
+		5: "May", 6: "June", 7: "July", 8: "August", 9: "September",
+		10: "October", 11: "November", 12: "December"
 	};
 
 /**
@@ -65,7 +70,8 @@ function checkDate(_d, _m, _y){
  * @todo
  */
 function getNumericMonth(_m){
-	return _ms[_m.substr(0, 3)];
+	let _monthKey = _m.substr(0, 3);
+	return _monthsNumeric[_monthKey];
 }
 
 /**
@@ -83,15 +89,10 @@ function getNumericMonth(_m){
  * @todo
  */
 function getMonthName(_m, _f){
-	let _ms = {
-		1: "January", 2: "February", 3: "March", 4: "April",
-		5: "May", 6: "June", 7: "July", 8: "August", 9: "September",
-		10: "October", 11: "November", 12: "December"
-	};
 	if(_f == false){
-		return _ms[_m].substr(0, 3);
+		return _monthsLong[_m].substr(0, 3);
 	}
-	return _ms[_m];
+	return _monthsLong[_m];
 }
 
 /**
@@ -99,9 +100,8 @@ function getMonthName(_m, _f){
  */
 $(function(){
 	$("#day, #month, #year").on("change", function(){
-		let _d = $("#day").val(),_m = $("#month").val(),_y = $("#year").val(), _f = null;
+		let _d = $("#day").val(), _m = $("#month").val(), _y = $("#year").val(), _f = null;
 		if("NaN" === parseInt(_m)){
-			_f = Boolean(_m.length > 3);
 			_m = getNumericMonth(_m);
 		}
 		let _v = checkDate(_d, _m, _y);
