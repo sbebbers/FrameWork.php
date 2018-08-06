@@ -235,4 +235,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 	@changes as of 2018-03-21
 				I've refactored the FrameworkException class to provide some
 				more clarity as to what it actually does.
+	@changes as of 2018-08-06
+				I've been futher refactoring and bug fixing as directed by
+				SonarLint and SonarQube
 --

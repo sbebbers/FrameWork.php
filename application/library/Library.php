@@ -2,6 +2,7 @@
 namespace Application\Library;
 
 use stdClass;
+use Application\Core\FrameworkException\FrameworkException;
 
 if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
     require_once("../view/403.phtml");
@@ -60,7 +61,7 @@ class Library
         if(getConfig('mode') != 'test'){
             return null;
         }
-        echo var_dump($variable);
+        var_dump($variable);
         echo $file != null ? '<pre>File: ' . print_r($file,1) . '</pre>' : "";
         echo $line != null ? '<pre>Line: ' . print_r($line,1) . '</pre>' : "";
         if(isTrue($die)){
@@ -184,10 +185,11 @@ class Library
      * @date    2 Feb 2017 13:18:50
      * @version 0.1.5-RC3
      * @return  void
+     * @throws  FrameworkException
      */
-    public function redirectExternal(string $destination = '', string $website= ''){
-        if($destination == '' || $host == ''){
-            $this->debug("You need to set a destination and host parameters as a string to call the Library redirectExternal() method", true);
+    public function redirectExternal(string $destination = '', string $website= null){
+        if($destination == '' || $website == ''){
+            throw new FrameworkException("You need to set a destination and host parameters as a string to call the Library redirectExternal() method");
         }
         die(trim("
             <!DOCTYPE html>
@@ -214,14 +216,14 @@ class Library
      * @version 0.1.5-RC3
      * @return  boolean | string
      */
-    public function testUnit($object = null, string $method = '', $params = array(), $expectedResult = null, bool $tested = false){
+    public function testUnit($object = null, string $method = null, $params = array(), $expectedResult = null, bool $tested = false){
         if(getConfig('mode') != 'test'){
             return null;
         }
-        if($object == null || !is_object($object)){
+        if($object === null || !is_object($object)){
             return print("<p>Pass an object to this method in order to test it</p>");
         }
-        if($method == ''){
+        if($method === null){
             return print("<p>You need to specify the name of the method that you want to test</p>");
         }
         if($expectedResult == null){
@@ -271,8 +273,8 @@ class Library
      * @version 0.1.5-RC3
      * @return  string
      */
-    public function convertSnakeCase(string $snake = '', string $delimiter = '_'){
-        if($snake != ''){
+    public function convertSnakeCase(string $snake = null, string $delimiter = '_'){
+        if($snake !== null){
             $_snake             = explode($delimiter, $snake);
             if(count($_snake) == 1){
                 return $snake;
@@ -311,8 +313,8 @@ class Library
      * @version 0.1.5-RC3
      * @return  string
      */
-    public function convertToSnakeCase(string $unSnaked = '', int $offset = 0){
-        if($unSnaked === ''){
+    public function convertToSnakeCase(string $unSnaked = null, int $offset = 0){
+        if($unSnaked === null || $unSnaked === ''){
             return '';
         }
         $index          = $charBuffer = 0;
@@ -384,7 +386,7 @@ class Library
      * @version 0.1.5-RC3
      * @return  string
      */
-    public function softMinimiseJS(string $filePathName = '', bool $doubleSpaces = true, bool $spacedTab = true){
+    public function softMinimiseJS(string $filePathName = null, bool $doubleSpaces = true, bool $spacedTab = true){
         if(empty($filePathName)){
             return '';
         }
@@ -410,17 +412,17 @@ class Library
         foreach($remove['remove'] as $data){
             $file   = str_replace($data, '', $file);
         }
-        foreach($remove['replace'] as $key => $data){
-            if($key =='space' || $key == 'tab'){
-                if($key == 'space' && isFalse($doubleSpaces)){
+        foreach($remove['replace'] as $_key => $data){
+            if($_key === 'space' || $_key === 'tab'){
+                if($_key == 'space' && isFalse($doubleSpaces)){
                     continue;
                 }
-                if($key == 'tab' && isFalse($spacedTab)){
+                if($_key === 'tab' && isFalse($spacedTab)){
                     continue;
                 }
-                $key = '';
+                $_key = '';
             }
-            $file = str_replace($data, $key, $file);
+            $file = str_replace($data, $_key, $file);
         }
         return $file;
     }
