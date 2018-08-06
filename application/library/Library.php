@@ -217,17 +217,8 @@ class Library
      * @return  boolean | string
      */
     public function testUnit($object = null, string $method = null, $params = array(), $expectedResult = null, bool $tested = false){
-        if(getConfig('mode') != 'test'){
-            return null;
-        }
-        if($object === null || !is_object($object)){
-            return print("<p>Pass an object to this method in order to test it</p>");
-        }
-        if($method === null){
-            return print("<p>You need to specify the name of the method that you want to test</p>");
-        }
-        if($expectedResult == null){
-            return print("<p>You need to specify your expected return value from the method that you are testing</p>");
+        if($this->checkUnitTestParameters($object, $method, $expectedResult)){
+            return false;
         }
         $passCol    = "color: green;";
         $failCol    = "color: red;";
@@ -238,20 +229,61 @@ class Library
         }else if(is_array($params)){
             $pass = $object->{$method}(
                 $params[0],
-                isset($params[1]) ? $params[1] : null,
-                isset($params[2]) ? $params[2] : null,
-                isset($params[3]) ? $params[3] : null,
-                isset($params[4]) ? $params[4] : null,
-                isset($params[5]) ? $params[5] : null,
-                isset($params[6]) ? $params[6] : null,
-                isset($params[7]) ? $params[7] : null,
-                isset($params[8]) ? $params[8] : null,
-                isset($params[9]) ? $params[9] : null
+                $params[1] ?? null,
+                $params[2] ?? null,
+                $params[3] ?? null,
+                $params[4] ?? null,
+                $params[5] ?? null,
+                $params[6] ?? null,
+                $params[7] ?? null,
+                $params[8] ?? null,
+                $params[9] ?? null
             );
                 
             $tested = true;
         }
         
+        return ($tested === true) ? $this->outputUnitTestResult($passCol, $failCol, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
+    }
+    
+    /**
+     * Does a check for the main parameters sent to
+     * $this->testUnit()
+     *
+     * @param   mixed $object
+     * @param   string $method
+     * @param   mixed $expectedResult
+     * @author  Shaun B
+     * @date	6 Aug 2018 13:21:07
+     * @throws  FrameworkException
+     */
+    public function checkUnitTestParameters($object, $method, $expectedResult) : bool
+    {
+        if(getConfig('mode') != 'test'){
+            return false;
+        }
+        if($object === null || !is_object($object)){
+            throw new FrameworkException("Pass an object to this method in order to test it");
+        }
+        if($method === null){
+            throw new FrameworkException("You need to specify the name of the method that you want to test");
+        }
+        if($expectedResult == null){
+            throw new FrameworkException("You need to specify your expected return value from the method that you are testing");
+        }
+        return true;
+    }
+    
+    /**
+     * Shows the test results in <P> tags
+     *
+     * @param   string $passCol
+     * @param   string $failCol
+     * @author  Shaun B
+     * @date	6 Aug 2018 13:25:49
+     */
+    public function outputUnitTestResult(string $passCol, string $failCol, $pass = null) : bool
+    {
         if(isTrue($tested)){
             echo "<p style=\"";
             echo ($pass == $expectedResult) ? "{$passCol}\">Test matched expected result" : "{$failCol}\">Test failed";
@@ -260,7 +292,7 @@ class Library
             echo "Actual: {$pass}" . PHP_EOL;
             return ($pass == $expectedResult);
         }
-        return print("<p>Please send the parameters as an array, a string or a numeric value</p>");
+        return false;
     }
     
     /**
