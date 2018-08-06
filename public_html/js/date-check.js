@@ -100,7 +100,7 @@ function getMonthName(_m, _f){
  */
 $(function(){
 	$("#day, #month, #year").on("change", function(){
-		let _d = $("#day").val(), _m = $("#month").val(), _y = $("#year").val(), _f = null;
+		let _d = $("#day").val(), _m = $("#month").val(), _y = $("#year").val();
 		if("NaN" === parseInt(_m)){
 			_m = getNumericMonth(_m);
 		}
