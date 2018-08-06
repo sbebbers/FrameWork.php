@@ -243,7 +243,7 @@ class Library
             $tested = true;
         }
         
-        return ($tested === true) ? $this->outputUnitTestResult($passCol, $failCol, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
+        return ($tested === true) ? $this->outputUnitTestResult($passCol, $failCol, $expectedResult, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
     }
     
     /**
@@ -282,7 +282,7 @@ class Library
      * @author  Shaun B
      * @date	6 Aug 2018 13:25:49
      */
-    public function outputUnitTestResult(string $passCol, string $failCol, $pass = null) : bool
+    public function outputUnitTestResult(string $passCol, string $failCol, $expectedResult = null, $pass = null) : bool
     {
         if(isTrue($tested)){
             echo "<p style=\"";
