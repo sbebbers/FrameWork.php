@@ -1,236 +1,284 @@
 <?php
-if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
-    require_once("../view/403.phtml");
+if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
+    require_once ("../view/403.phtml");
 }
 
 use Application\Controller\ControllerCore;
 
 class DateController extends ControllerCore
 {
-    public function __construct(){
+
+    public function __construct()
+    {
         ControllerCore::__construct();
         
-        if(!empty($this->post)){
-            $daySubmitted   = $this->post[DAY];
+        if (! empty($this->post)) {
+            $daySubmitted = $this->post[DAY];
             $monthSubmitted = $this->post[MONTH];
-            $yearSubmitted  = $this->post[YEAR];
-            $dateSubmitted  = "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
-    
-            if($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted)){
-                $dateSubmitted  .= " - This is a valid date";
-            }else{
-                $dateSubmitted  .= " - This is not a valid date";
+            $yearSubmitted = $this->post[YEAR];
+            $dateSubmitted = "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
+            
+            if ($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted)) {
+                $dateSubmitted .= " - This is a valid date";
+            } else {
+                $dateSubmitted .= " - This is not a valid date";
             }
             
-            $this->view->dateSubmitted  = $dateSubmitted;
+            $this->view->dateSubmitted = $dateSubmitted;
             goto end;
         }
         
-        $day    = array(
-            ''  => "-- Select Day --",
+        $day = array(
+            '' => "-- Select Day --"
         );
-        $month    = array(
-            ''  => "-- Select Month --",
+        $month = array(
+            '' => "-- Select Month --"
         );
-        $year    = array(
-            ''  => "-- Select Year --",
+        $year = array(
+            '' => "-- Select Year --"
         );
         
-        $day    += $this->setDays((int)date('d'));
-        $month  += $this->setMonths(FULLVALUE, NUMERICVALUE, date('m'));
-        $year   += $this->setYears(1901, (int)date('Y'), 'asc', (int)date('Y'));
+        $day += $this->setDays((int) date('d'));
+        $month += $this->setMonths(FULLVALUE, NUMERICVALUE, date('m'));
+        $year += $this->setYears(1901, (int) date('Y'), 'asc', (int) date('Y'));
         
-        $this->view->days   = $day;
+        $this->view->days = $day;
         $this->view->months = $month;
-        $this->view->years  = $year;    
+        $this->view->years = $year;
         end:
     }
-    
+
     /**
      * Sets the number of days for an array assuming
      * 1 - 31 inclusive as date validation is handled
      * dynamically in the jQuery
-     * 
-     * @param   int
-     * @author  sbebbington
+     *
+     * @param
+     *            int
+     * @author sbebbington
      * @date    4 Jul 2017 17:15:59
      * @version 0.1.5-RC3
-     * @return  array
+     * @return array
      */
-    protected function setDays(int $default = 0){
-        $days    = array();
-        for($i = 1; $i <= 31; $i++){
-            $day    = "{$i}";
-            if($i<10){
-                $day    = "0{$i}";
+    protected function setDays(int $default = 0)
+    {
+        $days = array();
+        for ($i = 1; $i <= 31; $i ++) {
+            $day = "{$i}";
+            if ($i < 10) {
+                $day = "0{$i}";
             }
             $days[$day] = $day;
         }
-        if($default == 0){
+        if ($default == 0) {
             goto end;
         }
-        $days[DEFAULTVALUE]    = ($default < 10) ? "0{$default}" : "{$default}";
+        $days[DEFAULTVALUE] = ($default < 10) ? "0{$default}" : "{$default}";
         
         end:
         return $days;
     }
-    
+
     /**
      * Sets a month object, keys and data can
      * each be set as numeric (01 - 12 inclusive),
      * short (jan, feb etc...) or full (january,
      * february etc...) send data type first and
      * then key type
-     * 
-     * @param   string, string
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string
+     * @author sbebbington
      * @date    5 Jul 2017 10:13:08
      * @version 0.1.5-RC3
-     * @return  array
+     * @return array
      */
-    protected function setMonths(string $type = FULLVALUE, string $keyType = NUMERICVALUE, string $default = ''){
+    protected function setMonths(string $type = FULLVALUE, string $keyType = NUMERICVALUE, string $default = '')
+    {
         $types = array(
             FULLVALUE,
             SHORTVALUE,
             NUMERICVALUE
         );
-        if(empty($type) || empty($keyType) || !in_array($type, $types) || !in_array($keyType, $types)){
-            return ["Error setting month object, please set type and key type as full, short or numeric"];
+        if (empty($type) || empty($keyType) || ! in_array($type, $types) || ! in_array($keyType, $types)) {
+            return [
+                "Error setting month object, please set type and key type as full, short or numeric"
+            ];
         }
-        $keys    = array(
-            NUMERICVALUE     => array(
-                "01", "02", "03", "04",
-                "05", "06", "07", "08",
-                "09", "10", "11", "12"
+        $keys = array(
+            NUMERICVALUE => array(
+                "01",
+                "02",
+                "03",
+                "04",
+                "05",
+                "06",
+                "07",
+                "08",
+                "09",
+                "10",
+                "11",
+                "12"
             ),
-            FULLVALUE        => array(
-                "January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"
+            FULLVALUE => array(
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
             ),
-            SHORTVALUE       => array(
-                "Jan", "Feb", "Mar",
-                "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep",
-                "Oct", "Nov", "Dec"
+            SHORTVALUE => array(
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
             )
         );
         $months = array();
-        $index  = 0;
-        foreach($keys[$keyType] as $primaryKey){
-            $months[$primaryKey]    = $keys[$type][$index];
-            $index++;
+        $index = 0;
+        foreach ($keys[$keyType] as $primaryKey) {
+            $months[$primaryKey] = $keys[$type][$index];
+            $index ++;
         }
-        if($default == ''){
+        if ($default == '') {
             goto end;
         }
-        $months[DEFAULTVALUE]  = $default;
+        $months[DEFAULTVALUE] = $default;
         
         end:
         return $months;
     }
-    
+
     /**
      * Example method to set the number of years
      * by sending two integers starting year and
-     * ending year. To set order, use 'asc' for
+     * ending year.
+     * To set order, use 'asc' for
      * assending years and 'desc' for decending
      * years - please note that this method has
      * a practical use for the deaded goto
      * command, replacing if/else logic
-     * 
-     * @param   int, int, string, int
-     * @author  sbebbington
+     *
+     * @param
+     *            int, int, string, int
+     * @author sbebbington
      * @date    5 Jul 2017 10:10:45
      * @version 0.1.5-RC3
-     * @return  array
+     * @return array
      */
-    protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0){
-        $ordering   = array(
+    protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0)
+    {
+        $ordering = array(
             'asc',
             'desc'
         );
-        $order      = strtolower($order);
+        $order = strtolower($order);
         
-        if(!in_array($order, $ordering)){
-            return ["Please set your ordering to ascending [asc] or descending [desc]"];
+        if (! in_array($order, $ordering)) {
+            return [
+                "Please set your ordering to ascending [asc] or descending [desc]"
+            ];
         }
-        if($start > $end){
-            return ["Error setting the year object, please check that your start year is before your end year"];
+        if ($start > $end) {
+            return [
+                "Error setting the year object, please check that your start year is before your end year"
+            ];
         }
         
-        $years  = array();
-        if($order == "asc"){
-            for($i = $start; $i <= $end; $i++){
-                $years["{$i}"]    = $i;
+        $years = array();
+        if ($order == "asc") {
+            for ($i = $start; $i <= $end; $i ++) {
+                $years["{$i}"] = $i;
             }
             goto checkDefault;
         }
-        for($i = $end; $i >= $start; $i--){
-            $years["{$i}"]    = $i;
+        for ($i = $end; $i >= $start; $i --) {
+            $years["{$i}"] = $i;
         }
         
         checkDefault:
-        if(!in_array($default, $years)){
+        if (! in_array($default, $years)) {
             goto end;
         }
-        $years[DEFAULTVALUE]    = $default;
+        $years[DEFAULTVALUE] = $default;
         
         end:
         return $years;
     }
-    
+
     /**
      * Checks the full date submitted to see if it is
      * valid according to the parameters of the
      * Gregorian calander
-     * 
-     * @param   int, int, int
-     * @author  sbebbington
+     *
+     * @param
+     *            int, int, int
+     * @author sbebbington
      * @date    6 Jul 2017 13:50:32
      * @version 0.1.5-RC3
-     * @return  boolean
+     * @return boolean
      */
-    protected function checkDateValidity($day = null, $month = null, $year = null){
-        if(is_null($day) || is_null($month) || is_null($year)){
+    protected function checkDateValidity($day = null, $month = null, $year = null)
+    {
+        if (is_null($day) || is_null($month) || is_null($year)) {
             return false;
         }
         return checkdate($month, $day, $year);
     }
-    
+
     /**
      * Returns the default values to the view
      * to auto-select day, month, and year
      *
-     * @param   stdClass
-     * @author  sbebbington
+     * @param
+     *            stdClass
+     * @author sbebbington
      * @date    6 Jul 2017 11:37:21
      * @version 0.1.5-RC3
-     * @return  string | null
+     * @return string | null
      */
-    public function getDefault($viewObject = null){
-        if(is_null($viewObject)){
+    public function getDefault($viewObject = null)
+    {
+        if (is_null($viewObject)) {
             return '';
         }
         return $viewObject[DEFAULTVALUE] ?? null;
     }
-    
+
     /**
      * Clears the default parameter from the view object
      * should one exist
      *
-     * @param   object | array
-     * @author  sbebbington
+     * @param
+     *            object | array
+     * @author sbebbington
      * @date	11 May 2018 14:13:24
      * @version 0.1.5-RC3
-     * @return  array | object
+     * @return array | object
      */
-    public function clearDefault($viewObject = null){
-        if(is_null($viewObject)){
+    public function clearDefault($viewObject = null)
+    {
+        if (is_null($viewObject)) {
             return [];
         }
-        if(is_array($viewObject)){
-            $viewObject[DEFAULTVALUE]    = null;
-        }else if(is_object($viewObject)){
+        if (is_array($viewObject)) {
+            $viewObject[DEFAULTVALUE] = null;
+        } else if (is_object($viewObject)) {
             $viewObject->{DEFAULTVALUE} = null;
         }
         

@@ -1,20 +1,20 @@
 {
-	"titles":{
-		"home":			"Example FrameWork.php skeleton site",
+	"titles": {
+		"home": "Example FrameWork.php skeleton site",
 		"date-example": "Shows a date picker using HTML 5 and bespoke jQuery/JavaScript"
 	},
-	"descriptions":{
-		"home":			"The Skeleton",
-		"date-example":	"Example of how to develop a simple form in Framework.php"
+	"descriptions": {
+		"home": "The Skeleton",
+		"date-example": "Example of how to develop a simple form in Framework.php"
 	},
-	"metaData":{
-		"default":{
-			"author":	"Shaun Bebbington",
-			"twitter":	"@YearOfCodes"
+	"metaData": {
+		"default": {
+			"author": "Shaun Bebbington",
+			"twitter": "@YearOfCodes"
 		},
-		"date-example":{
-			"author":	"Shaun Bebbington",
-			"twitter":	"@YearOfCodes"
+		"date-example": {
+			"author": "Shaun Bebbington",
+			"twitter": "@YearOfCodes"
 		}
 	}
 }

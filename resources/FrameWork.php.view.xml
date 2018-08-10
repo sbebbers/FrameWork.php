@@ -1,27 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="php_new_file_context" deleted="false" description="html 4.01 frameset" enabled="true" id="org.eclipse.php.ui.editor.templates.php.html.frameset" name="New PHP file - HTML frameset">&lt;!DOCTYPE html&gt;&#13;
-&lt;html lang="en-gb"&gt;&#13;
-	&lt;?php &#13;
-    	$$this-&gt;open("head");&#13;
-			require_once("{$$this-&gt;partial['header']}");&#13;
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<templates>
+	<template autoinsert="false" context="php_new_file_context"
+		deleted="false" description="html 4.01 frameset" enabled="true"
+		id="org.eclipse.php.ui.editor.templates.php.html.frameset"
+		name="New PHP file - HTML frameset">&lt;!DOCTYPE html&gt;&#13;
+		&lt;html lang="en-gb"&gt;&#13;
+		&lt;?php &#13;
+		$$this-&gt;open("head");&#13;
+		require_once("{$$this-&gt;partial['header']}");&#13;
 		$$this-&gt;close("head");&#13;
-    	$$this-&gt;open("body");&#13;
-    ?&gt;&#13;
-	&lt;?php&#13;
+		$$this-&gt;open("body");&#13;
+		?&gt;&#13;
+		&lt;?php&#13;
 		if(!empty($$this-&gt;flash-&gt;message)):&#13;
-			$$this-&gt;open("div", "flash", array("container", "flash"))&#13;
-				-&gt;p()-&gt;id("flash-message")-&gt;addClass(array("flash-bg", "green"))-&gt;closeElement()&#13;
-					-&gt;text($$this-&gt;flash-&gt;message)&#13;
-				-&gt;close("p")&#13;
-			-&gt;close("div");&#13;
+		$$this-&gt;open("div", "flash", array("container", "flash"))&#13;
+		-&gt;p()-&gt;id("flash-message")-&gt;addClass(array("flash-bg",
+		"green"))-&gt;closeElement()&#13;
+		-&gt;text($$this-&gt;flash-&gt;message)&#13;
+		-&gt;close("p")&#13;
+		-&gt;close("div");&#13;
 		endif;&#13;
-	?&gt;&#13;
-	&lt;?php&#13;
+		?&gt;&#13;
+		&lt;?php&#13;
 		$$this-&gt;open("div", "content", "container");&#13;
-	?&gt;&#13;
-	&lt;!-- HTML from here, if you like --&gt;${cursor}&#13;
-    &lt;?php&#13;
+		?&gt;&#13;
+		&lt;!-- HTML from here, if you like --&gt;${cursor}&#13;
+		&lt;?php&#13;
 		$$this-&gt;close("div");&#13;
 		require_once("{$$this-&gt;partial['footer']}");&#13;
-    	$$this-&gt;close("body");&#13;
-    ?&gt;&#13;
-&lt;/html&gt;</template></templates>
+		$$this-&gt;close("body");&#13;
+		?&gt;&#13;
+		&lt;/html&gt;</template>
+</templates>

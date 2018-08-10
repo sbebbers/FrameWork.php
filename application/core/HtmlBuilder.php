@@ -1,379 +1,396 @@
 <?php
 namespace Application\Core\Framework;
 
-if(!defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535){
-    require_once("../view/403.phtml");
+if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
+    require_once ("../view/403.phtml");
 }
 
 use Application\Library\Library;
-
-require_once(serverPath("/library/Library.php"));
+require_once (serverPath("/library/Library.php"));
 
 class HtmlBuilder
 {
+
     public $lib;
-    
-    public function __construct(){
-        $this->lib    = new Library();
+
+    public function __construct()
+    {
+        $this->lib = new Library();
     }
-    
+
     /**
      * Tests the extension
-     * 
-     * @param   na
-     * @author  sbebbington
+     *
+     * @param
+     *            na
+     * @author sbebbington
      * @date    16 Jan 2017 - 17:19:50
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function test(){
+    public function test()
+    {
         print("<p>HtmlBuilder test</p>");
         return $this;
     }
-    
+
     /**
      * Opens a paragraph tag
-     * 
-     * @param   na
-     * @author  sbebbington
+     *
+     * @param
+     *            na
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:15:10
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function p() : self
+    public function p(): self
     {
         print("<p");
         return $this;
     }
-    
+
     /**
      * Opens an a tag
      *
-     * @param   string, string, string, string, string, string | array, [boolean]
-     * @author  sbebbington
+     * @param
+     *            string, string, string, string, string, string | array, [boolean]
+     * @author sbebbington
      * @date    30 Mar 2017 - 11:30:31
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function a(string $id = null, string $href = null, string $target = null, string $onClick = null, string $class = null, $style = null, bool $close = true) : self
+    public function a(string $id = null, string $href = null, string $target = null, string $onClick = null, string $class = null, $style = null, bool $close = true): self
     {
         print("<a");
         
-        if(strlen($id)){
+        if (strlen($id)) {
             print(" id=\"{$id}\"");
         }
-        if(strlen($href)){
+        if (strlen($href)) {
             print(" href=\"{$href}\"");
         }
-        if(strlen($target)){
+        if (strlen($target)) {
             print(" target=\"{$target}\"");
         }
-        if(strlen($onClick)){
+        if (strlen($onClick)) {
             print(" onclick=\"{$onClick}\"");
         }
-        if(strlen($class)){
+        if (strlen($class)) {
             print(" class=\"{$class}\"");
         }
-        if($style !== null){
+        if ($style !== null) {
             $this->style($style);
         }
-        if(isTrue($close)){
+        if (isTrue($close)) {
             print(">");
         }
         
         return $this;
     }
-    
+
     /**
      * Makes a HR element
-     * 
-     * @param   string, string
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string
+     * @author sbebbington
      * @date    5 Apr 2017 - 16:14:08
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function hr(string $id = null, string $class='') : self
+    public function hr(string $id = null, string $class = ''): self
     {
         print("<hr");
-        if(strlen($id)){
+        if (strlen($id)) {
             print(" id=\"{$id}\"");
         }
-        if(strlen($class)){
+        if (strlen($class)) {
             print(" class=\"{$class}\"");
         }
         print(" />");
         
         return $this;
     }
-    
-    
+
     /**
      * Adds an ID attribute to an HTML element
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:15:29
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function id(string $id) : self
+    public function id(string $id): self
     {
         print(" id=\"{$id}\"");
         return $this;
     }
-    
+
     /**
      * Added in HTML span
-     * 
-     * @param   string, string
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string
+     * @author sbebbington
      * @date    10 Apr 2017 - 09:36:45
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function span(string $id = null, $class = null) : self
+    public function span(string $id = null, $class = null): self
     {
         print("<span");
         
-        if(strlen($id) > 0){
+        if (strlen($id) > 0) {
             $this->id($id);
         }
-        if(!is_null($class)){
+        if (! is_null($class)) {
             $this->addClass($class);
         }
         print(">");
         
         return $this;
     }
-    
+
     /**
      * Generates the HTML image tag
-     * 
-     * @param   string, string, int, int, string, string
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, int, int, string, string
+     * @author sbebbington
      * @date    29 Mar 2017 - 11:37:44
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function img(string $id = null, string $path = null, int $width = 0, int $height = 0, string $alt = null, string $class = null) : self{
+    public function img(string $id = null, string $path = null, int $width = 0, int $height = 0, string $alt = null, string $class = null): self
+    {
         print("<img");
-        if(!empty($id)){
+        if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
         print(" src=\"{$path}\"");
-        if($width > 0){
+        if ($width > 0) {
             print(" width=\"{$width}\"");
         }
-        if($height > 0){
+        if ($height > 0) {
             print(" height=\"{$height}\"");
         }
-        if(!empty($alt)){
+        if (! empty($alt)) {
             print(" alt=\"{$alt}\"");
         }
-        if(!empty($class)){
+        if (! empty($class)) {
             print(" class=\"{$class}\"");
         }
         print(" />");
         
         return $this;
     }
-    
+
     /**
      * Adds a class attribute to an HTML element
-     * 
-     * @param   string | array
-     * @author  sbebbington
+     *
+     * @param
+     *            string | array
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:16:35
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function addClass($class) : self
+    public function addClass($class): self
     {
-        if(!is_string($class) && !is_array($class)){
+        if (! is_string($class) && ! is_array($class)) {
             print(">" . PHP_EOL);
             $this->lib->debug("Please send your classes for your HTML element as a string or an array", true);
         }
         print(" class=\"");
-        $_class='';
-        if(is_array($class)){
-            foreach($class as $classes){
+        $_class = '';
+        if (is_array($class)) {
+            foreach ($class as $classes) {
                 $_class .= "{$classes} ";
             }
             $_class = rtrim($_class, " ");
-        }else{
+        } else {
             $_class .= "{$class}";
         }
         print("{$_class}\"");
         
         return $this;
     }
-    
+
     /**
      * Adds in data attribute, send the name of the attribute
      * followed by the relevant attribute value
-     * 
-     * @param   string, string
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:26:47
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function dataAttr(string $attrName, string $data) : self
+    public function dataAttr(string $attrName, string $data): self
     {
         print(" data-{$attrName}=\"{$data}\"");
         
         return $this;
     }
-    
+
     /**
      * Adds in the placeholder for elements
      * that use it
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    11 Apr 2017 - 10:03:08
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function placeHolder(string $placeHolder = null) : self
+    public function placeHolder(string $placeHolder = null): self
     {
         print(" placeholder");
-        if(strlen($placeHolder)){
+        if (strlen($placeHolder)) {
             print("=\"{$placeHolder}\"");
         }
         
         return $this;
     }
-    
+
     /**
      * Closes an element either with a > or a />
      * with false or true respecitively
-     * 
-     * @param   boolean
-     * @author  sbebbington
+     *
+     * @param
+     *            boolean
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:30:19
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function closeElement(bool $selfClose = false) : self
+    public function closeElement(bool $selfClose = false): self
     {
         print(isFalse($selfClose) ? ">" : " />");
         
         return $this;
     }
-    
+
     /**
      * Writes text, intended to be used within an element
      * If you have encoded your text with htmlspecialchars
      * then send true as the second parameter to decode
-     * 
-     * @param   string, boolean
-     * @author  sbebbington
+     *
+     * @param
+     *            string, boolean
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:31:27
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function text(string $text, bool $decode = false) : self
+    public function text(string $text, bool $decode = false): self
     {
         print(isFalse($decode) ? $text : htmlspecialchars_decode($text));
         
         return $this;
     }
-    
+
     /**
      * Generates a <textarea></textarea>
      * for your view
-     * 
-     * @param   string, string, int, int, string, string, boolean
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, int, int, string, string, boolean
+     * @author sbebbington
      * @date    30 Mar 2017 - 14:25:06
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function textArea(string $id = null, string $name = null, int $rows = 0, int $cols = 0, string $placeHolder = null, string  $class = null, bool $required = false) : self
+    public function textArea(string $id = null, string $name = null, int $rows = 0, int $cols = 0, string $placeHolder = null, string $class = null, bool $required = false): self
     {
         print("<textarea");
         
-        if(!empty($id)){
+        if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
-        if(!empty($name)){
+        if (! empty($name)) {
             print(" name=\"{$name}\"");
         }
-        if($rows > 0){
+        if ($rows > 0) {
             print(" rows=\"{$rows}\"");
         }
-        if($cols> 0){
+        if ($cols > 0) {
             print(" cols=\"{$cols}\"");
         }
-        if(!empty($placeHolder)){
-            print(" placeholder=\"{$placeHolder}\"");            
+        if (! empty($placeHolder)) {
+            print(" placeholder=\"{$placeHolder}\"");
         }
-        if(!empty($class)){
+        if (! empty($class)) {
             print(" class=\"{$class}\"");
         }
-        if(isTrue($required)){
+        if (isTrue($required)) {
             print(" required=\"required\"");
         }
         print(">");
         
         return $this;
     }
-    
+
     /**
      * Opens a form tag - added in encoding type
      * to handle input type file stuff
-     * 
-     * @param   string, string, string, string, string | array
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, string, string, string | array
+     * @author sbebbington
      * @date    22 May 2017 - 11:48:40
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function form(string $id = null, string $action = null, string $method = 'post', string $class = null, $style = null, string $encType = null) : self
+    public function form(string $id = null, string $action = null, string $method = 'post', string $class = null, $style = null, string $encType = null): self
     {
         print("<form");
         
-        if(!empty($id)){
+        if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
-        if(!empty($action)){
+        if (! empty($action)) {
             print(" action=\"{$action}\"");
         }
-        if(!empty($method)){
+        if (! empty($method)) {
             print(" method=\"{$method}\"");
         }
-        if(!empty($class)){
+        if (! empty($class)) {
             print(" class=\"{$class}\"");
         }
-        if($style !== null){
+        if ($style !== null) {
             $this->style($style);
         }
-        if(!empty($encType)){
+        if (! empty($encType)) {
             print(" enctype=\"{$encType}\"");
         }
         $this->closeElement(false);
         
         return $this;
     }
-    
+
     /**
      * Opens an input element
-     * 
-     * @param   na
-     * @author  sbebbington
+     *
+     * @param
+     *            na
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:44:29
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function input() : self
+    public function input(): self
     {
         print("<input");
         
         return $this;
     }
-    
+
     /**
      * Label generator - bug/typo fixed edition
      * Without sending the $text parameter, the
@@ -381,150 +398,157 @@ class HtmlBuilder
      * must therefore use $this->close('label')
      * or end up with dodgy mark-up and HTML
      * validation errors
-     * 
-     * @param   string, string, string, string, string | array
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, string, string, string | array
+     * @author sbebbington
      * @date    22 May 2017 - 11:15:23
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function label(string $text, string $id = null, string $for = null, string $class = null, $style = null) : self
+    public function label(string $text, string $id = null, string $for = null, string $class = null, $style = null): self
     {
         print("<label");
         
-        if(!empty($id)){
+        if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
-        if(!empty($for)){
+        if (! empty($for)) {
             print(" for=\"{$for}\"");
         }
-        if(!empty($class)){
+        if (! empty($class)) {
             print(" class=\"{$class}\"");
         }
-        if(!empty($style) && (is_string($style) || is_array($style))){
+        if (! empty($style) && (is_string($style) || is_array($style))) {
             $this->style($style);
         }
-        if(!empty($text)){
+        if (! empty($text)) {
             print(">{$text}</label>");
-        }else{
+        } else {
             print(">");
         }
         
         return $this;
     }
-    
+
     /**
      * Used for naming a form element
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:49:19
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function name(string $name) : self
+    public function name(string $name): self
     {
         print(" name=\"{$name}\"");
         
         return $this;
     }
-    
+
     /**
      * Used for input type (hidden, text etc...)
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:50:04
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function type(string $type) : self
+    public function type(string $type): self
     {
         print(" type=\"{$type}\"");
         
         return $this;
     }
-    
+
     /**
      * A value for your input type
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:51:04
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function value(string $value) : self
+    public function value(string $value): self
     {
         print(" value=\"{$value}\"");
         
         return $this;
     }
-    
+
     /**
      * Used if you want to disable an input or other
      * form element
-     * 
-     * @param   boolean
-     * @author  sbebbington
+     *
+     * @param
+     *            boolean
+     * @author sbebbington
      * @date    23 Jan 2017 - 09:52:23
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function disabled(bool $disabled = true) : self
+    public function disabled(bool $disabled = true): self
     {
         print(isTrue($disabled) ? " disabled=\"disabled\"" : "");
         
         return $this;
     }
-    
+
     /**
      * For <select id="id" name="name" class="class"><option></option></select>
      * Option values will be the $key and the display will be $data in the
      * array; if you want a selected item from the drop down, send the key
      * name of the item to be marked as selected after the options array
-     * 
-     * @param   string, string, string, array, string, boolean
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, string, array, string, boolean
+     * @author sbebbington
      * @date    27 Feb 2017 - 10:42:12
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function select(string $id = null, string $name = null, string $class = null, array $options = [], string $selected = null, bool $close = true) : self
+    public function select(string $id = null, string $name = null, string $class = null, array $options = [], string $selected = null, bool $close = true): self
     {
         print("<select");
-        if(!empty($id)){
+        if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
-        if(!empty($name)){
+        if (! empty($name)) {
             print(" name=\"{$name}\"");
         }
-        if(!empty($class)){
+        if (! empty($class)) {
             print(" class=\"{$class}\"");
         }
         print(">");
-        if(!empty($options)){
+        if (! empty($options)) {
             $this->option($options, $selected);
         }
         print(isTrue($close) ? "</select>" : "");
         
         return $this;
     }
-    
+
     /**
      * Builds the options for your select
-     * 
-     * @param   array, string
-     * @author  sbebbington
+     *
+     * @param
+     *            array, string
+     * @author sbebbington
      * @date    6 Jul 2017 - 12:12:56
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function option(array $options, string $selected = null) : self
+    public function option(array $options, string $selected = null): self
     {
-        foreach($options as $key => $data){
+        foreach ($options as $key => $data) {
             print("<option value=\"{$key}\"");
-            if($key == $selected){
+            if ($key == $selected) {
                 print(" selected=\"selected\"");
             }
             print(">{$data}</option>");
@@ -532,86 +556,90 @@ class HtmlBuilder
         
         return $this;
     }
-    
+
     /**
      * Used for opening any element not covered here
-     * i.e. in your view:
-     *         $this->open("div", "content", "col-xs-12", array('display' => "none"));
+     * i.e.
+     * in your view:
+     * $this->open("div", "content", "col-xs-12", array('display' => "none"));
      * will generate the following HTML:
-     *         <div id="content" class="col-xs-12" style="display: none;">
+     * <div id="content" class="col-xs-12" style="display: none;">
      * The style attribute has been added for those
      * who use [primarily] jQuery to make web pages
      * dynamic
-     * 
-     * @param   string, string, string | array, string | array, [boolean]
-     * @author  sbebbington
+     *
+     * @param
+     *            string, string, string | array, string | array, [boolean]
+     * @author sbebbington
      * @date    30 Mar 2017 - 11:22:00
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function open(string $element, string $id = null, $class = null, $style = null, bool $selfClose = false) : self
+    public function open(string $element, string $id = null, $class = null, $style = null, bool $selfClose = false): self
     {
         print("<{$element}");
-        if(strlen($id)>0){
+        if (strlen($id) > 0) {
             $this->id($id);
         }
-        if(is_string($class) || is_array($class)){
+        if (is_string($class) || is_array($class)) {
             $this->addClass($class);
         }
-        if(!empty($style) && (is_string($style) || is_array($style))){
+        if (! empty($style) && (is_string($style) || is_array($style))) {
             $this->style($style);
         }
         $this->closeElement($selfClose);
         
         return $this;
     }
-    
+
     /**
      * Used for closing an element such as a section
      * or a div etc...
      * i.e., in your view:
-     *         $this->close("div");
+     * $this->close("div");
      * will generate the following HTML:
-     *         </div>
-     * 
-     * @param   string
-     * @author  sbebbington
+     * </div>
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    23 Jan 2017 - 10:07:49
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function close(string $element) : self
+    public function close(string $element): self
     {
         print("</{$element}>");
         
         return $this;
     }
-    
+
     /**
      * For HTML elements H1 to H6 inclusive
      * the style attribute is added for use
      * with jQuery and such
-     * 
-     * @param   int, string, string, string | array, string | array
-     * @author  sbebbington
+     *
+     * @param
+     *            int, string, string, string | array, string | array
+     * @author sbebbington
      * @date    30 Mar 2017 - 10:51:02
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function h(int $size, string $text, string $id = null, $class = null, $style = null) : self
+    public function h(int $size, string $text, string $id = null, $class = null, $style = null): self
     {
-        if($size < 1 || $size > 6){
+        if ($size < 1 || $size > 6) {
             $this->lib->debug("Please set your header size between 1 and 6, value {$size} is not allowed", true);
         }
         
         print("<h{$size}");
-        if(strlen($id)>0){
+        if (strlen($id) > 0) {
             $this->id($id);
         }
-        if(is_string($class) || is_array($class)){
+        if (is_string($class) || is_array($class)) {
             $this->addClass($class);
         }
-        if(!empty($style) && (is_string($style) || is_array($style))){
+        if (! empty($style) && (is_string($style) || is_array($style))) {
             $this->style($style);
         }
         $this->closeElement(false);
@@ -620,63 +648,66 @@ class HtmlBuilder
         
         return $this;
     }
-    
+
     /**
      * Opens a <script type="text/javascript" src="...">
      * tag
      *
-     * @param   string
-     * @author  sbebbington
+     * @param
+     *            string
+     * @author sbebbington
      * @date    15 Feb 2017 - 13:45:35
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function javaScript(string $src = null) : self
+    public function javaScript(string $src = null): self
     {
         print("<script type=\"text/javascript\"");
         print(strlen($src) ? " src=\"{$src}\">" : ">");
         
         return $this;
     }
-    
+
     /**
      * Sets title attribute within an HTML element
-     * 
-     * @param   string
-     * @author  sbebbington
+     *
+     * @param
+     *            string
+     * @author sbebbington
      * @date    28 Mar 2017 - 15:29:22
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function title(string $title = null) : self
+    public function title(string $title = null): self
     {
         print(" title=\"{$title}\"");
         
         return $this;
     }
-    
+
     /**
      * This will allow style="display: none;"
      * and other such malevolence to be added
      * to your HTML
-     * 
-     * @param   string | array
-     * @author  sbebbington
+     *
+     * @param
+     *            string | array
+     * @author sbebbington
      * @date    30 Mar 2017 - 10:52:43
      * @version 0.1.5-RC3
-     * @return  $this
+     * @return $this
      */
-    public function style($style = null) : self
+    public function style($style = null): self
     {
-        if(empty($style)){
+        if (empty($style)) {
             $style = '';
         }
-        if(is_array($style)){
-            $_style    = '';
-            foreach($style as $key => $value){
-                $_style    .= "{$key}: {$value};";
+        if (is_array($style)) {
+            $_style = '';
+            foreach ($style as $key => $value) {
+                $_style .= "{$key}: {$value};";
             }
-            $style    = $_style;
+            $style = $_style;
             unset($_style);
         }
         print(" style=\"{$style}\"");
