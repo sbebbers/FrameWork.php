@@ -16,7 +16,15 @@ require_once (serverPath('/library/Library.php'));
 class ControllerCore
 {
 
-    public $post = array(), $view, $lib, $sql, $host;
+    public $post = array();
+
+    public $view;
+
+    public $lib;
+
+    public $sql;
+
+    public $host;
 
     public function __construct()
     {

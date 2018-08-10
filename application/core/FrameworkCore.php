@@ -23,13 +23,45 @@ require_once (serverPath('/core/HtmlBuilder.php'));
 class Core extends HtmlBuilder
 {
 
-    public $segment, $host, $partial, $controller, $title, $description, $metaData, $serverPath, $root, $flash, $filePath, $uriPath, $http;
+    public $segment;
 
-    public $canonical = '', $pageData = [], $ignoredExts = [];
+    public $host;
 
-    protected $allowedSegments, $pageController;
+    public $partial;
 
-    private $errorReporting, $allowedFileExts;
+    public $controller;
+
+    public $title;
+
+    public $description;
+
+    public $metaData;
+
+    public $serverPath;
+
+    public $root;
+
+    public $flash;
+
+    public $filePath;
+
+    public $uriPath;
+
+    public $http;
+
+    public $canonical = '';
+
+    public $pageData = [];
+
+    public $ignoredExts = [];
+
+    protected $allowedSegments;
+
+    protected $pageController;
+
+    private $errorReporting;
+
+    private $allowedFileExts;
 
     /**
      * Core constructor

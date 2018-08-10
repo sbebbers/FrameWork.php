@@ -11,7 +11,13 @@ require_once (serverPath("/core/FrameworkException.php"));
 class QueryBuilder
 {
 
-    protected $config, $select, $from, $where;
+    protected $config;
+
+    protected $select;
+
+    protected $from;
+
+    protected $where;
 
     public function __construct()
     {

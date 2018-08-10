@@ -1,7 +1,6 @@
 <?php
 namespace Application\Library;
 
-use stdClass;
 use Application\Core\FrameworkException\FrameworkException;
 if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
     require_once ("../view/403.phtml");
@@ -10,7 +9,9 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
 class Library
 {
 
-    private $key, $encryption;
+    private $key;
+
+    private $encryption;
 
     public function __construct()
     {

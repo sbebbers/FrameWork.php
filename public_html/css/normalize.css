@@ -122,24 +122,38 @@ audio, video, canvas, progress {
 }
 
 audio
+
+
 :not
+
  
+
 (
 [
 controls
 ]
+
  
+
 ){
 display
-:
- 
-none
-;
 
-	
-height
+
 :
+
  
+
+none
+
+
+;
+height
+
+
+:
+
+ 
+
 0
 }
 img {
@@ -147,16 +161,28 @@ img {
 }
 
 svg
+
+
 :not
+
  
+
 (
 :root
+
  
+
 ){
 overflow
+
+
 :
+
  
+
 hidden
+
+
 
 
 }

@@ -16,7 +16,11 @@ require_once (serverPath("/model/QueryBuilder.php"));
 class ModelCore extends QueryBuilder
 {
 
-    protected $db, $connection, $tables;
+    protected $db;
+
+    protected $connection;
+
+    protected $tables;
 
     protected $charSet = "utf8";
 
