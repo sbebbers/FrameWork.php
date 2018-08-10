@@ -468,7 +468,7 @@ class Library
      * @version 0.1.5-RC3
      * @return  object
      */
-    function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
+    public function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'){
         if($applicationType === 'x-www-form-urlencoded'){
             if(!is_object($data) || !is_array($data)){
                 $data    = [$data];

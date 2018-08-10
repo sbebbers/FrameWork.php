@@ -104,6 +104,9 @@ class Core extends HtmlBuilder
             return false;
         }
         $siteConfiguration      = json_decode(file_get_contents(serverPath('/config/pages.json')), true);
+        if(empty($siteConfiguration)){
+            throw new FrameworkException("Failed to load site configuration file", 0xf17e);
+        }
         $this->allowedSegments  = $siteConfiguration['allowedSegments'];
         $this->pageController   = $siteConfiguration['pageController'];
         $this->errorReporting   = $siteConfiguration['errorReporting'] ?? [];
