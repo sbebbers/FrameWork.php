@@ -56,11 +56,11 @@ class DateController extends ControllerCore
      * @param
      *            int
      * @author sbebbington
-     * @date    4 Jul 2017 17:15:59
+     * @date 4 Jul 2017 17:15:59
      * @version 0.1.5-RC3
      * @return array
      */
-    protected function setDays(int $default = 0)
+    protected function setDays(int $default = 0): array
     {
         $days = array();
         for ($i = 1; $i <= 31; $i ++) {
@@ -89,11 +89,11 @@ class DateController extends ControllerCore
      * @param
      *            string, string
      * @author sbebbington
-     * @date    5 Jul 2017 10:13:08
+     * @date 5 Jul 2017 10:13:08
      * @version 0.1.5-RC3
      * @return array
      */
-    protected function setMonths(string $type = FULLVALUE, string $keyType = NUMERICVALUE, string $default = '')
+    protected function setMonths(string $type = FULLVALUE, string $keyType = NUMERICVALUE, string $default = ''): array
     {
         $types = array(
             FULLVALUE,
@@ -177,11 +177,11 @@ class DateController extends ControllerCore
      * @param
      *            int, int, string, int
      * @author sbebbington
-     * @date    5 Jul 2017 10:10:45
+     * @date 5 Jul 2017 10:10:45
      * @version 0.1.5-RC3
      * @return array
      */
-    protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0)
+    protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0): array
     {
         $ordering = array(
             'asc',
@@ -229,11 +229,11 @@ class DateController extends ControllerCore
      * @param
      *            int, int, int
      * @author sbebbington
-     * @date    6 Jul 2017 13:50:32
+     * @date 6 Jul 2017 13:50:32
      * @version 0.1.5-RC3
      * @return boolean
      */
-    protected function checkDateValidity($day = null, $month = null, $year = null)
+    protected function checkDateValidity($day = null, $month = null, $year = null): bool
     {
         if (is_null($day) || is_null($month) || is_null($year)) {
             return false;
@@ -248,16 +248,16 @@ class DateController extends ControllerCore
      * @param
      *            stdClass
      * @author sbebbington
-     * @date    6 Jul 2017 11:37:21
+     * @date 6 Jul 2017 11:37:21
      * @version 0.1.5-RC3
      * @return string | null
      */
-    public function getDefault($viewObject = null)
+    public function getDefault($viewObject = null): string
     {
         if (is_null($viewObject)) {
             return '';
         }
-        return $viewObject[DEFAULTVALUE] ?? null;
+        return $viewObject[DEFAULTVALUE] ?? '';
     }
 
     /**
@@ -282,6 +282,6 @@ class DateController extends ControllerCore
             $viewObject->{DEFAULTVALUE} = null;
         }
         
-        return is_array($viewObject) ? array_filter($viewObject, 'strlen') : $viewObject;
+        return is_array($viewObject) ? array_filter($viewObject) : $viewObject;
     }
 }

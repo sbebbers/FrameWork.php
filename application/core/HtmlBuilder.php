@@ -24,7 +24,7 @@ class HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    16 Jan 2017 - 17:19:50
+     * @date 16 Jan 2017 - 17:19:50
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -40,7 +40,7 @@ class HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:15:10
+     * @date 23 Jan 2017 - 09:15:10
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -56,7 +56,7 @@ class HtmlBuilder
      * @param
      *            string, string, string, string, string, string | array, [boolean]
      * @author sbebbington
-     * @date    30 Mar 2017 - 11:30:31
+     * @date 30 Mar 2017 - 11:30:31
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -95,7 +95,7 @@ class HtmlBuilder
      * @param
      *            string, string
      * @author sbebbington
-     * @date    5 Apr 2017 - 16:14:08
+     * @date 5 Apr 2017 - 16:14:08
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -119,7 +119,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:15:29
+     * @date 23 Jan 2017 - 09:15:29
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -135,7 +135,7 @@ class HtmlBuilder
      * @param
      *            string, string
      * @author sbebbington
-     * @date    10 Apr 2017 - 09:36:45
+     * @date 10 Apr 2017 - 09:36:45
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -160,7 +160,7 @@ class HtmlBuilder
      * @param
      *            string, string, int, int, string, string
      * @author sbebbington
-     * @date    29 Mar 2017 - 11:37:44
+     * @date 29 Mar 2017 - 11:37:44
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -194,7 +194,7 @@ class HtmlBuilder
      * @param
      *            string | array
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:16:35
+     * @date 23 Jan 2017 - 09:16:35
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -226,7 +226,7 @@ class HtmlBuilder
      * @param
      *            string, string
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:26:47
+     * @date 23 Jan 2017 - 09:26:47
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -244,7 +244,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    11 Apr 2017 - 10:03:08
+     * @date 11 Apr 2017 - 10:03:08
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -265,7 +265,7 @@ class HtmlBuilder
      * @param
      *            boolean
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:30:19
+     * @date 23 Jan 2017 - 09:30:19
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -284,7 +284,7 @@ class HtmlBuilder
      * @param
      *            string, boolean
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:31:27
+     * @date 23 Jan 2017 - 09:31:27
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -302,7 +302,7 @@ class HtmlBuilder
      * @param
      *            string, string, int, int, string, string, boolean
      * @author sbebbington
-     * @date    30 Mar 2017 - 14:25:06
+     * @date 30 Mar 2017 - 14:25:06
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -343,7 +343,7 @@ class HtmlBuilder
      * @param
      *            string, string, string, string, string | array
      * @author sbebbington
-     * @date    22 May 2017 - 11:48:40
+     * @date 22 May 2017 - 11:48:40
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -380,7 +380,7 @@ class HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:44:29
+     * @date 23 Jan 2017 - 09:44:29
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -402,7 +402,7 @@ class HtmlBuilder
      * @param
      *            string, string, string, string, string | array
      * @author sbebbington
-     * @date    22 May 2017 - 11:15:23
+     * @date 22 May 2017 - 11:15:23
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -437,7 +437,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:49:19
+     * @date 23 Jan 2017 - 09:49:19
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -454,7 +454,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:50:04
+     * @date 23 Jan 2017 - 09:50:04
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -471,7 +471,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:51:04
+     * @date 23 Jan 2017 - 09:51:04
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -489,7 +489,7 @@ class HtmlBuilder
      * @param
      *            boolean
      * @author sbebbington
-     * @date    23 Jan 2017 - 09:52:23
+     * @date 23 Jan 2017 - 09:52:23
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -509,7 +509,7 @@ class HtmlBuilder
      * @param
      *            string, string, string, array, string, boolean
      * @author sbebbington
-     * @date    27 Feb 2017 - 10:42:12
+     * @date 27 Feb 2017 - 10:42:12
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -540,7 +540,7 @@ class HtmlBuilder
      * @param
      *            array, string
      * @author sbebbington
-     * @date    6 Jul 2017 - 12:12:56
+     * @date 6 Jul 2017 - 12:12:56
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -571,7 +571,7 @@ class HtmlBuilder
      * @param
      *            string, string, string | array, string | array, [boolean]
      * @author sbebbington
-     * @date    30 Mar 2017 - 11:22:00
+     * @date 30 Mar 2017 - 11:22:00
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -603,7 +603,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    23 Jan 2017 - 10:07:49
+     * @date 23 Jan 2017 - 10:07:49
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -622,7 +622,7 @@ class HtmlBuilder
      * @param
      *            int, string, string, string | array, string | array
      * @author sbebbington
-     * @date    30 Mar 2017 - 10:51:02
+     * @date 30 Mar 2017 - 10:51:02
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -656,7 +656,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    15 Feb 2017 - 13:45:35
+     * @date 15 Feb 2017 - 13:45:35
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -674,7 +674,7 @@ class HtmlBuilder
      * @param
      *            string
      * @author sbebbington
-     * @date    28 Mar 2017 - 15:29:22
+     * @date 28 Mar 2017 - 15:29:22
      * @version 0.1.5-RC3
      * @return $this
      */
@@ -693,7 +693,7 @@ class HtmlBuilder
      * @param
      *            string | array
      * @author sbebbington
-     * @date    30 Mar 2017 - 10:52:43
+     * @date 30 Mar 2017 - 10:52:43
      * @version 0.1.5-RC3
      * @return $this
      */

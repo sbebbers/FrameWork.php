@@ -32,14 +32,14 @@ class HomeController extends ControllerCore
      * library methods (and for my own sanity)
      * Seems worky.
      *
-     * @param
-     *            string, string
+     * @param string $password
+     * @param string $secret
      * @author sbebbington
-     * @date    1 Mar 2017 09:20:43
+     * @date 1 Mar 2017 09:20:43
      * @version 0.1.5-RC3
      * @return boolean
      */
-    public function passwordTester(string $password = "Password", string $secret = 'password')
+    public function passwordTester(string $password = "Password", string $secret = 'password'): bool
     {
         $_password = $this->lib->encryptIt($password, $secret);
         $_decryption = $this->lib->decryptIt("{$_password}", $secret);

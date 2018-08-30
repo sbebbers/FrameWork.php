@@ -37,7 +37,7 @@ class ModelCore extends QueryBuilder
      * @param
      *            field_type
      * @author sbebbington
-     * @date    26 Sep 2017 14:43:38
+     * @date 26 Sep 2017 14:43:38
      * @version 0.1.5-RC3
      * @return void
      * @throws FrameworkException
@@ -75,7 +75,7 @@ class ModelCore extends QueryBuilder
      *
      * @param string $dbUser
      * @author sbebbington
-     * @date    16 Jan 2018 15:36:02
+     * @date 16 Jan 2018 15:36:02
      * @version 0.1.5-RC3
      * @return void
      */
@@ -88,7 +88,7 @@ class ModelCore extends QueryBuilder
      * Gets the $dbUser object
      *
      * @author sbebbington
-     * @date    16 Jan 2018 15:38:42
+     * @date 16 Jan 2018 15:38:42
      * @version 0.1.5-RC3
      * @return string
      */
@@ -103,7 +103,7 @@ class ModelCore extends QueryBuilder
      * @param
      *            field_type
      * @author sbebbington
-     * @date    24 Oct 2017 13:26:43
+     * @date 24 Oct 2017 13:26:43
      * @version 0.1.5-RC3
      * @return void
      */
@@ -129,7 +129,7 @@ class ModelCore extends QueryBuilder
      * @param
      *            PDOStatement, array, bool, string, constant
      * @author sbebbington
-     * @date    24 Oct 2017 13:32:46
+     * @date 24 Oct 2017 13:32:46
      * @version 0.1.5-RC3
      * @return resource
      * @throws FrameworkException

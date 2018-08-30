@@ -12,23 +12,19 @@ use Application\Core\FrameworkException\FrameworkException;
  * is sent, or cookieDomain if no parameter
  * is sent
  *
- * @param
- *            string
+ * @param string $parameter
  * @author sbebbington
- * @date    2 Jan 2018 10:48:15
+ * @date 30 Aug 2018 16:22:28
  * @version 0.1.5-RC3
  * @return string
  * @throws FrameworkException
  */
-function getConfig(string $parameter = '')
+function getConfig(string $parameter = 'baseURL'): string
 {
     if (! file_exists(serverPath("/config/site.json"))) {
         throw new FrameworkException("A site.json file is required in the configuration at the application level for the framework to run", 0x02);
     }
-    if (empty($parameter)) {
-        $parameter = 'baseURL';
-    }
-    return json_decode(file_get_contents(serverPath("/config/site.json")), true)[$parameter] ?? null;
+    return json_decode(file_get_contents(serverPath("/config/site.json")), true)[$parameter] ?? '';
 }
 
 /**
@@ -37,30 +33,26 @@ function getConfig(string $parameter = '')
  * This parameter is now set in the
  * site.json file in the application config
  *
- * @param
- *            na
  * @author sbebbington
- * @date    27 Jul 2017 15:35:10
+ * @date 30 Aug 2018 16:21:55
  * @version 0.1.5-RC3
  * @return boolean
  */
-function isHttps()
+function isHttps(): bool
 {
-    return getConfig('protocol') == 'https';
+    return getConfig('protocol') === 'https';
 }
 
 /**
  * Returns the name of the current host file from
  * the PHP $_SERVER global thing #n00b
  *
- * @param
- *            na
  * @author sbebbington
- * @date    5 Oct 2016 10:55:01
+ * @date 5 Oct 2016 10:55:01
  * @version 0.1.5-RC3
  * @return string
  */
-function host()
+function host(): string
 {
     return "{$_SERVER['HTTP_HOST']}";
 }
@@ -69,14 +61,13 @@ function host()
  * Sets time zone, for a full list, see
  * http://php.net/manual/en/timezones.php
  *
- * @param
- *            string
+ * @param string $timeZone
  * @author sbebbington
- * @date    24 Jan 2017 09:48:21
+ * @date 24 Jan 2017 09:48:21
  * @version 0.1.5-RC3
  * @return void
  */
-function setTimeZone(string $timeZone)
+function setTimeZone(string $timeZone): void
 {
     date_default_timezone_set($timeZone);
 }
@@ -84,14 +75,12 @@ function setTimeZone(string $timeZone)
 /**
  * Gets user IP address
  *
- * @param
- *            na
  * @author sbebbington
- * @date    2 Feb 2017 - 09:58:21
+ * @date 2 Feb 2017 - 09:58:21
  * @version 0.1.5-RC3
  * @return string
  */
-function getUserIPAddress()
+function getUserIPAddress(): string
 {
     $client = $_SERVER['HTTP_CLIENT_IP'] ?? '';
     $forward = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
@@ -108,14 +97,12 @@ function getUserIPAddress()
  * Returns the IP address that the framework
  * is running on
  *
- * @param
- *            na
  * @author sbebbington
- * @date    2 Jan 2018 10:48:58
+ * @date 2 Jan 2018 10:48:58
  * @version 0.1.5-RC3
  * @return string
  */
-function getServerIPAddress()
+function getServerIPAddress(): string
 {
     return $_SERVER['SERVER_ADDR'];
 }
@@ -123,14 +110,12 @@ function getServerIPAddress()
 /**
  * Returns the current or default URI segment
  *
- * @param
- *            na
  * @author sbebbington
- * @date    6 Feb 2017 - 11:40:40
+ * @date 6 Feb 2017 - 11:40:40
  * @version 0.1.5-RC3
  * @return string
  */
-function getSegment()
+function getSegment(): string
 {
     $page = array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
     return ! empty($page) ? strtolower($page[count($page)]) : 'home';
@@ -139,14 +124,12 @@ function getSegment()
 /**
  * Returns PHP_SELF
  *
- * @param
- *            na
  * @author sbebbington
- * @date    2 Jan 2018 10:49:31
+ * @date 2 Jan 2018 10:49:31
  * @version 0.1.5-RC3
  * @return string
  */
-function getSelf()
+function getSelf(): string
 {
     return $_SERVER['PHP_SELF'];
 }
@@ -154,14 +137,12 @@ function getSelf()
 /**
  * Returns the server query string
  *
- * @param
- *            na
  * @author sbebbington
- * @date    2 Mar 2017 - 13:23:08
+ * @date 2 Mar 2017 - 13:23:08
  * @version 0.1.5-RC3
  * @return string
  */
-function getQueryString()
+function getQueryString(): string
 {
     return str_replace("/", '', $_SERVER['QUERY_STRING']);
 }
@@ -170,14 +151,12 @@ function getQueryString()
  * Returns the version number of the application
  * as set in the site.json config
  *
- * @param
- *            na
  * @author sbebbington
- * @date    27 Jul 2017 - 16:02:26
+ * @date 27 Jul 2017 - 16:02:26
  * @version 0.1.5-RC3
  * @return string
  */
-function getSiteVersion()
+function getSiteVersion(): string
 {
     return getConfig('version');
 }
@@ -186,14 +165,12 @@ function getSiteVersion()
  * If rc is set as true in the site.json config
  * then this is a release candidate, else it isn't
  *
- * @param
- *            na
  * @author sbebbington
- * @date    27 Jul 2017 - 16:03:33
+ * @date 27 Jul 2017 - 16:03:33
  * @version 0.1.5-RC3
  * @return bool
  */
-function isReleaseCandidate()
+function isReleaseCandidate(): string
 {
     return getConfig('rc');
 }
@@ -202,14 +179,12 @@ function isReleaseCandidate()
  * States whether or not is a development
  * version set in the site.json config
  *
- * @param
- *            na
  * @author sbebbington
- * @date    27 Jul 2017 - 16:05:23
+ * @date 27 Jul 2017 - 16:05:23
  * @version 0.1.5-RC3
  * @return bool
  */
-function isDevelopmentVersion()
+function isDevelopmentVersion(): string
 {
     return getConfig('dev');
 }
@@ -217,14 +192,13 @@ function isDevelopmentVersion()
 /**
  * Gets the configuration path
  *
- * @param
- *            string
+ * @param string $routeTo
  * @author Rob Gill && sbebbington
- * @date    16 Aug 2017 - 17:09:28
+ * @date 16 Aug 2017 - 17:09:28
  * @version 0.1.5-RC3
  * @return string
  */
-function logErrorPath(string $routeTo = '')
+function logErrorPath(string $routeTo = ''): string
 {
     $baseDir = dirname(__DIR__) . "/logs";
     return str_replace("\\", "/", "{$baseDir}{$routeTo}");
@@ -236,15 +210,14 @@ function logErrorPath(string $routeTo = '')
  * then it will append the data to the
  * file;
  *
- * @param
- *            array | mixed
+ * @param array $error
  * @author sbebbington
- * @date    19 Oct 2018 13:38:49
+ * @date 19 Oct 2018 13:38:49
  * @version 0.1.5-RC3
- * @return resource | false
+ * @return void
  * @throws Exception
  */
-function writeToLogFile($error = [])
+function writeToLogFile($error = []): void
 {
     if (empty($error)) {
         return false;
@@ -293,7 +266,7 @@ function writeToLogFile($error = [])
     if (! file_exists($fileName) && ! file_put_contents($fileName, "")) {
         throw new FrameworkException("File {$fileName} could not be created", 0xf17e);
     }
-    return file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? false;
+    file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? false;
 }
 
 /**
@@ -303,14 +276,13 @@ function writeToLogFile($error = [])
  * return as empty so this tries to negate
  * this feature as well
  *
- * @param
- *            scalar | object
+ * @param mixed $value
  * @author sbebbington
- * @date    5 Sep 2017 - 12:51:55
+ * @date 5 Sep 2017 - 12:51:55
  * @version 0.1.5-RC3
  * @return bool
  */
-function isEmpty($value)
+function isEmpty($value): bool
 {
     return (is_string($value) || is_numeric($value)) ? empty($value) && strlen("{$value}") : empty($value);
 }
@@ -323,7 +295,7 @@ function isEmpty($value)
  * @date	13 Feb 2018 13:26:37
  * @return boolean
  */
-function isCountable($object = null)
+function isCountable($object = null): bool
 {
     return ((is_array($object) || $object instanceof stdClass) && ! empty($object));
 }

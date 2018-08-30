@@ -26,7 +26,7 @@ class Library
      * @param
      *            object, boolean, string, string, string, string
      * @author sbebbington && Linden
-     * @date    26 Sep 2017 09:47:37
+     * @date 26 Sep 2017 09:47:37
      * @version 0.1.5-RC3
      * @return null
      */
@@ -57,7 +57,7 @@ class Library
      * @param
      *            object, boolean, string, string, string
      * @author sbebbington && Linden
-     * @date    26 Sep 2017 09:47:15
+     * @date 26 Sep 2017 09:47:15
      * @version 0.1.5-RC3
      * @return null
      */
@@ -81,7 +81,7 @@ class Library
      * @param
      *            na
      * @author sbebbington B
-     * @date    26 Sep 2017 10:05:31
+     * @date 26 Sep 2017 10:05:31
      * @return string
      * @todo Remember to update this number when
      *       enough changes constitute a new
@@ -99,7 +99,7 @@ class Library
      * @param
      *            na
      * @author sbebbington B
-     * @date    2016-02-19
+     * @date 2016-02-19
      * @return "Something good"
      * @todo Nothing as this function is perfect
      */
@@ -121,7 +121,7 @@ class Library
      * @param
      *            string, sting, int, boolean
      * @author sbebbington && Stack Overflow
-     * @date    1 Mar 2017 08:54:14
+     * @date 1 Mar 2017 08:54:14
      * @version 0.1.5-RC3
      * @return string
      */
@@ -138,7 +138,7 @@ class Library
      * @param
      *            string, string, int, boolean
      * @author sbebbington && Stack Overflow
-     * @date    1 Mar 2017 08:57:23
+     * @date 1 Mar 2017 08:57:23
      * @version 0.1.5-RC3
      * @return string
      */
@@ -181,7 +181,7 @@ class Library
      * @param
      *            int
      * @author sbebbington
-     * @date    1 Mar 2017 09:01:05
+     * @date 1 Mar 2017 09:01:05
      * @version 0.1.5-RC3
      * @return string
      */
@@ -199,7 +199,7 @@ class Library
      * @param
      *            string, string
      * @author sbebbington
-     * @date    2 Feb 2017 13:18:50
+     * @date 2 Feb 2017 13:18:50
      * @version 0.1.5-RC3
      * @return void
      * @throws FrameworkException
@@ -311,7 +311,7 @@ class Library
      * @param
      *            string
      * @author sbebbington
-     * @date    6 Jul 2017 12:14:42
+     * @date 6 Jul 2017 12:14:42
      * @version 0.1.5-RC3
      * @return string
      */
@@ -338,7 +338,7 @@ class Library
      * @param
      *            string
      * @author sbebbington
-     * @date    6 Jul 2017 12:17:34
+     * @date 6 Jul 2017 12:17:34
      * @version 0.1.5-RC3
      * @return string
      */
@@ -356,7 +356,7 @@ class Library
      * @param
      *            string, int
      * @author sbebbington
-     * @date    3 Feb 2017 13:46:37
+     * @date 3 Feb 2017 13:46:37
      * @version 0.1.5-RC3
      * @return string
      */
@@ -390,7 +390,7 @@ class Library
      * @param
      *            array, boolean, [array]
      * @author sbebbington && Vietnam
-     * @date    6 Jan 2017 15:36:29
+     * @date 6 Jan 2017 15:36:29
      * @version 0.1.5-RC3
      * @return array
      */
@@ -411,7 +411,7 @@ class Library
      * @param
      *            boolean
      * @author sbebbington
-     * @date    10 Jan 2017 09:25:07
+     * @date 10 Jan 2017 09:25:07
      * @version 0.1.5-RC3
      * @return string
      */
@@ -435,7 +435,7 @@ class Library
      * @param
      *            string, [boolean], [boolean]
      * @author sbebbington
-     * @date    21 Feb 2017 15:20:10
+     * @date 21 Feb 2017 15:20:10
      * @version 0.1.5-RC3
      * @return string
      */
@@ -487,7 +487,7 @@ class Library
      * @param
      *            string, object, string, string, string
      * @author sbebbington && Stack Overflow
-     * @date    3 Mar 2017 09:51:09
+     * @date 3 Mar 2017 09:51:09
      * @version 0.1.5-RC3
      * @return object
      */

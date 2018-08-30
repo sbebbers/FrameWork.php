@@ -69,7 +69,7 @@ class Core extends HtmlBuilder
      * @param
      *            field_type
      * @author sbebbington
-     * @date    26 Sep 2017 14:42:15
+     * @date 26 Sep 2017 14:42:15
      * @version 0.1.5-RC3
      * @return void
      * @throws FrameworkException
@@ -111,7 +111,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    28 Jul 2017 14:29:45
+     * @date 28 Jul 2017 14:29:45
      * @version 0.1.5-RC3
      * @return boolean
      * @throws FrameworkException
@@ -147,7 +147,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    25 Jul 2017 09:40:06
+     * @date 25 Jul 2017 09:40:06
      * @version 0.1.5-RC3
      * @return void
      */
@@ -168,7 +168,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    28 Jul 2017 11:50:03
+     * @date 28 Jul 2017 11:50:03
      * @version 0.1.5-RC3
      * @return void
      */
@@ -193,7 +193,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    25 Jul 2017 09:48:12
+     * @date 25 Jul 2017 09:48:12
      * @version 0.1.5-RC3
      * @return void
      */
@@ -220,7 +220,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    25 Jul 2017 10:50:31
+     * @date 25 Jul 2017 10:50:31
      * @version 0.1.5-RC3
      * @return array
      */
@@ -237,7 +237,7 @@ class Core extends HtmlBuilder
      * pagedata.json configuration file
      *
      * @author sbebbington
-     * @date    22 Jan 2018 09:38:02
+     * @date 22 Jan 2018 09:38:02
      * @version 0.1.5-RC3
      * @return string
      */
@@ -272,7 +272,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    25 Jul 2017 09:50:40
+     * @date 25 Jul 2017 09:50:40
      * @version 0.1.5-RC3
      * @return void
      */
@@ -296,7 +296,7 @@ class Core extends HtmlBuilder
      * @param
      *            resource | \stdClass, string
      * @author sbebbington
-     * @date    30 May 2017 09:49:39
+     * @date 30 May 2017 09:49:39
      * @version 0.1.5-RC3
      * @return void
      */
@@ -319,7 +319,7 @@ class Core extends HtmlBuilder
      * @param
      *            boolean
      * @author sbebbington
-     * @date    28 Jul 2017 12:04:03
+     * @date 28 Jul 2017 12:04:03
      * @version 0.1.5-RC3
      * @return array
      */
@@ -342,7 +342,7 @@ class Core extends HtmlBuilder
      * @param
      *            na
      * @author sbebbington
-     * @date    25 Jul 2017 10:59:38
+     * @date 25 Jul 2017 10:59:38
      * @version 0.1.5-RC3
      * @return void
      */
@@ -386,7 +386,7 @@ class Core extends HtmlBuilder
      * Checks if the route is valid or not
      *
      * @author Shaun B
-     * @date    27 Jul 2018 16:28:18
+     * @date 27 Jul 2018 16:28:18
      * @return bool
      */
     public function checkForPage(): bool
@@ -408,7 +408,7 @@ class Core extends HtmlBuilder
      * Requires Controller Core if necessary
      *
      * @author Shaun B
-     * @date    27 Jul 2018 16:30:33
+     * @date 27 Jul 2018 16:30:33
      * @return void
      */
     public function loadControllerCore(): void

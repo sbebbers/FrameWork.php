@@ -16,7 +16,7 @@ require_once (serverPath('/library/Library.php'));
 class ControllerCore
 {
 
-    public $post = array();
+    public $post = [];
 
     public $view;
 
@@ -45,7 +45,7 @@ class ControllerCore
      * @param
      *            Array
      * @author Linden && sbebbington
-     * @date    7 Oct 2016 14:54:10
+     * @date 7 Oct 2016 14:54:10
      * @version 0.1.5-RC3
      * @return void
      */
@@ -59,14 +59,12 @@ class ControllerCore
     /**
      * This should empty the super global $_POST and the controller $this->post
      *
-     * @param
-     *            na
      * @author sbebbington
-     * @date    16 Jun 2016 11:25:04
+     * @date 16 Jun 2016 11:25:04
      * @version 0.1.5-RC3
-     * @return array
+     * @return void
      */
-    public function emptyPost()
+    public function emptyPost(): void
     {
         $_POST = array();
         $this->post = $_POST;
@@ -75,14 +73,12 @@ class ControllerCore
     /**
      * Clears PHP session cookies
      *
-     * @param
-     *            na
      * @author sbebbington
-     * @date    14 Sep 2016 14:29:23
+     * @date 14 Sep 2016 14:29:23
      * @version 0.1.5-RC3
      * @return
      */
-    public function emptySession()
+    public function emptySession(): void
     {
         if (session_id() != "") {
             session_destroy();
@@ -93,14 +89,14 @@ class ControllerCore
     /**
      * Sets flash messages (recommend using string for value param)
      *
-     * @param
-     *            string, string | int | boolean
+     * @param string $key
+     * @param mixed $value
      * @author sbebbington
-     * @date    14 Sep 2016 09:48:53
+     * @date 14 Sep 2016 09:48:53
      * @version 0.1.5-RC3
      * @return void
      */
-    public function setFlashMessage($key, $value)
+    public function setFlashMessage($key, $value): void
     {
         $_SESSION[FLASHMESSAGE][$key] = $value;
     }
