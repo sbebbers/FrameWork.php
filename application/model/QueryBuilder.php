@@ -47,23 +47,23 @@ class QueryBuilder
      * @param array $items
      * @author Shaun B
      * @date	18 Apr 2018 10:32:32
-     * @return $this
+     * @return self
      */
-    public function select(array $items = [])
+    public function select(array $items = []): self
     {
         if (empty($items)) {
             $items = [
                 '*'
             ];
         }
-        $select = 'SELECT ';
+        $_select = 'SELECT ';
         foreach ($items as $item) {
-            $select .= $item === '*' ? $item : "`{$item}`,";
+            $_select .= $item === '*' ? $item : "`{$item}`,";
         }
-        if (strpos($select, ',') > 0) {
-            $select = substr($select, 0, - 1);
+        if (strpos($_select, ',') > 0) {
+            $_select = substr($_select, 0, - 1);
         }
-        $this->select = $select;
+        $this->select = $_select;
         return $this;
     }
 
@@ -74,10 +74,10 @@ class QueryBuilder
      *            [$database]
      * @author Shaun B
      * @date	18 Apr 2018 09:55:33
-     * @return $this
+     * @return self
      * @throws FrameworkException
      */
-    public function from(string $table = '', string $database = '')
+    public function from(string $table = '', string $database = ''): self
     {
         if (strlen($database) === 0) {
             $database = getConfig('db');
@@ -96,9 +96,9 @@ class QueryBuilder
      *            string $table, string $database
      * @author Shaun B
      * @date	18 Apr 2018 10:34:41
-     * @return $this
+     * @return self
      */
-    public function selectFrom(array $items = [], string $table = '', string $database = '')
+    public function selectFrom(array $items = [], string $table = '', string $database = ''): self
     {
         $this->select($items)->from($table, $database);
         return $this;
@@ -110,8 +110,10 @@ class QueryBuilder
      * @param array $conditions
      * @author Shaun B
      * @date	10 May 2018 16:24:09
-     * @return $this
+     * @return self
      */
-    public function where(array $conditions = [])
-    {}
+    public function where(array $conditions = []): self
+    {
+        return $this;
+    }
 }
