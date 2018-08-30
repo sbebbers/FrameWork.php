@@ -488,9 +488,9 @@ class Library
      * @author sbebbington && Stack Overflow
      * @date 3 Mar 2017 09:51:09
      * @version 0.1.5-RC3
-     * @return object
+     * @return string
      */
-    public function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8')
+    public function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'): string
     {
         if ($applicationType === 'x-www-form-urlencoded') {
             if (! is_object($data) || ! is_array($data)) {
