@@ -94,16 +94,13 @@ class Library
 
     /**
      * Is it Easter yet?
-     * Try <?phpecho $this->controllerInstance->libraryInstance->easterEgg(); ?> in your view
+     * Try <?= $this->controllerInstance->libraryInstance->easterEgg(); ?> in your view
      *
-     * @param
-     *            na
-     * @author sbebbington B
-     * @date 2016-02-19
+     * @author Shaun B
+     * @date 30 Aug 2018 16:29:57
      * @return "Something good"
-     * @todo Nothing as this function is perfect
      */
-    public function easterEgg(string $id = "something-good")
+    public function easterEgg(string $id = "something-good"): string
     {
         $easterEgg = chr(116) . chr(104) . chr(101) . chr(99) . chr(97) . chr(116) . chr(97) . chr(112) . chr(105);
         return trim("
@@ -112,20 +109,22 @@ class Library
                     <img src=\"http://{$easterEgg}.com/api/images/get?format=src&type=gif\" alt=\"Easter Egg\" />
                 </a>
             </div>
-        ");
+        ") ?? "Something good";
     }
 
     /**
      * Password encryption generator
      *
-     * @param
-     *            string, sting, int, boolean
+     * @param string $string
+     * @param string $secret
+     * @param int $padding
+     * @param bool $urlEncode
      * @author sbebbington && Stack Overflow
      * @date 1 Mar 2017 08:54:14
      * @version 0.1.5-RC3
      * @return string
      */
-    public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false)
+    public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $encrypt = $this->getEncryptionPadding($padding) . openssl_encrypt($string, $this->encryption, $md5) . $this->getEncryptionPadding($padding);
@@ -135,8 +134,10 @@ class Library
     /**
      * Password decryption generator
      *
-     * @param
-     *            string, string, int, boolean
+     * @param string $string
+     * @param string $secret
+     * @param int $padding
+     * @param bool $urlDecode
      * @author sbebbington && Stack Overflow
      * @date 1 Mar 2017 08:57:23
      * @version 0.1.5-RC3
@@ -152,14 +153,15 @@ class Library
     /**
      * Redirects using the PHP header command
      *
-     * @param
-     *            string, string, [int]
+     * @param string $destination
+     * @param string $host
+     * @param int $serverResponseCode
      * @author sbebbington || Steve
      * @date	17 Nov 2017 10:46:39
      * @version 0.1.5-RC3
      * @return void
      */
-    public function redirect(string $destination = '', string $host = '', int $serverResponseCode = 307)
+    public function redirect(string $destination = '', string $host = '', int $serverResponseCode = 307): void
     {
         if ($destination == '' || $host == '') {
             $this->debug("You need to set a destination and host parameters as a string to call the Library redirect() method", true);
@@ -173,22 +175,19 @@ class Library
     /**
      * Will add a random and predictable padding
      * to the encrypted and decrypted string.
-     * Made
-     * this method less like a ZX80 sub routine
-     * (I had been experimenting with ZX80 BASIC
-     * on that day so appologies)
+     * I Made this method less like a ZX80 sub
+     * routine (I had been experimenting with
+     * ZX80 BASIC on that day so appologies)
      *
-     * @param
-     *            int
+     * @param int $numberToPad
      * @author sbebbington
      * @date 1 Mar 2017 09:01:05
      * @version 0.1.5-RC3
      * @return string
      */
-    public function getEncryptionPadding(int $numberToPad = 8)
+    public function getEncryptionPadding(int $numberToPad = 8): string
     {
-        $shuffle = "1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM";
-        $shuffle = str_shuffle("{$shuffle}");
+        $shuffle = str_shuffle("1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM");
         
         return substr($shuffle, 0, $numberToPad);
     }
@@ -196,15 +195,15 @@ class Library
     /**
      * Redirects by using HTML/JavaScript
      *
-     * @param
-     *            string, string
+     * @param string $destination
+     * @param string $website
      * @author sbebbington
      * @date 2 Feb 2017 13:18:50
      * @version 0.1.5-RC3
      * @return void
      * @throws FrameworkException
      */
-    public function redirectExternal(string $destination = '', string $website = null)
+    public function redirectExternal(string $destination = '', string $website = null): void
     {
         if ($destination == '' || $website == '') {
             throw new FrameworkException("You need to set a destination and host parameters as a string to call the Library redirectExternal() method");
