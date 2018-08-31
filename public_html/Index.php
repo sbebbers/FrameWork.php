@@ -35,7 +35,7 @@ class Index
      *            na
      * @author sbebbington
      * @date 19 Jan 2018 13:38:24
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function __construct()
@@ -71,7 +71,7 @@ class Index
      *            na
      * @author sbebbington
      * @date 28 Jul 2017 - 17:03:54
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return boolean
      */
     public function checkPageLoad()
@@ -95,7 +95,7 @@ class Index
  * @param mixed $value
  * @author Shaun B
  * @date	12 May 2018 13:46:43
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return boolean
  */
 function isTrue($value = null)
@@ -110,7 +110,7 @@ function isTrue($value = null)
  * @param mixed $value
  * @author Shaun B
  * @date	12 May 2018 13:47:58
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return boolean
  * @throws
  */
@@ -127,7 +127,7 @@ function isFalse($value = null)
  *            string
  * @author Rob Gill && sbebbington
  * @date 26 Sep 2017 09:50:01
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function serverPath(string $routeTo = '')

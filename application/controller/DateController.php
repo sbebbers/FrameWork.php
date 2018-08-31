@@ -53,11 +53,10 @@ class DateController extends ControllerCore
      * 1 - 31 inclusive as date validation is handled
      * dynamically in the jQuery
      *
-     * @param
-     *            int
+     * @param int $default
      * @author sbebbington
      * @date 4 Jul 2017 17:15:59
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return array
      */
     protected function setDays(int $default = 0): array
@@ -86,11 +85,12 @@ class DateController extends ControllerCore
      * february etc...) send data type first and
      * then key type
      *
-     * @param
-     *            string, string
+     * @param string $type
+     * @param string $keyType
+     * @param string $default
      * @author sbebbington
      * @date 5 Jul 2017 10:13:08
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return array
      */
     protected function setMonths(string $type = FULLVALUE, string $keyType = NUMERICVALUE, string $default = ''): array
@@ -174,11 +174,13 @@ class DateController extends ControllerCore
      * a practical use for the deaded goto
      * command, replacing if/else logic
      *
-     * @param
-     *            int, int, string, int
+     * @param int $start
+     * @param int $end
+     * @param string $order
+     * @param int $default
      * @author sbebbington
      * @date 5 Jul 2017 10:10:45
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return array
      */
     protected function setYears(int $start = 1977, int $end = 2017, $order = "asc", int $default = 0): array
@@ -226,16 +228,17 @@ class DateController extends ControllerCore
      * valid according to the parameters of the
      * Gregorian calander
      *
-     * @param
-     *            int, int, int
+     * @param int $day
+     * @param int $month
+     * @param int $year
      * @author sbebbington
      * @date 6 Jul 2017 13:50:32
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return boolean
      */
-    protected function checkDateValidity($day = null, $month = null, $year = null): bool
+    protected function checkDateValidity(int $day = 0, int $month = 0, int $year = 0): bool
     {
-        if (is_null($day) || is_null($month) || is_null($year)) {
+        if (!$day || !$month || !$year) {
             return false;
         }
         return checkdate($month, $day, $year);
@@ -245,11 +248,10 @@ class DateController extends ControllerCore
      * Returns the default values to the view
      * to auto-select day, month, and year
      *
-     * @param
-     *            stdClass
+     * @param object $viewObject
      * @author sbebbington
      * @date 6 Jul 2017 11:37:21
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return string | null
      */
     public function getDefault($viewObject = null): string
@@ -264,11 +266,10 @@ class DateController extends ControllerCore
      * Clears the default parameter from the view object
      * should one exist
      *
-     * @param
-     *            object | array
+     * @param mixed $viewObject
      * @author sbebbington
-     * @date	11 May 2018 14:13:24
-     * @version 0.1.5-RC3
+     * @date 11 May 2018 14:13:24
+     * @version 1.0.0-RC1
      * @return array | object
      */
     public function clearDefault($viewObject = null)

@@ -42,14 +42,12 @@ class ControllerCore
     /**
      * Sanatizes posted data
      *
-     * @param
-     *            Array
      * @author Linden && sbebbington
      * @date 7 Oct 2016 14:54:10
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
-    public function setPost()
+    public function setPost(): void
     {
         foreach ($_POST as $key => $data) {
             $this->post[$key] = is_string($data) ? trim($data) : $data;
@@ -61,7 +59,7 @@ class ControllerCore
      *
      * @author sbebbington
      * @date 16 Jun 2016 11:25:04
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function emptyPost(): void
@@ -75,7 +73,7 @@ class ControllerCore
      *
      * @author sbebbington
      * @date 14 Sep 2016 14:29:23
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return
      */
     public function emptySession(): void
@@ -93,7 +91,7 @@ class ControllerCore
      * @param mixed $value
      * @author sbebbington
      * @date 14 Sep 2016 09:48:53
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function setFlashMessage($key, $value): void

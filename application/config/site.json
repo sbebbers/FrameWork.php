@@ -4,7 +4,7 @@
 	"cookieDomain": "framework.php.local",
 	"uriPath": "/",
 	"loadCoreController": true,
-	"version": "0.1.5-RC3",
+	"version": "1.0.0-RC1",
 	"rc": true,
 	"dev": true,
 	"mode": "test",

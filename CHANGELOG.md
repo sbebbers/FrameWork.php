@@ -1,4 +1,4 @@
-# Project FrameWork.php MVC v0.1.5-RC1 #
+# Project FrameWork.php MVC v1.0.0-RC1 #
 
 This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up your path in the allowed segments, the name of your path will point to the /application/view folder - you must place a view file with the same name as the allowed path with a .phtml extension, so in the example home in the $allowedSegments resource in the FrameworkCore.php will load the home.phtml view in /application/view
 
@@ -29,7 +29,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 --
 
 
-	@version	0.1.5-RC3
+	@version	1.0.0-RC1
 	@date		February 2016 - current date
 	@author		Shaun Bebbington (version 0.0.1 to current)
 				&& Linden Bryon (version 0.0.1 to 0.0.7)
@@ -238,4 +238,7 @@ This is a fairly simple and fairly stupid MCV framework for PHP 7. Simply set up
 	@changes as of 2018-08-06
 				I've been futher refactoring and bug fixing as directed by
 				SonarLint and SonarQube
+	@changes as of 2018-08-31
+				More refactoring and PHP 7 stuff added, adding return types
+				to methods and functions
 --

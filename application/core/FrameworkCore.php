@@ -66,12 +66,9 @@ class Core extends HtmlBuilder
     /**
      * Core constructor
      *
-     * @param
-     *            field_type
      * @author sbebbington
      * @date 26 Sep 2017 14:42:15
-     * @version 0.1.5-RC3
-     * @return void
+     * @version 1.0.0-RC1
      * @throws FrameworkException
      */
     public function __construct()
@@ -108,11 +105,9 @@ class Core extends HtmlBuilder
      * Note that allowedSegments and pageControllers
      * are required settings
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 28 Jul 2017 14:29:45
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return boolean
      * @throws FrameworkException
      */
@@ -144,11 +139,9 @@ class Core extends HtmlBuilder
      * Sets up the host object and checks against
      * the error reporting config values
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 25 Jul 2017 09:40:06
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     protected function setErrorReporting(): void
@@ -165,11 +158,9 @@ class Core extends HtmlBuilder
      * and will also set the page segment (in the
      * allowedSegments JSON object)
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 28 Jul 2017 11:50:03
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     protected function setUri(): void
@@ -190,11 +181,9 @@ class Core extends HtmlBuilder
     /**
      * Sets up the $_GET super global
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 25 Jul 2017 09:48:12
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     protected function setGetGlobal(): void
@@ -217,11 +206,9 @@ class Core extends HtmlBuilder
     /**
      * Sets the page title and meta descriptions
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 25 Jul 2017 10:50:31
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return array
      */
     public function getPageData(): array
@@ -238,7 +225,7 @@ class Core extends HtmlBuilder
      *
      * @author sbebbington
      * @date 22 Jan 2018 09:38:02
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return string
      */
     public function setMetaData(array $pageData = []): string
@@ -269,11 +256,9 @@ class Core extends HtmlBuilder
      * that the page without the file extension is the
      * main page
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 25 Jul 2017 09:50:40
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     protected function checkExtension(): void
@@ -293,11 +278,11 @@ class Core extends HtmlBuilder
      * added in error surpression to prevent warnings being
      * logged
      *
-     * @param
-     *            resource | \stdClass, string
+     * @param mixed $instance
+     * @param string $masterKey
      * @author sbebbington
      * @date 30 May 2017 09:49:39
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function setView($instance, string $masterKey = ''): void
@@ -316,11 +301,10 @@ class Core extends HtmlBuilder
      * are stored in the PHP $_SESSION global
      * or will empty the whole $_SESSION var
      *
-     * @param
-     *            boolean
+     * @param bool $emptyFlash
      * @author sbebbington
      * @date 28 Jul 2017 12:04:03
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return array
      */
     public function emptySession(bool $emptyFlash = false): array
@@ -339,11 +323,9 @@ class Core extends HtmlBuilder
      * Update includes a simplified way to get the page
      * meta data
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 25 Jul 2017 10:59:38
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function loadPage(): void

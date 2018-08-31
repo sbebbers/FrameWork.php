@@ -38,7 +38,7 @@ class ModelCore extends QueryBuilder
      *            field_type
      * @author sbebbington
      * @date 26 Sep 2017 14:43:38
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      * @throws FrameworkException
      */
@@ -76,7 +76,7 @@ class ModelCore extends QueryBuilder
      * @param string $dbUser
      * @author sbebbington
      * @date 16 Jan 2018 15:36:02
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     public function setDbUser(string $dbUser)
@@ -89,7 +89,7 @@ class ModelCore extends QueryBuilder
      *
      * @author sbebbington
      * @date 16 Jan 2018 15:38:42
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return string
      */
     public function getDbUser()
@@ -104,7 +104,7 @@ class ModelCore extends QueryBuilder
      *            field_type
      * @author sbebbington
      * @date 24 Oct 2017 13:26:43
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return void
      */
     private function setTables(string $db = '')
@@ -130,7 +130,7 @@ class ModelCore extends QueryBuilder
      *            PDOStatement, array, bool, string, constant
      * @author sbebbington
      * @date 24 Oct 2017 13:32:46
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return resource
      * @throws FrameworkException
      */

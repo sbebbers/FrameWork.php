@@ -36,7 +36,7 @@ class HomeController extends ControllerCore
      * @param string $secret
      * @author sbebbington
      * @date 1 Mar 2017 09:20:43
-     * @version 0.1.5-RC3
+     * @version 1.0.0-RC1
      * @return boolean
      */
     public function passwordTester(string $password = "Password", string $secret = 'password'): bool

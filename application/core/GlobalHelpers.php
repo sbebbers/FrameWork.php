@@ -15,7 +15,7 @@ use Application\Core\FrameworkException\FrameworkException;
  * @param string $parameter
  * @author sbebbington
  * @date 30 Aug 2018 16:22:28
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  * @throws FrameworkException
  */
@@ -35,7 +35,7 @@ function getConfig(string $parameter = 'baseURL'): string
  *
  * @author sbebbington
  * @date 30 Aug 2018 16:21:55
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return boolean
  */
 function isHttps(): bool
@@ -49,7 +49,7 @@ function isHttps(): bool
  *
  * @author sbebbington
  * @date 5 Oct 2016 10:55:01
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function host(): string
@@ -64,7 +64,7 @@ function host(): string
  * @param string $timeZone
  * @author sbebbington
  * @date 24 Jan 2017 09:48:21
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return void
  */
 function setTimeZone(string $timeZone): void
@@ -77,7 +77,7 @@ function setTimeZone(string $timeZone): void
  *
  * @author sbebbington
  * @date 2 Feb 2017 - 09:58:21
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getUserIPAddress(): string
@@ -99,7 +99,7 @@ function getUserIPAddress(): string
  *
  * @author sbebbington
  * @date 2 Jan 2018 10:48:58
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getServerIPAddress(): string
@@ -112,7 +112,7 @@ function getServerIPAddress(): string
  *
  * @author sbebbington
  * @date 6 Feb 2017 - 11:40:40
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getSegment(): string
@@ -126,7 +126,7 @@ function getSegment(): string
  *
  * @author sbebbington
  * @date 2 Jan 2018 10:49:31
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getSelf(): string
@@ -139,7 +139,7 @@ function getSelf(): string
  *
  * @author sbebbington
  * @date 2 Mar 2017 - 13:23:08
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getQueryString(): string
@@ -153,7 +153,7 @@ function getQueryString(): string
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:02:26
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function getSiteVersion(): string
@@ -167,7 +167,7 @@ function getSiteVersion(): string
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:03:33
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return bool
  */
 function isReleaseCandidate(): string
@@ -181,7 +181,7 @@ function isReleaseCandidate(): string
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:05:23
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return bool
  */
 function isDevelopmentVersion(): string
@@ -195,7 +195,7 @@ function isDevelopmentVersion(): string
  * @param string $routeTo
  * @author Rob Gill && sbebbington
  * @date 16 Aug 2017 - 17:09:28
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return string
  */
 function logErrorPath(string $routeTo = ''): string
@@ -213,14 +213,14 @@ function logErrorPath(string $routeTo = ''): string
  * @param array $error
  * @author sbebbington
  * @date 19 Oct 2018 13:38:49
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return void
  * @throws Exception
  */
 function writeToLogFile($error = []): void
 {
     if (empty($error)) {
-        return false;
+        return;
     }
     $error = is_array($error) ? $error : [
         $error
@@ -279,7 +279,7 @@ function writeToLogFile($error = []): void
  * @param mixed $value
  * @author sbebbington
  * @date 5 Sep 2017 - 12:51:55
- * @version 0.1.5-RC3
+ * @version 1.0.0-RC1
  * @return bool
  */
 function isEmpty($value): bool
