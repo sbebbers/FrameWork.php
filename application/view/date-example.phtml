@@ -6,13 +6,13 @@
 		$this->close("head");
     	$this->open("body", "body");
     		if(empty($this->dateSubmitted)){
-		    	$defaultDay		= "{$this->controller->dateExample->getDefault($this->days)}";
-		    	$defaultMonth	= "{$this->controller->dateExample->getDefault($this->months)}";
-		    	$defaultYear	= "{$this->controller->dateExample->getDefault($this->years)}";
+		    	$defaultDay = "{$this->controller->dateExample->getDefault($this->days)}";
+		    	$defaultMonth = "{$this->controller->dateExample->getDefault($this->months)}";
+		    	$defaultYear = "{$this->controller->dateExample->getDefault($this->years)}";
 		    	
-		    	$this->days		= $this->controller->dateExample->clearDefault($this->days);
-		    	$this->months	= $this->controller->dateExample->clearDefault($this->months);
-		    	$this->years	= $this->controller->dateExample->clearDefault($this->years);
+		    	$this->days = $this->controller->dateExample->clearDefault($this->days);
+		    	$this->months = $this->controller->dateExample->clearDefault($this->months);
+		    	$this->years = $this->controller->dateExample->clearDefault($this->years);
 	    	}
 	    	
 	    	$this->open("div", "content", "container")

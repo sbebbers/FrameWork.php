@@ -15,7 +15,6 @@ require_once (serverPath("/model/QueryBuilder.php"));
 
 class ModelCore extends QueryBuilder
 {
-
     protected $db;
 
     protected $connection;
@@ -34,8 +33,7 @@ class ModelCore extends QueryBuilder
     /**
      * Constructor
      *
-     * @param
-     *            field_type
+     * @param string $dbUser
      * @author sbebbington
      * @date 26 Sep 2017 14:43:38
      * @version 1.0.0-RC1
@@ -79,7 +77,7 @@ class ModelCore extends QueryBuilder
      * @version 1.0.0-RC1
      * @return void
      */
-    public function setDbUser(string $dbUser)
+    public function setDbUser(string $dbUser): void
     {
         $this->dbUser = $dbUser;
     }
@@ -92,7 +90,7 @@ class ModelCore extends QueryBuilder
      * @version 1.0.0-RC1
      * @return string
      */
-    public function getDbUser()
+    public function getDbUser(): string
     {
         return $this->dbUser;
     }
@@ -100,14 +98,13 @@ class ModelCore extends QueryBuilder
     /**
      * Sets the tables object
      *
-     * @param
-     *            field_type
+     * @param string $db
      * @author sbebbington
      * @date 24 Oct 2017 13:26:43
      * @version 1.0.0-RC1
      * @return void
      */
-    private function setTables(string $db = '')
+    private function setTables(string $db = ''): void
     {
         $query = "SELECT `TABLE_NAME` FROM `INFORMATION_SCHEMA`.`TABLES` " . "WHERE `TABLE_TYPE`='BASE TABLE' AND `TABLE_SCHEMA`=?;";
         $result = $this->connection->prepare($query);
@@ -126,12 +123,15 @@ class ModelCore extends QueryBuilder
      * Runs the MySQL query, returning the
      * required result
      *
-     * @param
-     *            PDOStatement, array, bool, string, constant
+     * @param PDOStatement $query
+     * @param array $parameters
+     * @param bool $fetchAll
+     * @param string $key
+     * @param PDO constant $fetchType
      * @author sbebbington
      * @date 24 Oct 2017 13:32:46
      * @version 1.0.0-RC1
-     * @return resource
+     * @return array
      * @throws FrameworkException
      */
     protected function execute(PDOStatement $query, array $parameters = [], bool $fetchAll = false, string $key = '', $fetchType = PDO::FETCH_ASSOC)

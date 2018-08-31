@@ -23,14 +23,18 @@ class Library
      * For debugging objects, optional die and die message included
      * Parameters now allow for a header for each object
      *
-     * @param
-     *            object, boolean, string, string, string, string
+     * @param mixed $variable
+     * @param bool $die
+     * @param string $message
+     * @param string $file
+     * @param string $line
+     * @param string $header
      * @author sbebbington && Linden
      * @date 26 Sep 2017 09:47:37
      * @version 1.0.0-RC1
      * @return null
      */
-    public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = '')
+    public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''): null
     {
         if (getConfig('mode') != 'test') {
             return null;
@@ -54,14 +58,17 @@ class Library
      * For seeing contents of variables or objects, optional die
      * and die message included
      *
-     * @param
-     *            object, boolean, string, string, string
+     * @param object $variable
+     * @param bool $die
+     * @param string $message
+     * @param string $file
+     * @param string $line
      * @author sbebbington && Linden
      * @date 26 Sep 2017 09:47:15
      * @version 1.0.0-RC1
      * @return null
      */
-    public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = '')
+    public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''): null
     {
         if (getConfig('mode') != 'test') {
             return null;
@@ -82,7 +89,7 @@ class Library
      * @date 26 Sep 2017 10:05:31
      * @return string
      */
-    public function version()
+    public function version(): string
     {
         return '1.0.0-RC1';
     }
@@ -138,7 +145,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false)
+    public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $decrypt = openssl_decrypt(substr($string, $padding, - $padding), $this->encryption, $md5);

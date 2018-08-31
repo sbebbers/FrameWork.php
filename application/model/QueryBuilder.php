@@ -2,6 +2,7 @@
 namespace Application\Model;
 
 use Application\Core\FrameworkException\FrameworkException;
+
 if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
     require_once ("../view/403.phtml");
 }
@@ -33,10 +34,10 @@ class QueryBuilder
      * settings
      *
      * @author Shaun B
-     * @date	18 Apr 2018 09:59:02
-     * @return resource
+     * @date 18 Apr 2018 09:59:02
+     * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }
@@ -70,10 +71,10 @@ class QueryBuilder
     /**
      * Builds the
      *
-     * @param string $table,
-     *            [$database]
+     * @param string $table
+     * @param string $database
      * @author Shaun B
-     * @date	18 Apr 2018 09:55:33
+     * @date 18 Apr 2018 09:55:33
      * @return self
      * @throws FrameworkException
      */
@@ -93,9 +94,10 @@ class QueryBuilder
      * Shorthand for SELECT * FROM `db`.`table`
      *
      * @param array $items,
-     *            string $table, string $database
+     * @param string $table
+     * @param string $database
      * @author Shaun B
-     * @date	18 Apr 2018 10:34:41
+     * @date 18 Apr 2018 10:34:41
      * @return self
      */
     public function selectFrom(array $items = [], string $table = '', string $database = ''): self
@@ -109,7 +111,7 @@ class QueryBuilder
      *
      * @param array $conditions
      * @author Shaun B
-     * @date	10 May 2018 16:24:09
+     * @date 10 May 2018 16:24:09
      * @return self
      */
     public function where(array $conditions = []): self

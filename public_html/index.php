@@ -18,7 +18,7 @@ if (session_id() == "") {
     session_start();
 }
 
-class Index
+class index
 {
 
     protected $core;
@@ -31,8 +31,6 @@ class Index
      * for a list of valid timezones, see:
      * http://php.net/manual/en/timezones.php
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 19 Jan 2018 13:38:24
      * @version 1.0.0-RC1
@@ -67,21 +65,19 @@ class Index
      * Check if request is for page view
      * or site asset
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 28 Jul 2017 - 17:03:54
      * @version 1.0.0-RC1
      * @return boolean
      */
-    public function checkPageLoad()
+    public function checkPageLoad(): bool
     {
         $exts = array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen');
         $last = [];
         if (count($exts)) {
             $last = explode(".", $exts[count($exts) - 1] ?? '');
             $last = (count($last) > 0) ? $last[count($last) - 1] : '';
-            return in_array($last, $this->core->ignoredExts) ? false : true;
+            return !in_array($last, $this->core->ignoredExts);
         }
         return true;
     }
@@ -94,11 +90,11 @@ class Index
  *
  * @param mixed $value
  * @author Shaun B
- * @date	12 May 2018 13:46:43
+ * @date 12 May 2018 13:46:43
  * @version 1.0.0-RC1
  * @return boolean
  */
-function isTrue($value = null)
+function isTrue($value = null): bool
 {
     return boolval($value);
 }
@@ -109,12 +105,11 @@ function isTrue($value = null)
  *
  * @param mixed $value
  * @author Shaun B
- * @date	12 May 2018 13:47:58
+ * @date 12 May 2018 13:47:58
  * @version 1.0.0-RC1
  * @return boolean
- * @throws
  */
-function isFalse($value = null)
+function isFalse($value = null): bool
 {
     return boolval($value === false);
 }
@@ -123,18 +118,17 @@ function isFalse($value = null)
  * This will correctly route to the application
  * directory on your server
  *
- * @param
- *            string
+ * @param string $routeTo
  * @author Rob Gill && sbebbington
  * @date 26 Sep 2017 09:50:01
  * @version 1.0.0-RC1
  * @return string
  */
-function serverPath(string $routeTo = '')
+function serverPath(string $routeTo = ''): string
 {
     $baseDir = dirname(__DIR__) . "/application";
     return str_replace("\\", "/", "{$baseDir}{$routeTo}");
 }
 
 // Creates new instance and therefore initiates the controllers, models and views etc...
-$page = new Index();
+$page = new index();
