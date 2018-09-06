@@ -34,10 +34,10 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''): null
+    public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''): void
     {
         if (getConfig('mode') != 'test') {
-            return null;
+            return;
         }
         if (is_null($variable)) {
             echo '<p>You need to send the scalar or resource that you are trying to debug as your first parameter, else this don\'t work</p>';
@@ -51,7 +51,6 @@ class Library
         if (isTrue($die)) {
             die("{$message}");
         }
-        return null;
     }
 
     /**
@@ -68,10 +67,10 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''): null
+    public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''): void
     {
         if (getConfig('mode') != 'test') {
-            return null;
+            return;
         }
         var_dump($variable);
         echo $file != null ? '<pre>File: ' . print_r($file, 1) . '</pre>' : "";
@@ -79,7 +78,6 @@ class Library
         if (isTrue($die)) {
             die($message);
         }
-        return null;
     }
 
     /**
