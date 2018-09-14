@@ -15,7 +15,9 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
 
 if (session_id() == "") {
-    session_start();
+    session_start([
+        'read_and_close' => true
+    ]);
 }
 
 class index

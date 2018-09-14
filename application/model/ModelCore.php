@@ -15,6 +15,7 @@ require_once (serverPath("/model/QueryBuilder.php"));
 
 class ModelCore extends QueryBuilder
 {
+
     protected $db;
 
     protected $connection;
@@ -127,7 +128,8 @@ class ModelCore extends QueryBuilder
      * @param array $parameters
      * @param bool $fetchAll
      * @param string $key
-     * @param PDO constant $fetchType
+     * @param
+     *            PDO constant $fetchType
      * @author sbebbington
      * @date 24 Oct 2017 13:32:46
      * @version 1.0.0-RC1
