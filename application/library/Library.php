@@ -188,7 +188,7 @@ class Library
     public function getEncryptionPadding(int $numberToPad = 8): string
     {
         $shuffle = str_shuffle("1q2w3e4r5t6y7u8i9o0p!AS£D\$%F^G!H*J(K)L-z=x[c]v{b}n;m:QW@E#R*T<Y>U,I.O/P?a|s%d1f2g3h4j5k6l7Z8X9C0VBNM");
-        
+
         return substr($shuffle, 0, $numberToPad);
     }
 
@@ -241,16 +241,16 @@ class Library
         }
         $passCol = "color: green;";
         $failCol = "color: red;";
-        
+
         if (! is_array($params) && (is_string($params) || is_numeric($params))) {
             $pass = $object->{$method}($params);
             $tested = true;
         } else if (is_array($params)) {
             $pass = $object->{$method}($params[0], $params[1] ?? null, $params[2] ?? null, $params[3] ?? null, $params[4] ?? null, $params[5] ?? null, $params[6] ?? null, $params[7] ?? null, $params[8] ?? null, $params[9] ?? null);
-            
+
             $tested = true;
         }
-        
+
         return ($tested === true) ? $this->outputUnitTestResult($passCol, $failCol, $expectedResult, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
     }
 
@@ -501,7 +501,7 @@ class Library
             $data = http_build_query($data);
         }
         $options = array();
-        
+
         $options['http'] = array(
             'method' => 'POST',
             'content' => $data
@@ -516,7 +516,7 @@ class Library
             $header['header'] .= PHP_EOL . "Authorization: Basic " . base64_encode("{$username}:{$password}");
         }
         $options['http'] = array_merge($options['http'], $header);
-        
+
         $context = stream_context_create($options);
         return file_get_contents($url, false, $context);
     }

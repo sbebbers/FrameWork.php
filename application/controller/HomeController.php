@@ -14,7 +14,7 @@ class HomeController extends ControllerCore
     public function __construct()
     {
         ControllerCore::__construct();
-        
+
         $this->sql = new HomeModel();
         foreach ($this->sql->getView() as $key => $data) {
             $key = $this->lib->convertSnakeCase($key);

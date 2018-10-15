@@ -11,23 +11,23 @@ class DateController extends ControllerCore
     public function __construct()
     {
         ControllerCore::__construct();
-        
+
         if (! empty($this->post)) {
             $daySubmitted = $this->post[DAY];
             $monthSubmitted = $this->post[MONTH];
             $yearSubmitted = $this->post[YEAR];
             $dateSubmitted = "You submitted the following date: {$daySubmitted}/{$monthSubmitted}/{$yearSubmitted} ";
-            
+
             if ($this->checkDateValidity($daySubmitted, $monthSubmitted, $yearSubmitted)) {
                 $dateSubmitted .= " - This is a valid date";
             } else {
                 $dateSubmitted .= " - This is not a valid date";
             }
-            
+
             $this->view->dateSubmitted = $dateSubmitted;
             goto end;
         }
-        
+
         $day = array(
             '' => "-- Select Day --"
         );
@@ -37,11 +37,11 @@ class DateController extends ControllerCore
         $year = array(
             '' => "-- Select Year --"
         );
-        
+
         $day += $this->setDays((int) date('d'));
         $month += $this->setMonths(FULLVALUE, NUMERICVALUE, date('m'));
         $year += $this->setYears(1901, (int) date('Y'), 'asc', (int) date('Y'));
-        
+
         $this->view->days = $day;
         $this->view->months = $month;
         $this->view->years = $year;
@@ -73,7 +73,7 @@ class DateController extends ControllerCore
             goto end;
         }
         $days[DEFAULTVALUE] = ($default < 10) ? "0{$default}" : "{$default}";
-        
+
         end:
         return $days;
     }
@@ -159,7 +159,7 @@ class DateController extends ControllerCore
             goto end;
         }
         $months[DEFAULTVALUE] = $default;
-        
+
         end:
         return $months;
     }
@@ -190,7 +190,7 @@ class DateController extends ControllerCore
             'desc'
         );
         $order = strtolower($order);
-        
+
         if (! in_array($order, $ordering)) {
             return [
                 "Please set your ordering to ascending [asc] or descending [desc]"
@@ -201,7 +201,7 @@ class DateController extends ControllerCore
                 "Error setting the year object, please check that your start year is before your end year"
             ];
         }
-        
+
         $years = array();
         if ($order == "asc") {
             for ($i = $start; $i <= $end; $i ++) {
@@ -212,13 +212,13 @@ class DateController extends ControllerCore
         for ($i = $end; $i >= $start; $i --) {
             $years["{$i}"] = $i;
         }
-        
+
         checkDefault:
         if (! in_array($default, $years)) {
             goto end;
         }
         $years[DEFAULTVALUE] = $default;
-        
+
         end:
         return $years;
     }
@@ -282,7 +282,7 @@ class DateController extends ControllerCore
         } else if (is_object($viewObject)) {
             $viewObject->{DEFAULTVALUE} = null;
         }
-        
+
         return is_array($viewObject) ? array_filter($viewObject) : $viewObject;
     }
 }

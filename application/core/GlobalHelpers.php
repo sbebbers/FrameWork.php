@@ -225,7 +225,7 @@ function writeToLogFile($error = []): void
     $error = is_array($error) ? $error : [
         $error
     ];
-    
+
     $months = [
         1 => 'jan',
         'feb',
@@ -240,11 +240,11 @@ function writeToLogFile($error = []): void
         'nov',
         'dec'
     ];
-    
+
     if (empty($error['ip_address'])) {
         $error['ip_address'] = getUserIPAddress();
     }
-    
+
     if (empty($error['date'])) {
         $error['date'] = date("Y-m-d");
         $error['time'] = date("H:i:s");
@@ -253,16 +253,16 @@ function writeToLogFile($error = []): void
     $dirName = $months[(int) $fileNames[1]];
     $logPath = logErrorPath("/{$dirName}");
     $fileName = "{$logPath}/{$fileNames[2]}.log";
-    
+
     if (! is_dir(logErrorPath()) && ! mkdir(logErrorPath(), 0755)) {
         throw new FrameworkException("Filepath " . logErrorPath() . " could not be created", 0xf17e);
     }
-    
+
     if (! is_dir($logPath) && ! mkdir($logPath, 0755)) {
         throw new FrameworkException("Filepath {$logPath} could not be created", 0xf17e);
     }
     $error = json_encode($error);
-    
+
     if (! file_exists($fileName) && ! file_put_contents($fileName, "")) {
         throw new FrameworkException("File {$fileName} could not be created", 0xf17e);
     }

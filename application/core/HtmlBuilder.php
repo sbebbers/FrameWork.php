@@ -63,7 +63,7 @@ class HtmlBuilder
     public function a(string $id = null, string $href = null, string $target = null, string $onClick = null, string $class = null, $style = null, bool $close = true): self
     {
         print("<a");
-        
+
         if (strlen($id)) {
             print(" id=\"{$id}\"");
         }
@@ -85,7 +85,7 @@ class HtmlBuilder
         if (isTrue($close)) {
             print(">");
         }
-        
+
         return $this;
     }
 
@@ -109,7 +109,7 @@ class HtmlBuilder
             print(" class=\"{$class}\"");
         }
         print(" />");
-        
+
         return $this;
     }
 
@@ -142,7 +142,7 @@ class HtmlBuilder
     public function span(string $id = null, $class = null): self
     {
         print("<span");
-        
+
         if (strlen($id) > 0) {
             $this->id($id);
         }
@@ -150,7 +150,7 @@ class HtmlBuilder
             $this->addClass($class);
         }
         print(">");
-        
+
         return $this;
     }
 
@@ -184,7 +184,7 @@ class HtmlBuilder
             print(" class=\"{$class}\"");
         }
         print(" />");
-        
+
         return $this;
     }
 
@@ -215,7 +215,7 @@ class HtmlBuilder
             $_class .= "{$class}";
         }
         print("{$_class}\"");
-        
+
         return $this;
     }
 
@@ -233,7 +233,7 @@ class HtmlBuilder
     public function dataAttr(string $attrName, string $data): self
     {
         print(" data-{$attrName}=\"{$data}\"");
-        
+
         return $this;
     }
 
@@ -254,7 +254,7 @@ class HtmlBuilder
         if (strlen($placeHolder)) {
             print("=\"{$placeHolder}\"");
         }
-        
+
         return $this;
     }
 
@@ -272,7 +272,7 @@ class HtmlBuilder
     public function closeElement(bool $selfClose = false): self
     {
         print(isFalse($selfClose) ? ">" : " />");
-        
+
         return $this;
     }
 
@@ -291,7 +291,7 @@ class HtmlBuilder
     public function text(string $text, bool $decode = false): self
     {
         print(isFalse($decode) ? $text : htmlspecialchars_decode($text));
-        
+
         return $this;
     }
 
@@ -309,7 +309,7 @@ class HtmlBuilder
     public function textArea(string $id = null, string $name = null, int $rows = 0, int $cols = 0, string $placeHolder = null, string $class = null, bool $required = false): self
     {
         print("<textarea");
-        
+
         if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
@@ -332,7 +332,7 @@ class HtmlBuilder
             print(" required=\"required\"");
         }
         print(">");
-        
+
         return $this;
     }
 
@@ -350,7 +350,7 @@ class HtmlBuilder
     public function form(string $id = null, string $action = null, string $method = 'post', string $class = null, $style = null, string $encType = null): self
     {
         print("<form");
-        
+
         if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
@@ -370,7 +370,7 @@ class HtmlBuilder
             print(" enctype=\"{$encType}\"");
         }
         $this->closeElement(false);
-        
+
         return $this;
     }
 
@@ -387,7 +387,7 @@ class HtmlBuilder
     public function input(): self
     {
         print("<input");
-        
+
         return $this;
     }
 
@@ -409,7 +409,7 @@ class HtmlBuilder
     public function label(string $text, string $id = null, string $for = null, string $class = null, $style = null): self
     {
         print("<label");
-        
+
         if (! empty($id)) {
             print(" id=\"{$id}\"");
         }
@@ -427,7 +427,7 @@ class HtmlBuilder
         } else {
             print(">");
         }
-        
+
         return $this;
     }
 
@@ -444,7 +444,7 @@ class HtmlBuilder
     public function name(string $name): self
     {
         print(" name=\"{$name}\"");
-        
+
         return $this;
     }
 
@@ -461,7 +461,7 @@ class HtmlBuilder
     public function type(string $type): self
     {
         print(" type=\"{$type}\"");
-        
+
         return $this;
     }
 
@@ -478,7 +478,7 @@ class HtmlBuilder
     public function value(string $value): self
     {
         print(" value=\"{$value}\"");
-        
+
         return $this;
     }
 
@@ -496,7 +496,7 @@ class HtmlBuilder
     public function disabled(bool $disabled = true): self
     {
         print(isTrue($disabled) ? " disabled=\"disabled\"" : "");
-        
+
         return $this;
     }
 
@@ -530,7 +530,7 @@ class HtmlBuilder
             $this->option($options, $selected);
         }
         print(isTrue($close) ? "</select>" : "");
-        
+
         return $this;
     }
 
@@ -553,7 +553,7 @@ class HtmlBuilder
             }
             print(">{$data}</option>");
         }
-        
+
         return $this;
     }
 
@@ -588,7 +588,7 @@ class HtmlBuilder
             $this->style($style);
         }
         $this->closeElement($selfClose);
-        
+
         return $this;
     }
 
@@ -610,7 +610,7 @@ class HtmlBuilder
     public function close(string $element): self
     {
         print("</{$element}>");
-        
+
         return $this;
     }
 
@@ -631,7 +631,7 @@ class HtmlBuilder
         if ($size < 1 || $size > 6) {
             $this->lib->debug("Please set your header size between 1 and 6, value {$size} is not allowed", true);
         }
-        
+
         print("<h{$size}");
         if (strlen($id) > 0) {
             $this->id($id);
@@ -645,7 +645,7 @@ class HtmlBuilder
         $this->closeElement(false);
         print("{$text}");
         $this->close("h{$size}");
-        
+
         return $this;
     }
 
@@ -664,7 +664,7 @@ class HtmlBuilder
     {
         print("<script type=\"text/javascript\"");
         print(strlen($src) ? " src=\"{$src}\">" : ">");
-        
+
         return $this;
     }
 
@@ -681,7 +681,7 @@ class HtmlBuilder
     public function title(string $title = null): self
     {
         print(" title=\"{$title}\"");
-        
+
         return $this;
     }
 
@@ -711,7 +711,7 @@ class HtmlBuilder
             unset($_style);
         }
         print(" style=\"{$style}\"");
-        
+
         return $this;
     }
 }

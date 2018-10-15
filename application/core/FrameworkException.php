@@ -27,7 +27,7 @@ class FrameworkException extends Exception
             'message' => $message,
             'code' => $code
         ];
-        
+
         $this->setExceptionDetails(array_merge($error, $additionalInformation));
     }
 

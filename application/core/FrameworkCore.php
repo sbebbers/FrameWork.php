@@ -82,12 +82,12 @@ class Core extends HtmlBuilder
         if (! empty($this->pageData['metaData'])) {
             $this->metaData = $this->setMetaData($this->pageData['metaData']);
         }
-        
+
         $this->setErrorReporting();
         $this->setUri();
         $this->setGetGlobal();
         $this->checkExtension();
-        
+
         $this->serverPath = serverPath();
         $this->root = str_replace("\\", "/", $_SERVER['DOCUMENT_ROOT']);
         $this->controller = new stdClass();
@@ -128,7 +128,7 @@ class Core extends HtmlBuilder
             'js',
             'css'
         ];
-        
+
         if (! empty($this->allowedSegments) && ! empty($this->pageController)) {
             return true;
         }
@@ -167,7 +167,7 @@ class Core extends HtmlBuilder
     {
         $this->uriPath = getConfig('uriPath');
         $page = [];
-        
+
         if (($page = array_filter(explode('/', $_SERVER['REQUEST_URI']), 'strlen')) && strlen($this->uriPath) <= 1 && ! empty($page)) {
             foreach ($page as $key => $data) {
                 if ($key != count($page)) {
@@ -191,7 +191,7 @@ class Core extends HtmlBuilder
         if (! empty($_GET)) {
             $segment = explode('?', $this->segment);
             $this->segment = $segment[0];
-            
+
             if (isset($segment[1]) && ! empty($segment[1])) {
                 $_GET = array();
                 $get = explode("&", $segment[1]);
@@ -234,19 +234,19 @@ class Core extends HtmlBuilder
             return '';
         }
         $metaData = "";
-        
+
         if ((empty($this->segment) || $this->segment == 'home') || ! empty($pageData["{$this->segment}"])) {
             if (! empty($pageData["{$this->segment}"])) {
                 $pageData = $pageData["{$this->segment}"];
             } else if (empty($this->segment) || $this->segment == 'home') {
                 $pageData = $pageData[DEFAULTVALUE];
             }
-            
+
             foreach ($pageData as $key => $data) {
                 $metaData .= "<meta name=\"{$key}\" content=\"{$data}\" />" . PHP_EOL;
             }
         }
-        
+
         return $metaData;
     }
 
@@ -265,7 +265,7 @@ class Core extends HtmlBuilder
     {
         if (strpos($this->segment, ".") > 0) {
             $segments = explode(".", $this->segment);
-            
+
             if (in_array($segments[count($segments) - 1], $this->allowedFileExts)) {
                 $this->segment = $segments[count($segments) - 2];
                 $this->canonical = "<link rel=\"canonical\" href=\"{$this->host}/{$this->segment}\">" . PHP_EOL;
@@ -334,31 +334,31 @@ class Core extends HtmlBuilder
             $this->segment = 'home';
         }
         $this->checkForPage();
-        
+
         if (isTrue(in_array($this->segment, $this->allowedSegments))) {
             $this->title = $this->pageData['titles']["{$this->segment}"] ?? '';
             $this->description = $this->pageData['descriptions']["{$this->segment}"] ?? '';
             $this->loadControllerCore();
-            
+
             foreach ($this->pageController as $instance => $controller) {
                 if ($this->segment == $instance) {
                     require_once (serverPath("/controller/{$controller}.php"));
                     $_instance = $this->lib->camelCaseFromDashes($instance);
                     $this->controller->{$_instance} = new $controller();
-                    
+
                     if ($this->controller->{$_instance}->view instanceof stdClass) {
                         $this->setView($this->controller->{$_instance}->view);
                         $this->controller->{$_instance}->view = null;
                     }
                 }
             }
-            
+
             $emptyFlash = false;
             if (isset($_SESSION[FLASHMESSAGE]) && ! empty($_SESSION[FLASHMESSAGE])) {
                 $this->setView($_SESSION[FLASHMESSAGE], FLASH);
                 $emptyFlash = true;
             }
-            
+
             require_once (serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
             $this->emptySession($emptyFlash);
         }

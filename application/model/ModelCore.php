@@ -47,13 +47,13 @@ class ModelCore extends QueryBuilder
             throw new FrameworkException("Database user type was not set or is incorrect when constructing the ModelCore", 0x03);
         }
         QueryBuilder::__construct();
-        
+
         $dbConfig = $this->getConfig();
         $this->lib = new Library();
         $this->db = $dbConfig['db'];
         $password = $this->lib->decryptIt($dbConfig['password'][$dbUser]);
         $this->tables = new stdClass();
-        
+
         try {
             $this->connection = new PDO("mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$this->db};charset={$this->charSet}", $dbConfig[$dbUser], $password);
             $this->setTables($this->db);
@@ -65,7 +65,7 @@ class ModelCore extends QueryBuilder
                 "dbUser" => $dbUser
             ));
         }
-        
+
         $this->setDbUser($dbUser);
     }
 
@@ -109,11 +109,11 @@ class ModelCore extends QueryBuilder
     {
         $query = "SELECT `TABLE_NAME` FROM `INFORMATION_SCHEMA`.`TABLES` " . "WHERE `TABLE_TYPE`='BASE TABLE' AND `TABLE_SCHEMA`=?;";
         $result = $this->connection->prepare($query);
-        
+
         $tables = $this->execute($this->connection->prepare($query), [
             $db
         ], true);
-        
+
         foreach ($tables as $key => $data) {
             $table = $data['TABLE_NAME'];
             $this->tables->{$table} = "{$table}";
@@ -140,14 +140,14 @@ class ModelCore extends QueryBuilder
     {
         $trace = debug_backtrace();
         $caller = $trace[1];
-        
+
         if (empty($query) || empty($parameters)) {
             throw new FrameworkException("PDO execution called without valid query or parameters", 0x07, array(
                 "class" => $caller['class'] ?? __CLASS__,
                 "method" => $caller['function'] ?? __METHOD__
             ));
         }
-        
+
         if (isTrue($query->execute($parameters))) {
             if (isFalse($fetchAll)) {
                 $return = $query->fetch($fetchType);
