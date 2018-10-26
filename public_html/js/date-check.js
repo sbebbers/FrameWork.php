@@ -21,7 +21,7 @@
  * 
  * @param	int, int, int
  * @author	sbebbington
- * @date	23 Jan 2017 - 14:18:12
+ * @date 23 Jan 2017 - 14:18:12
  * @version	0.0.1a
  * @return	object
  * @todo
@@ -64,7 +64,7 @@ function checkDate(_d, _m, _y){
  * 
  * @param	string
  * @author	sbebbington
- * @date	7 Jul 2017 - 09:23:12
+ * @date 7 Jul 2017 - 09:23:12
  * @version	0.0.1
  * @return	object
  * @todo
@@ -83,7 +83,7 @@ function getNumericMonth(_m){
  * 
  * @param	int, Boolean
  * @author	sbebbington
- * @date	7 Jul 2017 - 09:30:37
+ * @date 7 Jul 2017 - 09:30:37
  * @version	0.0.1
  * @return	string
  * @todo

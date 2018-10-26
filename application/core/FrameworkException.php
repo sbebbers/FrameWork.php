@@ -14,10 +14,11 @@ class FrameworkException extends Exception
 
     /**
      *
-     * @param
-     *            string, int, array
+     * @param string $message
+     * @param int $code
+     * @param array $additionalInformation
      * @author Shaun Bebbington
-     * @date	21 Mar 2018 11:30:01
+     * @date 21 Mar 2018 11:30:01
      * @return void
      */
     public function __construct($message, $code = null, array $additionalInformation = [])
@@ -35,7 +36,7 @@ class FrameworkException extends Exception
      * getExceptionDetails
      *
      * @author Shaun Bebbington
-     * @date	21 Mar 2018 11:30:49
+     * @date 21 Mar 2018 11:30:49
      * @return array
      */
     public function getExceptionDetails()
@@ -49,7 +50,7 @@ class FrameworkException extends Exception
      * @param
      *            array
      * @author Shaun Bebbington
-     * @date	21 Mar 2018 11:31:21
+     * @date 21 Mar 2018 11:31:21
      * @return void
      */
     public function setExceptionDetails(array $exceptionDetails = [])

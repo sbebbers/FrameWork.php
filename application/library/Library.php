@@ -157,7 +157,7 @@ class Library
      * @param string $host
      * @param int $serverResponseCode
      * @author sbebbington || Steve
-     * @date	17 Nov 2017 10:46:39
+     * @date 17 Nov 2017 10:46:39
      * @version 1.0.0-RC1
      * @return void
      */
@@ -230,7 +230,7 @@ class Library
      * @param
      *            object, string, array, any, [boolean]
      * @author sbebbington
-     * @date	21 Feb 2018 09:53:55
+     * @date 21 Feb 2018 09:53:55
      * @version 1.0.0-RC1
      * @return boolean | string
      */
@@ -262,7 +262,7 @@ class Library
      * @param string $method
      * @param mixed $expectedResult
      * @author Shaun B
-     * @date	6 Aug 2018 13:21:07
+     * @date 6 Aug 2018 13:21:07
      * @throws FrameworkException
      */
     public function checkUnitTestParameters($object, $method, $expectedResult): bool
@@ -288,7 +288,7 @@ class Library
      * @param string $passCol
      * @param string $failCol
      * @author Shaun B
-     * @date	6 Aug 2018 13:25:49
+     * @date 6 Aug 2018 13:25:49
      */
     public function outputUnitTestResult(string $passCol, string $failCol, $expectedResult = null, $pass = null): bool
     {

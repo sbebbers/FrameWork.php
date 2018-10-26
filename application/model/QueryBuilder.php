@@ -46,7 +46,7 @@ class QueryBuilder
      *
      * @param array $items
      * @author Shaun B
-     * @date	18 Apr 2018 10:32:32
+     * @date 18 Apr 2018 10:32:32
      * @return self
      */
     public function select(array $items = []): self

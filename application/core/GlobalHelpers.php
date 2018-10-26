@@ -292,7 +292,7 @@ function isEmpty($value): bool
  *
  * @param mixed $object
  * @author sbebbeington
- * @date	13 Feb 2018 13:26:37
+ * @date 13 Feb 2018 13:26:37
  * @return boolean
  */
 function isCountable($object = null): bool
