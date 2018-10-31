@@ -41,7 +41,7 @@ class index
     public function __construct()
     {
         $this->core = new Core();
-        
+
         if (isTrue($this->checkPageLoad())) {
             $_error = null;
             try {
@@ -52,7 +52,7 @@ class index
             } catch (Exception $error) {
                 $_error = $error;
             }
-            
+
             if (! is_null($_error)) {
                 try {
                     writeToLogFile($_error);
@@ -79,7 +79,7 @@ class index
         if (count($exts)) {
             $last = explode(".", $exts[count($exts) - 1] ?? '');
             $last = (count($last) > 0) ? $last[count($last) - 1] : '';
-            return !in_array($last, $this->core->ignoredExts);
+            return ! in_array($last, $this->core->ignoredExts);
         }
         return true;
     }
