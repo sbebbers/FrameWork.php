@@ -379,7 +379,8 @@ class Core extends HtmlBuilder
                 $this->setView($_SESSION[FLASHMESSAGE], FLASH);
                 $emptyFlash = true;
             }
-
+            
+            $this->setPageHeaders();
             require_once (serverPath("/view/{$this->uriPath}{$this->segment}.phtml"));
             $this->emptySession($emptyFlash);
         }
