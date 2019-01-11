@@ -313,6 +313,27 @@ class Core extends HtmlBuilder
     }
 
     /**
+     * Sets response headers
+     *
+     * @param string $serverProtocol
+     * @param int $serverResponse
+     * @param string $serverMessage
+     * @author sbebbington
+     * @date 11 Jan 2019 16:47:51
+     * @return void
+     */
+    public function setPageHeaders(string $serverProtocol = null, int $serverResponse = 200, string $serverMessage = "Ok"): void
+    {
+        if ($serverProtocol === null) {
+            $protocol = (isset($_SERVER['SERVER_PROTOCOL'])) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+        } else {
+            $protocol = $serverProtocol;
+        }
+        http_response_code($serverResponse);
+        header("{$protocol} {$serverMessage}");
+    }
+
+    /**
      * This will load the view and related controllers
      * It has an added exception for Jamie's admin html
      * template.
@@ -379,7 +400,7 @@ class Core extends HtmlBuilder
             $this->setView(array(
                 "_404Error" => 1
             ));
-            http_response_code(404);
+            $this->setPageHeaders(null, 404, 'Not Found');
             require_once (serverPath("/view/404.phtml"));
             exit();
         }
