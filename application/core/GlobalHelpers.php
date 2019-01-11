@@ -205,28 +205,17 @@ function logErrorPath(string $routeTo = ''): string
 }
 
 /**
- * Writes a log file based on date
- * and day; if log file already exists
- * then it will append the data to the
- * file;
+ * Returns the months according to
+ * the Gregorian calendar
  *
- * @param array $error
- * @author sbebbington
- * @date 19 Oct 2018 13:38:49
+ * @author ShaunB
+ * @date 11 Jan 2019 12:39:03
  * @version 1.0.0-RC1
- * @return void
- * @throws Exception
+ * @return array
  */
-function writeToLogFile($error = []): void
+function getMonths(): array
 {
-    if (empty($error)) {
-        return;
-    }
-    $error = is_array($error) ? $error : [
-        $error
-    ];
-
-    $months = [
+    return [
         1 => 'jan',
         'feb',
         'mar',
@@ -240,6 +229,33 @@ function writeToLogFile($error = []): void
         'nov',
         'dec'
     ];
+}
+
+/**
+ * Writes a log file based on date
+ * and day; if log file already exists
+ * then it will append the data to the
+ * file;
+ *
+ * @param mixed $error
+ * @param mixed $jsonConstant
+ * @param bool $generateFileName
+ * @author sbebbington
+ * @date 19 Oct 2018 13:38:49
+ * @version 1.0.0-RC1
+ * @return bool
+ * @throws Exception
+ */
+function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileName = false): bool
+{
+    if (empty($error)) {
+        return false;
+    }
+    $error = is_array($error) ? $error : [
+        $error
+    ];
+
+    $months = getMonths();
 
     if (empty($error['ip_address'])) {
         $error['ip_address'] = getUserIPAddress();
@@ -251,22 +267,23 @@ function writeToLogFile($error = []): void
     }
     $fileNames = explode("-", $error['date']);
     $dirName = $months[(int) $fileNames[1]];
-    $logPath = logErrorPath("/{$dirName}");
-    $fileName = "{$logPath}/{$fileNames[2]}.log";
+    $logPath = str_replace('//', '/', logErrorPath("/{$dirName}/"));
+    $fileName = str_replace('//', '/', "{$logPath}/{$fileNames[2]}");
+    $fileName .= ($generateFileName === true) ? date("His") : '';
+    $fileName .= '.log';
+    $file = null;
 
-    if (! is_dir(logErrorPath()) && ! mkdir(logErrorPath(), 0755)) {
-        throw new FrameworkException("Filepath " . logErrorPath() . " could not be created", 0xf17e);
+    if (! is_dir($logPath)) {
+        while (isFalse(mkdir($logPath, 0775))) {}
+    }
+    $error = json_encode($error, $jsonConstant);
+
+    while (isFalse(file_exists($fileName))) {
+        file_put_contents($fileName, "");
     }
 
-    if (! is_dir($logPath) && ! mkdir($logPath, 0755)) {
-        throw new FrameworkException("Filepath {$logPath} could not be created", 0xf17e);
-    }
-    $error = json_encode($error);
-
-    if (! file_exists($fileName) && ! file_put_contents($fileName, "")) {
-        throw new FrameworkException("File {$fileName} could not be created", 0xf17e);
-    }
-    file_put_contents($fileName, $error . PHP_EOL, FILE_APPEND | LOCK_EX) ?? false;
+    $file = file_put_contents($fileName, "{$error}" . PHP_EOL, FILE_APPEND | LOCK_EX);
+    return $file;
 }
 
 /**

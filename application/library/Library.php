@@ -481,34 +481,57 @@ class Library
     }
 
     /**
-     * Handles the posting of data
+     * Builds a URL encoded form to post
      *
-     * @param
-     *            string, object, string, string, string
-     * @author sbebbington && Stack Overflow
-     * @date 3 Mar 2017 09:51:09
+     * @param mixed $data
+     * @author Shaun Bebbington
+     * @date 11 Jan 2019 09:55:23
      * @version 1.0.0-RC1
+     * @throws FrameworkException
      * @return string
      */
-    public function filePostContents(string $url, $data, string $applicationType = 'x-www-form-urlencoded', string $username = '', string $password = '', string $characterEncoding = 'utf-8'): string
+    protected function makeUrlEncodedForm($data = null): string
+    {
+        if (empty($data)) {
+            throw new FrameworkException("Malformed or empty form data", 418);
+        }
+        if (! is_object($data) || ! is_array($data)) {
+            $data = [
+                $data
+            ];
+        }
+        return http_build_query($data);
+    }
+
+    /**
+     * Handles the posting of data
+     *
+     * @param string $url
+     * @param mixed $data
+     * @param string $http
+     * @param string $applicationType
+     * @param string $username
+     * @param string $password
+     * @param string $characterEncoding
+     * @author sbebbington && Stack Overflow
+     * @date 11 Jan 2019 09:47:12
+     * @version 1.0.0-RC1
+     * @throws FrameworkException
+     * @return string
+     */
+    public function filePostContents(string $url, $data = null, string $http = HTTP, string $applicationType = WWWFORMURLENCODED, string $username = null, string $password = null, string $characterEncoding = 'utf-8'): string
     {
         if ($applicationType === 'x-www-form-urlencoded') {
-            if (! is_object($data) || ! is_array($data)) {
-                $data = [
-                    $data
-                ];
-            }
-            $data = http_build_query($data);
+            $data = $this->makeUrlEncodedForm($data);
         }
-        $options = array();
-
-        $options['http'] = array(
+        $options = [];
+        $options['http'] = [
             'method' => 'POST',
             'content' => $data
-        );
-        $header = array(
+        ];
+        $header = [
             'header' => "Content-type: application/{$applicationType};charset={$characterEncoding}"
-        );
+        ];
         if (is_string($data)) {
             $header['header'] .= PHP_EOL . 'Content-Length: ' . strlen($data) . PHP_EOL;
         }
@@ -517,7 +540,20 @@ class Library
         }
         $options['http'] = array_merge($options['http'], $header);
 
+        if ($http === 'https') {
+            $options += [
+                'ssl' => [
+                    'verify_peer' => FALSE,
+                    'verify_peer_name' => FALSE
+                ]
+            ];
+        }
+
         $context = stream_context_create($options);
-        return file_get_contents($url, false, $context);
+
+        if ($contents = file_get_contents($url, false, $context)) {
+            return $contents;
+        }
+        throw new FrameworkException('Failed to get contents from specified path ' . $url, 418);
     }
 }
