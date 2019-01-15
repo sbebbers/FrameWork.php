@@ -299,9 +299,9 @@ function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileNam
  * @version 1.0.0-RC1
  * @return bool
  */
-function isEmpty($value): bool
+function isEmpty($value = null): bool
 {
-    return (is_string($value) || is_numeric($value)) ? empty($value) && strlen("{$value}") : empty($value);
+    return (is_string($value) || is_numeric($value)) ? empty(strlen("{$value}")) : empty($value);
 }
 
 /**
