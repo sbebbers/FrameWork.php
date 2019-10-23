@@ -24,7 +24,7 @@ function getConfig(string $parameter = 'baseURL'): string
     if (! file_exists(serverPath("/config/site.json"))) {
         throw new FrameworkException("A site.json file is required in the configuration at the application level for the framework to run", 0x02);
     }
-    return json_decode(file_get_contents(serverPath("/config/site.json")), true)[$parameter] ?? '';
+    return json_decode(file_get_contents(serverPath("/config/site.json")), TRUE)[$parameter] ?? '';
 }
 
 /**
@@ -162,7 +162,7 @@ function getSiteVersion(): string
 }
 
 /**
- * If rc is set as true in the site.json config
+ * If rc is set as TRUE in the site.json config
  * then this is a release candidate, else it isn't
  *
  * @author sbebbington
@@ -246,10 +246,10 @@ function getMonths(): array
  * @return bool
  * @throws Exception
  */
-function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileName = false): bool
+function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileName = FALSE): bool
 {
     if (empty($error)) {
-        return false;
+        return FALSE;
     }
     $error = is_array($error) ? $error : [
         $error
@@ -269,7 +269,7 @@ function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileNam
     $dirName = $months[(int) $fileNames[1]];
     $logPath = str_replace('//', '/', logErrorPath("/{$dirName}/"));
     $fileName = str_replace('//', '/', "{$logPath}/{$fileNames[2]}");
-    $fileName .= ($generateFileName === true) ? date("His") : '';
+    $fileName .= ($generateFileName === TRUE) ? date("His") : '';
     $fileName .= '.log';
     $file = null;
 

@@ -112,7 +112,7 @@ class ModelCore extends QueryBuilder
 
         $tables = $this->execute($this->connection->prepare($query), [
             $db
-        ], true);
+        ], TRUE);
 
         foreach ($tables as $key => $data) {
             $table = $data['TABLE_NAME'];
@@ -136,7 +136,7 @@ class ModelCore extends QueryBuilder
      * @return array
      * @throws FrameworkException
      */
-    protected function execute(PDOStatement $query, array $parameters = [], bool $fetchAll = false, string $key = '', $fetchType = PDO::FETCH_ASSOC)
+    protected function execute(PDOStatement $query, array $parameters = [], bool $fetchAll = FALSE, string $key = '', $fetchType = PDO::FETCH_ASSOC)
     {
         $trace = debug_backtrace();
         $caller = $trace[1];

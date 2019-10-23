@@ -239,7 +239,7 @@ class DateController extends ControllerCore
     protected function checkDateValidity(int $day = 0, int $month = 0, int $year = 0): bool
     {
         if (! $day || ! $month || ! $year) {
-            return false;
+            return FALSE;
         }
         return checkdate($month, $day, $year);
     }

@@ -13,6 +13,7 @@ class FrameworkException extends Exception
     public $exceptionDetails;
 
     /**
+     * <p>Constructs parent</p>
      *
      * @param string $message
      * @param int $code
@@ -39,7 +40,7 @@ class FrameworkException extends Exception
      * @date 21 Mar 2018 11:30:49
      * @return array
      */
-    public function getExceptionDetails()
+    public function getExceptionDetails(): array
     {
         return $this->exceptionDetails;
     }
@@ -47,13 +48,12 @@ class FrameworkException extends Exception
     /**
      * setExceptionDetails
      *
-     * @param
-     *            array
+     * @param array $exceptionDetails
      * @author Shaun Bebbington
      * @date 21 Mar 2018 11:31:21
      * @return void
      */
-    public function setExceptionDetails(array $exceptionDetails = [])
+    public function setExceptionDetails(array $exceptionDetails = []): void
     {
         $this->exceptionDetails = $exceptionDetails;
     }

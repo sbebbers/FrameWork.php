@@ -114,9 +114,9 @@ class Core extends HtmlBuilder
     protected function setSiteConfiguration(): bool
     {
         if (! file_exists(serverPath('/config/pages.json'))) {
-            return false;
+            return FALSE;
         }
-        $siteConfiguration = json_decode(file_get_contents(serverPath('/config/pages.json')), true);
+        $siteConfiguration = json_decode(file_get_contents(serverPath('/config/pages.json')), TRUE);
         if (empty($siteConfiguration)) {
             throw new FrameworkException("Failed to load site configuration file", 0xf17e);
         }
@@ -130,7 +130,7 @@ class Core extends HtmlBuilder
         ];
 
         if (! empty($this->allowedSegments) && ! empty($this->pageController)) {
-            return true;
+            return TRUE;
         }
         throw new FrameworkException("No pages or page controllers set in the pages.json file", 0x01);
     }
@@ -216,7 +216,7 @@ class Core extends HtmlBuilder
         if (! file_exists(serverPath('/config/pagedata.json'))) {
             return [];
         }
-        return json_decode(file_get_contents(serverPath('/config/pagedata.json')), true);
+        return json_decode(file_get_contents(serverPath('/config/pagedata.json')), TRUE);
     }
 
     /**
@@ -307,7 +307,7 @@ class Core extends HtmlBuilder
      * @version 1.0.0-RC1
      * @return array
      */
-    public function emptySession(bool $emptyFlash = false): array
+    public function emptySession(bool $emptyFlash = FALSE): array
     {
         return (isTrue($emptyFlash)) ? $_SESSION[FLASHMESSAGE] = array() : array();
     }
@@ -374,10 +374,10 @@ class Core extends HtmlBuilder
                 }
             }
 
-            $emptyFlash = false;
+            $emptyFlash = FALSE;
             if (isset($_SESSION[FLASHMESSAGE]) && ! empty($_SESSION[FLASHMESSAGE])) {
                 $this->setView($_SESSION[FLASHMESSAGE], FLASH);
-                $emptyFlash = true;
+                $emptyFlash = TRUE;
             }
 
             $this->setPageHeaders();
@@ -405,7 +405,7 @@ class Core extends HtmlBuilder
             require_once (serverPath("/view/404.phtml"));
             exit();
         }
-        return true;
+        return TRUE;
     }
 
     /**

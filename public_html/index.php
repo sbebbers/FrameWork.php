@@ -12,13 +12,11 @@ header('X-Content-Type-Options: nosniff');
 header('X-XSS-Protection: 1');
 header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 
-session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), true);
+session_set_cookie_params(0, '/', getConfig('cookieDomain'), isHttps(), TRUE);
 
-if (session_id() == "") {
-    session_start([
-        'read_and_close' => true
-    ]);
-}
+session_start([
+    'read_and_close' => TRUE
+]);
 
 class index
 {
@@ -53,11 +51,11 @@ class index
                 $_error = $error;
             }
 
-            if (! is_null($_error)) {
+            if ($_error) {
                 try {
                     writeToLogFile($_error);
                 } catch (Exception $error) {
-                    echo '<!-- Unable to write to error log: ' . print_r($error->getMessage(), true) . ' -->';
+                    echo '<!-- Unable to write to error log: ' . print_r($error->getMessage(), TRUE) . ' -->';
                 }
             }
         }
@@ -81,7 +79,7 @@ class index
             $last = (count($last) > 0) ? $last[count($last) - 1] : '';
             return ! in_array($last, $this->core->ignoredExts);
         }
-        return true;
+        return TRUE;
     }
 }
 
@@ -113,7 +111,7 @@ function isTrue($value = null): bool
  */
 function isFalse($value = null): bool
 {
-    return boolval($value === false);
+    return ($value === FALSE);
 }
 
 /**
@@ -136,3 +134,5 @@ function serverPath(string $routeTo = ''): string
 $page = new index();
 
 unset($page);
+
+exit();

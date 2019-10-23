@@ -21,8 +21,6 @@ class HtmlBuilder
     /**
      * Tests the extension
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 16 Jan 2017 - 17:19:50
      * @version 1.0.0-RC1
@@ -37,8 +35,6 @@ class HtmlBuilder
     /**
      * Opens a paragraph tag
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 23 Jan 2017 - 09:15:10
      * @version 1.0.0-RC1
@@ -53,14 +49,19 @@ class HtmlBuilder
     /**
      * Opens an a tag
      *
-     * @param
-     *            string, string, string, string, string, string | array, [boolean]
+     * @param string $id
+     * @param string $href
+     * @param string $target
+     * @param string $onClick
+     * @param string $class
+     * @param mixed $style
+     * @param bool $close
      * @author sbebbington
      * @date 30 Mar 2017 - 11:30:31
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function a(string $id = null, string $href = null, string $target = null, string $onClick = null, string $class = null, $style = null, bool $close = true): self
+    public function a(string $id = null, string $href = null, string $target = null, string $onClick = null, string $class = null, $style = null, bool $close = TRUE): self
     {
         print("<a");
 
@@ -90,10 +91,10 @@ class HtmlBuilder
     }
 
     /**
-     * Makes a HR element
+     * Makes an HR element
      *
-     * @param
-     *            string, string
+     * @param string $id
+     * @param string $class
      * @author sbebbington
      * @date 5 Apr 2017 - 16:14:08
      * @version 1.0.0-RC1
@@ -116,8 +117,7 @@ class HtmlBuilder
     /**
      * Adds an ID attribute to an HTML element
      *
-     * @param
-     *            string
+     * @param string $id
      * @author sbebbington
      * @date 23 Jan 2017 - 09:15:29
      * @version 1.0.0-RC1
@@ -132,8 +132,8 @@ class HtmlBuilder
     /**
      * Added in HTML span
      *
-     * @param
-     *            string, string
+     * @param string $id
+     * @param string $class
      * @author sbebbington
      * @date 10 Apr 2017 - 09:36:45
      * @version 1.0.0-RC1
@@ -157,8 +157,12 @@ class HtmlBuilder
     /**
      * Generates the HTML image tag
      *
-     * @param
-     *            string, string, int, int, string, string
+     * @param string $id
+     * @param string $path
+     * @param int $width
+     * @param int $height
+     * @param string $alt
+     * @param string $class
      * @author sbebbington
      * @date 29 Mar 2017 - 11:37:44
      * @version 1.0.0-RC1
@@ -191,8 +195,7 @@ class HtmlBuilder
     /**
      * Adds a class attribute to an HTML element
      *
-     * @param
-     *            string | array
+     * @param mixed $class
      * @author sbebbington
      * @date 23 Jan 2017 - 09:16:35
      * @version 1.0.0-RC1
@@ -202,7 +205,7 @@ class HtmlBuilder
     {
         if (! is_string($class) && ! is_array($class)) {
             print(">" . PHP_EOL);
-            $this->lib->debug("Please send your classes for your HTML element as a string or an array", true);
+            $this->lib->debug("Please send your classes for your HTML element as a string or an array", TRUE);
         }
         print(" class=\"");
         $_class = '';
@@ -223,8 +226,8 @@ class HtmlBuilder
      * Adds in data attribute, send the name of the attribute
      * followed by the relevant attribute value
      *
-     * @param
-     *            string, string
+     * @param string $attrName
+     * @param string $data
      * @author sbebbington
      * @date 23 Jan 2017 - 09:26:47
      * @version 1.0.0-RC1
@@ -241,8 +244,7 @@ class HtmlBuilder
      * Adds in the placeholder for elements
      * that use it
      *
-     * @param
-     *            string
+     * @param string $placeHolder
      * @author sbebbington
      * @date 11 Apr 2017 - 10:03:08
      * @version 1.0.0-RC1
@@ -260,16 +262,15 @@ class HtmlBuilder
 
     /**
      * Closes an element either with a > or a />
-     * with false or true respecitively
+     * with FALSE or TRUE respecitively
      *
-     * @param
-     *            boolean
+     * @param boolean $selfClose
      * @author sbebbington
      * @date 23 Jan 2017 - 09:30:19
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function closeElement(bool $selfClose = false): self
+    public function closeElement(bool $selfClose = FALSE): self
     {
         print(isFalse($selfClose) ? ">" : " />");
 
@@ -279,16 +280,16 @@ class HtmlBuilder
     /**
      * Writes text, intended to be used within an element
      * If you have encoded your text with htmlspecialchars
-     * then send true as the second parameter to decode
+     * then send TRUE as the second parameter to decode
      *
-     * @param
-     *            string, boolean
+     * @param string $text
+     * @param boolean $decode
      * @author sbebbington
      * @date 23 Jan 2017 - 09:31:27
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function text(string $text, bool $decode = false): self
+    public function text(string $text, bool $decode = FALSE): self
     {
         print(isFalse($decode) ? $text : htmlspecialchars_decode($text));
 
@@ -299,14 +300,19 @@ class HtmlBuilder
      * Generates a <textarea></textarea>
      * for your view
      *
-     * @param
-     *            string, string, int, int, string, string, boolean
+     * @param string $id
+     * @param string $name
+     * @param int $rows
+     * @param int $cols
+     * @param string $placeHolder
+     * @param string $class
+     * @param boolean $required
      * @author sbebbington
      * @date 30 Mar 2017 - 14:25:06
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function textArea(string $id = null, string $name = null, int $rows = 0, int $cols = 0, string $placeHolder = null, string $class = null, bool $required = false): self
+    public function textArea(string $id = null, string $name = null, int $rows = 0, int $cols = 0, string $placeHolder = null, string $class = null, bool $required = FALSE): self
     {
         print("<textarea");
 
@@ -340,8 +346,12 @@ class HtmlBuilder
      * Opens a form tag - added in encoding type
      * to handle input type file stuff
      *
-     * @param
-     *            string, string, string, string, string | array
+     * @param string $id
+     * @param string $action
+     * @param string $method
+     * @param string $class
+     * @param mixed $style
+     * @param string $encType
      * @author sbebbington
      * @date 22 May 2017 - 11:48:40
      * @version 1.0.0-RC1
@@ -351,7 +361,7 @@ class HtmlBuilder
     {
         print("<form");
 
-        if (! empty($id)) {
+        if ($id !== null) {
             print(" id=\"{$id}\"");
         }
         if (! empty($action)) {
@@ -369,7 +379,7 @@ class HtmlBuilder
         if (! empty($encType)) {
             print(" enctype=\"{$encType}\"");
         }
-        $this->closeElement(false);
+        $this->closeElement(FALSE);
 
         return $this;
     }
@@ -377,8 +387,6 @@ class HtmlBuilder
     /**
      * Opens an input element
      *
-     * @param
-     *            na
      * @author sbebbington
      * @date 23 Jan 2017 - 09:44:29
      * @version 1.0.0-RC1
@@ -493,7 +501,7 @@ class HtmlBuilder
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function disabled(bool $disabled = true): self
+    public function disabled(bool $disabled = TRUE): self
     {
         print(isTrue($disabled) ? " disabled=\"disabled\"" : "");
 
@@ -513,7 +521,7 @@ class HtmlBuilder
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function select(string $id = null, string $name = null, string $class = null, array $options = [], string $selected = null, bool $close = true): self
+    public function select(string $id = null, string $name = null, string $class = null, array $options = [], string $selected = null, bool $close = TRUE): self
     {
         print("<select");
         if (! empty($id)) {
@@ -575,7 +583,7 @@ class HtmlBuilder
      * @version 1.0.0-RC1
      * @return $this
      */
-    public function open(string $element, string $id = null, $class = null, $style = null, bool $selfClose = false): self
+    public function open(string $element, string $id = null, $class = null, $style = null, bool $selfClose = FALSE): self
     {
         print("<{$element}");
         if (strlen($id) > 0) {
@@ -629,7 +637,7 @@ class HtmlBuilder
     public function h(int $size, string $text, string $id = null, $class = null, $style = null): self
     {
         if ($size < 1 || $size > 6) {
-            $this->lib->debug("Please set your header size between 1 and 6, value {$size} is not allowed", true);
+            $this->lib->debug("Please set your header size between 1 and 6, value {$size} is not allowed", TRUE);
         }
 
         print("<h{$size}");
@@ -642,7 +650,7 @@ class HtmlBuilder
         if (! empty($style) && (is_string($style) || is_array($style))) {
             $this->style($style);
         }
-        $this->closeElement(false);
+        $this->closeElement(FALSE);
         print("{$text}");
         $this->close("h{$size}");
 

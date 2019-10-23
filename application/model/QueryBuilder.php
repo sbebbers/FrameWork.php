@@ -22,7 +22,7 @@ class QueryBuilder
     public function __construct()
     {
         if (file_exists(serverPath('/config/database.json'))) {
-            $this->config = json_decode(file_get_contents(serverPath('/config/database.json')), true);
+            $this->config = json_decode(file_get_contents(serverPath('/config/database.json')), TRUE);
         } else {
             throw new FrameworkException("The framework requires a database configuration file at the application layer", 0xdb);
         }

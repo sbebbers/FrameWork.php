@@ -34,7 +34,7 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function debug($variable = null, bool $die = false, string $message = '', string $file = '', string $line = '', string $header = ''): void
+    public function debug($variable = null, bool $die = FALSE, string $message = '', string $file = '', string $line = '', string $header = ''): void
     {
         if (getConfig('mode') != 'test') {
             return;
@@ -67,7 +67,7 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function dump($variable, bool $die = false, string $message = '', string $file = '', string $line = ''): void
+    public function dump($variable, bool $die = FALSE, string $message = '', string $file = '', string $line = ''): void
     {
         if (getConfig('mode') != 'test') {
             return;
@@ -124,7 +124,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = false): string
+    public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = FALSE): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $encrypt = $this->getEncryptionPadding($padding) . openssl_encrypt($string, $this->encryption, $md5) . $this->getEncryptionPadding($padding);
@@ -143,7 +143,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = false): string
+    public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = FALSE): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $decrypt = openssl_decrypt(substr($string, $padding, - $padding), $this->encryption, $md5);
@@ -164,11 +164,11 @@ class Library
     public function redirect(string $destination = '', string $host = '', int $serverResponseCode = 307): void
     {
         if ($destination == '' || $host == '') {
-            $this->debug("You need to set a destination and host parameters as a string to call the Library redirect() method", true);
+            $this->debug("You need to set a destination and host parameters as a string to call the Library redirect() method", TRUE);
         }
         $host = preg_replace('/^https?\:\/\//', '', $host);
         $http = isHttps() ? "https://" : "http://";
-        header("Location:{$http}{$host}/{$destination}", true, $serverResponseCode);
+        header("Location:{$http}{$host}/{$destination}", TRUE, $serverResponseCode);
         exit();
     }
 
@@ -234,24 +234,24 @@ class Library
      * @version 1.0.0-RC1
      * @return boolean | string
      */
-    public function testUnit($object = null, string $method = null, $params = array(), $expectedResult = null, bool $tested = false)
+    public function testUnit($object = null, string $method = null, $params = array(), $expectedResult = null, bool $tested = FALSE)
     {
         if ($this->checkUnitTestParameters($object, $method, $expectedResult)) {
-            return false;
+            return FALSE;
         }
         $passCol = "color: green;";
         $failCol = "color: red;";
 
         if (! is_array($params) && (is_string($params) || is_numeric($params))) {
             $pass = $object->{$method}($params);
-            $tested = true;
+            $tested = TRUE;
         } else if (is_array($params)) {
             $pass = $object->{$method}($params[0], $params[1] ?? null, $params[2] ?? null, $params[3] ?? null, $params[4] ?? null, $params[5] ?? null, $params[6] ?? null, $params[7] ?? null, $params[8] ?? null, $params[9] ?? null);
 
-            $tested = true;
+            $tested = TRUE;
         }
 
-        return ($tested === true) ? $this->outputUnitTestResult($passCol, $failCol, $expectedResult, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
+        return ($tested === TRUE) ? $this->outputUnitTestResult($passCol, $failCol, $expectedResult, $pass) : print("<p>Please send the parameters as an array, a string or a numeric value</p>");
     }
 
     /**
@@ -268,7 +268,7 @@ class Library
     public function checkUnitTestParameters($object, $method, $expectedResult): bool
     {
         if (getConfig('mode') != 'test') {
-            return false;
+            return FALSE;
         }
         if ($object === null || ! is_object($object)) {
             throw new FrameworkException("Pass an object to this method in order to test it");
@@ -279,7 +279,7 @@ class Library
         if ($expectedResult == null) {
             throw new FrameworkException("You need to specify your expected return value from the method that you are testing");
         }
-        return true;
+        return TRUE;
     }
 
     /**
@@ -300,7 +300,7 @@ class Library
             echo "Actual: {$pass}" . PHP_EOL;
             return ($pass == $expectedResult);
         }
-        return false;
+        return FALSE;
     }
 
     /**
@@ -393,7 +393,7 @@ class Library
      * @version 1.0.0-RC1
      * @return array
      */
-    public function cleanseInputs($data, bool $htmlSpecialChars = false, $cleanInput = array())
+    public function cleanseInputs($data, bool $htmlSpecialChars = FALSE, $cleanInput = array())
     {
         foreach ($data as $key => $value) {
             $cleanInput[$key] = (isFalse($htmlSpecialChars)) ? trim(strip_tags($value)) : htmlspecialchars(trim($value));
@@ -403,7 +403,7 @@ class Library
 
     /**
      * Used for identifying .local and .localhost sites to set
-     * PHP error reporting - send true to the method to return
+     * PHP error reporting - send TRUE to the method to return
      * the subdomain, i.e., staging or test, or whatever the
      * Reapit is for staging domains
      *
@@ -414,7 +414,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function domainType(bool $subDomain = false)
+    public function domainType(bool $subDomain = FALSE)
     {
         $host = explode(".", $this->host());
         return (isFalse($subDomain)) ? $host[count($host) - 1] : $host[0];
@@ -438,7 +438,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function softMinimiseJS(string $filePathName = null, bool $doubleSpaces = true, bool $spacedTab = true)
+    public function softMinimiseJS(string $filePathName = null, bool $doubleSpaces = TRUE, bool $spacedTab = TRUE)
     {
         if (empty($filePathName)) {
             return '';
@@ -551,7 +551,7 @@ class Library
 
         $context = stream_context_create($options);
 
-        if ($contents = file_get_contents($url, false, $context)) {
+        if ($contents = file_get_contents($url, FALSE, $context)) {
             return $contents;
         }
         throw new FrameworkException('Failed to get contents from specified path ' . $url, 418);

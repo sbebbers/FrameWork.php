@@ -22,7 +22,7 @@ class HomeController extends ControllerCore
         }
         $this->setFlashMessage('message', "Made you look :-P");
         if (isset($this->post['submit'])) {
-            $this->lib->debug($this->post, true);
+            $this->lib->debug($this->post, TRUE);
         }
         // $this->view->easterEgg = ''; ## $this->lib->easterEgg();
     }
