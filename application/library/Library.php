@@ -292,15 +292,12 @@ class Library
      */
     public function outputUnitTestResult(string $passCol, string $failCol, $expectedResult = null, $pass = null): bool
     {
-        if (isTrue($tested)) {
-            echo "<p style=\"";
-            echo ($pass == $expectedResult) ? "{$passCol}\">Test matched expected result" : "{$failCol}\">Test failed";
-            echo "</p>" . PHP_EOL;
-            echo "Expected: {$expectedResult}" . PHP_EOL;
-            echo "Actual: {$pass}" . PHP_EOL;
-            return ($pass == $expectedResult);
-        }
-        return FALSE;
+        echo "<p style=\"";
+        echo ($pass == $expectedResult) ? "{$passCol}\">Test matched expected result" : "{$failCol}\">Test failed";
+        echo "</p>" . PHP_EOL;
+        echo "Expected: {$expectedResult}" . PHP_EOL;
+        echo "Actual: {$pass}" . PHP_EOL;
+        return ($pass == $expectedResult);
     }
 
     /**
@@ -386,8 +383,9 @@ class Library
      * version as it seemed a little over-kill, although quite
      * clever; it will also handle HTML Special Chars if necessary
      *
-     * @param
-     *            array, boolean, [array]
+     * @param mixed $data
+     * @param boolean $htmlSpecialChars
+     * @param array $cleanInput
      * @author sbebbington && Vietnam
      * @date 6 Jan 2017 15:36:29
      * @version 1.0.0-RC1

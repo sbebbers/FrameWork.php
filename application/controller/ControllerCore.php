@@ -7,6 +7,7 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
 
 use Application\Library\Library;
 use stdClass;
+use Application\Core\FrameworkException\FrameworkException;
 require_once (serverPath('/library/Library.php'));
 
 class ControllerCore
@@ -45,7 +46,8 @@ class ControllerCore
      */
     public function setPost(): void
     {
-        foreach ($_POST as $key => $data) {
+        $post = @file_get_contents('php://input') ?? $_POST ?? [];
+        foreach ($post as $key => $data) {
             $this->post[$key] = is_string($data) ? trim($data) : $data;
         }
     }
@@ -60,8 +62,7 @@ class ControllerCore
      */
     public function emptyPost(): void
     {
-        $_POST = array();
-        $this->post = $_POST;
+        $this->post = $_POST = [];
     }
 
     /**
@@ -70,14 +71,16 @@ class ControllerCore
      * @author sbebbington
      * @date 14 Sep 2016 14:29:23
      * @version 1.0.0-RC1
-     * @return
+     * @return void
+     * @throws FrameworkException
      */
     public function emptySession(): void
     {
-        if (session_id() != "") {
-            session_destroy();
+        if(session_destroy()) {
+            $this->session = null;
+        } else {
+            throw new FrameworkException(__METHOD__ . '() failed');
         }
-        $this->session = null;
     }
 
     /**
