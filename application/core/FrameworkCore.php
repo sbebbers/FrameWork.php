@@ -5,20 +5,11 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
     require_once ("../view/403.phtml");
 }
 
-define('FLASHMESSAGE', 'flashMessage');
-define('FLASH', 'flash');
-define('DAY', 'day');
-define('MONTH', 'month');
-define('YEAR', 'year');
-define('FULLVALUE', 'full');
-define('SHORTVALUE', 'short');
-define('NUMERICVALUE', 'numeric');
-define('DEFAULTVALUE', 'default');
-
 use Application\Core\FrameworkException\FrameworkException;
 use stdClass;
 require_once (serverPath('/core/GlobalHelpers.php'));
 require_once (serverPath('/core/HtmlBuilder.php'));
+require_once (serverPath('/core/pre-defined-constants.php'));
 
 class Core extends HtmlBuilder
 {
