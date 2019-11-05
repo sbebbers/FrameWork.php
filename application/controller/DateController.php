@@ -61,7 +61,7 @@ class DateController extends ControllerCore
      */
     protected function setDays(int $default = 0): array
     {
-        $days = array();
+        $days = [];
         for ($i = 1; $i <= 31; $i ++) {
             $day = "{$i}";
             if ($i < 10) {
@@ -149,7 +149,7 @@ class DateController extends ControllerCore
                 "Dec"
             )
         );
-        $months = array();
+        $months = [];
         $index = 0;
         foreach ($keys[$keyType] as $primaryKey) {
             $months[$primaryKey] = $keys[$type][$index];
@@ -202,7 +202,7 @@ class DateController extends ControllerCore
             ];
         }
 
-        $years = array();
+        $years = [];
         if ($order == "asc") {
             for ($i = $start; $i <= $end; $i ++) {
                 $years["{$i}"] = $i;

@@ -237,7 +237,7 @@ class Library
      * @version 1.0.0-RC1
      * @return boolean | string
      */
-    public function testUnit($object = null, string $method = null, $params = array(), $expectedResult = null, bool $tested = FALSE)
+    public function testUnit($object = null, string $method = null, $params = [], $expectedResult = null, bool $tested = FALSE)
     {
         if ($this->checkUnitTestParameters($object, $method, $expectedResult)) {
             return FALSE;
@@ -334,14 +334,13 @@ class Library
      * Converts to camelCase where one or more dashes
      * appear in the string
      *
-     * @param
-     *            string
+     * @param string $string
      * @author sbebbington
      * @date 6 Jul 2017 12:17:34
      * @version 1.0.0-RC1
      * @return string
      */
-    public function camelCaseFromDashes($string)
+    public function camelCaseFromDashes(string $string = null): string
     {
         return $this->convertSnakeCase($string, '-');
     }
@@ -352,8 +351,8 @@ class Library
      * snake_case.
      * A lot
      *
-     * @param
-     *            string, int
+     * @param string $unSnaked
+     * @param int $offset
      * @author sbebbington
      * @date 3 Feb 2017 13:46:37
      * @version 1.0.0-RC1
@@ -361,7 +360,7 @@ class Library
      */
     public function convertToSnakeCase(string $unSnaked = null, int $offset = 0)
     {
-        if ($unSnaked === null || $unSnaked === '') {
+        if (empty($unSnaked === '')) {
             return '';
         }
         $index = $charBuffer = 0;
@@ -394,7 +393,7 @@ class Library
      * @version 1.0.0-RC1
      * @return array
      */
-    public function cleanseInputs($data, bool $htmlSpecialChars = FALSE, $cleanInput = array())
+    public function cleanseInputs($data, bool $htmlSpecialChars = FALSE, $cleanInput = [])
     {
         foreach ($data as $key => $value) {
             $cleanInput[$key] = (isFalse($htmlSpecialChars)) ? trim(strip_tags($value)) : htmlspecialchars(trim($value));

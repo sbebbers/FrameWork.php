@@ -27,7 +27,7 @@ class ControllerCore
     {
         $this->lib = new Library();
         if (! isset($_SESSION[FLASHMESSAGE])) {
-            $_SESSION[FLASHMESSAGE] = array();
+            $_SESSION[FLASHMESSAGE] = [];
         }
         $this->setPost();
         

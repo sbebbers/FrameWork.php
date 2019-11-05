@@ -186,7 +186,7 @@ class Core extends HtmlBuilder
             $this->segment = $segment[0];
 
             if (isset($segment[1]) && ! empty($segment[1])) {
-                $_GET = array();
+                $_GET = [];
                 $get = explode("&", $segment[1]);
                 foreach ($get as $data) {
                     $_data = explode("=", $data);
@@ -302,7 +302,7 @@ class Core extends HtmlBuilder
      */
     public function emptySession(bool $emptyFlash = FALSE): array
     {
-        return (isTrue($emptyFlash)) ? $_SESSION[FLASHMESSAGE] = array() : array();
+        return (isTrue($emptyFlash)) ? $_SESSION[FLASHMESSAGE] = [] : [];
     }
 
     /**
