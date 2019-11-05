@@ -85,7 +85,10 @@ class QueryBuilder
         if (strlen($table) === 0) {
             throw new FrameworkException("Malformed SELECT statement in Application\Model::QueryBuilder()");
         }
-        $this->from = " FROM `{$database}`.`{$database}`";
+        $this->from = " FROM";
+        $this->from .= !empty($database) ? " `{$database}`." : ' ';
+        $this->from .= "`{$table}";
+        
         return $this;
     }
 

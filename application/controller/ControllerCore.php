@@ -29,9 +29,8 @@ class ControllerCore
         if (! isset($_SESSION[FLASHMESSAGE])) {
             $_SESSION[FLASHMESSAGE] = array();
         }
-        if (! empty($_POST)) {
-            $this->setPost();
-        }
+        $this->setPost();
+        
         $this->view = new stdClass();
         $this->host = host();
     }
@@ -47,6 +46,10 @@ class ControllerCore
     public function setPost(): void
     {
         $post = @file_get_contents('php://input') ?? $_POST ?? [];
+        if(empty($post)){
+            return;
+        }
+
         foreach ($post as $key => $data) {
             $this->post[$key] = is_string($data) ? trim($data) : $data;
         }
