@@ -34,7 +34,7 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function debug($variable = null, bool $die = FALSE, string $message = '', string $file = '', string $line = '', string $header = ''): void
+    public function debug($variable = null, bool $die = FALSE, string $message = null, string $file = null, string $line = null, string $header = null): void
     {
         if (getConfig('mode') != 'test') {
             return;
@@ -67,7 +67,7 @@ class Library
      * @version 1.0.0-RC1
      * @return null
      */
-    public function dump($variable, bool $die = FALSE, string $message = '', string $file = '', string $line = ''): void
+    public function dump($variable, bool $die = FALSE, string $message = null, string $file = null, string $line = null): void
     {
         if (getConfig('mode') != 'test') {
             return;
@@ -124,7 +124,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function encryptIt(string $string, string $secret = '', int $padding = 8, bool $urlEncode = FALSE): string
+    public function encryptIt(string $string, string $secret = null, int $padding = 8, bool $urlEncode = FALSE): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $encrypt = $this->getEncryptionPadding($padding) . openssl_encrypt($string, $this->encryption, $md5) . $this->getEncryptionPadding($padding);
@@ -143,7 +143,7 @@ class Library
      * @version 1.0.0-RC1
      * @return string
      */
-    public function decryptIt(string $string, string $secret = '', int $padding = 8, bool $urlDecode = FALSE): string
+    public function decryptIt(string $string, string $secret = null, int $padding = 8, bool $urlDecode = FALSE): string
     {
         $md5 = ($secret === '') ? md5(md5($this->key)) : md5(md5($secret));
         $decrypt = openssl_decrypt(substr($string, $padding, - $padding), $this->encryption, $md5);
@@ -161,7 +161,7 @@ class Library
      * @version 1.0.0-RC1
      * @return void
      */
-    public function redirect(string $destination = '', string $host = '', int $serverResponseCode = 307): void
+    public function redirect(string $destination = null, string $host = null, int $serverResponseCode = 307): void
     {
         if ($destination == '' || $host == '') {
             $this->debug("You need to set a destination and host parameters as a string to call the Library redirect() method", TRUE);
@@ -203,7 +203,7 @@ class Library
      * @return void
      * @throws FrameworkException
      */
-    public function redirectExternal(string $destination = '', string $website = null): void
+    public function redirectExternal(string $destination = null, string $website = null): void
     {
         if ($destination == '' || $website == '') {
             throw new FrameworkException("You need to set a destination and host parameters as a string to call the Library redirectExternal() method");
@@ -227,8 +227,11 @@ class Library
      * parameters as a flat array and the expected result
      * to use this
      *
-     * @param
-     *            object, string, array, any, [boolean]
+     * @param object $object
+     * @param string $method
+     * @param array $params
+     * @param mixed $expectedResult
+     * @param boolean $tested
      * @author sbebbington
      * @date 21 Feb 2018 09:53:55
      * @version 1.0.0-RC1

@@ -77,7 +77,7 @@ class QueryBuilder
      * @return self
      * @throws FrameworkException
      */
-    public function from(string $table = '', string $database = ''): self
+    public function from(string $table = null, string $database = null): self
     {
         if (strlen($database) === 0) {
             $database = getConfig('db');
@@ -102,7 +102,7 @@ class QueryBuilder
      * @date 18 Apr 2018 10:34:41
      * @return self
      */
-    public function selectFrom(array $items = [], string $table = '', string $database = ''): self
+    public function selectFrom(array $items = [], string $table = null, string $database = null): self
     {
         $this->select($items)->from($table, $database);
         return $this;

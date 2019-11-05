@@ -22,14 +22,13 @@ class HomeModel extends ModelCore
     /**
      * Gets the generic view stuff
      *
-     * @param
-     *            [string]
+     * @param string $colName
      * @author sbebbington
      * @date 24 Oct 2017 15:50:08
      * @version 1.0.0-RC1
      * @return array
      */
-    public function getView($colName = 'home')
+    public function getView(string $colName = 'home')
     {
         $query = "SELECT `header`, `sub_header`, `content` FROM `{$this->db}`.`{$this->table}` " . "WHERE `name`=?;";
         return $this->execute($this->connection->prepare($query), [

@@ -41,7 +41,7 @@ class ModelCore extends QueryBuilder
      * @return void
      * @throws FrameworkException
      */
-    public function __construct(string $dbUser = '')
+    public function __construct(string $dbUser = null)
     {
         if (! in_array($dbUser, $this->userTypes)) {
             throw new FrameworkException("Database user type was not set or is incorrect when constructing the ModelCore", 0x03);
@@ -105,16 +105,15 @@ class ModelCore extends QueryBuilder
      * @version 1.0.0-RC1
      * @return void
      */
-    private function setTables(string $db = ''): void
+    private function setTables(string $db = null): void
     {
         $query = "SELECT `TABLE_NAME` FROM `INFORMATION_SCHEMA`.`TABLES` " . "WHERE `TABLE_TYPE`='BASE TABLE' AND `TABLE_SCHEMA`=?;";
-        $result = $this->connection->prepare($query);
 
         $tables = $this->execute($this->connection->prepare($query), [
             $db
         ], TRUE);
 
-        foreach ($tables as $key => $data) {
+        foreach ($tables as &$data) {
             $table = $data['TABLE_NAME'];
             $this->tables->{$table} = "{$table}";
         }
@@ -128,15 +127,14 @@ class ModelCore extends QueryBuilder
      * @param array $parameters
      * @param bool $fetchAll
      * @param string $key
-     * @param
-     *            PDO constant $fetchType
+     * @param PDO $fetchType
      * @author sbebbington
      * @date 24 Oct 2017 13:32:46
      * @version 1.0.0-RC1
      * @return array
      * @throws FrameworkException
      */
-    protected function execute(PDOStatement $query, array $parameters = [], bool $fetchAll = FALSE, string $key = '', $fetchType = PDO::FETCH_ASSOC)
+    protected function execute(PDOStatement $query, array $parameters = [], bool $fetchAll = FALSE, string $key = null, $fetchType = PDO::FETCH_ASSOC)
     {
         $trace = debug_backtrace();
         $caller = $trace[1];
