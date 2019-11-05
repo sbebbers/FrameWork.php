@@ -76,7 +76,7 @@ class ControllerCore
      */
     public function emptySession(): void
     {
-        if(session_destroy()) {
+        if (session_destroy()) {
             $this->session = null;
         } else {
             throw new FrameworkException(__METHOD__ . '() failed');

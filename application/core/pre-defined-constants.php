@@ -1,5 +1,4 @@
 <?php
-
 define('FLASHMESSAGE', 'flashMessage');
 define('FLASH', 'flash');
 define('DAY', 'day');

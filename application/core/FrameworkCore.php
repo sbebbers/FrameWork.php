@@ -9,7 +9,9 @@ use Application\Core\FrameworkException\FrameworkException;
 use stdClass;
 require_once (serverPath('/core/GlobalHelpers.php'));
 require_once (serverPath('/core/HtmlBuilder.php'));
-require_once (serverPath('/core/pre-defined-constants.php'));
+if ($preDefinedConstants = serverPath('/core/pre-defined-constants.php') && file_exists($preDefinedConstants)) {
+    require_once ($preDefinedConstants);
+}
 
 class Core extends HtmlBuilder
 {
