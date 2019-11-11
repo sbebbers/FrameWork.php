@@ -38,12 +38,13 @@ class ControllerCore
     /**
      * Sanatizes posted data
      *
+     * @param bool $unsetPost
      * @author Linden && sbebbington
      * @date 7 Oct 2016 14:54:10
      * @version 1.0.0-RC1
      * @return void
      */
-    public function setPost(): void
+    public function setPost(bool $unsetPost = FALSE): void
     {
         $post = @file_get_contents('php://input') ?? $_POST ?? [];
         if(empty($post)){
@@ -52,6 +53,10 @@ class ControllerCore
 
         foreach ($post as $key => $data) {
             $this->post[$key] = is_string($data) ? trim($data) : $data;
+        }
+
+        if($unsetPost) {
+            $this->emptyPost();
         }
     }
 
