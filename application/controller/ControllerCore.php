@@ -30,7 +30,7 @@ class ControllerCore
             $_SESSION[FLASHMESSAGE] = [];
         }
         $this->setPost();
-        
+
         $this->view = new stdClass();
         $this->host = host();
     }
@@ -47,7 +47,7 @@ class ControllerCore
     public function setPost(bool $unsetPost = FALSE): void
     {
         $post = @file_get_contents('php://input') ?? $_POST ?? [];
-        if(empty($post)){
+        if (empty($post)) {
             return;
         }
 
@@ -55,7 +55,7 @@ class ControllerCore
             $this->post[$key] = is_string($data) ? trim($data) : $data;
         }
 
-        if($unsetPost) {
+        if ($unsetPost) {
             $this->emptyPost();
         }
     }

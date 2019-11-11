@@ -9,7 +9,8 @@ use Application\Core\FrameworkException\FrameworkException;
 use stdClass;
 require_once (serverPath('/core/GlobalHelpers.php'));
 require_once (serverPath('/core/HtmlBuilder.php'));
-if ($preDefinedConstants = serverPath('/core/pre-defined-constants.php') && file_exists($preDefinedConstants)) {
+
+if (($preDefinedConstants = serverPath('/core/pre-defined-constants.php')) && file_exists($preDefinedConstants)) {
     require_once ($preDefinedConstants);
 }
 
