@@ -307,8 +307,8 @@ class Library
      * This will convert the snake_case stuff typically used in databases
      * to normal camelCase typically used in PHP
      *
-     * @param
-     *            string
+     * @param string $snake
+     * @param string $delimiter
      * @author sbebbington
      * @date 6 Jul 2017 12:14:42
      * @version 1.0.0-RC1

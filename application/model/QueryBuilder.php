@@ -29,8 +29,8 @@ class QueryBuilder
     }
 
     /**
-     * Returns the specific database configuration
-     * settings
+     * <p>Returns the specific database configuration
+     * settings</p>
      *
      * @author Shaun B
      * @date 18 Apr 2018 09:59:02
@@ -42,7 +42,7 @@ class QueryBuilder
     }
 
     /**
-     * Builds SELECT part of the query
+     * <p>Builds SELECT part of the query</p>
      *
      * @param array $items
      * @author Shaun B
@@ -68,7 +68,7 @@ class QueryBuilder
     }
 
     /**
-     * Builds the
+     * <p>Builds the FROM part of the query</p>
      *
      * @param string $table
      * @param string $database
@@ -83,17 +83,17 @@ class QueryBuilder
             $database = getConfig('db');
         }
         if (strlen($table) === 0) {
-            throw new FrameworkException("Malformed SELECT statement in Application\Model::QueryBuilder()");
+            throw new FrameworkException("Malformed SELECT statement in " . __METHOD__ . '()');
         }
         $this->from = " FROM";
         $this->from .= ! empty($database) ? " `{$database}`." : ' ';
-        $this->from .= "`{$table}";
+        $this->from .= "`{$table}`";
 
         return $this;
     }
 
     /**
-     * Shorthand for SELECT * FROM `db`.`table`
+     * <p>Shorthand for SELECT * FROM `db`.`table`</p>
      *
      * @param array $items,
      * @param string $table
@@ -109,7 +109,7 @@ class QueryBuilder
     }
 
     /**
-     * Builds the where clause
+     * <p>Builds the WHERE clause</p>
      *
      * @param array $conditions
      * @author Shaun B
@@ -118,6 +118,16 @@ class QueryBuilder
      */
     public function where(array $conditions = []): self
     {
+        if (empty($conditions) || ! is_array($conditions)) {
+            throw new FrameworkException(__METHOD__ . '() called with incorrect parameters', 0xdb);
+        }
+
+        $_where = '';
+        foreach ($conditions as $condition => $type) {
+            $_where .= "`{$condition}`{$type}? ";
+        }
+        $this->where = substr($_where, 0, - 1);
+
         return $this;
     }
 }
