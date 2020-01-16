@@ -34,7 +34,7 @@ class FrameworkException extends Exception
     }
 
     /**
-     * getExceptionDetails
+     * <p>Returns the Exception details</p>
      *
      * @author Shaun Bebbington
      * @date 21 Mar 2018 11:30:49
@@ -46,7 +46,7 @@ class FrameworkException extends Exception
     }
 
     /**
-     * setExceptionDetails
+     * <p>Creates the Exception details information</p>
      *
      * @param array $exceptionDetails
      * @author Shaun Bebbington

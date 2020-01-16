@@ -6,11 +6,11 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
 use Application\Core\FrameworkException\FrameworkException;
 
 /**
- * Will return the specific site parameter from
+ * <p>Will return the specific site parameter from
  * the site.json config - will default to the
  * baseURL setting if an empty string
  * is sent, or cookieDomain if no parameter
- * is sent
+ * is sent</p>
  *
  * @param string $parameter
  * @author sbebbington
@@ -28,10 +28,12 @@ function getConfig(string $parameter = 'baseURL'): string
 }
 
 /**
- * This will check to see if the server is running
- * http or https.
- * This parameter is now set in the
- * site.json file in the application config
+ * <p>This will check to see if the server is running
+ * http or https.</p>
+ *
+ * <p>This parameter is now set in the
+ * site.json file in the application config.
+ * <strong>Please only use HTTP for local development</strong></p>
  *
  * @author sbebbington
  * @date 30 Aug 2018 16:21:55
@@ -44,8 +46,8 @@ function isHttps(): bool
 }
 
 /**
- * Returns the name of the current host file from
- * the PHP $_SERVER global thing #n00b
+ * <p>Returns the name of the current host file from
+ * the PHP <strong>$_SERVER</strong> global thing #n00b</p>
  *
  * @author sbebbington
  * @date 5 Oct 2016 10:55:01
@@ -58,8 +60,8 @@ function host(): string
 }
 
 /**
- * Sets time zone, for a full list, see
- * http://php.net/manual/en/timezones.php
+ * <p>Sets time zone, for a full list, see
+ * <a href="http://php.net/manual/en/timezones.php">PHP Timezones</a></p>
  *
  * @param string $timeZone
  * @author sbebbington
@@ -73,7 +75,7 @@ function setTimeZone(string $timeZone): void
 }
 
 /**
- * Gets user IP address
+ * <p>Gets user IP address</p>
  *
  * @author sbebbington
  * @date 2 Feb 2017 - 09:58:21
@@ -94,8 +96,8 @@ function getUserIPAddress(): string
 }
 
 /**
- * Returns the IP address that the framework
- * is running on
+ * <p>Returns the IP address that the framework
+ * is running on</p>
  *
  * @author sbebbington
  * @date 2 Jan 2018 10:48:58
@@ -108,7 +110,7 @@ function getServerIPAddress(): string
 }
 
 /**
- * Returns the current or default URI segment
+ * <p>Returns the <em>last</em> or default URI segment</p>
  *
  * @author sbebbington
  * @date 6 Feb 2017 - 11:40:40
@@ -122,7 +124,8 @@ function getSegment(): string
 }
 
 /**
- * Returns PHP_SELF
+ * <p>Returns PHP_SELF from the <strong>$_SERVER</strong>
+ * PHP Super Global</p>
  *
  * @author sbebbington
  * @date 2 Jan 2018 10:49:31
@@ -135,7 +138,7 @@ function getSelf(): string
 }
 
 /**
- * Returns the server query string
+ * <p>Returns the server query string</p>
  *
  * @author sbebbington
  * @date 2 Mar 2017 - 13:23:08
@@ -148,8 +151,8 @@ function getQueryString(): string
 }
 
 /**
- * Returns the version number of the application
- * as set in the site.json config
+ * <p>Returns the version number of the application
+ * as set in the <strong>site.json</strong> config</p>
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:02:26
@@ -162,8 +165,8 @@ function getSiteVersion(): string
 }
 
 /**
- * If rc is set as TRUE in the site.json config
- * then this is a release candidate, else it isn't
+ * <p>If <strong>rc</strong> is set as TRUE in the <strong>site.json</strong>
+ * config then this is a release candidate</p>
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:03:33
@@ -176,8 +179,8 @@ function isReleaseCandidate(): string
 }
 
 /**
- * States whether or not is a development
- * version set in the site.json config
+ * <p>States whether or not is a development
+ * version set in the <strong>site.json</strong> config</p>
  *
  * @author sbebbington
  * @date 27 Jul 2017 - 16:05:23
@@ -190,7 +193,7 @@ function isDevelopmentVersion(): string
 }
 
 /**
- * Gets the configuration path
+ * <p>Gets the configuration path</p>
  *
  * @param string $routeTo
  * @author Rob Gill && sbebbington
@@ -205,8 +208,8 @@ function logErrorPath(string $routeTo = ''): string
 }
 
 /**
- * Returns the months according to
- * the Gregorian calendar
+ * <p>Returns the months according to
+ * the <em>Gregorian</em> calendar</p>
  *
  * @author ShaunB
  * @date 11 Jan 2019 12:39:03
@@ -232,10 +235,10 @@ function getMonths(): array
 }
 
 /**
- * Writes a log file based on date
+ * <p>Writes a log file based on date
  * and day; if log file already exists
  * then it will append the data to the
- * file;
+ * file</p>
  *
  * @param mixed $error
  * @param mixed $jsonConstant
@@ -287,17 +290,19 @@ function writeToLogFile($error = [], $jsonConstant = null, bool $generateFileNam
 }
 
 /**
- * Negates a PHP feature on the empty() command
- * whereby a string value of "0" will be empty;
+ * <p>Negates a PHP feature (on some versions) on the
+ * <strong>empty()</strong> command whereby a string
+ * value of "0" will be empty;
  * note that numeric values of 0 or 0.0 will
  * return as empty so this tries to negate
- * this feature as well
+ * this feature as well</p>
  *
  * @param mixed $value
  * @author sbebbington
  * @date 5 Sep 2017 - 12:51:55
  * @version 1.0.0-RC1
  * @return bool
+ * @deprecated 16 Jan 2020 15:43:47
  */
 function isEmpty($value = null): bool
 {
@@ -305,12 +310,13 @@ function isEmpty($value = null): bool
 }
 
 /**
- * Checks if count() can be used on an object or scalar
+ * <p>Checks if count() can be used on an object or scalar</p>
  *
  * @param mixed $object
  * @author sbebbeington
  * @date 13 Feb 2018 13:26:37
  * @return boolean
+ * @deprecated 16 Jan 2020 15:03:36
  */
 function isCountable($object = null): bool
 {

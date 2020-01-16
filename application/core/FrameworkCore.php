@@ -443,7 +443,7 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Checks if the route is valid or not
+     * <p>Checks if the route is valid or not</p>
      *
      * @author Shaun B
      * @date 27 Jul 2018 16:28:18
@@ -465,7 +465,7 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Requires Controller Core if necessary
+     * <p>Requires Controller Core if necessary</p>
      *
      * @author Shaun B
      * @date 27 Jul 2018 16:30:33
