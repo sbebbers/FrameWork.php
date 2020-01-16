@@ -6,11 +6,17 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
 }
 
 use Application\Library\Library;
+use Application;
 require_once (serverPath("/library/Library.php"));
 
 class HtmlBuilder
 {
 
+    /**
+     * <p>Library object for helpers</p>
+     *
+     * @var Application\Library $lib
+     */
     public $lib;
 
     public function __construct()
@@ -19,21 +25,22 @@ class HtmlBuilder
     }
 
     /**
-     * Tests the extension
+     * <p>Tests the extension</p>
      *
      * @author sbebbington
      * @date 16 Jan 2017 - 17:19:50
      * @version 1.0.0-RC1
      * @return $this
+     * @deprecated 16 Jan 2020 15:46:08
      */
-    public function test()
+    public function test(): self
     {
         print("<p>HtmlBuilder test</p>");
         return $this;
     }
 
     /**
-     * Opens a paragraph tag
+     * <p>Opens a paragraph tag</p>
      *
      * @author sbebbington
      * @date 23 Jan 2017 - 09:15:10
@@ -47,7 +54,7 @@ class HtmlBuilder
     }
 
     /**
-     * Opens an a tag
+     * <p>Opens an a tag</p>
      *
      * @param string $id
      * @param string $href
@@ -91,7 +98,7 @@ class HtmlBuilder
     }
 
     /**
-     * Makes an HR element
+     * <p>Makes an HR element</p>
      *
      * @param string $id
      * @param string $class
