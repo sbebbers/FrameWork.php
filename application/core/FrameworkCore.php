@@ -17,24 +17,74 @@ if (($preDefinedConstants = serverPath('/core/pre-defined-constants.php')) && fi
 class Core extends HtmlBuilder
 {
 
+    /**
+     * <p></p>
+     *
+     * @var string $segment
+     */
     public $segment;
 
+    /**
+     * <p></p>
+     *
+     * @var string $host
+     */
     public $host;
 
+    /**
+     * <p></p>
+     *
+     * @var string $partial
+     */
     public $partial;
 
+    /**
+     * <p></p>
+     *
+     * @var object $controller
+     */
     public $controller;
 
+    /**
+     * <p>For the meta title</p>
+     *
+     * @var string $title
+     */
     public $title;
 
+    /**
+     * <p>For the meta description</p>
+     *
+     * @var string $description
+     */
     public $description;
 
+    /**
+     * <p></p>
+     *
+     * @var string $metaData
+     */
     public $metaData;
 
+    /**
+     * <p>File path to the hosted files</p>
+     *
+     * @var string $serverPath
+     */
     public $serverPath;
 
+    /**
+     * <p></p>
+     *
+     * @var string $root
+     */
     public $root;
 
+    /**
+     * <p>Used for the flash message</p>
+     *
+     * @var string $flash
+     */
     public $flash;
 
     public $filePath;
@@ -55,10 +105,15 @@ class Core extends HtmlBuilder
 
     private $errorReporting;
 
+    /**
+     * <p>To stop infinite redirections from routing via index.php</p>
+     *
+     * @var object $allowedFileExts
+     */
     private $allowedFileExts;
 
     /**
-     * Core constructor
+     * <p>Core constructor - sets up everything for the response</p>
      *
      * @author sbebbington
      * @date 26 Sep 2017 14:42:15
@@ -93,11 +148,11 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets up the site configuration according
-     * to the JSON objects in
-     * ../application/config/pages.json
-     * Note that allowedSegments and pageControllers
-     * are required settings
+     * <p>Sets up the site configuration according
+     * to the JSON objects in</p>
+     * <pre>../application/config/pages.json</pre>
+     * <p>Note that allowedSegments and pageControllers
+     * are required settings</p>
      *
      * @author sbebbington
      * @date 28 Jul 2017 14:29:45
@@ -130,8 +185,8 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets up the host object and checks against
-     * the error reporting config values
+     * <p>Sets up the host object and checks against
+     * the error reporting config values</p>
      *
      * @author sbebbington
      * @date 25 Jul 2017 09:40:06
@@ -148,9 +203,9 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets up the request URI path for the framework
+     * <p>Sets up the request URI path for the framework
      * and will also set the page segment (in the
-     * allowedSegments JSON object)
+     * allowedSegments JSON object)</p>
      *
      * @author sbebbington
      * @date 28 Jul 2017 11:50:03
@@ -173,15 +228,17 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets up the $_GET super global
+     * <p>Sets up the $_GET super global</p>
      *
      * @author sbebbington
      * @date 25 Jul 2017 09:48:12
      * @version 1.0.0-RC1
      * @return void
+     * @deprecated 16 Jan 2020 13:58:01
      */
     protected function setGetGlobal(): void
     {
+        writeToLogFile('Deprecated method called ' . __METHOD__ . '()');
         if (! empty($_GET)) {
             $segment = explode('?', $this->segment);
             $this->segment = $segment[0];
@@ -198,7 +255,7 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets the page title and meta descriptions
+     * <p>Sets the page title and meta descriptions</p>
      *
      * @author sbebbington
      * @date 25 Jul 2017 10:50:31
@@ -214,8 +271,8 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets the page matadata according to the
-     * pagedata.json configuration file
+     * <p>Sets the page matadata according to the
+     * pagedata.json configuration file</p>
      *
      * @author sbebbington
      * @date 22 Jan 2018 09:38:02
@@ -245,10 +302,10 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Checks for valid extension; if one is present then
+     * <p>Checks for valid extension; if one is present then
      * a canonical string is set as each page will assume
      * that the page without the file extension is the
-     * main page
+     * main page</p>
      *
      * @author sbebbington
      * @date 25 Jul 2017 09:50:40
@@ -268,9 +325,9 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Bug fixed edition of the using ZF type view variables
+     * <p>Bug fixed edition of the using ZF type view variables
      * added in error surpression to prevent warnings being
-     * logged
+     * logged</p>
      *
      * @param mixed $instance
      * @param string $masterKey
@@ -279,8 +336,12 @@ class Core extends HtmlBuilder
      * @version 1.0.0-RC1
      * @return void
      */
-    public function setView($instance, string $masterKey = ''): void
+    public function setView($instance = null, string $masterKey = ''): void
     {
+        if (empty($instance)) {
+            return;
+        }
+
         foreach ($instance as $key => $data) {
             if ($masterKey == '') {
                 $this->{$key} = $data;
@@ -291,9 +352,9 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Clears the page flash messages as these
+     * <p>Clears the page flash messages as these
      * are stored in the PHP $_SESSION global
-     * or will empty the whole $_SESSION var
+     * or will empty the whole $_SESSION var</p>
      *
      * @param bool $emptyFlash
      * @author sbebbington
@@ -307,7 +368,7 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * Sets response headers
+     * <p>Sets response headers</p>
      *
      * @param string $serverProtocol
      * @param int $serverResponse
@@ -328,15 +389,16 @@ class Core extends HtmlBuilder
     }
 
     /**
-     * This will load the view and related controllers
+     * <p>This will load the view and related controllers
      * It has an added exception for Jamie's admin html
-     * template.
-     * This version should now allow Zend-alike
+     * template.</p>
+     *
+     * <p>This version should now allow Zend-alike
      * view variables - so if you set an object in a page
-     * controller as $this->view->objName, you can use
-     * $this->objName in the PHP/HTML view or something.
+     * controller as <strong>$this->view->objName</strong>, you can use
+     * <strong>$this->objName</strong> in the PHP/HTML view or something.
      * Update includes a simplified way to get the page
-     * meta data
+     * meta data</p>
      *
      * @author sbebbington
      * @date 25 Jul 2017 10:59:38

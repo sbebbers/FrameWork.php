@@ -49,9 +49,9 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Sets the number of days for an array assuming
+     * <p>Sets the number of days for an array assuming
      * 1 - 31 inclusive as date validation is handled
-     * dynamically in the jQuery
+     * dynamically in the jQuery</p>
      *
      * @param int $default
      * @author sbebbington
@@ -79,11 +79,11 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Sets a month object, keys and data can
+     * <p>Sets a month object, keys and data can
      * each be set as numeric (01 - 12 inclusive),
      * short (jan, feb etc...) or full (january,
      * february etc...) send data type first and
-     * then key type
+     * then key type</p>
      *
      * @param string $type
      * @param string $keyType
@@ -165,14 +165,15 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Example method to set the number of years
+     * <p>Example method to set the number of years
      * by sending two integers starting year and
-     * ending year.
-     * To set order, use 'asc' for
+     * ending year.</p>
+     *
+     * <p>To set order, use 'asc' for
      * assending years and 'desc' for decending
      * years - please note that this method has
      * a practical use for the deaded goto
-     * command, replacing if/else logic
+     * command, replacing if/else logic</p>
      *
      * @param int $start
      * @param int $end
@@ -224,9 +225,9 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Checks the full date submitted to see if it is
+     * <p>Checks the full date submitted to see if it is
      * valid according to the parameters of the
-     * Gregorian calander
+     * Gregorian calander</p>
      *
      * @param int $day
      * @param int $month
@@ -245,8 +246,8 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Returns the default values to the view
-     * to auto-select day, month, and year
+     * <p>Returns the default values to the view
+     * to auto-select day, month, and year</p>
      *
      * @param object $viewObject
      * @author sbebbington
@@ -263,8 +264,8 @@ class DateController extends ControllerCore
     }
 
     /**
-     * Clears the default parameter from the view object
-     * should one exist
+     * <p>Clears the default parameter from the view object
+     * should one exist</p>
      *
      * @param mixed $viewObject
      * @author sbebbington

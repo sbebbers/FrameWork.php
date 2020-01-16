@@ -8,19 +8,45 @@ if (! defined('FRAMEWORKPHP') || FRAMEWORKPHP != 65535) {
 use Application\Library\Library;
 use stdClass;
 use Application\Core\FrameworkException\FrameworkException;
+use Application;
 require_once (serverPath('/library/Library.php'));
 
 class ControllerCore
 {
 
+    /**
+     * <p></p>
+     *
+     * @var array $post
+     */
     public $post = [];
 
+    /**
+     * <p>Used to pass mark-up and other entities to the served page</p>
+     *
+     * @var string $view
+     */
     public $view;
 
+    /**
+     * <p></p>
+     *
+     * @var Application\Library $lib
+     */
     public $lib;
 
+    /**
+     * <p></p>
+     *
+     * @var Application\Model $sql
+     */
     public $sql;
 
+    /**
+     * <p></p>
+     *
+     * @var string $host
+     */
     public $host;
 
     public function __construct()
@@ -36,7 +62,7 @@ class ControllerCore
     }
 
     /**
-     * Sanatizes posted data
+     * <p>Sanatizes posted data</p>
      *
      * @param bool $unsetPost
      * @author Linden && sbebbington
@@ -61,7 +87,7 @@ class ControllerCore
     }
 
     /**
-     * This should empty the super global $_POST and the controller $this->post
+     * <p>This should empty the super global $_POST and the controller $this->post</p>
      *
      * @author sbebbington
      * @date 16 Jun 2016 11:25:04
@@ -74,7 +100,7 @@ class ControllerCore
     }
 
     /**
-     * Clears PHP session cookies
+     * <p>Clears PHP session cookies</p>
      *
      * @author sbebbington
      * @date 14 Sep 2016 14:29:23
@@ -92,7 +118,7 @@ class ControllerCore
     }
 
     /**
-     * Sets flash messages (recommend using string for value param)
+     * <p>Sets flash messages (recommend using string for value param)</p>
      *
      * @param string $key
      * @param mixed $value

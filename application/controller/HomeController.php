@@ -28,9 +28,9 @@ class HomeController extends ControllerCore
     }
 
     /**
-     * Tester for the encryption and decryption
+     * <p>Tester for the encryption and decryption
      * library methods (and for my own sanity)
-     * Seems worky.
+     * Seems worky.</p>
      *
      * @param string $password
      * @param string $secret
